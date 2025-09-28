@@ -333,7 +333,7 @@ if (array_key_exists('sort',$_GET)) {
 			   <div class="card card-cat" style="overflow:hidden; height:100%;">
   <div class="card-image">
     <figure class="image">
-      <a href="'.$url.'"><img src="assets/images/product/thumb/';
+      <a href="'.$url.'"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
           $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='".$rowslt2['id_pack']."' limit 1"; 
           $displaypw2=mysqli_query($con,$sqlpw2);
 	      $rowpw2=mysqli_fetch_array($displaypw2);

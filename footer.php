@@ -84,7 +84,7 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 					echo '
 		      <div style="position:relative;">
   <a href="' . make_url($rowpw['p_name']) . '">
-  <img src="assets/images/product/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
 
 
 					/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */

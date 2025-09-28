@@ -673,16 +673,16 @@
               $rowsp = mysqli_fetch_array($displaysp);
               if (!empty($rowsp) && array_key_exists('s_path', $rowsp)) {
                 echo '<a id="Zoom-1" class="MagicZoom Active" title="Product Gallery"
-            href="assets/images/product/thumb/' . $rowsp['s_path'] . '">
+            href="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowsp['s_path'] . '">
 		
-            <img src="assets/images/product/thumb/' . $rowsp['s_path'] . '?scale.height=400" alt=""/>
+            <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowsp['s_path'] . '?scale.height=400" alt=""/>
         </a>';
 
                 echo '
 		<a id="Zoom-1x" class="MagicZoom Active2" title=""
-            href="assets/images/product/thumb/' . $rowsp['s_path'] . '">
+            href="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowsp['s_path'] . '">
 		
-            <img src="assets/images/product/thumb/' . $rowsp['s_path'] . '?scale.height=400" alt=""/>
+            <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowsp['s_path'] . '?scale.height=400" alt=""/>
         </a>';
 
               } else {
@@ -820,7 +820,7 @@
                     echo '
 		      <div class="relative">
   <a href="' . make_url($rowpw['p_name']) . '">
-  <img src="assets/images/product/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%;aspect-ratio:4/5;" class="image is-fullwidth"/>';
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%;aspect-ratio:4/5;" class="image is-fullwidth"/>';
 
                     $sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
                     $displaywl = mysqli_query($con, $sqlwl);
