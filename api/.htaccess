@@ -1,0 +1,16 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/whitefeat/api"
+PassengerBaseURI "/api"
+PassengerNodejs "/home/whitefeat/nodevenv/api/22/bin/node"
+PassengerAppType node
+PassengerStartupFile server.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv JWT_SECRET snKhSbaanLl1wHHOJWjAVwcX85mWnVRf
+SetEnv MONGO_URL mongodb+srv://sugamsingh10:P%40ssw00rd@cluster0.271zu.mongodb.net/white-feathers?retryWrites=true&w=majority&appName=Cluster0
+SetEnv ESEWA_SECRET_KEY 8gBm/:&EnhH.1/q
+SetEnv ESEWA_GATEWAY_URL https://rc-epay.esewa.com.np
+SetEnv ESEWA_PRODUCT_CODE EPAYTEST
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END

@@ -1,0 +1,87 @@
+<IfModule mod_headers.c>
+    Header append Cache-Control "public"
+    <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|css|swf)$">
+      Header set Cache-Control "max-age=2678400, public"
+    </FilesMatch>
+    <FilesMatch "\.(html|htm)$">
+      Header set Cache-Control "max-age=7200, private, must-revalidate"
+    </FilesMatch>
+    <FilesMatch "\.(pdf)$">
+      Header set Cache-Control "max-age=86400, public"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+      Header set Cache-Control "max-age=2678400, private"
+    </FilesMatch>
+  </IfModule>
+
+RewriteEngine On
+RewriteRule ^contact$ contact.php?title=$1 [NC,L]
+RewriteRule ^clogin/([a-zA-Z0-9_-]+)$ ajax_dlogin.php?title=$1 [NC,L]
+RewriteRule ^subscriber$ ajax_subs.php?title=$1 [NC,L]
+RewriteRule ^savehome$ ajax_savehome.php?title=$1 [NC,L]
+RewriteRule ^savetocart$ ajax_savecart.php?title=$1 [NC,L]
+RewriteRule ^saveudetail$ ajax_saveudetail.php?title=$1 [NC,L]
+RewriteRule ^saveupdetail$ ajax_saveupdetail.php?title=$1 [NC,L]
+RewriteRule ^savewish$ ajax_savewish.php?title=$1 [NC,L]
+RewriteRule ^removewish$ ajax_removewish.php?title=$1 [NC,L]
+RewriteRule ^exchange$ ajax_exchange_program.php?title=$1 [NC,L]
+RewriteRule ^testinomial$ testi.php?title=$1 [NC,L]
+RewriteRule ^signup/([a-zA-Z0-9_-]+)$ ajax_signup.php?title=$1 [NC,L]
+RewriteRule ^wishlist$ wish.php?title=$1 [NC,L]
+RewriteRule ^cart$ checkout.php?title=$1 [NC,L]
+RewriteRule ^cartdel$ ajax_cart_item_del.php?title=$1 [NC,L]
+RewriteRule ^cartwish$ ajax_cart_item_wish.php?title=$1 [NC,L]
+RewriteRule ^cartqty$ ajax_cart_item_qty.php?title=$1 [NC,L]
+RewriteRule ^successlogin$ ajax_success_login.php?title=$1 [NC,L]
+RewriteRule ^deliverycart$ ajax_deliverycart.php?title=$1 [NC,L]
+RewriteRule ^confirmcart$ ajax_confirmcart.php?title=$1 [NC,L]
+RewriteRule ^cotp/([a-zA-Z0-9_-]+)$ ajax_cotp.php?title=$1 [NC,L]
+RewriteRule ^bill/([a-zA-Z0-9_-]+)$ invoice.php?title=$1 [NC,L]
+RewriteRule ^cemail/([a-zA-Z0-9_-]+)$ ajax_cemail.php?title=$1 [NC,L]
+RewriteRule ^track/([a-zA-Z0-9_-]+)$ ajax_otracking.php?title=$1 [NC,L]
+RewriteRule ^cartsave/([a-zA-Z0-9_-]+)$ ajax_cart_save.php?title=$1 [NC,L]
+RewriteRule ^trending$ trend.php?title=$1 [NC,L]
+RewriteRule ^checkcart$ cart_fetch.php?title=$1 [NC,L]
+RewriteRule ^checkout$ checkout_final.php?title=$1 [NC,L]
+RewriteRule ^jewellerycollection$ coll.php?title=$1 [NC,L]
+RewriteRule ^newarrival$ newarrive.php?title=$1 [NC,L]
+RewriteRule ^trigger/([a-zA-Z0-9_-]+)$ ajax_trigger.php?title=$1 [NC,L]
+RewriteRule ^search/([a-zA-Z0-9_-]+)$ find_product.php?title=$1 [NC,L]
+RewriteRule ^csave/([a-zA-Z0-9_-]+)$ ajax_csave.php?title=$1 [NC,L]
+RewriteRule ^filter/([a-zA-Z0-9_-]+)$ ajax_sfilter.php?title=$1 [NC,L]
+RewriteRule ^productfilter/([a-zA-Z0-9_-]+)$ ajax_pfilter.php?title=$1 [NC,L]
+RewriteRule ^collectionfilter/([a-zA-Z0-9_-]+)$ ajax_collfilter.php?title=$1 [NC,L]
+RewriteRule ^addcart/([a-zA-Z0-9_-]+)$ ajax_addtocart.php?title=$1 [NC,L]
+RewriteRule ^signout$ ajax_signout.php?title=$1 [NC,L]
+RewriteRule ^customer$ user.php?title=$1 [NC,L]
+RewriteRule ^logout$ release.php?title=$1 [NC,L]
+RewriteRule ^partners$ agent_list.php?title=$1 [NC,L]
+RewriteRule ^videos$ video.php?title=$1 [NC,L]
+RewriteRule ^about$ about.php?title=$1 [NC,L]
+RewriteRule ^terms$ terms.php?title=$1 [NC,L]
+RewriteRule ^diamondguide$ diamondguide.php?title=$1 [NC,L]
+RewriteRule ^jewelleryguide$ jewelleryguide.php?title=$1 [NC,L]
+RewriteRule ^gemstonesguide$ gemstonesguide.php?title=$1 [NC,L]
+RewriteRule ^goldrate$ goldrate.php?title=$1 [NC,L]
+RewriteRule ^dayreturn$ dayreturn.php?title=$1 [NC,L]
+RewriteRule ^freeshipping$ freeshipping.php?title=$1 [NC,L]
+RewriteRule ^financing$ financing.php?title=$1 [NC,L]
+RewriteRule ^reuturnpolicy$ reuturnpolicy.php?title=$1 [NC,L]
+RewriteRule ^story$ story.php?title=$1 [NC,L]
+RewriteRule ^notices$ notices.php?title=$1 [NC,L]
+RewriteRule ^sitemap$ sitemap.php?title=$1 [NC,L]
+RewriteRule ^privacy$ privacy.php?title=$1 [NC,L]
+RewriteRule ^corporate$ corporate.php?title=$1 [NC,L]
+RewriteRule ^faq$ faq.php?title=$1 [NC,L]
+RewriteRule ^partner/([a-zA-Z0-9_-]+)$ agent_profile.php?stitle=$1 [NC,L]
+RewriteRule ^products/([a-zA-Z0-9_-]+)$ category.php?stitle=$1 [NC,L]
+RewriteRule ^collection/([a-zA-Z0-9_-]+)$ collection.php?stitle=$1 [NC,L]
+RewriteRule ^post/([a-zA-Z0-9_-]+)$ posts.php?stitle=$1 [NC,L]
+RewriteRule ^([a-zA-Z0-9_-]+)$ product.php?pack=$1 [NC,L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “alt-php83” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-alt-php83 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
