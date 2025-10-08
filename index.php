@@ -166,14 +166,14 @@
 			<a href="/search.php?term=diamond%20pendant">
 				<div class="columns" style="gap: 20px; margin: 10px auto;margin-bottom:30px;">
 					<div class="column banner-scale"
-						style="width:100%;aspect-ratio:5/7;overflow:hidden;background:url(assets/v2/images/IMG_8841.jpg);background-size:cover;object-position:center;margin-bottom:20px;">
+						style="width:100%;aspect-ratio:5/7;overflow:hidden;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/IMG_8841.jpg);background-size:cover;object-position:center;margin-bottom:20px;">
 					</div>
 					<div class="column" style="display: flex;gap:20px; flex-direction: column;padding:0">
 						<div class="banner-scale"
-							style="width:100%;aspect-ratio:7/5 ;background:url(assets/v2/images/IMG_8924.jpg);background-size:cover;vertical-align:center;">
+							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/IMG_8924.jpg);background-size:cover;vertical-align:center;">
 						</div>
 						<div class="banner-scale"
-							style="width:100%;aspect-ratio:7/5 ;background:url(assets/v2/images/1_11.jpg);background-size:cover;object-position:center;vertical-align:bottom;">
+							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/1_11.jpg);background-size:cover;object-position:center;vertical-align:bottom;">
 						</div>
 					</div>
 				</div>
@@ -185,37 +185,37 @@
 			<div class="columns is-mobile is-multiline">
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/engagement">
-						<img src="assets/v2/images/home/e_r.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/e_r.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="products/drops">
-						<img src="assets/v2/images/home/ear.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ear.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/search.php?tags[]=gift">
-						<img src="assets/v2/images/home/gift.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/gift.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/flexible-bracelets">
-						<img src="assets/v2/images/home/bracelet.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bracelet.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/gold-bangles">
-						<img src="assets/v2/images/home/bangles.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bangles.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/diamond-pendent">
-						<img src="assets/v2/images/home/wed-jwel.png" class="image is-fullwidth banner-scale small-banner"
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wed-jwel.png" class="image is-fullwidth banner-scale small-banner"
 							style="max-height:240px;">
 					</a>
 				</div>
@@ -225,7 +225,7 @@
 			style="margin-top:1.5em; background-color:#F9F9FA; padding-top:2em; padding-bottom:2em;">
 			<div class="columns" style="flex-wrap:wrap;justify-content:space-evenly;padding-top:10px;">
 				<div class="column is-one-third"
-					style="aspect-ratio:1/1 ;background:linear-gradient( transparent, 50%, rgba(0,0,0,0.8)),url(assets/v2/images/home/pickup.jpg);background-size:cover;object-position:top;position:relative;margin-bottom:20px;">
+					style="aspect-ratio:1/1 ;background:linear-gradient( transparent, 50%, rgba(0,0,0,0.8)),url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/pickup.jpg);background-size:cover;object-position:top;position:relative;margin-bottom:20px;">
 					<div
 						style="position: absolute; padding-right: 20px;text-align:center;padding-left: 20px;padding-bottom:30px;height:100%;width:100%; display: flex;flex-direction:column;color:white;justify-content:flex-end;align-items:center;margin-left:-12px;">
 						<div style="font-size:20px; font-weight: 700;text-align-center">
@@ -242,7 +242,7 @@
 					</div>
 				</div>
 				<div class="column is-one-third"
-					style="aspect-ratio:1/1 ;background:linear-gradient( transparent, rgba(0,0,0,0.8)),url(assets/v2/images/home/store.jpg);background-size:cover;object-position:top;position:relative;margin-bottom:20px;">
+					style="aspect-ratio:1/1 ;background:linear-gradient( transparent, rgba(0,0,0,0.8)),url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/store.jpg);background-size:cover;object-position:top;position:relative;margin-bottom:20px;">
 					<div
 						style="position: absolute; padding-right: 20px;text-align:center;padding-left: 20px;padding-bottom:30px;height:100%;width:100%; display: flex;flex-direction:column;color:white;justify-content:flex-end;align-items:center;margin-left:-12px;">
 						<div style="font-size:20px; font-weight: 700;text-align-center">
