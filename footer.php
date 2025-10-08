@@ -8,7 +8,7 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 
 	<div class="columns p-3" style="padding-top:0;">
 		<div class="column" style="padding-left:5%; padding-top:2%;">
-			<img src="assets/images/extra/ba1.png">
+			<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ba1.png">
 		</div>
 		<div class="column letter-spacing pb-6" style="padding-top:5%;">
 			<h1 class="title" style="font-size:1.7rem;">
