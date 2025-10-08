@@ -26,13 +26,13 @@ function closeDrawer(drawerId) {
 }
 </script>
 <script>
+    document.querySelector(
+        "#loader").style.display = "none";
+    document.querySelector(
+        "body").style.visibility = "visible";
         document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                document.querySelector(
-                    "#loader").style.display = "none";
-                document.querySelector(
-                    "body").style.visibility = "visible";
-            }
+            // if (document.readyState === "complete") {
+            // }
         };
     </script>
 <style>

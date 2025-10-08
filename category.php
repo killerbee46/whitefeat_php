@@ -304,8 +304,7 @@ if (array_key_exists('sort',$_GET)) {
 		echo'
 			<div class="product-card-container">
 			   <div class="card card-cat" style="overflow:hidden;height:100%;">
-  <div class="card-image" style="background:url(../../../v2/images/no-image.avif)">
-    <figure class="image">
+  <div style="width:100%;aspect-ratio:1/1;background:url(assets/v2/images/image-loading.gif);background-repeat:no-repeat;background-size:contain;object-fit:cover;object-position:center;">
       <a href="'.$url.'"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
           $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='".$rowslt2['id_pack']."' limit 1"; 
           $displaypw2=mysqli_query($con,$sqlpw2);
@@ -316,7 +315,6 @@ if (array_key_exists('sort',$_GET)) {
 		echo "../../../v2/images/no-image.avif";  
 		}
 	  echo'" alt="Placeholder image" class="card-img-top" style="aspect-ratio=7/5;"/></a>
-    </figure>
   </div>
   <div class="card-content has-background-light" style="height:100%;">
     <div class="media mb-0">
