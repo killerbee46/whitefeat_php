@@ -221,7 +221,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 		<div class="columns has-background-white mt-3 each_item mr-3">
 	    <div class="column each_item is-2">
 		 <figure class="image">
-      <a href="#"><img src="assets/images/product/thumb/';
+      <a href="#"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
      
    	  $sqlckp = "Select * from `whitefeat_wf_new`.`package` where id_pack='".$rowactx['id_pack']."'"; 
       $displayckp=mysqli_query($con,$sqlckp);

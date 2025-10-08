@@ -72,7 +72,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	    </div>
   <div class="card-image">
     <figure class="image">
-      <img src="assets/images/product/thumb/' . $rowwp2['s_path'] . '" alt="' . $rowwp['p_name'] . '" class="card-img-top" />
+      <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowwp2['s_path'] . '" alt="' . $rowwp['p_name'] . '" class="card-img-top" />
     </figure>
   </div>
   <div class="card-content">

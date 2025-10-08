@@ -196,7 +196,7 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 					$rowpw2 = mysqli_fetch_array($displaypw2);
 
 					echo '
-		      <div>
+		      <div style="position:relative;">
   <a href="' . make_url($rowpw['p_name']) . '">
   <img src="assets/images/product/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%; height:40VH; object-fit:cover;" class="image"/>';
 
@@ -207,10 +207,12 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 					$countw = mysqli_num_rows($displaywl);
 					if ($countw > 0) {
 						echo '
-  <a href="wishlist" class="added_wishlist"><i class="fas fa-heart" style="color:#9471FB; font-size:1.2rem; position:absolute; margin-left:90%;margin-top:-97%; z-index:11;"></i></a>';
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;"><i class="fas fa-heart"></i></a>';
 					} else {
-						echo '<a href="#" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+						echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
 					}
+
+					echo '<br>';
 					/* checking if product is alreay in wishlish or not end */
 
 
