@@ -170,7 +170,7 @@
 					</div>
 					<div class="column" style="display: flex;gap:20px; flex-direction: column;padding:0">
 						<div class="banner-scale"
-							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/IMG_8924.jpg);background-size:cover;vertical-align:center;">
+							style="width:100%;aspect-ratio:7/5 ;background:url(assets/v2/images/home/IMG_9153.jpg);background-size:cover;vertical-align:center;">
 						</div>
 						<div class="banner-scale"
 							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/1_11.jpg);background-size:cover;object-position:center;vertical-align:bottom;">
