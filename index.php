@@ -88,16 +88,6 @@
 				top.location = self.location;
 			}
 		</script>
-		<script>
-			document.onreadystatechange = function () {
-                if (document.readyState === "complete") {
-                    document.querySelector(
-                        "#loader").style.display = "none";
-                    document.querySelector(
-                        "body").style.visibility = "visible";
-                }
-            };
-		</script>
 	</head>
 
 	<body style="letter-spacing:0.02em;visibility:invisible;">
@@ -195,38 +185,38 @@
 			<div class="columns is-mobile is-multiline">
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/engagement">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/e_r.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/e_r.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="products/drops">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ear.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ear.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/search.php?tags[]=gift">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/gift.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/gift.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/flexible-bracelets">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bracelet.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bracelet.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/gold-bangles">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bangles.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/bangles.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 				<div class="column is-12-mobile is-4-desktop is-2-tablet">
 					<a href="/products/diamond-pendent">
-						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wed-jwel.png" class="image is-fullwidth banner-scale small-banner"
-							style="max-height:240px;">
+						<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wed-jwel.png"
+							class="image is-fullwidth banner-scale small-banner" style="max-height:240px;">
 					</a>
 				</div>
 			</div>
@@ -273,7 +263,17 @@
 			</div>
 		</div>
 
-
+		<script>
+			document.onreadystatechange = function () {
+				if (document.readyState === "complete") {
+					document.querySelector(
+						"#loader").style.display = "none";
+					document.querySelector(
+						"body").style.visibility = "visible";
+				}
+			};
+		</script>
+		
 		<?PHP /*-- BODY SECTION END --*/ ?>
 
 
