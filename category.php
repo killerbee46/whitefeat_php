@@ -312,7 +312,7 @@ if (array_key_exists('sort',$_GET)) {
           if(!empty($rowpw2) && array_key_exists('s_path',$rowpw2)) {
 		echo $rowpw2['s_path'];
 		} else {
-		echo "../../../v2/images/no-image.avif";  
+		echo "no-image.avif";  
 		}
 	  echo'" alt="Placeholder image" class="card-img-top" style="aspect-ratio=7/5;"/></a>
   </div>
