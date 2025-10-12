@@ -90,7 +90,7 @@
 		</script>
 	</head>
 
-	<body style="letter-spacing:0.02em;invisibility:none;">
+	<body style="letter-spacing:0.02em; visibility:hidden;">
 		<div id="loader" class="center">
 		</div>
 
