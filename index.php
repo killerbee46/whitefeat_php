@@ -88,9 +88,19 @@
 				top.location = self.location;
 			}
 		</script>
+		<script>
+			document.onreadystatechange = function () {
+                if (document.readyState === "complete") {
+                    document.querySelector(
+                        "#loader").style.display = "none";
+                    document.querySelector(
+                        "body").style.visibility = "visible";
+                }
+            };
+		</script>
 	</head>
 
-	<body style="letter-spacing:0.02em;">
+	<body style="letter-spacing:0.02em;visibility:invisible;">
 		<div id="loader" class="center">
 		</div>
 
@@ -170,7 +180,7 @@
 					</div>
 					<div class="column" style="display: flex;gap:20px; flex-direction: column;padding:0">
 						<div class="banner-scale"
-							style="width:100%;aspect-ratio:7/5 ;background:url(assets/v2/images/home/IMG_9153.jpg);background-size:cover;vertical-align:center;">
+							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/IMG_9153.jpg);background-size:cover;vertical-align:center;">
 						</div>
 						<div class="banner-scale"
 							style="width:100%;aspect-ratio:7/5 ;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/1_11.jpg);background-size:cover;object-position:center;vertical-align:bottom;">

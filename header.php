@@ -549,10 +549,10 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                         </div>
                     </div>
                     <div class="search-info-container flex align-center justify-between" style="gap: 10px;">
-                        <div class="col-6 flex align-center" style="gap:10px;">
+                        <div class="col-6 flex align-center" style="gap:10px;position:relative;">
                             <?php /* START ==> Header autocomplete search */?>
                                 <span id="the-basics">
-            <input class="nav-search typeahead" id="auto-com-val" type="search" placeholder="Search..." style="height: 100%;" />
+            <div class="search-icon-container" style="position:absolute;z-index:10;top:0;bottom:0;height:100%;display:flex; align-items: center;padding-left:10px;"><i class="fas fa-search search-icon"></i></div><input class="nav-search typeahead" id="auto-com-val" type="search" placeholder="Search..." style="height: 100%;" />
 	    </span>
       <?php /* END ==> Header autocomplete search */?>
                             <div class="currency-select">
@@ -647,7 +647,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
   	  		/* if user is not logged-in START */ 
   if($GLOBALS['customer']=='0'){
 	  echo'<span data-target="modal-user" class="user-modal contains-number big-screen">
-	  <image class="avatar icons" src="assets/v2/images/user.png" alt="user detail" />
+	  <i class="fas fa-user icons" style="font-size:18px"></i>
 	  </span>';
 	  }
 	  		/* if user is not logged-in END */ 
@@ -663,7 +663,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                                 <!-- <image class="avatar menu-items icons" onclick="openModal('login-modal')" src="assets/v2/images/user.png" alt="user detail" /> -->
                             </div>
                             <a href="/wishlist" class="contains-number big-screen">
-                                <image class="info icons" src="assets/v2/images/wishlist.png" alt="wishlist icon" />
+                                <i class="fas fa-heart info icons" style="font-size: 18px;"></i>
                                 <div class="number-data">
                                     <?php 
       $sql1acw = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='".$GLOBALS['cookid']."' "; 
@@ -676,7 +676,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                                 </div>
                             </a>
                             <a href="/checkout.php" class='contains-number big-screen'>
-                                <image class="info icons" src="assets/v2/images/cart.png" alt="cart icon" />
+                                <i class="fas fa-shopping-cart info icons" style="font-size: 18px;"></i>
                                 <div class="number-data">
                                     <?php
 
@@ -723,7 +723,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 		  /* MV (Mobile View) if user is not logged-in START */ 
   if($GLOBALS['customer']=='0'){
 	  echo'<span data-target="modal-user" class="user-modal contains-number small-screen">
-	  <image class="avatar menu-items icons" src="assets/v2/images/user.png" alt="user detail" /> <span style="cursor:pointer;"> Login</span>
+	  <i class="fas fa-user icons" style="font-size:18px"></i> <span style="cursor:pointer;"> Login</span>
 	  </span>  
 	  ';
 	  }
@@ -738,7 +738,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
   ?>
                             </div>
             <a href="/wishlist" class="contains-number small-screen">
-                                <image class="info menu-items icons" src="assets/v2/images/wishlist.png" alt="wishlist icon" /> <span> Wishlist</span>
+                <i class="fas fa-heart info icons" style="font-size: 18px;"></i><span> Wishlist</span>
                                 <div class="number-data">
                                     <?php 
       $sql1acw = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='".$GLOBALS['cookid']."' "; 
@@ -751,7 +751,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                                 </div>
                             </a>
                             <a href="/checkout.php" class='contains-number small-screen'>
-                                <image class="info menu-items icons" src="assets/v2/images/cart.png" alt="cart icon" /> <span> Cart</span>
+                                <i class="fas fa-shopping-cart info icons" style="font-size: 18px;"></i> <span> Cart</span>
                                 <div class="number-data">
                                     <?php
 

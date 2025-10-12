@@ -371,11 +371,21 @@
             padding: 8px 16px;
             padding-left: 30px;
             border-radius: 8px;
-            background-image: url('assets/v2/images/search.png');
             background-position: 8px center;
             background-size: 15px 15px;
             background-repeat: no-repeat;
             border: 2px solid #3892C6;
+        }
+
+        .search-icon-container {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
         }
 
         .nav-search:focus {
@@ -897,6 +907,12 @@
                 width: 90px;
                 aspect-ratio: 7/2;
                 margin-right: 10px;
+            }
+            .search-icon-container {
+                padding-left: 5px !important;
+            }
+            .search-icon-container .search-icon{
+                font-size: 12px;
             }
 
             .logo-menu-container {
