@@ -90,7 +90,7 @@
 		</script>
 	</head>
 
-	<body style="letter-spacing:0.02em;visibility:invisible;">
+	<body style="letter-spacing:0.02em;invisibility:none;">
 		<div id="loader" class="center">
 		</div>
 
@@ -263,17 +263,6 @@
 			</div>
 		</div>
 
-		<script>
-			document.onreadystatechange = function () {
-				if (document.readyState === "complete") {
-					document.querySelector(
-						"#loader").style.display = "none";
-					document.querySelector(
-						"body").style.visibility = "visible";
-				}
-			};
-		</script>
-		
 		<?PHP /*-- BODY SECTION END --*/ ?>
 
 

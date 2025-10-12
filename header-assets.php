@@ -28,9 +28,6 @@
         }
     </script>
     <script>
-        const assetsLoaded = localStorage.getItem('assetsLoaded') ?? "false"
-        localStorage.setItem("assetsLoaded", "true")
-        if (assetsLoaded == "false") {
             document.onreadystatechange = function () {
                 if (document.readyState === "complete") {
                     document.querySelector(
@@ -39,12 +36,6 @@
                         "body").style.visibility = "visible";
                 }
             };
-        } else {
-            document.querySelector(
-                "#loader").style.display = "none";
-            document.querySelector(
-                "body").style.visibility = "visible";
-        }
     </script>
     <style>
         * {
