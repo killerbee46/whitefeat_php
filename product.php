@@ -650,8 +650,6 @@
   </head>
 
   <body style="letter-spacing:0.02em;">
-    <div id="loader" class="center">
-    </div>
     <?php include 'header.php'; ?>
 
 
@@ -770,7 +768,8 @@
           <div class="column is-9 letter-spacing">
 
             <h2 class="letter-spacing is-size-4 has-text-weight-semibold" style="color:#333;">
-              <?php echo $rowpd['p_name']; ?></h2>
+              <?php echo $rowpd['p_name']; ?>
+            </h2>
             <small><small><a href="#" class="scrollto" data-target="product_details"><u>Product
                     Details</u></a></small></small>
 
@@ -803,89 +802,89 @@
               <div class="modal-background"></div>
               <div class="column modal-content has-background-white p-0 h-fit">
                 <h2 class="m-0 px-2 pt-2">Similar Products</h2>
-                  <hr class="m-0 my-2 mb-4" />
-                  <section class="modal-card-body">
-                <div class="owl-carousel owl-theme owl-smv w-[99%]">
+                <hr class="m-0 my-2 mb-4" />
+                <section class="modal-card-body">
+                  <div class="owl-carousel owl-theme owl-smv w-[99%]">
 
 
-                  <?php
+                    <?php
 
-                  $sqlpw = "Select * from `whitefeat_wf_new`.`package` where visible='1' and active='1' and status='1' and cat_id='" . $rowpd['cat_id'] . "'";
-                  $displaypw = mysqli_query($con, $sqlpw);
-                  while ($rowpw = mysqli_fetch_array($displaypw)) {
-                    $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowpw['id_pack'] . "' limit 1";
-                    $displaypw2 = mysqli_query($con, $sqlpw2);
-                    $rowpw2 = mysqli_fetch_array($displaypw2);
+                    $sqlpw = "Select * from `whitefeat_wf_new`.`package` where visible='1' and active='1' and status='1' and cat_id='" . $rowpd['cat_id'] . "'";
+                    $displaypw = mysqli_query($con, $sqlpw);
+                    while ($rowpw = mysqli_fetch_array($displaypw)) {
+                      $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowpw['id_pack'] . "' limit 1";
+                      $displaypw2 = mysqli_query($con, $sqlpw2);
+                      $rowpw2 = mysqli_fetch_array($displaypw2);
 
-                    echo '
+                      echo '
 		      <div class="relative">
   <a href="' . make_url($rowpw['p_name']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%;aspect-ratio:4/5;" class="image is-fullwidth"/>';
 
-                    $sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
-                    $displaywl = mysqli_query($con, $sqlwl);
-                    $countw = mysqli_num_rows($displaywl);
-                    if ($countw > 0) {
-                          echo '
+                      $sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
+                      $displaywl = mysqli_query($con, $sqlwl);
+                      $countw = mysqli_num_rows($displaywl);
+                      if ($countw > 0) {
+                        echo '
   <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;"><i class="fas fa-heart"></i></a>';
-                        } else {
-                          echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
-                        }
+                      } else {
+                        echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+                      }
 
 
 
 
 
-                    echo '<br>';
+                      echo '<br>';
 
-                    // currency 
-                    $sel_cur = 1;
-                    $cnot = '';
-                    $crate = 1;
-                    if ($GLOBALS['customer'] != 0) {
-                      $sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
-                      $displaycrc = mysqli_query($con, $sqlcrc);
-                      $rowcrc = mysqli_fetch_array($displaycrc);
-                      $sel_cur = $rowcrc['cur_id'];
-                    } else {
-                      $sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
-                      $displaycrc = mysqli_query($con, $sqlcrc);
-                      $rowcrc = mysqli_fetch_array($displaycrc);
-                      $sel_cur = $rowcrc['cookie_currency'];
-                    }
-                    $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
-                    $displaycrc2 = mysqli_query($con, $sqlcrc2);
-                    $rowcrc2 = mysqli_fetch_array($displaycrc2);
-                    $cnot = $rowcrc2['cur_name'];
-                    $crate = ($rowcrc2['cur_rate']);
+                      // currency 
+                      $sel_cur = 1;
+                      $cnot = '';
+                      $crate = 1;
+                      if ($GLOBALS['customer'] != 0) {
+                        $sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
+                        $displaycrc = mysqli_query($con, $sqlcrc);
+                        $rowcrc = mysqli_fetch_array($displaycrc);
+                        $sel_cur = $rowcrc['cur_id'];
+                      } else {
+                        $sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
+                        $displaycrc = mysqli_query($con, $sqlcrc);
+                        $rowcrc = mysqli_fetch_array($displaycrc);
+                        $sel_cur = $rowcrc['cookie_currency'];
+                      }
+                      $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
+                      $displaycrc2 = mysqli_query($con, $sqlcrc2);
+                      $rowcrc2 = mysqli_fetch_array($displaycrc2);
+                      $cnot = $rowcrc2['cur_name'];
+                      $crate = ($rowcrc2['cur_rate']);
 
-                    $dynamicPrices = dynamicPriceCalculator($productname, $crate);
+                      $dynamicPrices = dynamicPriceCalculator($productname, $crate);
 
-                    if ($rowpw['offer'] > 0) {
-                      $newprice = $dynamicPrices['originalPrice'] - $dynamicPrices['discount'];
-                      echo '
+                      if ($rowpw['offer'] > 0) {
+                        $newprice = $dynamicPrices['originalPrice'] - $dynamicPrices['discount'];
+                        echo '
   <span class="p-2"><Strong class="letter-spacing price-off ">';
 
-                      echo $cnot . " " . round(($newprice), 2);
+                        echo $cnot . " " . round(($newprice), 2);
 
-                      echo '</strong>
+                        echo '</strong>
   <small><small><strike class="price-off">' . $cnot . " " . round(($dynamicPrices['originalPrice']), 2) . '</strike></small></small>';
-                    } else {
-                      echo '<span class="p-2"><Strong class="letter-spacing price-off ">';
-                      echo $cnot . " " . round(($dynamicPrices['originalPrice']), 2);
-                      echo '</strong>';
-                    }
-                    echo '<br> <span style="font-size:0.9rem; color:#555;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
+                      } else {
+                        echo '<span class="p-2"><Strong class="letter-spacing price-off ">';
+                        echo $cnot . " " . round(($dynamicPrices['originalPrice']), 2);
+                        echo '</strong>';
+                      }
+                      echo '<br> <span style="font-size:0.9rem; color:#555;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
   </a>
   </div>
 		  
 		  ';
 
-                  }
+                    }
 
 
 
-                  ?>
+                    ?>
 
 
 
@@ -893,17 +892,17 @@
 
 
 
-                  <div class="owl-nav" style="display:none;">
-                    <div class='nav-button owl-prev'>
-                      <i class='fas fa-chevron-circle-left'
-                        style='position:absolute; font-size:2em; margin-top:-250px; margin-left:0.5%;'></i>
-                    </div>
-                    <div class='nav-button owl-next'>
-                      <i class='fas fa-chevron-circle-right'
-                        style='position:absolute; font-size:2em; margin-left:97%; margin-top:-250px;'></i>
+                    <div class="owl-nav" style="display:none;">
+                      <div class='nav-button owl-prev'>
+                        <i class='fas fa-chevron-circle-left'
+                          style='position:absolute; font-size:2em; margin-top:-250px; margin-left:0.5%;'></i>
+                      </div>
+                      <div class='nav-button owl-next'>
+                        <i class='fas fa-chevron-circle-right'
+                          style='position:absolute; font-size:2em; margin-left:97%; margin-top:-250px;'></i>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </section>
 
 

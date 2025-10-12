@@ -23,8 +23,6 @@
 	</head>
 
 	<body style="letter-spacing:0.02em;">
-		<div id="loader" class="center">
-		</div>
 		<?php include 'header.php'; ?>
 
 		<div class="container is-fluid mb-5">

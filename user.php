@@ -25,8 +25,6 @@ header('location:index.php');
 </head>
 
 <body style="letter-spacing:0.02em;">
-    	<div id="loader" class="center">
-	</div>
 <?php include('header.php'); ?>
 
 
