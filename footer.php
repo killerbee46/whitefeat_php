@@ -1,42 +1,3 @@
-<?php /* Disabled UI featured, digital ADS START
-echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="columns is-variable letter-spacing"><div class="column column-banner is-4-desktop is-full-mobile"><div class="columns m-1 p-2 banner-scale" style="border:1px solid rgba(136,99,251,0.2); background-color:#F9F3E6;"><div class="column is-12 ads-banner-mini" style="padding-left:25%;"><i class="fas fa-images" style="font-size:2.8rem;"></i><Br><strong style="font-size:1.5em; font-weight:100; color:#3E8ED0;"><i class="fas fa-ad"></i>&nbsp;Your ad here.</strong></div></div></div><div class="column column-banner is-4-desktop is-full-mobile"><div class="columns m-1 p-2 banner-scale" style="border:1px solid rgba(136,99,251,0.2); background-color:#F6F4FF;"><div class="column is-12 ads-banner-mini" style="padding-left:25%;"><i class="fas fa-images" style="font-size:2.8rem;"></i><Br><strong style="font-size:1.5em; font-weight:100; color:#3E8ED0;"><i class="fas fa-ad"></i>&nbsp;Your ad here.</strong></div></div></div><div class="column column-banner is-4-desktop is-full-mobile "><div class="columns m-1 p-2 banner-scale" style="border:1px solid rgba(136,99,251,0.2); background-color:#F8EEF8;"><div class="column is-3" style=""><i class="fas fa-ad" style="font-size:5em;color:#3E8ED0;"></i></div><div class="column letter-spacing mt-3" style="font-size:0.9rem"><h3 class="subtitle mb-2">For Advertisements </h3><i class="fas fa-phone"></i>CALL:+977-9845178434 </div></div></div></div></div>';*/ ?>
-
-
-
-<?php /* gold exchange program section start */ ?>
-<div class="container is-fluid" style="margin-top:2.5em; background-color:#F7F0EE;">
-
-	<div class="columns p-3" style="padding-top:0;">
-		<div class="column" style="padding-left:5%; padding-top:2%;">
-			<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ba1.png">
-		</div>
-		<div class="column letter-spacing pb-6" style="padding-top:5%;">
-			<h1 class="title" style="font-size:1.7rem;">
-				Gold Exchange Program!</h1> <br>
-			- Exchange your old gold for new gorgeous jewellery at any whitefeather's store.<br><br>
-			- Repolishing & Repair (FREE), Appointment with Jewellery Designer
-
-			<br>
-			<br>
-
-			<small>
-				Please note: The old gold doesn’t have to be from only whitefeather's, it can be any gold jewellery you
-				have.
-			</small>
-			<br><br><br><br>
-
-			<a href="post/exchange"><button class="button is-info is-light p-5 is-rounded"
-					style="width:50%; border:1px solid #ddd;">Know More</button></a>
-
-		</div>
-	</div>
-
-</div>
-<?php /* gold exchange program section start */ ?>
-
-
-
-
 <?php /* Footer Products OWL carousel section end */ ?>
 <div class="container is-fluid" style="margin-top:1.5em;">
 	<div class="columns is-variable" style="flex-direction:column; width:100%;">
@@ -144,22 +105,13 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 
 					echo '<br> <span style="font-size:0.9rem; color:#555;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
   </a>
-  </div>
-		  
+  </div>	  
 		  ';
-
 				}
 
 				/* lopping through products in database matching the terms and displaying end */
 
 				?>
-
-
-
-
-
-
-
 				<div class="owl-nav" style="display:none;">
 					<div class='nav-button owl-prev'>
 						<i class='fas fa-chevron-circle-left'
@@ -434,10 +386,48 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 </div>
 <?php /* testinomials on OWL carousel end */ ?>
 
+<?PHP /* FOOTER 2 COLLAGE SECTION START (BANNER SET 4) */ ?>
 
+<div class="container is-fluid" style="margin-top:1.5em;">
+	<div class="columns is-variable">
+		<div class="column is-9-desktop is-12-mobile letter-spacing">
+			<h2 class="subtitle hd-1"
+				style="border-bottom:1px solid #A65FF3; width:30%; padding-bottom:0.5em; font-size:1.8rem; font-weight:380;">
+				Shop Our Instagram</h2>
+		</div>
+
+		<div class="column is-3-desktop is-12-mobile insta-hd" style=" text-align:right; padding-right:0.7em;">
+			<span style="font-size:1.5rem; font-weight:100">#MyWhiteFeatherStory</span>
+
+		</div>
+	</div>
+
+
+
+</div>
+
+
+<div class="container is-fluid" style="margin-top:1.5em;padding-bottom:5em;">
+	<div class="columns">
+
+		<div class="column is-4 p-0" style="padding-left:0.5em!important;">
+			<a target="_blank" href="https://www.instagram.com/reel/DPtQTKvAfHz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
+					src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/16853350821685335082.png"
+					class="image is-fullwidth banner-scale2" style="max-height:560px;" /></a>
+		</div>
+		<div class="column is-8 p-0" style="padding-left:0.5em!important;">
+			<a target="_blank" href="https://www.instagram.com/reel/DPle6AxDFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
+					src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/17383398271738339827.jpg"
+					class="image is-fullwidth banner-scale2" style="max-height:560px;" /></a>
+		</div>
+	</div>
+
+</div>
+
+<?PHP /* FOOTER 2 COLLAGE SECTION END (BANNER SET 4) */ ?>
 
 <?PHP /* SUBSCRIBER SECTION START */ ?>
-<div class="container is-fluid" style="margin-top:2.5em; padding:3%; padding-bottom:2%; background-color:#231535;">
+<div class="container is-fluid" style="padding:3%; padding-bottom:2%; background-color:#231535;">
 	<div class="columns is-mobile p-0">
 		<div class="column has-text-centered">
 
@@ -478,7 +468,7 @@ echo'<div class="container is-fluid" style="margin-top:1.5em;"><div class="colum
 			<?PHP /* ABOUT WHITEFEATHER TRIANGLE CSS START */ ?>
 			<span style="color:#3892C6;">About White Feather's Jewellery</span>
 			<div style="
-  position:absolute;
+			position:absolute;
   left:48%;
   bottom:0%;
   width: 0;
@@ -643,7 +633,8 @@ border-color: transparent transparent #ffffff transparent;"></div>
 					<h3 class="subtitle is-size-5 p-5 pb-0 mb-0 "
 						style="background: rgb(241,243,244);
 background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%);">Whitefeathers Location:
-						<small><small><small><small></small></small></small></small></h3>
+						<small><small><small><small></small></small></small></small>
+					</h3>
 
 
 

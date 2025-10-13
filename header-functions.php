@@ -1,5 +1,6 @@
-<?php 
-function dynamicProductPrice($p_name){
+<?php
+function dynamicProductPrice($p_name)
+{
     $dynamicPriceSql = "
     SELECT 
     offer,
@@ -11,7 +12,7 @@ JOIN
     `whitefeat_wf_new`.`package_metal` pr ON p.pmt_id = pr.pmt_id 
     
 WHERE 
-p.p_name ='".$p_name."';";
+p.p_name ='" . $p_name . "';";
     return $dynamicPriceSql;
 
 }
@@ -19,16 +20,17 @@ p.p_name ='".$p_name."';";
 
 <?php
 
-function dynamicPriceCalculator($p_name, $c_rate){
+function dynamicPriceCalculator($p_name, $c_rate)
+{
     include 'db_connect.php';
-    $dynamicQuery = dynamicProductPrice($p_name); 
-      $dynamicDisplay = mysqli_query($con,$dynamicQuery);
-	  $dynamicRow = (!empty($dynamicDisplay))?mysqli_fetch_array($dynamicDisplay):[];
+    $dynamicQuery = dynamicProductPrice($p_name);
+    $dynamicDisplay = mysqli_query($con, $dynamicQuery);
+    $dynamicRow = (!empty($dynamicDisplay)) ? mysqli_fetch_array($dynamicDisplay) : [];
     $originalPrice = $dynamicRow['dynamic_price'];
-    $discount = ($dynamicRow['offer']>0) ? ($dynamicRow['discount']) : 0;
+    $discount = ($dynamicRow['offer'] > 0) ? ($dynamicRow['discount']) : 0;
     return [
-        "originalPrice"=>$originalPrice/$c_rate,
-        "discount"=>$discount/$c_rate
+        "originalPrice" => $originalPrice / $c_rate,
+        "discount" => $discount / $c_rate
     ];
 }
 ?>

@@ -28,14 +28,14 @@
         }
     </script>
     <script>
-            document.onreadystatechange = function () {
-                if (document.readyState === "complete") {
-                    document.querySelector(
-                        "#loader").style.display = "none";
-                    document.querySelector(
-                        "body").style.visibility = "visible";
-                }
-            };
+        document.onreadystatechange = function () {
+            if (document.readyState === "complete") {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
     </script>
     <style>
         * {
@@ -899,10 +899,12 @@
                 aspect-ratio: 7/2;
                 margin-right: 10px;
             }
+
             .search-icon-container {
                 padding-left: 5px !important;
             }
-            .search-icon-container .search-icon{
+
+            .search-icon-container .search-icon {
                 font-size: 12px;
             }
 
@@ -992,6 +994,10 @@
             .modal-content {
                 width: 90vw !important;
                 height: unset !important;
+            }
+
+            .slide-img {
+                margin-top: 0;
             }
 
             .user-detail {
