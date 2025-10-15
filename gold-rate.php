@@ -107,10 +107,9 @@
 				?>
 				<div class="columns" style="padding-bottom:30px;">
 					<div class="column">
-						<!-- <img src="assets/v2/images/price_gold.webp" alt=""> -->
 						<div style="display:flex;align-items:center;justify-content:space-evenly;">
 							<div
-								style="background-image:url(assets/v2/images/price_gold.webp);aspect-ratio:7/5;height:100px;object-fit:cover;background-size:cover;">
+								style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/price_gold.webp);aspect-ratio:7/5;height:100px;object-fit:cover;background-size:cover;">
 							</div>
 							<div>
 								<span style="color:gold;font-size:18px;font-weight:700;">Gold</span> <br />
@@ -145,7 +144,7 @@
 					<div class="column"
 						style="display:flex;align-items:center;justify-content:space-evenly; border-left:0.5px solid #848482 ;">
 						<div
-							style="background-image:url(assets/v2/images/price_silver.webp);aspect-ratio:6/5;height:100px;object-fit:cover;background-size:cover;">
+							style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/price_silver.webp);aspect-ratio:6/5;height:100px;object-fit:cover;background-size:cover;">
 						</div>
 						<div>
 							<span style="color:#c0c0c0;font-size:18px;font-weight:700;">Silver</span> <br />
