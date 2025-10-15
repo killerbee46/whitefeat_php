@@ -180,10 +180,10 @@
 							style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/price_gold.webp);aspect-ratio:7/5;height:100px;object-fit:cover;background-size:cover;">
 						</div>
 						<div>
-							<span style="color:gold;font-size:18px;font-weight:700;">Gold</span> <br />
+							<span style="color:#DAA520;font-size:18px;font-weight:700;">Gold</span> <br />
 							<span style="color:#848482">Per Tola</span>
 						</div>
-						<div style="color:gold;font-size:18px;font-weight:700;">
+						<div style="color:#DAA520;font-size:18px;font-weight:700;">
 							RS. <?php echo $gold['price'] ?>
 						</div>
 					</div>
