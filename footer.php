@@ -103,7 +103,11 @@
 
 					/* Checking for discount on product end */
 
-					echo '<br> <span style="font-size:0.9rem; color:#555;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
+					echo '<br> <span title="'.$rowpw['p_name'].'" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
   </a>
   </div>	  
 		  ';
@@ -561,7 +565,7 @@ border-color: transparent transparent #ffffff transparent;"></div>
 			<a href="post/diamondguide" style="color:#666;font-size:0.7rem; font-weight:400;">DIAMOND GUIDE</a><br>
 			<a href="post/jewelleryguide" style="color:#666;font-size:0.7rem; font-weight:400;">JEWELLERY GUIDE</a><br>
 			<a href="post/gemstonesguide" style="color:#666;font-size:0.7rem; font-weight:400;">GEMSTONES GUIDE</a><br>
-			<a href="post/goldrate" style="color:#666;font-size:0.7rem; font-weight:400;">GOLD RATE</a><br>
+			<a href="/gold-rate.php" style="color:#666;font-size:0.7rem; font-weight:400;">GOLD RATE</a><br>
 			<br>
 
 

@@ -29,36 +29,35 @@
 <?php include('header.php'); ?>
 <br>
 <div class="container mt-4" style="min-height:50VH; margin-top:5rem; padding:30px;">
- <p class="has-text-dark"><?php  echo $rowslt['info_text']; ?></p>
  <?php /* gold exchange program section start */ ?>
-<div class="container is-fluid" style="margin-top:2.5em; background-color:#F7F0EE;">
-<?php if ($rowslt['info_type'] === "exchange") { ?>
-	<div class="columns p-3" style="padding-top:0;">
-		<div class="column" style="padding-left:5%; padding-top:2%;">
-			<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ba1.png">
-		</div>
-		<div class="column letter-spacing pb-6" style="padding-top:5%;">
-			<h1 class="title" style="font-size:1.7rem;">
-				Gold Exchange Program!</h1> <br>
-			- Exchange your old gold for new gorgeous jewellery at any whitefeather's store.<br><br>
-			- Repolishing & Repair (FREE), Appointment with Jewellery Designer
-
-			<br>
-			<br>
-
-			<small>
-				Please note: The old gold doesn’t have to be from only whitefeather's, it can be any gold jewellery you
-				have.
-			</small>
-			<br><br><br><br>
-
-			<a href="post/exchange"><button class="button is-info is-light p-5 is-rounded"
-					style="width:50%; border:1px solid #ddd;">Know More</button></a>
-
-		</div>
-	</div>
-
-</div>
+ <?php if ($rowslt['info_type'] === "exchange") { ?>
+	 <div class="columns p-3" style="padding-top:0;margin-top:2em;">
+		 <div class="column" style="padding-left:5%; padding-top:2%;">
+			 <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/ba1.png">
+		 </div>
+		 <div class="column letter-spacing pb-6" style="padding-top:5%;">
+			 <h1 class="title" style="font-size:1.7rem;">
+				 Gold Exchange Program!</h1> <br>
+			 - Exchange your old gold for new gorgeous jewellery at any whitefeather's store.<br><br>
+			 - Repolishing & Repair (FREE), Appointment with Jewellery Designer
+ 
+			 <br>
+			 <br>
+ 
+			 <small>
+				 Please note: The old gold doesn’t have to be from only whitefeather's, it can be any gold jewellery you
+				 have.
+			 </small>
+			 <br><br><br><br>
+ 
+			 <!-- <a href="post/exchange"><button class="button is-info is-light p-5 is-rounded"
+					 style="width:50%; border:1px solid #ddd;">Know More</button></a> -->
+ 
+		 </div>
+	 </div>
+ <?php }else{?>
+	<p class="has-text-dark"><?php  echo $rowslt['info_text']; ?></p>
+	<?php } ?>
 <?php /* gold exchange program section start */ ?>
  <?php if ($rowslt['info_type'] === "goldrate") { ?>
 	<div class="gold-rate-container">

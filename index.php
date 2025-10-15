@@ -160,6 +160,50 @@
 		}
 
 		/* HOMEPAGE SLIDER END */ ?>
+			<div class="container is-fluid" style="margin-top: 10px;">
+				<a href="/gold-rate.php">
+			<div class="card p-4" style="background: #01243a; color:white; overflow:hidden;">
+				<div style="font-size:20px;font-weight:700;">Today's Gold and Silver Rates
+					<hr style="margin-top:10px;background:#848482;height:1px;" />
+				</div>
+				<?php
+				$sqlgol = "Select pm_id,price from `whitefeat_wf_new`.`package_material` where pm_id = 2";
+				$gol = mysqli_query($con, $sqlgol);
+				$gold = mysqli_fetch_array($gol);
+				$sqlsil = "Select pm_id,price from `whitefeat_wf_new`.`package_material` where pm_id = 3";
+				$sil = mysqli_query($con, $sqlsil);
+				$silver = mysqli_fetch_array($sil);
+				?>
+				<div class="columns" style="padding-bottom:30px;">
+					<div class="column" style="display:flex;align-items:center;justify-content:space-evenly;flex-wrap:wrap;">
+						<div
+							style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/price_gold.webp);aspect-ratio:7/5;height:100px;object-fit:cover;background-size:cover;">
+						</div>
+						<div>
+							<span style="color:gold;font-size:18px;font-weight:700;">Gold</span> <br />
+							<span style="color:#848482">Per Tola</span>
+						</div>
+						<div style="color:gold;font-size:18px;font-weight:700;">
+							RS. <?php echo $gold['price'] ?>
+						</div>
+					</div>
+					<div class="column"
+						style="display:flex;align-items:center;justify-content:space-evenly; border-left:0.5px solid #848482;flex-wrap:wrap;">
+						<div
+							style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/price_silver.webp);aspect-ratio:6/5;height:100px;object-fit:cover;background-size:cover;">
+						</div>
+						<div>
+							<span style="color:#c0c0c0;font-size:18px;font-weight:700;">Silver</span> <br />
+							<span style="color:#848482">Per Tola</span>
+						</div>
+						<div style="color:#c0c0c0;font-size:18px;font-weight:700;margin-left:10px;">
+							RS. <?php echo $silver['price'] ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		</div>
 
 
 		<div class="container is-fluid" style="margin-top: 20px;">
