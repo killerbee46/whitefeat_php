@@ -124,19 +124,19 @@
 							<h4>More Details</h4>
 							<hr style="margin-top:10px;background:#848482;height:1px;" />
 							<div class="flex justify-evenly">
-								<div>24 Karat</div>
+								<div>24K</div>
 								<div>Rs. <?php echo ($gold['price'])*1 ?></div>
 							</div>
 							<div class="flex justify-evenly">
-								<div>22 Karat</div>
+								<div>22K</div>
 								<div>Rs. <?php echo ($gold['price'] * 0.92 ) ?></div>
 							</div>
 							<div class="flex justify-evenly">
-								<div>18 Karat</div>
+								<div>18K</div>
 								<div>Rs. <?php echo ($gold['price'] * 0.75 ) ?></div>
 							</div>
 							<div class="flex justify-evenly">
-								<div>14 Karat</div>
+								<div>14K</div>
 								<div>Rs. <?php echo ($gold['price'] * 0.6 ) ?></div>
 							</div>
 						</div>
