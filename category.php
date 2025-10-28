@@ -331,10 +331,13 @@ background: rgba(116,228,250,1);">
 						$sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowslt2['id_pack'] . "' limit 1";
 						$displaypw2 = mysqli_query($con, $sqlpw2);
 						$rowpw2 = mysqli_fetch_array($displaypw2);
-						if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
+						if (isset($rowslt2['image'])) {
+							echo $rowslt2['image'];
+						}
+						else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
 							echo $rowpw2['s_path'];
 						} else {
-							echo "no-image.avif";
+							echo "no-image.png";
 						}
 						echo '" alt="Placeholder image" class="card-img-top" style="aspect-ratio=7/5;"/></a>
   </div>

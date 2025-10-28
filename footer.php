@@ -45,7 +45,15 @@
 					echo '
 		      <div style="position:relative;">
   <a href="' . make_url($rowpw['p_name']) . '">
-  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
+					if (isset($rowpw['image'])) {
+						echo $rowpw['image'];
+					} else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
+						echo $rowpw2['s_path'];
+					} else {
+						echo "no-image.png";
+					}
+					echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
 
 
 					/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
@@ -103,7 +111,7 @@
 
 					/* Checking for discount on product end */
 
-					echo '<br> <span title="'.$rowpw['p_name'].'" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+					echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -154,7 +162,15 @@ display: -webkit-box;
 					echo '
 		      <div style="position:relative;">
   <a href="' . make_url($rowpw['p_name']) . '">
-  <img src="assets/images/product/thumb/' . $rowpw2['thumb'] . '" style="border:1px solid #eee; border-radius:2.5%; height:40VH; object-fit:cover;" class="image"/>';
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
+					if (isset($rowpw['image'])) {
+						echo $rowpw['image'];
+					} else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
+						echo $rowpw2['s_path'];
+					} else {
+						echo "no-image.png";
+					}
+					echo '" style="border:1px solid #eee; border-radius:2.5%; height:40VH; object-fit:cover;" class="image"/>';
 
 
 					/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
@@ -415,12 +431,14 @@ display: -webkit-box;
 	<div class="columns">
 
 		<div class="column is-4 p-0" style="padding-left:0.5em!important;">
-			<a target="_blank" href="https://www.instagram.com/reel/DPtQTKvAfHz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
+			<a target="_blank"
+				href="https://www.instagram.com/reel/DPtQTKvAfHz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
 					src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/16853350821685335082.png"
 					class="image is-fullwidth banner-scale2" style="max-height:560px;" /></a>
 		</div>
 		<div class="column is-8 p-0" style="padding-left:0.5em!important;">
-			<a target="_blank" href="https://www.instagram.com/reel/DPle6AxDFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
+			<a target="_blank"
+				href="https://www.instagram.com/reel/DPle6AxDFcU/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="><img
 					src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/17383398271738339827.jpg"
 					class="image is-fullwidth banner-scale2" style="max-height:560px;" /></a>
 		</div>

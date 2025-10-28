@@ -1,3 +1,5 @@
 assets
 db_connect.php
 wfs/db_connect.php
+.env
+vendor

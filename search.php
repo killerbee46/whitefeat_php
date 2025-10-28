@@ -373,18 +373,21 @@ background: rgba(116,228,250,1);">
 						echo '
 			<div class="product-card-container">
 			   <div class="card card-cat" style="overflow:hidden; height:100%;">
-  <div style="width:100%;aspect-ratio:1/1;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/image-loading.gif);background-repeat:no-repeat;background-size:contain;object-fit:cover;object-position:center;">
+  <div style="width:100%;aspect-ratio=7/5;background:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/image-loading.gif);background-repeat:no-repeat;background-size:contain;object-fit:cover;object-position:center;">
       <a href="' . $url . '"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						$sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowslt2['id_pack'] . "' limit 1";
 						$displaypw2 = mysqli_query($con, $sqlpw2);
 						$rowpw2 = mysqli_fetch_array($displaypw2);
-						if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
+						if (isset($rowslt2['image'])) {
+							echo $rowslt2['image'];
+						}
+						else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
 							echo $rowpw2['s_path'];
 						} else {
-							echo "../../../v2/images/no-image.avif";
+							echo "no-image.png";
 						}
 						echo ' " 
-	  alt="Placeholder image" class="card-img-top" style="aspect-ratio=7/5;"/></a>
+	  alt="product image" class="card-img-top" style="aspect-ratio=7/5;"/></a>
   </div>
   <div class="card-content has-background-light" style="height:100%;">
     <div class="media mb-0">
@@ -764,26 +767,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 
 					?>
-
-
-
-
-
-
-
-
-
-
 				</div>
-
-
 			</div>
-
-
-
-
-
-
 		</div>
 
 
