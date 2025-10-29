@@ -2,6 +2,7 @@
 include('session_control.php');
 include('db_connect.php');
 include('cut_review.php');
+include '../header-assets.php';
 
 require 's3_upload.php';
 $queryud = "Select * from `whitefeat_wf_new`.`login` where id_user='" . $_SESSION['u_id'] . "'";
@@ -19,7 +20,9 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 		<link rel="stylesheet"
 			href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+			integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- overlayScrollbars -->
 		<link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 		<!-- Theme style -->
@@ -472,14 +475,6 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 								<div class="card card-success card-outline card-outline-tabs">
 									<div class="card-header p-0 border-bottom-0">
-										<div class="card-tools">
-											<button type="button" class="btn btn-tool" data-card-widget="collapse">
-												<i class="fas fa-minus"></i>
-											</button>
-											<button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-													class="fas fa-expand"></i>
-											</button>
-										</div>
 										<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
 											<li class="nav-item">
 												<a class="nav-link active" id="custom-tabs-four-home-tab-stock"
@@ -522,63 +517,11 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 											<div class="tab-pane fade active show p-1" id="custom-tabs-four-home-stock"
 												role="tabpanel" aria-labelledby="custom-tabs-four-home-tab-stock">
-
-
-
-
-
-
-
-
-
-												<?php
-
-												$query_sn = "Select * from `whitefeat_wf_new`.`package_category` order by cat_name";
-												$display_sn = mysqli_query($con, $query_sn);
-												while ($row_sn = mysqli_fetch_array($display_sn)) {
-													echo '
-					
-					<h5 class="p-2 bg-light get-product" data-id="' . $row_sn['cat_id'] . '" style="cursor:pointer;">' . $row_sn['cat_name'];
-
-													$query_sc = "Select count(*) from `whitefeat_wf_new`.`package` where cat_id='" . $row_sn['cat_id'] . "'";
-													$display_sc = mysqli_query($con, $query_sc);
-													$row_sc = mysqli_fetch_array($display_sc);
-													echo '&nbsp; <small style="font-weight:100;"><span class="badge badge-secondary" style="font-weight:400;">' . $row_sc[0] . '</span></small>';
-													echo '</h5>
-					<div class="row p-2 letter-spacing load-product" data-id="' . $row_sn['cat_id'] . '">
-					
-					';
-
-													echo '</div>';
-
-
-												}
-												?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+												<?php include 'admin_product_list.php' ?>
 
 											</div>
-
 											<div class="tab-pane fade" id="custom-tabs-four-home" role="tabpanel"
 												aria-labelledby="custom-tabs-four-home-tab">
-												<!-- <form method="post" enctype="multipart/form-data" action="./s3_upload.php">
-													<section class="form-section">
-														<h2>Product Image</h2>
-														<button type>Upload</button>
-													</section>
-												</form> -->
 												<form method="POST" action="./ajax_create_product.php"
 													enctype="multipart/form-data">
 
@@ -597,15 +540,17 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<h2>PRODUCT :</h2>
 														<div class="image-upload" style="margin-top:20px;margin-left:5px;">
 															<div>Product Image</div>
-															<div id="imagePreview" class="preview-container" style="margin-bottom: 10px;"></div>
-															<input type="file" id="imageInput" accept="image/*" name="image">
+															<div id="imagePreview" class="preview-container"
+																style="margin-bottom: 10px;"></div>
+															<input type="file" id="imageInput" accept="image/*"
+																name="image">
 															<label for="imageInput" class="upload-label">+ Add Image</label>
 														</div>
 														<div class="grid">
 															<label>
 																Select Category
-																<select name="cat_id">
-																	<option disabled selected>Categories</option>
+																<select name="cat_id" required>
+																	<option value="" disabled selected>Categories</option>
 																	<?php
 																	$sql1 = "Select * from `whitefeat_wf_new`.`package_category` order by cat_name";
 																	$display = mysqli_query($con, $sql1);
@@ -618,7 +563,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 															<label>
 																Product Name
-																<input type="text" name="p_name">
+																<input required type="text" name="p_name">
 															</label>
 															<label for="nothing">
 																Fixed Price
@@ -638,7 +583,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 															<label>
 																Wt (gm)
-																<input type="number" step="0.01" name="weight">
+																<input required type="number" step="0.01" name="weight">
 															</label>
 															<label>
 																Size Type
@@ -656,8 +601,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 															<label>
 																Material
-																<select name="pm_id">
-																	<option selected disabled>Materials</option>
+																<select name="pm_id" required>
+																	<option value="" selected disabled>Materials</option>
 																	<?php
 																	$sql1 = "Select pm_id,pm_name from `whitefeat_wf_new`.`package_material` where pm_id > 1 and pm_id < 4  order by pm_name";
 																	$display = mysqli_query($con, $sql1);
@@ -670,8 +615,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 															<label>
 																Metal Type
-																<select name="pmt_id">
-																	<option selected disabled>Metals</option>
+																<select name="pmt_id" required>
+																	<option value="" selected disabled>Metals</option>
 																	<?php
 																	$sql1 = "Select * from `whitefeat_wf_new`.`package_metal` where pmt_id!='12' order by pmt_name";
 																	$display = mysqli_query($con, $sql1);
@@ -779,8 +724,13 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 													<!-- PRODUCT CONTENT -->
 													<section class="form-section">
-														<h2>Product Components (Add Separated by ,)</h2>
-														<input type="text" name="p_des" style="margin-bottom:20px;">
+														<h2>Product Components</h2>
+														<div class="grid">
+															<label>Product Description
+																<input type="text" name="p_des" style="margin-bottom:20px;"
+																	required>
+															</label>
+														</div>
 														<br />
 														<label>Product Content (HTML)
 														</label>
@@ -834,7 +784,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																</select>
 															</label>
 															<label>Gift
-																<select name="gift_tag">
+																<select name="tag_gift">
 																	<option selected disabled>Gift Tags</option>
 																	<?php
 																	$sql1g = "Select * from `whitefeat_wf_new`.`package_gift`";
@@ -859,7 +809,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<h2>SEO :</h2>
 														<label>Product Page Title
 															<br />
-															<input type="text" name="title_head">
+															<input required type="text" name="title_head">
 														</label>
 														<div style="display:flex;gap:20px;">
 															<label style="width: 50%;">Keywords (separated by comma)
@@ -872,12 +822,12 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 														</div>
 														<label style="width: 100%;">Description (separated by comma)
-															<textarea style="width:88%; height:250px;" class="form-control"
+															<textarea style="width:100%; height:250px;" class="form-control"
 																name="meta_head"><meta name="description" content="">
-		<meta name="keywords" content="">
-		<meta name="robots" content="index, follow">
-		<meta name="author" content="White Feathers Jewellery">
-					</textarea>
+						<meta name="keywords" content="">
+						<meta name="robots" content="index, follow">
+						<meta name="author" content="White Feathers Jewellery">
+									</textarea>
 														</label>
 													</section>
 
@@ -887,92 +837,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 													</div>
 
 												</form>
-
-												<!-- MIUP START -->
-												<div class="row lspace img-upload  " style="display:none;">
-
-													<div class="container-fluid">
-														<form method='post' action='' enctype="multipart/form-data">
-															<div class="row col">
-																<div class="col-4 p-2">
-																	<h1><i class="fas fa-image mb-2"
-																			style="font-size:2em;"></i><br>
-																		<small style="font-size:1.2rem;">
-																			<p>Upload photos </p>
-																		</small>
-																	</h1>
-
-																	<div class="col-12 p-0 mt-2"><input type="file"
-																			id='files' name="files[]" multiple
-																			class="form-control pl-1 pt-1"></div>
-
-																	<input type="hidden" id="pval" name="pval"></input>
-
-
-																</div>
-
-
-																<div class="col p-2">
-																	<div class="form-group">
-
-
-																		<h1><i class="fas fa-video mb-2"
-																				style="font-size:2em;"></i><br>
-																			<small style="font-size:1.2rem;">
-																				<p>Embed video ( <i
-																						class="fab fa-youtube"></i>&nbsp;
-																					youtube link ) </p>
-																			</small>
-																		</h1>
-
-
-																		<input type="text" name="addvid"
-																			class="form-control" id="addvid"
-																			placeholder="Embed Video Link"></input>
-																	</div>
-																</div>
-
-																<div class="row col-12 mt-2 pl-3">
-																	<input type="button" id="submit" value='Upload'
-																		class="btn btn-info btn-sm">
-																</div>
-
-
-
-															</div>
-														</form>
-														<hr>
-														<button class="col-3 pt-2 btn btn-light img-alert text-danger">(
-															Skip for now )</button>
-
-
-													</div>
-
-													<div class="col-12">
-														<div id="preview"></div>
-													</div>
-												</div>
-
-
-												<div class="col-12 progress-status" style="display:none;">
-													<i class="fas fa-3x fa-sync-alt fa-spin"></i>
-													<div class="text-bold pt-2">Uploading...</div>
-												</div>
-
-												<div class="col-5 callout callout-info alert alert-dismissible bg-info img-alert"
-													style="display:none;">
-													<h6><i class="fas fa-check-circle"></i> Images uploaded successfully!
-														<button type="btn" class="close" data-dismiss="alert"
-															style="opacity:1;"><i class="fas fa-times-circle"
-																style="color:#fff; opacity:1;"></i></button>
-													</h6>
-												</div>
-
-
-												<!-- MIUP END -->
-
 											</div>
-
 
 
 
@@ -1333,7 +1198,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																	</div>
 
 																	<div class="form-group">
-																		<label for="add_table">Gift Photo <small>( landscape
+																		<label for="add_table">Gift Photo <small>(
+																				landscape
 																				)</small></label>
 																		<input type="file"
 																			class="form-control p-0 pt-1 pl-1"
@@ -1342,8 +1208,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																	</div>
 
 																	<div class="form-group">
-																		<label for="add_table">Gift Video <small>( <i
-																					class="fab fa-youtube"></i>&nbsp;
+																		<label for="add_table">Gift Video <small>(
+																				<i class="fab fa-youtube"></i>&nbsp;
 																				youtube link )</small></label>
 																		<input type="text" class="form-control"
 																			id="add_video" name="cat_video"
@@ -1534,14 +1400,16 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																<form id="save_collection_form" method="post"
 																	enctype="multipart/form-data">
 																	<div class="form-group">
-																		<label for="add_table">Collection Name</label>
+																		<label for="add_table">Collection
+																			Name</label>
 																		<input type="text" class="form-control"
 																			id="add_name" name="cat_name_coll"
 																			placeholder="Write Name">
 																	</div>
 
 																	<div class="form-group">
-																		<label for="add_table">Collection Photo <small>(
+																		<label for="add_table">Collection Photo
+																			<small>(
 																				landscape )</small></label>
 																		<input type="file"
 																			class="form-control p-0 pt-1 pl-1"
@@ -1550,8 +1418,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																	</div>
 
 																	<div class="form-group">
-																		<label for="add_table">Collection Video <small>( <i
-																					class="fab fa-youtube"></i>&nbsp;
+																		<label for="add_table">Collection Video
+																			<small>( <i class="fab fa-youtube"></i>&nbsp;
 																				youtube link )</small></label>
 																		<input type="text" class="form-control"
 																			id="add_video" name="cat_video"
@@ -1724,247 +1592,6 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 		</div>
 
 		<a href="" id="r_print" target="_blank"></a>
-
-
-		<script type="text/javascript">
-			$(document).ready(function () {
-
-				$('#submit').click(function () {
-
-					var form_data = new FormData();
-					const cookies = document.cookie;
-					const productId = <?php echo $_COOKIE['productId']; ?>
-
-					// Read selected files
-					var totalfiles = document.getElementById('files').files.length;
-					for (var index = 0; index < totalfiles; index++) {
-						form_data.append("files[]", document.getElementById('files').files[index]);
-					}
-					form_data.append('pval', productId);
-					form_data.append('addvid', ($('#addvid').val()));
-					//alert($('#pval').val());
-
-					//activate spinner
-					$('.img-upload').hide();
-					$('.progress-status').show();
-
-
-					// AJAX request
-
-
-					$.ajax({
-						url: 'ajax_image_save.php',
-						type: 'post',
-						data: form_data,
-						dataType: 'json',
-						contentType: false,
-						processData: false,
-						success: function (res) {
-							//	alert(res);
-							$('.progress-status').remove();
-							$('.img-upload').remove();
-							$('.img-alert').fadeIn('slow');
-
-
-
-						}
-
-					});
-
-					/*
-					setTimeout(function(){
-			  $('.progress-status').remove();
-											$('.img-upload').remove();
-											$('.img-alert').fadeIn('slow');
-		}, 60000);//wait 2 seconds
-					*/
-
-				});
-
-				$('.img-alert').click(function () {
-					location.reload(true);
-				});
-
-
-				// first form submit 
-
-				/* creating new packages */
-				$(document).on('submit', '.save_form1', function (evt) {
-					evt.preventDefault();
-					var check1 = $(".fpnamem").val();
-					//alert(check1);
-					if (check1 == '') {
-						swal({
-							type: "error",
-							title: "Incomplete Details!",
-							text: "Please provide all details!",
-							timer: 2000,
-						});
-
-					}
-					else {
-						//alert('here1');
-						var formData = new FormData($(this)[0]);
-						$.ajax({
-							url: 'ajax_package_create1.php',
-							type: 'POST',
-							data: formData,
-							cache: false,
-							contentType: false,
-							processData: false,
-							success: function (res) {
-								//alert('here');
-								// alert(res);
-								$('#pval').val(res);
-								$('.save_form1').hide();
-								$('.img-upload').fadeIn();
-
-								swal({
-									type: "success",
-									title: "Product Created Successfully!",
-									text: "You can now upload photos / videos !",
-									timer: 3000,
-								});
-
-
-							}
-						});
-						return false;
-					}
-
-				});
-				// for temp cal_days_in_month
-
-
-				$('#pric_b2c').click(function (evt) {
-					evt.preventDefault(); var finalp = 0;
-					var wt = $('#pro_wt').val();
-					if (wt > 0) {
-
-						var pm = $('#pro_metal_type option:selected').val();
-						var dcr = $('#dcrater').val();
-						var dcq = $('#dcrateqty').val();
-						var mkp = $('#makingpp').val();
-						var mkg = $('#makinggm').val();
-						var jarti = $('#jarti').val();
-						var discount = $('#discount').val();
-
-
-						var dataString = 'pm=' + pm + '&wt=' + wt + '&dcr=' + dcr + '&dcq=' + dcq + '&mkp=' + mkp + '&mkg=' + mkg + '&jarti=' + jarti + '&discount=' + discount;
-						//alert(dataString);
-						$.ajax({
-							type: "POST",
-							url: 'ajax_price_cal_temp.php',
-							data: dataString,
-							cache: false,
-							success: function (result) {
-								//alert(result);
-								var finalp = result;
-								//alert(finalp);
-								// $('#pric_b2c_temp').html(result); 
-
-								/*extra calculation */
-								if ($('#dcrater_bce2').val() != '0' && $('#dcrater_bce2').val() != '') {
-									var ext = ($('#dcrater_bce2').val() * $('#dcrateqty_bce2').val());
-
-									finalp = parseFloat(finalp);
-									ext = parseFloat(ext);
-									var rr = finalp + ext;
-									// alert(rr);
-									$('#pric_b2c_temp').html(rr);
-
-
-								}
-								else {
-									$('#pric_b2c_temp').html(result);
-								}
-
-
-								/*end  extra calculation*/
-
-
-
-							}
-						});
-
-						// alert(finalp);
-						//$('#pric_b2c_temp').html(finalp);
-
-						//alert(finalp);
-
-					}
-					else { alert('Weight is 0'); }
-
-
-
-
-				});
-
-				$('#pric_b2b').click(function (evt) {
-					evt.preventDefault();
-					var wt = $('#pro_wt').val();
-					if (wt > 0) {
-						var pm = $('#pro_metal_type option:selected').val();
-						var dcr = $('#dcrater_b2b').val();
-						var dcq = $('#dcrateqty_b2b').val();
-						var mkp = $('#makingpp_b2b').val();
-						var mkg = $('#makinggm_b2b').val();
-						var jarti = $('#jarti_b2b').val();
-						var discount = $('#discount_b2b').val();
-
-						var dataString = 'pm=' + pm + '&wt=' + wt + '&dcr=' + dcr + '&dcq=' + dcq + '&mkp=' + mkp + '&mkg=' + mkg + '&jarti=' + jarti + '&discount=' + discount + '&str_b2b=' + 1;
-						console.log(dataString);
-						$.ajax({
-							type: "POST",
-							url: 'ajax_price_cal_temp.php',
-							data: dataString,
-							cache: false,
-							success: function (result) {
-								//console.log(result);
-								//alert(result);
-								var finalp = result;
-								//alert(finalp);
-								// $('#pric_b2c_temp').html(result); 
-
-								/*extra calculation */
-								if ($('#dcrater_b2e2').val() != '0' && $('#dcrater_b2e2').val() != '') {
-									var ext = ($('#dcrater_b2e2').val() * $('#dcrateqty_b2e2').val());
-
-									finalp = parseFloat(finalp);
-									ext = parseFloat(ext);
-									var rr = finalp + ext;
-									//alert(rr);
-									$('#pric_b2b_temp').html(rr);
-
-								}
-								else {
-									$('#pric_b2b_temp').html(result);
-								}
-
-
-								/*end  extra calculation*/
-
-
-
-
-
-
-							}
-						});
-
-					}
-					else { alert('Weight is 0'); }
-
-
-
-
-				});
-
-
-				//jquery end
-
-			});
-		</script>
 
 		<script src="plugins/addon/SunEditor-master/dist/suneditor.min.js" type="text/javascript"></script>
 		<script>

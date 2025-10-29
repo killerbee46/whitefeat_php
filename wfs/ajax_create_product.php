@@ -1,58 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include 'db_connect.php';
+include 's3_upload.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <?php
-    include 'db_connect.php';
-    include 's3_upload.php';
-
-    //     $gkey_final = mysqli_real_escape_string($con, $gkey);
+//     $gkey_final = mysqli_real_escape_string($con, $gkey);
 // $gsdes_final = mysqli_real_escape_string($con, $gsdes);
 // $gmeta_final = mysqli_real_escape_string($con, $gmeta);
-    $women = 0;
-    $men = 0;
-    $kid = 0;
-    $gift = 0;
-    $isFixedPrice = 0;
-    $fixedPrice = 0;
-    $fixedPriceB2B = 0;
-    $collection = 0;
+$women = 0;
+$men = 0;
+$kid = 0;
+$gift = 0;
+$isFixedPrice = 0;
+$fixedPrice = 0;
+$fixedPriceB2B = 0;
+$collection = 0;
 
-    $fileUrl = null;
+$fileUrl = null;
 
-    if (!empty($_FILES['image']['name'])) {
-        $fileUrl = uploadImageToS3($_FILES['image']);
-    }
+if (!empty($_FILES['image']['name'])) {
+    $fileUrl = uploadImageToS3($_FILES['image']);
+}
 
-    if (isset($_POST['tag_women'])) {
-        $women = 1;
-    }
-    if (isset($_POST['collection'])) {
-        $collection = $_POST['collection'];
-    }
+if (isset($_POST['tag_women'])) {
+    $women = 1;
+}
+if (isset($_POST['collection'])) {
+    $collection = $_POST['collection'];
+}
 
-    if (isset($_POST['isFixedPrice'])) {
-        $isFixedPrice = 1;
-        $fixedPrice = $_POST['price'];
-        $fixedPriceB2B = $_POST['price_b2b'];
-    }
+if (isset($_POST['isFixedPrice'])) {
+    $isFixedPrice = 1;
+    $fixedPrice = $_POST['price'];
+    $fixedPriceB2B = $_POST['price_b2b'];
+}
 
-    if (isset($_POST['tag_men'])) {
-        $men = 1;
-    }
+if (isset($_POST['tag_men'])) {
+    $men = 1;
+}
 
-    if (isset($_POST['tag_kid'])) {
-        $kid = 1;
-    }
-    $gift = $_POST['tag_gift'];
+if (isset($_POST['tag_kid'])) {
+    $kid = 1;
+}
+$gift = $_POST['tag_gift'];
 
-    $query = "INSERT INTO package (
+$query = "INSERT INTO package (
     cat_id,
     image,
     p_name,
@@ -129,32 +119,23 @@
     '" . $_POST['meta_head'] . "'
     )
     ";
-    if (!empty($_FILES['image']['name'])) {
-        if ($fileUrl) {
-            if (mysqli_query($con, $query)) {
-                echo "<script>
-                        alert('Product Created Successfully!')
-                        window.location.href = '/wfs/product.php'
-        </script>";
-            } else {
-                echo "<script>alert('Error While Creating Product!')</script>";
-            }
-        } else {
-            echo "";
-            echo "<script>alert('❌ Product could not be updated due to failed upload!')</script>";
-        }
-    } else {
+$requiredFields = [];
+if (!empty($_FILES['image']['name'])) {
+    if ($fileUrl) {
         if (mysqli_query($con, $query)) {
             echo "<script>
-        alert('Product Updated Successfully!')
-        window.location.href = '/wfs/product.php'
+                        alert('Product Created Successfully!')
+                        window.location.href = '/wfs/product.php'
         </script>";
         } else {
             echo "<script>alert('Error While Creating Product!')</script>";
         }
+    } else {
+        echo "";
+        echo "<script>alert('❌ Product could not be created due to failed upload!')</script>";
     }
+} else {
+    echo "<script>alert('Image is Required!')</script>";
+}
 
-    ?>
-</body>
-
-</html>
+?>

@@ -13,10 +13,10 @@ use Aws\Exception\AwsException;
 function uploadImageToS3($file)
 {
     // --- AWS Configuration ---
-    $bucketName = '';
+    $bucketName = 'whitefeatherbucket';
     $region = 'ap-south-1'; // e.g., Mumbai
-    $key = '';
-    $secret = '';
+    $key = 'AKIAZ2LPCDWZEZC4A7N5';
+    $secret = 'C/V4bDcfb98tC8/IJdraHj2ghOf7f6BsEHkH/rZu';
 
     // --- Validate File ---
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {

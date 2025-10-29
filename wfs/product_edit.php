@@ -512,7 +512,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																echo '<div id="currentImage" class="preview-container">
 																<img width="100%" height="100%" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowpd['image'] . '" />
 															</div>';
-															} else if (!empty($slider) && array_key_exists('s_path', $rowpw2)) {
+															} else if (!empty($slider) && array_key_exists('s_path', $slider)) {
 																echo '<div id="currentImage" class="preview-container">
 																<img width="100%" height="100%" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $slider['s_path'] . '" />
 															</div>';

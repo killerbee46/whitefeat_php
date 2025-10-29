@@ -277,7 +277,6 @@ background: rgba(116,228,250,1);">
 							}
 							if ($_GET['price'] == 5) {
 								echo '<span class="tag is-info">PRICE : Rs 100,000 - Rs 200,000</span>';
-								$sqlslt2 = "Select * from `whitefeat_wf_new`.`package` where lower(p_name) LIKE '%" . $_GET['term'] . "%' and price > '100000' and price < '200000' ";
 							}
 							if ($_GET['price'] == 6) {
 								echo '<span class="tag is-info">Over Rs 200,000</span>';
@@ -303,7 +302,6 @@ background: rgba(116,228,250,1);">
 							}
 						}
 
-						//  }
 						// material 
 						if (array_key_exists('metal', $_GET)) {
 							if ($_GET['metal'] == 1) {
@@ -380,8 +378,7 @@ background: rgba(116,228,250,1);">
 						$rowpw2 = mysqli_fetch_array($displaypw2);
 						if (isset($rowslt2['image'])) {
 							echo $rowslt2['image'];
-						}
-						else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
+						} else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
 							echo $rowpw2['s_path'];
 						} else {
 							echo "no-image.png";
