@@ -54,7 +54,7 @@
 
     $query = "update  package set
     cat_id='" . $_POST['cat_id'] . "',".
-    (!empty($_FILES['image']['name']) ? "image=". $fileUrl . "'," : "")
+    (!empty($_FILES['image']['name']) ? "image='". $fileUrl . "'," : "")
     ."    p_name='" . $_POST['p_name'] . "',
     weight='" . $_POST['weight'] . "',
     p_des='" . $_POST['p_des'] . "',
@@ -93,30 +93,30 @@
 
     echo $query;
 
-    // if (!empty($_FILES['image']['name'])) {
-    //     if ($fileUrl) {
-    //         if (mysqli_query($con, $query)) {
-    //             echo "<script>
-    //                     alert('Product Updating Successfully!')
-    //                     window.location.href = '/wfs/product.php'
-    //     </script>";
-    //         } else {
-    //             echo "<script>alert('Error While Updating Product!')</script>";
-    //         }
-    //     } else {
-    //         echo "";
-    //         echo "<script>alert('❌ Product could not be updated due to failed upload!')</script>";
-    //     }
-    // } else {
-    //     if (mysqli_query($con, $query)) {
-    //         echo "<script>
-    //     alert('Product Updated Successfully!')
-    //     window.location.href = '/wfs/product.php'
-    //     </script>";
-    //     } else {
-    //         echo "<script>alert('Error While Updating Product!')</script>";
-    //     }
-    // }
+    if (!empty($_FILES['image']['name'])) {
+        if ($fileUrl) {
+            if (mysqli_query($con, $query)) {
+                echo "<script>
+                        alert('Product Updated Successfully!')
+                        window.location.href = '/wfs/product.php'
+        </script>";
+            } else {
+                echo "<script>alert('Error While Updating Product!')</script>";
+            }
+        } else {
+            echo "";
+            echo "<script>alert('❌ Product could not be updated due to failed upload!')</script>";
+        }
+    } else {
+        if (mysqli_query($con, $query)) {
+            echo "<script>
+        alert('Product Updated Successfully!')
+        window.location.href = '/wfs/product.php'
+        </script>";
+        } else {
+            echo "<script>alert('Error While Updating Product!')</script>";
+        }
+    }
 
     ?>
 </body>

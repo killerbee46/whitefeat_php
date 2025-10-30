@@ -4,6 +4,7 @@ require '../vendor/autoload.php';
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 
+
 /**
  * Upload an image to AWS S3 and return the uploaded file URL or filename.
  *
@@ -13,10 +14,10 @@ use Aws\Exception\AwsException;
 function uploadImageToS3($file)
 {
     // --- AWS Configuration ---
-    $bucketName = 'whitefeatherbucket';
-    $region = 'ap-south-1'; // e.g., Mumbai
-    $key = 'AKIAZ2LPCDWZEZC4A7N5';
-    $secret = 'C/V4bDcfb98tC8/IJdraHj2ghOf7f6BsEHkH/rZu';
+    $bucketName = getenv("S3_BUCKET_NAME");
+    $region = getenv("S3_REGION"); // e.g., Mumbai
+    $key = getenv("S3_KEY");
+    $secret = getenv("S3_SECRET_KEY");
 
     // --- Validate File ---
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
