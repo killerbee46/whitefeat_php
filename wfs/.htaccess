@@ -1,0 +1,15 @@
+<IfModule mod_headers.c>
+    Header append Cache-Control "public"
+    <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|css|swf)$">
+      Header set Cache-Control "max-age=2678400, public"
+    </FilesMatch>
+    <FilesMatch "\.(html|htm)$">
+      Header set Cache-Control "max-age=7200, private, must-revalidate"
+    </FilesMatch>
+    <FilesMatch "\.(pdf)$">
+      Header set Cache-Control "max-age=86400, public"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+      Header set Cache-Control "max-age=2678400, private"
+    </FilesMatch>
+  </IfModule>
