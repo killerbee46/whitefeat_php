@@ -1,3 +1,3 @@
 <?php 
-include "../../envVars/db.php";
+include "../envVars/db.php";
 ?>
