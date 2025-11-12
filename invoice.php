@@ -33,18 +33,25 @@
 			}
 		</style>
 	</head>
+
 	<body style="background-color:#eee;color:#000;">
 		<?php
 
 		$total_bd = 0;
 		$total_dis = 0;
 		$total_net = 0;
+		$b2b_check = 0;
+		$crate = 1;
+		$cnot = "Rs";
+		$apporder = false;
 
 		$sqlm = "Select * from `whitefeat_wf_new`.`cart_book` where cb_id='" . $_GET['title'] . "'";
 		$displaym = mysqli_query($con, $sqlm);
 		$rowm = mysqli_fetch_array($displaym);
-
+		$apporder = $rowm['c_id'] == 0;
 		$customer = $rowm['c_id'];
+		$tempProd = json_decode($rowm['cookie_id'], true);
+		$products = $apporder ? $tempProd['products'] : [];
 
 		?>
 
@@ -64,7 +71,9 @@
 										</div>
 									</div>
 									<div class="col-auto">
-										<h1 class="big-title"><img src="assets/images/logo.png" alt="WF"
+										<h1 class="big-title"><img
+												src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wflogo.png"
+												alt="WF"
 												style="height:1.6em; position:relative; margin-top:-1em; margin-right:-0.5em;"
 												class="img_logo" /></h1>
 									</div>
@@ -77,7 +86,9 @@
 												</b>#WFO-<?php echo $rowm['cb_id']; ?></p>
 										</div>
 										<div class="col-auto">
-											<p class="invoice-date"><b>Date: </b><?php echo $rowm['p_date']; ?></p>
+											<p class="invoice-date"><b>Date:
+												</b><?php echo $apporder ? date_format(date_create($rowm['book_date']), "Y-m-d") : $rowm['p_date']; ?>
+											</p>
 										</div>
 									</div>
 								</div>
@@ -123,93 +134,108 @@
 								<tbody>
 
 									<?php
+									if ($apporder) {
+										$sn=0;
+										foreach ($products as $prod) {
+											$sn += 1;
+											?>
+											<tr>
+												<td><?= $sn ?></td>
+												<td><?= $prod['title'] ?></td>
+												<td>Rs. <?= $prod['dynamic_price'] ?></td>
+												<td><?= $prod['quantity'] ?> <small>Unit</small></td>
+												<td>Rs. <?= $prod['quantity'] * $prod['dynamic_price'] ?></td>
+											</tr>
 
-									$sqlld = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowm['cb_id'] . "' ";
-									$displayld = mysqli_query($con, $sqlld);
-									$sn = 1;
-									while ($rowld = mysqli_fetch_array($displayld)) {
+										<?php }
+									} else { ?>
+										<?php
+
+										$sqlld = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowm['cb_id'] . "' ";
+										$displayld = mysqli_query($con, $sqlld);
+										$sn = 1;
+										while ($rowld = mysqli_fetch_array($displayld)) {
 
 
-										$sqlld1 = "Select * from `whitefeat_wf_new`.`package` where id_pack='" . $rowld['id_pack'] . "' ";
-										$displayld1 = mysqli_query($con, $sqlld1);
-										$rowld1 = mysqli_fetch_array($displayld1);
+											$sqlld1 = "Select * from `whitefeat_wf_new`.`package` where id_pack='" . $rowld['id_pack'] . "' ";
+											$displayld1 = mysqli_query($con, $sqlld1);
+											$rowld1 = mysqli_fetch_array($displayld1);
 
-										//b2b check
-										$b2b_check = 0;
-										if ($customer != 0) {
-											$sqlb2b = "Select b2b from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
-											$displayb2b = mysqli_query($con, $sqlb2b);
-											$rowb2b = mysqli_fetch_array($displayb2b);
-											if (isset($rowb2b['b2b']) && $rowb2b['b2b'] == 1) {
-												$b2b_check = 1;
+											//b2b check
+											$b2b_check = 0;
+											if ($customer != 0) {
+												$sqlb2b = "Select b2b from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
+												$displayb2b = mysqli_query($con, $sqlb2b);
+												$rowb2b = mysqli_fetch_array($displayb2b);
+												if (isset($rowb2b['b2b']) && $rowb2b['b2b'] == 1) {
+													$b2b_check = 1;
+												}
 											}
+
+											$total_bd = $total_bd + ($rowld1['price'] * $rowld['qty']);
+											$newprice = $rowld1['price'];
+
+											if ($rowld1['offer'] > 0 && $b2b_check == 0) {
+												$newprice = ($rowld1['price'] - (($rowld1['offer'] / 100) * $rowld1['price']));
+												$total_dis = $total_dis + ((($rowld1['offer'] / 100) * $rowld1['price']) * $rowld['qty']);
+											}
+
+
+											//b2b check
+											if ($b2b_check == 1) {
+
+												$newprice = $rowld1['price_b2b'];
+											}
+
+
+											$total_net = $total_net + ($newprice * $rowld['qty']);
+
+
+											echo '<tr><td>' . $sn . '</td><td>';
+											echo ucfirst($rowld1['p_name']);
+											echo '</td><td>';
+
+											// currency 
+											$sel_cur = $rowm['cur_id'];
+											$cnot = '';
+											$crate = 1;
+
+											$sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
+											$displaycrc2 = mysqli_query($con, $sqlcrc2);
+											$rowcrc2 = mysqli_fetch_array($displaycrc2);
+											$cnot = $rowcrc2['cur_name'];
+											$crate = (1 / $rowcrc2['cur_rate']);
+
+											if ($b2b_check == 0) {
+												echo $cnot . ' ' . floor(($crate * $rowld1['price']));
+											} else {
+												echo $cnot . ' ' . floor(($crate * $newprice));
+											}
+
+											echo '</td><td>' . $rowld['qty'] . ' <small><small>Unit</small></small>';
+											if ($rowld['size'] > 0) {
+												echo '&nbsp; <small><small><small>(Size): </small></small> <small><b>' . $rowld['size'] . '</b></small></small>';
+											}
+											echo '</td><td>';
+
+
+											if ($b2b_check == 0) {
+												echo $cnot . ' ' . floor(($crate * $rowld1['price'] * $rowld['qty']));
+											} else {
+												echo $cnot . ' ' . floor(($crate * $newprice * $rowld['qty']));
+											}
+
+											echo '</td></tr>';
+											$sn++;
 										}
-
-										$total_bd = $total_bd + ($rowld1['price'] * $rowld['qty']);
-										$newprice = $rowld1['price'];
-
-										if ($rowld1['offer'] > 0 && $b2b_check == 0) {
-											$newprice = ($rowld1['price'] - (($rowld1['offer'] / 100) * $rowld1['price']));
-											$total_dis = $total_dis + ((($rowld1['offer'] / 100) * $rowld1['price']) * $rowld['qty']);
-										}
-
-
-										//b2b check
-										if ($b2b_check == 1) {
-
-											$newprice = $rowld1['price_b2b'];
-										}
-
-
-										$total_net = $total_net + ($newprice * $rowld['qty']);
-
-
-										echo '<tr><td>' . $sn . '</td><td>';
-										echo ucfirst($rowld1['p_name']);
-										echo '</td><td>';
-
-										// currency 
-										$sel_cur = $rowm['cur_id'];
-										$cnot = '';
-										$crate = 1;
-
-										$sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
-										$displaycrc2 = mysqli_query($con, $sqlcrc2);
-										$rowcrc2 = mysqli_fetch_array($displaycrc2);
-										$cnot = $rowcrc2['cur_name'];
-										$crate = (1 / $rowcrc2['cur_rate']);
-
-										if ($b2b_check == 0) {
-											echo $cnot . ' ' . floor(($crate * $rowld1['price']));
-										} else {
-											echo $cnot . ' ' . floor(($crate * $newprice));
-										}
-
-										echo '</td><td>' . $rowld['qty'] . ' <small><small>Unit</small></small>';
-										if ($rowld['size'] > 0) {
-											echo '&nbsp; <small><small><small>(Size): </small></small> <small><b>' . $rowld['size'] . '</b></small></small>';
-										}
-										echo '</td><td>';
-
-
-										if ($b2b_check == 0) {
-											echo $cnot . ' ' . floor(($crate * $rowld1['price'] * $rowld['qty']));
-										} else {
-											echo $cnot . ' ' . floor(($crate * $newprice * $rowld['qty']));
-										}
-
-										echo '</td></tr>';
-										$sn++;
-									}
-
-									?>
+									} ?>
 
 								</tbody>
 
 							</table>
 
 
-
+							<hr />
 							<div class="row justify-content-between">
 								<div class="col-auto">
 									<div class="invoice-left">
@@ -224,7 +250,6 @@
 										if ($rowm['mode'] == '3') {
 											echo 'Esewa';
 										}
-
 										?></p>
 									</div>
 								</div>
@@ -235,12 +260,25 @@
 											<tr>
 												<th>Sub Total:</th>
 												<td><?php
-
-												if ($b2b_check == 0) {
-													echo $cnot . ' ' . floor($crate * $total_bd);
+												if ($apporder) {
+													if ($rowm['p_amount'] == 0) {
+														$prodPrice = 0;
+														foreach ($products as $prod) {
+															$prodPrice += $prod['quantity'] * ($prod['dynamic_price'] + $prod['discount']);
+														}
+														echo $cnot . ' ' . floor($crate * $prodPrice);
+													} else {
+														echo $cnot . ' ' . floor($crate * $rowm['p_amount']);
+													}
 												} else {
-													echo $cnot . ' ' . floor($crate * $total_net);
+													if ($b2b_check == 0) {
+														echo $cnot . ' ' . floor($crate * $total_bd);
+													} else {
+														echo $cnot . ' ' . floor($crate * $total_net);
+													}
 												}
+
+
 
 												?></td>
 											</tr>
@@ -248,11 +286,40 @@
 <td>$00.00</td></tr>-->
 											<tr>
 												<th>Discount:</th>
-												<td><?php echo $cnot . ' ' . floor($crate * $total_dis); ?></td>
+												<td><?php
+												if ($apporder) {
+													if ($rowm['p_amount'] == 0) {
+														$prodDis = 0;
+														foreach ($products as $prod) {
+															$prodDis = $prod['quantity'] * $prod['discount'];
+														}
+														echo $cnot . ' ' . floor($crate * $prodDis);
+													} else {
+														echo $cnot . ' ' . floor($crate * $rowm['p_amount']);
+													}
+												} else {
+													echo $cnot . ' ' . floor($crate * $total_dis); 
+												}
+												
+												?></td>
 											</tr>
 											<tr>
 												<th>Total:</th>
-												<td><?php echo $cnot . ' ' . floor($crate * $total_net); ?></td>
+												<td><?php
+												if ($apporder) {
+													if ($rowm['p_amount'] == 0) {
+														$prodFin = 0;
+														foreach ($products as $prod) {
+															$prodFin += $prod['quantity'] * $prod['dynamic_price'];
+														}
+														echo $cnot . ' ' . floor($crate * $prodFin);
+													} else {
+														echo $cnot . ' ' . floor($crate * $rowm['p_amount']);
+													}
+												} else {
+													echo $cnot . ' ' . floor($crate * $total_net); 
+												}?>
+												</td>
 											</tr>
 										</tbody>
 									</table>
