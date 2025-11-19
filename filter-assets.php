@@ -1,5 +1,4 @@
 <?php ?>
- <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 <style>
 .filter {
     padding: 10px 20px;
@@ -205,8 +204,9 @@ function filterSelectorHandle(e, filter_name) {
     }
     else {
         searchParams.set(filter_name, value)
+        window.location.href = url
     }
-	(filter_name == "sort") ? window.location.href = url : tempUrl = url
+    window.location.href = url
 }
 
 function onSubmit() {
@@ -226,10 +226,6 @@ function onReset() {
         });
     }
     window.location.href = temp
-}
-
-function setParams() {
-    console.log("setting params")
 }
 
 </script>

@@ -6,13 +6,13 @@
   include_once('make_url.php');
   include_once('get_url.php');
   $productname = get_url($_GET['pack']);
-  $sqlpd = "Select * from `whitefeat_wf_new`.`package` WHERE p_name='" . $productname . "'";
-  $displaypd = mysqli_query($con, $sqlpd);
-  $countpd = mysqli_num_rows($displaypd);
-  if ($countpd <= 0) {
+  $headsql = "Select * from `whitefeat_wf_new`.`package` WHERE id_pack='" . $productname . "'";
+  $displayhead = mysqli_query($con, $headsql);
+  $counthead = mysqli_num_rows($displayhead);
+  if ($counthead <= 0) {
     header('location:index.php');
   }
-  $rowpd = mysqli_fetch_array($displaypd);
+  $rowhead = mysqli_fetch_array($displayhead);
   ?><!DOCTYPE html>
   <html lang="en">
 
@@ -20,7 +20,7 @@
     <meta http-equiv="Cache-control" content="public">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $rowpd['p_name']; ?></title>
+    <title><?php echo $rowhead['p_name']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="assets/owl/owl.theme.default.min.css">
     <link rel="stylesheet" href="assets/css/css.css">
     <script src="assets/hover/test.js" type="text/javascript"></script>
-		<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 
     <style type="text/css">
       html {
@@ -139,16 +139,19 @@
         color: gainsboro;
       }
 
-      @media(max-width:700px) {
+      @media(max-width:768px) {
         .preview-wrap {
           flex-direction: column;
           align-items: center;
           width: 100%;
         }
 
+        .thumb {
+          cursor: default;
+        }
+
         .zoom-preview {
-          width: 100%;
-          height: 100%;
+          visibility: hidden;
         }
 
         .product-image-info {
@@ -178,13 +181,11 @@
                 Hover for Zoom Preview
               </div>
               <img id="thumbImg" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?php
-              $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowpd['id_pack'] . "' limit 1";
-              $displaypw2 = mysqli_query($con, $sqlpw2);
-              $rowpw2 = mysqli_fetch_array($displaypw2);
+              $sqlpd = fetchProduct($productname);
+              $displaypd = mysqli_query($con, $sqlpd);
+              $rowpd = mysqli_fetch_array($displaypd);
               if (isset($rowpd['image'])) {
                 echo $rowpd['image'];
-              } else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
-                echo $rowpw2['s_path'];
               } else {
                 echo "no-image.png";
               } ?>" alt="no image">
@@ -269,21 +270,16 @@
 
                       <?php
 
-                      $sqlpw = "Select * from `whitefeat_wf_new`.`package` where visible='1' and active='1' and status='1' and cat_id='" . $rowpd['cat_id'] . "'";
+                      $sqlpw = fetchProducts(isset($rowpd['cat_id']) ? " cat_id =  ".$rowpd['cat_id'] : " true " ." limit 10");
                       $displaypw = mysqli_query($con, $sqlpw);
                       while ($rowpw = mysqli_fetch_array($displaypw)) {
-                        $sqlpw2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowpw['id_pack'] . "' limit 1";
-                        $displaypw2 = mysqli_query($con, $sqlpw2);
-                        $rowpw2 = mysqli_fetch_array($displaypw2);
 
                         echo '
 		      <div style="position:relative;">
-  <a href="' . make_url($rowpw['p_name']) . '">
+  <a href="' . make_url($rowpw['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
                         if (isset($rowpw['image'])) {
                           echo $rowpw['image'];
-                        } else if (!empty($rowpw2) && array_key_exists('s_path', $rowpw2)) {
-                          echo $rowpw2['s_path'];
                         } else {
                           echo "no-image.png";
                         }
@@ -322,25 +318,20 @@
                         $rowcrc2 = mysqli_fetch_array($displaycrc2);
                         $cnot = $rowcrc2['cur_name'];
                         $crate = ($rowcrc2['cur_rate']);
-                        $dynamic_price = dynamicPriceCalculator($rowpw['p_name'], $crate);
-                        $original_price = $dynamic_price['originalPrice'];
-                        $newprice = $original_price;
+                        $actual_price = $rowpd['actual_price']/$crate;
+                        $final_price = $rowpd['final_price']/$crate;
+                        $discount = $rowpd['discount']/$crate;
                         /* customer & its attribute checking end (new/logged-in,currency) */
 
                         /* Checking for discount on product start */
+                        echo '
+                        <span class="p-2"><Strong class="letter-spacing price-off ">';
+
+                        echo $cnot . " " . round(($final_price), 2);
+                        
+                        echo '</strong>';
                         if ($rowpw['offer'] > 0) {
-                          $newprice = $original_price - $dynamic_price['discount'];
-                          echo '
-  <span class="p-2"><Strong class="letter-spacing price-off ">';
-
-                          echo $cnot . " " . round(($newprice), 2);
-
-                          echo '</strong>
-  <small><small><strike class="price-off">' . $cnot . round(($original_price), 2) . '</strike></small></small>';
-                        } else {
-                          echo '<span class="p-2"><Strong class="letter-spacing price-off ">';
-                          echo $cnot . " " . round($original_price, 2);
-                          echo '</strong>';
+                          echo '<small><small><strike class="price-off">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
                         }
 
                         /* Checking for discount on product end */
@@ -616,11 +607,9 @@ display: -webkit-box;
               $rowcrc2 = mysqli_fetch_array($displaycrc2);
               $cnot = $rowcrc2['cur_name'];
               $crate = ($rowcrc2['cur_rate']);
-              $dynamicPrices = dynamicPriceCalculator($productname, $crate);
-              $newprice = $dynamicPrices['originalPrice'];
-              if ($rowpd['offer'] > 0) {
-                $newprice = $dynamicPrices['originalPrice'] - $dynamicPrices['discount'];
-              }
+              $actual_price = $rowpd['actual_price']/$crate;
+              $final_price = $rowpd['final_price']/$crate;
+              $discount = $rowpd['discount']/$crate;
 
               //b2b check
               $b2b_check = 0;
@@ -638,7 +627,7 @@ display: -webkit-box;
 
               echo '
    <h3 class="is-size-4 has-text-weight-semibold" style="color:#333;">';
-              echo $cnot . " " . round(($newprice), 2);
+              echo $cnot . " " . round(($final_price), 2);
 
               echo '&nbsp;';
               if ($b2b_check == 1) {
@@ -646,7 +635,7 @@ display: -webkit-box;
               }
               if ($rowpd['offer'] > 0 && $b2b_check == 0) {
                 echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-                echo $cnot . " " . round(($dynamicPrices['originalPrice']), 2);
+                echo $cnot . " " . round(($actual_price), 2);
                 echo '</small></small></del>';
               }
               echo '</h3>';
@@ -664,23 +653,23 @@ display: -webkit-box;
             <div class="column is-4">
               <?php
               if ($rowpd['offer'] > 0 && $b2b_check == 0) {
-                echo '<small>' . $rowpd['offer'] . '% off on diamond</small>';
+                echo '<small>' . $rowpd['offer'] . '% off on the product</small>';
               }
               ?>
             </div>
 
 
-            <div class="column is-4 pl-3 letter-spacing" style="margin-top:-1.2em; letter-spacing:1.5px;">
-              <button class="button is-success is-normal is-fullwidth add_cart"
-                data-ref="<?php echo $rowpd['id_pack']; ?>">
-                <span>ADD TO CART</span>
-                <span class="icon is-small">
-                  <i class="fas fa-shopping-cart"></i>
-                </span>
-              </button>
-
-            </div>
-
+            
+            
+          </div>
+          <div class="" style="margin-top:-1.2em; letter-spacing:1.5px;">
+            <button style="width:50%;" class="button is-success is-normal add_cart"
+              data-ref="<?php echo $rowpd['id_pack']; ?>">
+              <span>ADD TO CART</span>
+              <span class="icon is-small">
+                <i class="fas fa-shopping-cart"></i>
+              </span>
+            </button>
 
           </div>
 
@@ -1013,7 +1002,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
               </div>
             </div>
             <div class="pack-png">
-              <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home//pack.png" />
+              <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/pack.png" />
             </div>
           </div>
         </div>

@@ -30,14 +30,10 @@ else{$sqls = "Select * from `whitefeat_wf_new`.`package_metal` where pmt_id='".$
 			
 $price_total=0;
 $price1=$rows['rate']*$wt;
-//echo $rows['rate'].'**';
-//echo $wt.'**';
-//echo $price1.'**';
 $price2=$dcr*$dcq;
 $price3=0;
 if($mkp>0){$price3=$mkp;}else{$price3=$mkg*($wt*11.664);}
 $price4=$rows['rate']*(($jarti/100)*$wt);
-//echo $price3.'**';
 $price_total=$price1+$price2+$price3+$price4;
 if(isset($_POST['discount'])){
  $price_total=$price_total-(($_POST['discount']/100)*$price_total);

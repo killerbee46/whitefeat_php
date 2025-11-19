@@ -101,7 +101,7 @@ $(document).ready(function(){
 	dots:false,
 	autoplay:true,
 	loop:true,
-	nav:true,
+	nav:false,
 	navText: ["<i class='fas fa-chevron-circle-left' style='position:absolute; font-size:2em; margin-top:-250px; left:0.5%;'></i>", "<i class='fas fa-chevron-circle-right' style='position:absolute; font-size:2em; right:0.5%; margin-top:-250px;'></i>"],
     margin:10,
     responsive:{

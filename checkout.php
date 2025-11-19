@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="assets/css/css.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-    /crypto-js.min.js"></script>
+      /crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-    /hmac-sha256.min.js"></script>
+      /hmac-sha256.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-    /enc-base64.min.js"></script>
+      /enc-base64.min.js"></script>
     <script>
       //var hash = CryptoJS.HmacSHA256("Message", "secret");
       //var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
@@ -161,7 +161,7 @@
              $displaycrc2 = mysqli_query($con, $sqlcrc2);
              $rowcrc2 = mysqli_fetch_array($displaycrc2);
              $cnot = $rowcrc2['cur_name'];
-             $crate = (1 / $rowcrc2['cur_rate']);
+             $crate = ($rowcrc2['cur_rate']);
 
              echo $cnot . " ";
 
@@ -189,8 +189,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             <code id="tracking_code" class="column is-half
 is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style="">
 
-               here is code...
-               </code>
+                   here is code...
+                   </code>
 
 
             <div class="column mt-5 thankyou-div">
@@ -236,25 +236,22 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
               <?php
 
               while ($rowactx = mysqli_fetch_array($displayacw)) {
+                $sqlckp = fetchProducts("id_pack='" . $rowactx['id_pack'] . "'");
+                $displayckp = mysqli_query($con, $sqlckp);
+                $rowckp = mysqli_fetch_array($displayckp);
+
+                $originalPrice = $rowckp['actual_price'];
+                $discount = $rowckp['discount'];
                 echo '
 		<div class="columns has-background-white mt-3 each_item mr-3">
 	    <div class="column each_item is-2">
 		 <figure class="image">
       <a href="#"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
-
-                $sqlckp = "Select * from `whitefeat_wf_new`.`package` where id_pack='" . $rowactx['id_pack'] . "'";
-                $displayckp = mysqli_query($con, $sqlckp);
-                $rowckp = mysqli_fetch_array($displayckp);
-
-                $dynamicPrice = dynamicPriceCalculator($rowckp['p_name'], 1);
-                $originalPrice = $dynamicPrice['originalPrice'];
-                $discount = $dynamicPrice['discount'];
-
-                $sqlckp1 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowactx['id_pack'] . "' limit 1";
-                $displayckp1 = mysqli_query($con, $sqlckp1);
-                $rowckp1 = mysqli_fetch_array($displayckp1);
-
-                echo $rowckp1['s_path'];
+                if (isset($rowckp['image'])) {
+                  echo $rowckp['image'];
+                } else {
+                  echo "no-image.png";
+                }
 
                 echo '" alt="product image" class="card-img-top" style="height:7.3em; width:auto;"/></a>
     </figure>
@@ -262,7 +259,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 		
 		<div class="column is-7">
 		  <h5 class="subtitle is-size-6 is-uppercase mb-0">' . ucfirst($rowckp['p_name']) . '</h5>
-		  <h5 class="subtitle is-size-7 is-uppercase mt-1 mb-0">' . $rowckp['sku_code'] . '</h5>
+		  <h5 class="subtitle is-size-7 is-uppercase mt-1 mb-0">#WF-' . $rowckp['id_pack'] . '</h5>
 		  <h5 class="subtitle is-size-7 is-uppercase mt-3 mb-0"><b>';
                 if ($rowactx['size'] != '0') {
                   echo 'Size: ' . $rowactx['size'] . ', &nbsp;';
@@ -288,7 +285,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 
                 if ($rowckp['offer'] > 0) {
                   $newprice = $originalPrice - $discount;
-                  $total_dis = $total_dis + $discount;
+                  $total_dis += $discount;
                 }
 
                 //b2b check
@@ -309,7 +306,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 
                 echo '
    <h3 class="is-size-6 has-text-weight-semibold mt-4" style="color:#333;">';
-                echo $cnot . " " . floor(($crate * $newprice * $rowactx['qty']));
+                echo $cnot . " " . floor(( $newprice * $rowactx['qty'])/$crate);
 
                 echo '&nbsp;';
                 if ($b2b_check == 1) {
@@ -317,7 +314,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 }
                 if ($rowckp['offer'] > 0 && $b2b_check == 0) {
                   echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-                  echo $cnot . " " . floor(($crate * $rowckp['price'] * $rowactx['qty']));
+                  echo $cnot . " " . floor(( $newprice * $rowactx['qty'])/$crate);
                   echo '</small></small></del>';
                 }
 
@@ -668,7 +665,9 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                       <label class="b-radio radio is-large">
                         <input type="radio" name="group_2" value="2">
                         <span class="check is-info"></span>
-                        <span class="control-label is-size-6"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/khl.png" style="height:3em;" /></span>
+                        <span class="control-label is-size-6"><img
+                            src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/khl.png"
+                            style="height:3em;" /></span>
                       </label>
                     </div>
 
@@ -676,7 +675,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                       <label class="b-radio radio is-large">
                         <input type="radio" name="group_2" value="3">
                         <span class="check is-success"></span>
-                        <span class="control-label is-size-6"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/esewa.jpg"
+                        <span class="control-label is-size-6"><img
+                            src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/esewa.jpg"
                             style="height:3.5em;" /></span>
                       </label>
                     </div>
@@ -719,7 +719,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                   Subtotal:
                 </div>
                 <div class="column is-6 pb-0 has-text-right checkout_right_div">
-                  <?php echo $cnot . " " . floor(($crate * $total_bd)); ?>
+                  <?php echo $cnot . " " . floor(($total_bd/$crate)); ?>
                 </div>
 
               </div>
@@ -732,7 +732,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	Offer Discount:
 	</div>
 	<div class="column is-6 pb-0 has-text-right checkout_right_div">';
-                echo $cnot . " " . floor(($crate * $total_dis));
+                echo $cnot . " " . floor(($total_dis/$crate));
                 echo '</div>
 	
 	</div>';
@@ -758,8 +758,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 </div>
                 <div
                   class="column is-6 pb-2 letter-spacing is-size-6 has-text-weight-semibold has-text-right checkout_right_div">
-                  <?php echo $cnot . " " . floor(($crate * $total_net));
-                  echo '<input type="hidden" id="tcost" value="' . floor(($crate * $total_net)) . '" />'; ?>
+                  <?php echo $cnot . " " . floor(($total_net/$crate));
+                  echo '<input type="hidden" id="tcost" value="' . floor(($total_net/$crate)) . '" />'; ?>
                 </div>
               </div>
 

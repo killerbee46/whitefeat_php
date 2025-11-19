@@ -54,13 +54,9 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 				}
 				while ($rowwl = mysqli_fetch_array($displayacw)) {
 
-					$sqlwp = "Select * from `whitefeat_wf_new`.`package` where id_pack='" . $rowwl['id_pack'] . "' ";
+					$sqlwp = fetchProducts("id_pack='" . $rowwl['id_pack'] . "' ");
 					$displaywp = mysqli_query($con, $sqlwp);
 					$rowwp = mysqli_fetch_array($displaywp);
-
-					$sqlwp2 = "Select * from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowwl['id_pack'] . "' limit 1";
-					$displaywp2 = mysqli_query($con, $sqlwp2);
-					$rowwp2 = mysqli_fetch_array($displaywp2);
 
 
 
@@ -71,7 +67,14 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	    </div>
   <div class="card-image">
     <figure class="image">
-      <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowwp2['s_path'] . '" alt="' . $rowwp['p_name'] . '" class="card-img-top" />
+      <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/'; 
+	  if($rowwp['image']) { 
+		echo $rowwp['image'];
+	} 
+	  else{ 
+		echo "no-image.png";
+	}
+	  echo '" alt="' . $rowwp['p_name'] . '" class="card-img-top" />
     </figure>
   </div>
   <div class="card-content">
@@ -84,7 +87,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	
     </div>
 	  		<div class="media-content" style="margin-top:-50px;width:100%;display:flex; justify-content:center;">
-			<a href="' . make_url($rowwp['p_name']) . '"><button class="button is-info is-outlined  is-light"><i class="fas fa-eye"></i>&nbsp; View & Confirm</button></a></h5>
+			<a href="' . make_url($rowwp['id_pack']) . '"><button class="button is-info is-outlined  is-light"><i class="fas fa-eye"></i>&nbsp; View & Confirm</button></a></h5>
 			</div>
 			
 			
@@ -109,12 +112,11 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 					$displaycrc2 = mysqli_query($con, $sqlcrc2);
 					$rowcrc2 = mysqli_fetch_array($displaycrc2);
 					$cnot = $rowcrc2['cur_name'];
-					$crate = (1 / $rowcrc2['cur_rate']);
+					$crate = ($rowcrc2['cur_rate']);
 
-					$newprice = $rowwp['price'];
-					if ($rowwp['offer'] > 0) {
-						$newprice = ($rowwp['price'] - (($rowwp['offer'] / 100) * $rowwp['price']));
-					}
+					$actual_price = $rowwp['actual_price'] / $crate;
+					$final_price = $rowwp['final_price'] / $crate;
+					$discount = $rowwp['discount'] / $crate;
 
 					$b2b_check = 0;
 					if ($GLOBALS['customer'] != 0) {
@@ -131,7 +133,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 					echo '
    <div class=" has-text-weight-semibold" style="color:#333; font-size:18px;">';
-					echo $cnot . " " . round(($crate * $newprice), 2);
+					echo $cnot . " " . round($final_price, 2);
 
 					echo '&nbsp;';
 					if ($b2b_check == 1) {
@@ -139,7 +141,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 					}
 					if ($rowwp['offer'] > 0 && $b2b_check == 0) {
 						echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-						echo $cnot . round(($crate * $rowwp['price']), 2);
+						echo $cnot . round($actual_price, 2);
 						echo '</small></small></del>';
 					}
 
