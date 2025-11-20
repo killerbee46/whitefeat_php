@@ -771,7 +771,15 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             </div>
 
             <div class="columns mt-4 p-3">
-              <button class="button is-normal is-fullwidth first-checkout" data-ref="<?php echo $GLOBALS['customer']; ?>"
+              <?php 
+              if ($GLOBALS['customer'] == '0') { ?>
+                <button class="button is-normal is-fullwidth user-modal"
+                data-target="modal-user"
+                style="background: rgb(241,243,244);
+background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%); border:0;"><i
+                  class="fas fa-shopping-cart"></i> &nbsp; Checkout Now</button>
+              <?php } else { ?>
+                <button class="button is-normal is-fullwidth first-checkout" data-ref="<?php echo $GLOBALS['customer']; ?>"
                 data-ref2="<?php
                 if ($GLOBALS['customer'] != '0') {
                   $sqlud = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
@@ -784,6 +792,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 style="background: rgb(241,243,244);
 background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%); border:0;"><i
                   class="fas fa-shopping-cart"></i> &nbsp; Checkout Now</button>
+              <?php } ?>
             </div>
 
           </div>

@@ -38,21 +38,21 @@
         };
     </script>
     <style id="antiClickjack">
-			body {
-				display: none !important;
-			}
-		</style>
+        body {
+            display: none !important;
+        }
+    </style>
 
-		<!-- clickjacking prevention -->
-		<script type="text/javascript">
-			if (self === top) {
-				var antiClickjack = document.getElementById("antiClickjack");
-				var intruder = document.getElementById("intruder");
-				antiClickjack.parentNode.removeChild(antiClickjack);
-			} else {
-				top.location = self.location;
-			}
-		</script>
+    <!-- clickjacking prevention -->
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            var intruder = document.getElementById("intruder");
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        } else {
+            top.location = self.location;
+        }
+    </script>
     <style>
         * {
             box-sizing: border-box;
@@ -67,6 +67,12 @@
             border-top: 4px solid #3892C682;
             width: 70px;
             height: 70px;
+            background: rgba(255, 255, 255, 0.39);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(6.4px);
+            -webkit-backdrop-filter: blur(6.4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: spin 1s linear infinite;
         }
 
@@ -252,9 +258,10 @@
             width: 60%;
         }
 
-        .slide_viewer{
+        .slide_viewer {
             margin-top: 12px !important;
         }
+
         .search-info-container {
             width: 40%;
         }
@@ -918,9 +925,11 @@
                 aspect-ratio: 7/2;
                 margin-right: 10px;
             }
-.nav-spacer {
-            height: 80px;
-        }
+
+            .nav-spacer {
+                height: 80px;
+            }
+
             .search-icon-container {
                 padding-left: 5px !important;
             }
@@ -974,8 +983,8 @@
                 margin-bottom: -10px;
                 padding-bottom: 20px;
             }
-            
-            .slider{
+
+            .slider {
                 margin-top: 0 !important;
             }
 
@@ -991,11 +1000,11 @@
                 flex-direction: column;
             }
 
-            .slider{
+            .slider {
                 margin-bottom: 180px !important;
             }
 
-            .slide_viewer{
+            .slide_viewer {
                 aspect-ratio: 7/4 !important;
                 height: max-content !important;
             }
@@ -1096,7 +1105,7 @@
                 display: none;
             }
 
-            .slider{
+            .slider {
                 margin-bottom: 20% !important;
             }
 
