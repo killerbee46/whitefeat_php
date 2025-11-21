@@ -64,22 +64,22 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['price'] == 1) {
-					$queries = $queries . " and price < '10000' ";
+					$queries = $queries . " and p.price < '10000' ";
 				}
 				if ($_GET['price'] == 2) {
-					$queries = $queries . " and price > '10000' and price < '20000' ";
+					$queries = $queries . " and p.price > '10000' and p.price < '20000' ";
 				}
 				if ($_GET['price'] == 3) {
-					$queries = $queries . " and price > '20000' and price < '50000' ";
+					$queries = $queries . " and p.price > '20000' and p.price < '50000' ";
 				}
 				if ($_GET['price'] == 4) {
-					$queries = $queries . " and price > '50000' and price < '100000' ";
+					$queries = $queries . " and p.price > '50000' and p.price < '100000' ";
 				}
 				if ($_GET['price'] == 5) {
-					$queries = $queries . " and price > '100000' and price < '200000' ";
+					$queries = $queries . " and p.price > '100000' and p.price < '200000' ";
 				}
 				if ($_GET['price'] == 6) {
-					$queries = $queries . " and price > '200000' ";
+					$queries = $queries . " and p.price > '200000' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -90,19 +90,19 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['weight'] == 1) {
-					$queries = $queries . " and weight < '2' ";
+					$queries = $queries . " and p.weight < '2' ";
 				}
 				if ($_GET['weight'] == 2) {
-					$queries = $queries . " and weight > '2' and weight < '5' ";
+					$queries = $queries . " and p.weight > '2' and p.weight < '5' ";
 				}
 				if ($_GET['weight'] == 3) {
-					$queries = $queries . " and weight > '5' and weight < '10' ";
+					$queries = $queries . " and p.weight > '5' and p.weight < '10' ";
 				}
 				if ($_GET['weight'] == 4) {
-					$queries = $queries . " and weight > '10' and weight < '20' ";
+					$queries = $queries . " and p.weight > '10' and p.weight < '20' ";
 				}
 				if ($_GET['weight'] == 5) {
-					$queries = $queries . " and weight > '20' ";
+					$queries = $queries . " and p.weight > '20' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -113,16 +113,48 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['sort'] == "date") {
-					$queries = $queries . " order by id_pack DESC ";
+					$queries = $queries . " order by p.id_pack DESC ";
 				}
 				if ($_GET['sort'] == "price-lth") {
-					$queries = $queries . " order by price ASC ";
+					$queries = $queries . " order by (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
+            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer > 0,
+            (
+                (
+                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
+                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    )
+                ) *(p.offer / 100)
+            ),
+            0
+        )
+    ) ASC ";
 				}
 				if ($_GET['sort'] == "price-htl") {
-					$queries = $queries . "  order by price DESC ";
+					$queries = $queries . "  order by (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
+            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer > 0,
+            (
+                (
+                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
+                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    )
+                ) *(p.offer / 100)
+            ),
+            0
+        )
+    ) DESC ";
 				}
 				if ($_GET['sort'] == "discounted") {
-					$queries = $queries . " order by offer DESC ";
+					$queries = $queries . " and offer > 0 order by offer DESC ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -133,16 +165,16 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['metal'] == 1) {
-					$queries = $queries . " and pm_id = '1' ";
+					$queries = $queries . " and p.dc_qty > 0 ";
 				}
 				if ($_GET['metal'] == 2) {
-					$queries = $queries . " and pm_id = '2' ";
+					$queries = $queries . " and p.pm_id = '2' ";
 				}
 				if ($_GET['metal'] == 3) {
-					$queries = $queries . " and pm_id = '4' ";
+					$queries = $queries . " and p.pm_id = '4' ";
 				}
 				if ($_GET['metal'] == 4) {
-					$queries = $queries . " and pm_id = '3' ";
+					$queries = $queries . " and p.pm_id = '3' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -197,7 +229,10 @@ background: rgba(116,228,250,1);">
 		</div>
 
 
-		<?php $sqlslt2 = fetchProducts("cat_id='" . $rowslt['cat_id'] . "'" . queryFilter()) ?>
+		<?php 
+		$sortFilter = !isset($_GET['sort']) ? " order by p.id_pack DESC" : '';
+		$sqlslt2 = fetchProducts(queryFilter() . $sortFilter);
+		$sqlslt2 = fetchProducts("cat_id='" . $rowslt['cat_id'] . "'" . queryFilter()) ?>
 		<div class="container is-fluid">
 			<div class="columns p-2 ">
 				<div class="column is-10 letter-spacing has-text-weight-normal is-size-7">

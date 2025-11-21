@@ -21,33 +21,33 @@
 		if (isset($_GET['term'])) {
 			$title = $_GET['term'];
 		} else {
-			if(isset($_GET['tags'])){
+			if (isset($_GET['tags'])) {
 				foreach ($_GET['tags'] as $key => $tag) {
-				if ($tag == 'kid') {
-					$title = $title . ' for Kids';
+					if ($tag == 'kid') {
+						$title = $title . ' for Kids';
+					}
+					if ($tag == 'men') {
+						$title = $title . ' for Men';
+					}
+					if ($tag == 'women') {
+						$title = $title . ' for Women';
+					}
+					if ($tag == 'gift') {
+						$title = $title . 'Gift';
+					}
+					if ($tag == 'gift1') {
+						$title = $title . 'Birthday Gift';
+					}
+					if ($tag == 'gift2') {
+						$title = $title . 'Anniversary Gift';
+					}
+					if ($tag == 'gift3') {
+						$title = $title . 'Wedding Gift';
+					}
+					if ($tag == 'gift4') {
+						$title = $title . 'Pasni Gift';
+					}
 				}
-				if ($tag == 'men') {
-					$title = $title . ' for Men';
-				}
-				if ($tag == 'women') {
-					$title = $title . ' for Women';
-				}
-				if ($tag == 'gift') {
-					$title = $title . 'Gift';
-				}
-				if ($tag == 'gift1') {
-					$title = $title . 'Birthday Gift';
-				}
-				if ($tag == 'gift2') {
-					$title = $title . 'Anniversary Gift';
-				}
-				if ($tag == 'gift3') {
-					$title = $title . 'Wedding Gift';
-				}
-				if ($tag == 'gift4') {
-					$title = $title . 'Pasni Gift';
-				}
-			}
 			}
 		}
 
@@ -56,7 +56,8 @@
 		<meta http-equiv="Cache-control" content="public">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title style="text-transform:capitalize"><?php echo isset($_GET['term']) ? $title." || " : "" ?> WhiteFeathers Jewellery </title>
+		<title style="text-transform:capitalize"><?php echo isset($_GET['term']) ? $title . " || " : "" ?> WhiteFeathers
+			Jewellery </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -75,8 +76,8 @@
 	</head>
 
 	<body style="letter-spacing:0.02em;">
-		<?php 
-		include('header.php'); 
+		<?php
+		include('header.php');
 		include('filter-assets.php');
 		?>
 		<?php
@@ -189,13 +190,45 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['sort'] == "date") {
-					$queries = $queries . " order by id_pack DESC ";
+					$queries = $queries . " order by p.id_pack DESC ";
 				}
 				if ($_GET['sort'] == "price-lth") {
-					$queries = $queries . " order by price ASC ";
+					$queries = $queries . " order by (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
+            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer > 0,
+            (
+                (
+                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
+                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    )
+                ) *(p.offer / 100)
+            ),
+            0
+        )
+    ) ASC ";
 				}
 				if ($_GET['sort'] == "price-htl") {
-					$queries = $queries . "  order by price DESC ";
+					$queries = $queries . "  order by (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
+            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer > 0,
+            (
+                (
+                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
+                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    )
+                ) *(p.offer / 100)
+            ),
+            0
+        )
+    ) DESC ";
 				}
 				if ($_GET['sort'] == "discounted") {
 					$queries = $queries . " and offer > 0 order by offer DESC ";
@@ -246,7 +279,8 @@ background: rgba(116,228,250,1);">
 		$filter_check = 0;
 		$nameFilter = isset($_GET['term']) ? " lower(p_name) LIKE '%" . $_GET['term'] . "%' " : ' 1 ';
 		$catFilter = isset($_GET['cat_id']) ? " and cat_id = " . $_GET['cat_id'] . " " : '';
-		$sqlslt2 = fetchProducts($nameFilter. $catFilter . queryFilter());
+		$sortFilter = !isset($_GET['sort']) ? " order by p.id_pack DESC" : '';
+		$sqlslt2 = fetchProducts($nameFilter . $catFilter . queryFilter() . $sortFilter);
 		$filter_check = 1;
 		?>
 		</div>
@@ -403,7 +437,7 @@ background: rgba(116,228,250,1);">
 						$cnot = $rowcrc2['cur_name'];
 						$crate = ($rowcrc2['cur_rate']);
 
-						$newprice = $cnot == "Rs" ? floor($rowslt2['final_price']/$crate) : round($rowslt2['final_price']/$crate, 2);
+						$newprice = $cnot == "Rs" ? floor($rowslt2['final_price'] / $crate) : round($rowslt2['final_price'] / $crate, 2);
 
 						//b2b check
 						$b2b_check = 0;
@@ -418,7 +452,7 @@ background: rgba(116,228,250,1);">
 
 						}
 
-						echo "<small><small>".$cnot."</small></small>" . ' ' . ($newprice);
+						echo "<small><small>" . $cnot . "</small></small>" . ' ' . ($newprice);
 
 						echo '&nbsp;';
 						if ($b2b_check == 1) {
@@ -426,7 +460,7 @@ background: rgba(116,228,250,1);">
 						}
 						if ($rowslt2['offer'] > 0 && $b2b_check == 0) {
 							echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-							echo $cnot . $cnot == "Rs" ? floor($rowslt2['actual_price']/$crate) : round($rowslt2['actual_price']/$crate, 2);
+							echo $cnot . $cnot == "Rs" ? floor($rowslt2['actual_price'] / $crate) : round($rowslt2['actual_price'] / $crate, 2);
 							echo '</small></small></del>';
 						}
 						echo '</h3>
