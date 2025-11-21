@@ -28,14 +28,9 @@
         }
     </script>
     <script>
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                document.querySelector(
-                    "#loader").style.display = "none";
-                document.querySelector(
-                    "body").style.visibility = "visible";
-            }
-        };
+         window.addEventListener("load", function() {
+        document.getElementById("loader").style.display = "none";
+    });
     </script>
     <style id="antiClickjack">
         body {
@@ -61,37 +56,34 @@
         }
 
         #loader {
-            visibility: visible;
-            border: 4px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 4px solid #3892C682;
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.39);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(6.4px);
-            -webkit-backdrop-filter: blur(6.4px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: spin 1s linear infinite;
-        }
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;  /* background color */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999; /* always on top */
+    }
 
-        .center {
-            position: fixed;
-            background: white;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            z-index: 1000;
-        }
+    /* Spinner */
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 6px solid #ddd;
+        border-top-color: #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+    /* Animation */
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
         }
+    }
 
         /* primary-color:#3892C6 */
 
