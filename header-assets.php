@@ -61,11 +61,13 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: white;  /* background color */
+        backdrop-filter: blur(10px);   /* Blur effect */
+        background: rgba(255, 255, 255, 0.3); /* Slight white tint */
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 99999; /* always on top */
+        z-index: 99999;
+        transition: opacity 0.5s ease;
     }
 
     /* Spinner */
@@ -83,6 +85,11 @@
         to {
             transform: rotate(360deg);
         }
+    }
+
+    #loader.fade-out {
+        opacity: 0;
+        pointer-events: none;
     }
 
         /* primary-color:#3892C6 */
