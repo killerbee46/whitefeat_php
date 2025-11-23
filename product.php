@@ -180,23 +180,20 @@
               <div class="product-image-info">
                 Hover for Zoom Preview
               </div>
-              <img id="thumbImg" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?php
+              <?php 
               $sqlpd = fetchProduct($productname);
               $displaypd = mysqli_query($con, $sqlpd);
               $rowpd = mysqli_fetch_array($displaypd);
+              $image = "no-image.png";
               if (isset($rowpd['image'])) {
-                echo $rowpd['image'];
-              } else {
-                echo "no-image.png";
-              } ?>" alt="no image">
+                $image = $rowpd['image'];
+              } 
+              ?>
+              <img id="thumbImg" onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';" 
+              src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>" alt="no image">
             </div>
 
-            <div class="zoom-preview" id="zoomPreview" style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumby/<?php
-            if (isset($rowpd['image'])) {
-              echo $rowpd['image'];
-            } else {
-              echo "no-image.png";
-            } ?>');">
+            <div class="zoom-preview" id="zoomPreview" style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');">
             </div>
           </div>
         </div>
