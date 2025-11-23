@@ -326,7 +326,7 @@ background: rgba(116,228,250,1);">
 						echo '
 			<div class="product-card-container">
 			   <div class="card card-cat" style="overflow:hidden; height:100%;">
-  <div style="aspect-ratio:1/1;max-height:max-content;background:url(assets/images/image-loading.gif);background-repeat:no-repeat;background-size:cover;object-fit:cover;object-position:center;">
+  <div style="aspect-ratio:1/1;max-height:max-content;background:url(assets/images/loading-25.gif);background-repeat:no-repeat;background-size:30px;background-position:center center;object-fit:cover;object-position:center;">
       <a href="' . $url . '"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 
 						if (isset($rowslt2['image'])) {
