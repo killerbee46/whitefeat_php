@@ -180,7 +180,7 @@
               <div class="product-image-info">
                 Hover for Zoom Preview
               </div>
-              <img id="thumbImg" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?php
+              <img id="thumbImg" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?php
               $sqlpd = fetchProduct($productname);
               $displaypd = mysqli_query($con, $sqlpd);
               $rowpd = mysqli_fetch_array($displaypd);
@@ -191,7 +191,7 @@
               } ?>" alt="no image">
             </div>
 
-            <div class="zoom-preview" id="zoomPreview" style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?php
+            <div class="zoom-preview" id="zoomPreview" style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumby/<?php
             if (isset($rowpd['image'])) {
               echo $rowpd['image'];
             } else {
