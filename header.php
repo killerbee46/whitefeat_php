@@ -462,9 +462,12 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	       <?php /* Header desktop view start */ ?>
 	
 <nav class="navbar">
-                <div class="flex justify-between">
+                <div class="flex justify-between" style="align-items: center;">
                     <div class="logo-menu-container flex align-center">
-                        <a href="/"><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wflogo.png" class="logo" /></a>
+                        <a href="/">
+                            <img src="assets/images/wflogo.png" class="logo" />
+                            <img src="assets/images/wflogo-small.png" class="logo-small" />
+                        </a>
                         <div class="menus">
                             <?php foreach ($menus as $index => $menu) { ?>
                                 <div class="custom-dropdown">

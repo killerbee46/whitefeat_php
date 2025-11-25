@@ -20,13 +20,17 @@
 		if ($countslt > 0) {
 		}
 		$rowslt = mysqli_fetch_array($displayslt);
-
+		$title = $_GET['stitle'];
 
 		?>
 		<meta http-equiv="Cache-control" content="public">
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>WhiteFeathers Jewellery || <?php echo $_GET['stitle']; ?></title>
+		<title><?= $title ?> | Premium <?= $title ?> Collection | White Feathers Jewellery</title>
+		<meta name="description"
+			content="Shop elegant and premium <?= $title ?> crafted in diamond, gold and silver. Discover unique designs perfect for daily wear, gifts, weddings and special occasions.">
+		<meta name="keywords"
+			content="<?= $title ?>, <?= $title ?> Nepal, diamond <?= $title ?>, gold <?= $title ?>, silver <?= $title ?>, White Feathers Jewellery">
+z
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -220,7 +224,8 @@ background: rgba(116,228,250,1);">
 				style="display:flex;justify-content:space-between; padding-top:30px; padding-bottom:10px;align-items:center;flex-wrap:wrap; gap:10px;">
 				<div class="">
 					<p>Jewellery <small><i class="fas fa-angle-right has-text-grey-light"></i></small>
-						<span style="text-transform:capitalize;"><?php echo $rowslt['cat_name']; ?></p></span>
+						<span style="text-transform:capitalize;"><?php echo $rowslt['cat_name']; ?>
+					</p></span>
 				</div>
 
 			</div>
@@ -229,7 +234,7 @@ background: rgba(116,228,250,1);">
 		</div>
 
 
-		<?php 
+		<?php
 		$sortFilter = !isset($_GET['sort']) ? " order by p.id_pack DESC" : '';
 		$sqlslt2 = fetchProducts(queryFilter() . $sortFilter);
 		$sqlslt2 = fetchProducts("cat_id='" . $rowslt['cat_id'] . "'" . queryFilter()) ?>
@@ -237,7 +242,7 @@ background: rgba(116,228,250,1);">
 			<div class="columns p-2 ">
 				<div class="column is-10 letter-spacing has-text-weight-normal is-size-7">
 					<p style="display:flex;gap:5px;flex-wrap:wrap;">
-						<?= getTags() ?>	
+						<?= getTags() ?>
 						<?php
 
 						$displayslt2 = mysqli_query($con, $sqlslt2);

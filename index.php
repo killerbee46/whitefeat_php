@@ -55,9 +55,15 @@
 
 	<head>
 		<meta http-equiv="Cache-control" content="public">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>White Feather's Jewellery</title>
+		<meta charset="UTF-8">
+		<title>White Feathers Jewellery | Premium Diamond, Gold & Silver Jewellery in Nepal</title>
+		<meta name="description"
+			content="Shop premium diamond, gold and silver jewellery at White Feathers Jewellery. Discover rings, necklaces, earrings, bridal collections and custom-made designs crafted with elegance and authenticity.">
+
+		<meta name="keywords"
+			content="White Feathers Jewellery, diamond jewellery Nepal, gold jewellery Nepal, silver jewellery Nepal, bridal jewellery, engagement rings, custom jewellery, fine jewellery online Nepal, luxury jewellery store">
+		<meta name="robots" content="index, follow">
+		<meta name="author" content="White Feathers Jewellery">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?PHP /* LOADING REQUIRED CSS */ ?>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -71,8 +77,7 @@
 			integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
 			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<?PHP /* END => LOADING REQUIRED CSS */ ?>
-		<link rel="icon" type="image/x-icon"
-			href="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 	</head>
 
 	<body style="letter-spacing:0.02em;">

@@ -19,8 +19,11 @@
   <head>
     <meta http-equiv="Cache-control" content="public">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $rowhead['p_name']; ?></title>
+    <title><?= $rowhead['p_name'] ?> | White Feathers Jewellery</title>
+		<meta name="description"
+			content="<?= $rowhead['description'] ?>">
+		<meta name="keywords"
+			content="<?= $rowhead['keyword'] ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -159,11 +162,6 @@
         }
       }
     </style>
-
-
-
-
-
   </head>
 
   <body style="letter-spacing:0.02em;">
@@ -176,10 +174,6 @@
 
         <div class="column is-5" style="border-right:1px solid #eee; ">
           <div class="preview-wrap">
-            <div class="thumb" id="thumb">
-              <div class="product-image-info">
-                Hover for Zoom Preview
-              </div>
               <?php 
               $sqlpd = fetchProduct($productname);
               $displaypd = mysqli_query($con, $sqlpd);
@@ -189,6 +183,10 @@
                 $image = $rowpd['image'];
               } 
               ?>
+            <div class="thumb" id="thumb" style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');background-size:cover;">
+              <div class="product-image-info">
+                Hover for Zoom Preview
+              </div>
               <img id="thumbImg" onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';" 
               src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>" alt="no image">
             </div>
@@ -243,8 +241,6 @@
               }
 
               ?>
-
-
 
               <span class="has-tooltip-arrow has-tooltip-multiline has-tooltip-bottom pb-1 modal-smv"
                 data-tooltip="View similar products" data-target="modal-smp"><i class="far fa-clone is-size-4"

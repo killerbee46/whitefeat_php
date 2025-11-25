@@ -672,7 +672,7 @@ $('.add_wish_product').click(function(evt){
 $('.add_wish_owl').click(function(evt){
 	evt.preventDefault();
  var idp=$(this).attr("data-id");
- $(this).append('<a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:2%; right: 4%; margin-top:0px; margin-left:0px;"><i class="fas fa-heart"></i></a>');
+ $(this).append('<a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>');
  
  var dataString = 'idp='+idp;
    $.ajax({url: "savewish",data: dataString, type: 'POST', cache: false,

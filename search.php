@@ -11,7 +11,7 @@
 	<head>
 
 		<?php
-		$title = '';
+		$title = 'Jewellries';
 		$himage = 0;
 		$hvideo = 0;
 		$cterm = 0;
@@ -55,9 +55,12 @@
 		?>
 		<meta http-equiv="Cache-control" content="public">
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title style="text-transform:capitalize"><?php echo isset($_GET['term']) ? $title . " || " : "" ?> WhiteFeathers
-			Jewellery </title>
+		<title><?= $title ?> | Premium <?= $title ?> Collection | White Feathers Jewellery</title>
+		<meta name="description"
+			content="Shop elegant and premium <?=$title  ?> crafted in diamond, gold and silver. Discover unique designs perfect for daily wear, gifts, weddings and special occasions.">
+		<meta name="keywords"
+			content="<?=$title  ?>, <?=$title  ?> Nepal, diamond <?=$title  ?>, gold <?=$title  ?>, silver <?=$title  ?>, White Feathers Jewellery">
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"

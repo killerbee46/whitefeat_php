@@ -1,5 +1,5 @@
 <?php
-$sqlfixed = fetchProducts(" cat_id = 81 limit 20 ");
+$sqlfixed = fetchProducts(" cat_id = 81 order by p.id_pack DESC limit 20");
 $displayfixed = mysqli_query($con, $sqlfixed);
 $countFixed = mysqli_num_rows($displayfixed);
 
@@ -69,9 +69,9 @@ $crate = ($rowcrc2['cur_rate']);
 						$countw = mysqli_num_rows($displaywl);
 						if ($countw > 0) {
 							echo '
-  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;"><i class="fas fa-heart"></i></a>';
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
 						} else {
-							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowfixed['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
 						}
 
 						echo '<br>';
@@ -151,7 +151,7 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 	<div class="columns is-mobile p-0 for-women-div">
 		<?php
 		/* lopping through products in database matching the terms and displaying start */
-		$sqlpw = fetchProducts(" tag_women=1 limit 10");
+		$sqlpw = fetchProducts(" tag_women=1 order by p.id_pack DESC limit 10");
 		$displaypw = mysqli_query($con, $sqlpw);
 		$countgen = mysqli_num_rows($displaypw);
 		if ($countgen > 0) { ?>
@@ -182,9 +182,9 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 						$countw = mysqli_num_rows($displaywl);
 						if ($countw > 0) {
 							echo '
-  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;"><i class="fas fa-heart"></i></a>';
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
 						} else {
-							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
 						}
 
 						echo '<br>';
@@ -249,7 +249,7 @@ display: -webkit-box;
 			<div class="owl-carousel owl-theme owl-one">
 				<?php
 				/* lopping through products in database matching the terms and displaying start */
-				$sqlpw = fetchProducts(" tag_men=1 limit 10");
+				$sqlpw = fetchProducts(" tag_men=1 order by p.id_pack limit 10");
 				$displaypw = mysqli_query($con, $sqlpw);
 				while ($rowpw = mysqli_fetch_array($displaypw)) {
 					echo '
@@ -269,11 +269,11 @@ display: -webkit-box;
 					$displaywl = mysqli_query($con, $sqlwl);
 					$countw = mysqli_num_rows($displaywl);
 					if ($countw > 0) {
-						echo '
-  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;"><i class="fas fa-heart"></i></a>';
-					} else {
-						echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
-					}
+							echo '
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
+						} else {
+							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+						}
 
 					echo '<br>';
 

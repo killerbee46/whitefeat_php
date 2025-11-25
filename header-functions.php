@@ -2,9 +2,7 @@
 function fetchProducts($filters)
 {
     $dynamicPriceSql = "SELECT
-    p.id_pack AS id_pack,
-	p.p_name,
-	p.offer,
+    p.*,
     IF(
         p.image <> '',
         p.image,
@@ -49,14 +47,48 @@ function fetchProducts($filters)
             ),
             0
         )
-    ) AS final_price
+    ) AS final_price,
+    (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) AS actual_price_b2b,(
+        IF(
+            p.offer_b2b > 0,
+            (
+                (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) *(p.offer_b2b / 100)
+            ),
+            0
+        )
+    ) AS discount_b2b,
+    (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer_b2b > 0,
+            (
+                (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) *(p.offer_b2b / 100)
+            ),
+            0
+        )
+    ) as final_price_b2b
 FROM
     package p
 JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
 	p.pm_id = pm.pm_id
-	WHERE " . $filters;
+WHERE  " . $filters;
     return $dynamicPriceSql;
 
 }
@@ -109,14 +141,48 @@ function fetchProduct($id)
             ),
             0
         )
-    ) AS final_price
+    ) AS final_price,
+    (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) AS actual_price_b2b,(
+        IF(
+            p.offer_b2b > 0,
+            (
+                (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) *(p.offer_b2b / 100)
+            ),
+            0
+        )
+    ) AS discount_b2b,
+    (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) - (
+        IF(
+            p.offer_b2b > 0,
+            (
+                (
+        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+        )
+    ) *(p.offer_b2b / 100)
+            ),
+            0
+        )
+    ) as final_price_b2b
 FROM
     package p
 JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
 	p.pm_id = pm.pm_id
-WHERE 
+WHERE  
 p.id_pack ='" . $id . "';";
     return $dynamicPriceSql;
 }

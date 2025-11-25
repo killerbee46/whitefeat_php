@@ -271,9 +271,13 @@
             margin-right: 20px;
         }
 
+        .logo-small{
+            display:none;
+        }
+
         .menus {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: -25px;
         }
 
@@ -282,7 +286,7 @@
             font-size: .7rem;
             font-weight: 500;
             border-bottom: 2px solid transparent;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             cursor: pointer;
             transition: border-bottom .5s ease-in-out;
         }
@@ -1044,6 +1048,14 @@
             .user-detail {
                 flex-direction: row;
             }
+            .logo{
+                display: none;
+            }
+            .logo-small{
+                display: block;
+                width: 50px;
+                margin-top: -10px;
+            }
         }
 
 
@@ -1077,7 +1089,11 @@
             }
 
             .logo {
-                width: 80px;
+                display: none;
+            }
+            .logo-small {
+                display: block;
+                width: 50px;
             }
 
             .contains-number.small-screen {

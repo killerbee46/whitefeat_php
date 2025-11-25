@@ -824,10 +824,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<label style="width: 100%;">Description (separated by comma)
 															<textarea style="width:100%; height:250px;" class="form-control"
 																name="meta_head"><meta name="description" content="">
-						<meta name="keywords" content="">
-						<meta name="robots" content="index, follow">
-						<meta name="author" content="White Feathers Jewellery">
-									</textarea>
+							<meta name="keywords" content="">
+							<meta name="robots" content="index, follow">
+							<meta name="author" content="White Feathers Jewellery">
+										</textarea>
 														</label>
 													</section>
 

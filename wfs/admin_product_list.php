@@ -2,7 +2,7 @@
 include 'db_connect.php';
 // $search = (isset($_GET['cat_id'])) ? " and cat_id = ".$_GET['cat_id'];
 $category = (isset($_GET['cat_id'])) ? " and p.cat_id = " . $_GET['cat_id'] . " " : "";
-$sqlslt2 = "SELECT  p.id_pack as id, p.p_name,IF(p.image <> '', p.image, (SELECT ps.s_path FROM package_slider ps WHERE ps.id_pack = p.id_pack LIMIT 1)) AS image,(pr.rate/11.664 * p.weight + p.dc_rate * p.dc_qty + IF(p.mk_pp, p.mk_pp, p.mk_gm * p.weight) ) AS dynamic_price FROM package p JOIN package_metal pr ON p.pmt_id = pr.pmt_id where " . (isset($_GET['search']) ? " lower(p.p_name) LIKE '%" . $_GET['search'] . "%'" : ' 1 ') . $category . " order by p.id_pack desc limit 12 offset " . (isset($_GET['page']) ? (int) $_GET['page'] : 1) * 12 - 12;
+$sqlslt2 = fetchProducts((isset($_GET['search']) ? " lower(p.p_name) LIKE '%" . $_GET['search'] . "%'" : ' 1 ') . $category . " order by p.id_pack desc limit 12 offset " . (isset($_GET['page']) ? (int) $_GET['page'] : 1) * 12 - 12);
 $countSql = "SELECT  count(*) as total_count from package p where " . (isset($_GET['search']) ? " lower(p.p_name) LIKE '%" . $_GET['search'] . "%'" : ' 1 ') . $category;
 $displayCount = mysqli_query($con, $countSql);
 $rowCount = mysqli_fetch_array($displayCount);
@@ -109,7 +109,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
             style="border:1px solid bisque;width:33%;max-width:300px;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;">
             <div class="actions" style="display:flex;gap:10px; position:absolute;right:10px; top:10px;">
                 <div title="Edit"><a style="padding: 10px;background:white;border-radius:50%;"
-                        href="/wfs/product_edit.php?id=<?= $rowslt2['id'] ?>" target="_blank"><i class="fas fa-pen"></i></a>
+                        href="/wfs/product_edit.php?id=<?= $rowslt2['id_pack'] ?>" target="_blank"><i class="fas fa-pen"></i></a>
                 </div>
                 <div title="Delete">
                     <a href="#" class=" del_product" style="padding: 10px;background:white;border-radius:50%;">
@@ -139,11 +139,11 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
                 <div class="product_prices" style="display:flex;justify-content:space-between;">
                     <div class="b2c" style="font-weight:550;font-size:14px;color:gray !important;">
                         <div style="color:blueviolet">B2C</div>
-                        <div><small>RS </small><?= number_format($rowslt2['dynamic_price'], 2) ?></div>
+                        <div><small>RS </small><?= number_format($rowslt2['final_price'], 2) ?></div>
                     </div>
                     <div class="b2b" style="font-weight:550;font-size:14px;color:gray !important;">
                         <div style="color:blueviolet">B2B</div>
-                        <div><small>RS </small>45000</div>
+                        <div><small>RS </small><?= number_format($rowslt2['final_price_b2b'], 2) ?></div>
                     </div>
                 </div>
                 <div class="product_name" style="margin:7px auto;font-weight:600;font-size:16px;font-style:italic;text-overflow: ellipsis;
