@@ -2,7 +2,7 @@
 include 'db_connect.php';
 include 's3_upload.php';
 
-//     $gkey_final = mysqli_real_escape_string($con, $gkey);
+// $gkey_final = mysqli_real_escape_string($con, $gkey);
 // $gsdes_final = mysqli_real_escape_string($con, $gsdes);
 // $gmeta_final = mysqli_real_escape_string($con, $gmeta);
 $women = 0;
@@ -131,11 +131,16 @@ if (!empty($_FILES['image']['name'])) {
             echo "<script>alert('Error While Creating Product!')</script>";
         }
     } else {
-        echo "";
-        echo "<script>alert('❌ Product could not be created due to failed upload!')</script>";
+        echo "<script>
+        window.history.go(-1);
+        alert('❌ Product could not be created due to failed upload!')
+        </script>";
     }
 } else {
-    echo "<script>alert('Image is Required!')</script>";
+    echo "<script>
+    window.history.go(-1);
+    alert('Image is Required!');
+    </script>";
 }
 
 ?>

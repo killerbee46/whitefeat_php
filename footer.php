@@ -71,7 +71,7 @@ $crate = ($rowcrc2['cur_rate']);
 							echo '
   <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
 						} else {
-							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowfixed['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
 						}
 
 						echo '<br>';

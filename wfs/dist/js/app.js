@@ -1501,9 +1501,7 @@ var dataString = 'd1='+d1;
    text: "You are about to delete the product!",  
    type: "warning",  
    showCancelButton: true, 
-   confirmButtonColor: "#DD6B55", 
-   confirmButtonText: "Yes, save!", 
-   cancelButtonText: "No, cancel!",  
+   confirmButtonColor: "#DD6B55",  
    closeOnConfirm: false, 
    closeOnCancel: false 
    }, 

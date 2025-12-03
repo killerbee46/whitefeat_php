@@ -307,6 +307,47 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 				border: 1px solid #ddd;
 				border-radius: 6px;
 			}
+
+			.tabs-control {
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 10px 20px;
+				flex-wrap: wrap;
+			}
+
+			.tabs-head {
+				font-weight: 600;
+				cursor: pointer;
+				padding: 20px;
+			}
+
+			.tabs-head:hover {
+				color: gray;
+			}
+
+			.tabs-head.active {
+				color: #138296;
+				border-bottom: 3px solid;
+			}
+
+			.tabs-contents {
+				padding: 20px;
+			}
+
+			.tabs-item {
+				display: none;
+			}
+
+			.tabs-item.active {
+				display: block;
+			}
+			.tab-divider{
+				width: 1px;
+				background: gray;
+				height: 20px;
+			}
 		</style>
 
 	</head>
@@ -344,20 +385,6 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 		 <button class="btn btn-xs btn-outline-info">KOT <i class="fas fa-print"></i></button> 
 		</a>
 	  </li>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<li class="nav-item">
 						<a class="nav-link btn btn-light" href="../" target="_blank" role="button" id="">
 							View site &nbsp; <i class="fas fa-eye"></i>
@@ -375,12 +402,6 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 		  <i class="fas fa-th-large"></i>
 		</a>
 	  </li>-->
-
-
-
-
-
-
 					<!-- USERS Dropdown Menu -->
 					<li class="nav-item dropdown">
 						<a class="nav-link" data-toggle="dropdown" href="#">
@@ -437,25 +458,9 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
-
-
 				<!-- Main content -->
 				<section class="content" style="padding-top:1em;">
-
-
-
-
-
-
-
-
-
 					<div class="container-fluid app_area">
-
-
-
-
-
 						<div class="row" style="letter-spacing:1px;">
 							<div class="col-12">
 								<div class="callout callout-success alert alert-dismissible">
@@ -466,76 +471,40 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 								</div>
 							</div>
 						</div>
-
-
 						<div class="row">
 							<div class="col-12">
-
-
-
 								<div class="card card-success card-outline card-outline-tabs">
 									<div class="card-header p-0 border-bottom-0">
-										<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-											<li class="nav-item">
-												<a class="nav-link active" id="custom-tabs-four-home-tab-stock"
-													data-toggle="pill" href="#custom-tabs-four-home-stock" role="tab"
-													aria-controls="custom-tabs-four-home" aria-selected="true"><i
-														class="fas fa-file"></i> Product List</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
-													href="#custom-tabs-four-home" role="tab"
-													aria-controls="custom-tabs-four-home" aria-selected="true"><i
-														class="fas fa-edit"></i> Add New Product</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link stock_direct_open" id="custom-tabs-four-profile-tab"
-													data-toggle="pill" href="#custom-tabs-four-profile" role="tab"
-													aria-controls="custom-tabs-four-profile" aria-selected="false"><i
-														class="fas fa-tags"></i> Regular Tags</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link stock_direct_open" id="custom-tabs-four-profile-messages"
-													data-toggle="pill" href="#custom-tabs-four-messages" role="tab"
-													aria-controls="custom-tabs-four-messages" aria-selected="false"><i
-														class="fas fa-gift"></i> Gift Tags</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link stock_direct_open" id="custom-tabs-four-profile-settings"
-													data-toggle="pill" href="#custom-tabs-four-settings" role="tab"
-													aria-controls="custom-tabs-four-settings" aria-selected="false"><i
-														class="fas fa-cubes"></i> Collection Tags</a>
-											</li>
-
-
-										</ul>
-
+										<div class="tabs-control">
+											<div class="tabs-head <?= !isset($_GET['tab']) || $_GET['tab'] == "" || $_GET['tab'] == "products" ? "active" : "" ?>"
+												onclick="filterSelectorHandle({value:'0'},'tab')"> Products</div>
+												<div class="tab-divider"></div>
+											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "add" ? "active" : "" ?>"
+												onclick="filterSelectorHandle({value:'add'},'tab')">Add Product</div>
+												<div class="tab-divider"></div>
+											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "regular" ? "active" : "" ?>"
+												onclick="filterSelectorHandle({value:'regular'},'tab')">Regular Tags</div>
+												<div class="tab-divider"></div>
+											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "gift" ? "active" : "" ?>"
+												onclick="filterSelectorHandle({value:'gift'},'tab')">Gift Tags</div>
+												<div class="tab-divider"></div>
+											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "collection" ? "active" : "" ?>"
+												onclick="filterSelectorHandle({value:'collection'},'tab')">Collection Tags
+											</div>
+										</div>
+										<hr style="margin-top:-12px;" />
 									</div>
 
 									<div class="card-body">
-										<div class="tab-content" id="custom-tabs-four-tabContent">
-
-											<div class="tab-pane fade active show p-1" id="custom-tabs-four-home-stock"
-												role="tabpanel" aria-labelledby="custom-tabs-four-home-tab-stock">
+										<div class="tabs-contents">
+											<div
+												class="product_list tabs-item <?= !isset($_GET['tab']) || $_GET['tab'] == "" || $_GET['tab'] == "products" ? "active" : "" ?>">
 												<?php include 'admin_product_list.php' ?>
-
 											</div>
-											<div class="tab-pane fade" id="custom-tabs-four-home" role="tabpanel"
-												aria-labelledby="custom-tabs-four-home-tab">
+											<div
+												class="product_add tabs-item <?= isset($_GET['tab']) && $_GET['tab'] == "add" ? "active" : "" ?>">
 												<form method="POST" action="./ajax_create_product.php"
 													enctype="multipart/form-data">
-
-													<!-- PRODUCT SECTION -->
-													<!-- <section class="form-section">
-														<h2>Product Image</h2>
-														<div class="image-upload">
-															<input type="file" id="imageInput" accept="image/*"
-																name="image">
-															<label for="imageInput" class="upload-label">+ Upload
-																Image</label>
-															<div id="imagePreview" class="preview-container"></div>
-														</div>
-													</section> -->
 													<section class="form-section">
 														<h2>PRODUCT :</h2>
 														<div class="image-upload" style="margin-top:20px;margin-left:5px;">
@@ -555,8 +524,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																	$sql1 = "Select * from `whitefeat_wf_new`.`package_category` order by cat_name";
 																	$display = mysqli_query($con, $sql1);
 																	while ($row = mysqli_fetch_array($display)) {
-																		echo '<option value="' . $row['cat_id'] . '"><b>' . ucfirst($row['cat_name']) . '</b></option>
-			    ';
+																		echo '<option value="' . $row['cat_id'] . '"><b>' . ucfirst($row['cat_name']) . '</b></option>';
 																	}
 																	?>
 																</select>
@@ -623,8 +591,6 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																	while ($row = mysqli_fetch_array($display)) {
 																		echo '<option value="' . $row['pmt_id'] . '"><b>' . ucfirst($row['pmt_name']) . '</b></option>
 			    ';
-
-
 																	}
 																	?>
 																</select>
@@ -824,10 +790,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<label style="width: 100%;">Description (separated by comma)
 															<textarea style="width:100%; height:250px;" class="form-control"
 																name="meta_head"><meta name="description" content="">
-							<meta name="keywords" content="">
-							<meta name="robots" content="index, follow">
-							<meta name="author" content="White Feathers Jewellery">
-										</textarea>
+														<meta name="keywords" content="">
+														<meta name="robots" content="index, follow">
+														<meta name="author" content="White Feathers Jewellery">
+																	</textarea>
 														</label>
 													</section>
 
@@ -838,23 +804,12 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 												</form>
 											</div>
-
-
-
-											<!-- start more section -->
-
-
-											<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
-												aria-labelledby="custom-tabs-four-profile-tab">
-
-
+											<div
+												class="regular_tags tabs-item <?= isset($_GET['tab']) && $_GET['tab'] == "regular" ? "active" : "" ?>">
 												<div class="row" style="letter-spacing:1px;">
 
 
 													<div class="col-7">
-
-
-
 														<div class="card card-light shadow">
 															<div class="card-header">
 																<h3 class="card-title">Regular Tags List</h3>
@@ -904,15 +859,6 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
                   </div>
 				  
 				    <div class="form-group">
-                  
-                   
-				   
-				   
-				   
-				   
-				   
-				   
-				   
                     
                   </div>
 				  
@@ -926,14 +872,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 				  
 				  <div class="col">
                   <div class="form-group">';
-
-
-
-
-
 																	echo '<button type="button" class="btn btn-block btn-danger del_rtag" data-id="' . $row_s['tag_id'] . '"><small>Delete &nbsp;<i class="fas fa-trash-alt"></i></small></button>';
-
-
 																	echo '</div>
 				  </div>
 				  </div>
@@ -946,24 +885,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 																	$counter++;
 																} ?>
-
-
-
-
-
-
-
-
 															</div>
 															<!-- /.card-body -->
 														</div>
-
-
-
-
 													</div>
-
-
 													<div class="col-5">
 														<div class="card card-light shadow">
 															<div class="card-header">
@@ -992,61 +917,25 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 																			id="add_name_tag" name="cat_name"
 																			placeholder="Write Name">
 																	</div>
-
-
-
 																	<div class="form-group">
 																		<input type="submit"
 																			class="btn btn-info btn-block add_table"
 																			value="Add"></button>
 																	</div>
 																</form>
-
-
-
-
 															</div>
 															<!-- /.card-body -->
 														</div>
 													</div>
-
-
-
-
-
-
-
 												</div>
-
-
-												<div id="menu_order" style="display:none;">
-													<a href="#" id="closem"><code
-															style="float:right; margin-right:10px; margin-top:10px; color:red;"> Close [X] </code></a>
-													<div id="mo_fetch">
-													</div>
-												</div>
-
-
-
-
 											</div>
-
-
-											<div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
-												aria-labelledby="custom-tabs-four-messages-tab">
-
-
+											<div
+												class="gift_tags tabs-item <?= isset($_GET['tab']) && $_GET['tab'] == "gift" ? "active" : "" ?>">
 												<div class="row" style="letter-spacing:1px;">
-
-
 													<div class="col-7">
-
-
-
 														<div class="card card-light shadow">
 															<div class="card-header">
 																<h3 class="card-title">Gift List</h3>
-
 																<div class="card-tools">
 																	<button type="button" class="btn btn-tool"
 																		data-card-widget="collapse">
@@ -1061,20 +950,12 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</div>
 															<!-- /.card-header -->
 															<div class="card-body">
-
-																<!--<a href="#" title="adjust table sequence / order "><button class="btn btn-light rea_table"><code>Relocate Table / Seat Postion</code></button></a>
-				<hr>
-				-->
-
 																<?php
 																include('db_connect.php');
 																$query_s = "Select * from `whitefeat_wf_new`.`package_gift` order by pgf_name";
 																$display_s = mysqli_query($con, $query_s);
 																$counter = 1;
 																while ($row_s = mysqli_fetch_array($display_s)) {
-
-
-
 																	echo '
 				<form class="edit_save_gift" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="' . $row_s['pgf_id'] . '" name="catval"></input>
@@ -1230,21 +1111,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															<!-- /.card-body -->
 														</div>
 													</div>
-
-
-
-
-
-
-
 												</div>
-
-
 											</div>
-
-											<div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
-												aria-labelledby="custom-tabs-four-settings-tab">
-
+											<div
+												class="collection_tags tabs-item <?= isset($_GET['tab']) && $_GET['tab'] == "collection" ? "active" : "" ?>">
 												<div class="row" style="letter-spacing:1px;">
 
 
@@ -1448,70 +1318,25 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 
 												</div>
-
-
 											</div>
-
 										</div>
 									</div>
-									<!-- /.card -->
 								</div>
-
-
-
-
 							</div>
-
-
-
 						</div>
-
-
-
-
-
-
-
-
-
-
-
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				</section>
+				<!-- /.content -->
 			</div>
-		</div>
-		</section>
-		<!-- /.content -->
-		</div>
-		<!-- /.content-wrapper -->
+			<!-- /.content-wrapper -->
 
 
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+			<!-- Control Sidebar -->
+			<aside class="control-sidebar control-sidebar-dark">
+				<!-- Control sidebar content goes here -->
+			</aside>
+			<!-- /.control-sidebar -->
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->

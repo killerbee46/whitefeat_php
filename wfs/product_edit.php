@@ -476,7 +476,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 											<code class="text-danger">(#<?php echo $_GET['id']; ?>)</code>
 										</a>
 										<h5>Edit Product</h5>
-										<a href="#"><button class="btn btn-outline-danger btn-xs del_product"
+										<a href="#"><button isEdit="true" class="btn btn-outline-danger btn-xs del_product"
 												data-id="<?php echo $_GET['id']; ?>"><i class="fas fa-trash-alt"></i>&nbsp;
 												Delete Product </button>
 										</a>

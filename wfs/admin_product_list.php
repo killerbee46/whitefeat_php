@@ -98,7 +98,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
     </div>
 </div>
 <hr style="color: gainsboro;margin-top:0;margin-bottom:20px" />
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+<div style="display:flex;justify-content:space-evenly;flex-wrap:wrap;gap:20px;">
     <?php
     if ($countslt2 === 0) {
         include '../no-data.php';
@@ -112,7 +112,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
                         href="/wfs/product_edit.php?id=<?= $rowslt2['id_pack'] ?>" target="_blank"><i class="fas fa-pen"></i></a>
                 </div>
                 <div title="Delete">
-                    <a href="#" class=" del_product" style="padding: 10px;background:white;border-radius:50%;">
+                    <a href="#" data-id="<?= $rowslt2['id_pack'] ?>" class="del_product" style="padding: 10px;background:white;border-radius:50%;">
                         <i class="fas fa-trash-alt" style="color:crimson"></i>
                     </a>
                 </div>
