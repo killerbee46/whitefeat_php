@@ -15,79 +15,125 @@ function fetchProducts($filters)
             ps.id_pack = p.id_pack
         LIMIT 1
     )
-    ) AS image,(
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+    ) AS image, IF(
+        isFixedPrice,
+        p.price,
+        (
+            IF(
+                p.pmt_id = 11,
+                pr.rate,
+                pr.rate / 11.664
+            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+            )
         )
-    ) AS actual_price,(
+    ) AS actual_price, IF(
+        isFixedPrice,
+        0,
+        (
+            IF(
+                p.offer > 0,
+                (
+                    (
+                        IF(
+                            p.pmt_id = 11,
+                            pr.rate,
+                            pr.rate / 11.664
+                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                        )
+                    ) *(p.offer / 100)
+                ),
+                0
+            )
+        )
+    ) AS discount,IF(
+        isFixedPrice,
+        p.price,
+        (
+            IF(
+                p.pmt_id = 11,
+                pr.rate,
+                pr.rate / 11.664
+            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+            )
+        )
+    ) - IF(
+        isFixedPrice,
+        0,
+        (
+            IF(
+                p.offer > 0,
+                (
+                    (
+                        IF(
+                            p.pmt_id = 11,
+                            pr.rate,
+                            pr.rate / 11.664
+                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                        )
+                    ) *(p.offer / 100)
+                ),
+                0
+            )
+        )
+    ) AS final_price,(
         IF(
-            p.offer > 0,
+            p.pmt_id = 11,
+            pr.rate,
+            pr.rate / 11.664
+        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+        )
+    ) AS dynamic_price_b2b,(
+        IF(
+            p.offer_b2b > 0,
             (
                 (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) AS discount,(
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    IF(
+                        p.pmt_id = 11,
+                        pr.rate,
+                        pr.rate / 11.664
+                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
                     )
-                ) *(p.offer / 100)
+                ) *(p.offer_b2b / 100)
             ),
             0
         )
-    ) AS final_price,
-    (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+    ) AS discount_b2b,(
+        IF(
+            p.pmt_id = 11,
+            pr.rate,
+            pr.rate / 11.664
+        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
         )
-    ) AS actual_price_b2b,(
+    ) -(
         IF(
             p.offer_b2b > 0,
             (
                 (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer_b2b / 100)
+                    IF(
+                        p.pmt_id = 11,
+                        pr.rate,
+                        pr.rate / 11.664
+                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                    )
+                ) *(p.offer_b2b / 100)
             ),
             0
         )
-    ) AS discount_b2b,
-    (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer_b2b > 0,
-            (
-                (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer_b2b / 100)
-            ),
-            0
-        )
-    ) as final_price_b2b
+    ) AS final_price_b2b
 FROM
     package p
 JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
-	p.pm_id = pm.pm_id
+    p.pm_id = pm.pm_id
 WHERE  " . $filters;
     return $dynamicPriceSql;
 
@@ -109,79 +155,125 @@ function fetchProduct($id)
             ps.id_pack = p.id_pack
         LIMIT 1
     )
-    ) AS image,(
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+    ) AS image, IF(
+        isFixedPrice,
+        p.price,
+        (
+            IF(
+                p.pmt_id = 11,
+                pr.rate,
+                pr.rate / 11.664
+            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+            )
         )
-    ) AS actual_price,(
+    ) AS actual_price, IF(
+        isFixedPrice,
+        0,
+        (
+            IF(
+                p.offer > 0,
+                (
+                    (
+                        IF(
+                            p.pmt_id = 11,
+                            pr.rate,
+                            pr.rate / 11.664
+                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                        )
+                    ) *(p.offer / 100)
+                ),
+                0
+            )
+        )
+    ) AS discount,IF(
+        isFixedPrice,
+        p.price,
+        (
+            IF(
+                p.pmt_id = 11,
+                pr.rate,
+                pr.rate / 11.664
+            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+            )
+        )
+    ) - IF(
+        isFixedPrice,
+        0,
+        (
+            IF(
+                p.offer > 0,
+                (
+                    (
+                        IF(
+                            p.pmt_id = 11,
+                            pr.rate,
+                            pr.rate / 11.664
+                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                        )
+                    ) *(p.offer / 100)
+                ),
+                0
+            )
+        )
+    ) AS final_price,(
         IF(
-            p.offer > 0,
+            p.pmt_id = 11,
+            pr.rate,
+            pr.rate / 11.664
+        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+        )
+    ) AS dynamic_price_b2b,(
+        IF(
+            p.offer_b2b > 0,
             (
                 (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) AS discount,(
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
+                    IF(
+                        p.pmt_id = 11,
+                        pr.rate,
+                        pr.rate / 11.664
+                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
                     )
-                ) *(p.offer / 100)
+                ) *(p.offer_b2b / 100)
             ),
             0
         )
-    ) AS final_price,
-    (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
+    ) AS discount_b2b,(
+        IF(
+            p.pmt_id = 11,
+            pr.rate,
+            pr.rate / 11.664
+        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
         )
-    ) AS actual_price_b2b,(
+    ) -(
         IF(
             p.offer_b2b > 0,
             (
                 (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer_b2b / 100)
+                    IF(
+                        p.pmt_id = 11,
+                        pr.rate,
+                        pr.rate / 11.664
+                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
+                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                    )
+                ) *(p.offer_b2b / 100)
             ),
             0
         )
-    ) AS discount_b2b,
-    (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer_b2b > 0,
-            (
-                (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) *(p.offer_b2b / 100)
-            ),
-            0
-        )
-    ) as final_price_b2b
+    ) AS final_price_b2b
 FROM
     package p
 JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
-	p.pm_id = pm.pm_id
+    p.pm_id = pm.pm_id
 WHERE  
 p.id_pack ='" . $id . "';";
     return $dynamicPriceSql;

@@ -219,30 +219,12 @@ display: -webkit-box;
 					/* lopping through products in database matching the terms and displaying end */
 
 					?>
-					<div class="owl-nav" style="display:none;">
-						<div class='nav-button owl-prev'>
-							<i class='fas fa-chevron-circle-left'
-								style='position:absolute; font-size:2em; margin-top:-250px; margin-left:0.5%;'></i>
-						</div>
-						<div class='nav-button owl-next'>
-							<i class='fas fa-chevron-circle-right'
-								style='position:absolute; font-size:2em; margin-left:97%; margin-top:-250px;'></i>
-						</div>
-					</div>
 				</div>
-
-
-
 			</div>
 		<?php } else {
 			include "no-data.php";
 		} ?>
 	</div>
-
-
-
-
-
 	<div class="columns is-mobile p-0 for-men-div" style="display:none;">
 
 		<div class="column is-full">
@@ -426,19 +408,9 @@ display: -webkit-box;
    <span style="font-size:0.9rem;">-' . $rowtm['name_t'] . ',  Via Instagram</span>
    <br><br><br>
    <a href="testinomial"><button class="button" style="color:#916CFC; border:1px solid #916CFC;">Read More</button></a>
-  </div>
-		  
-		  ';
-
-
+  </div>';
 				}
-
-				/* lopping through reviews / testinomials in database displaying end */
-
-
-
 				?>
-
 			</div>
 		</div>
 	</div>
@@ -520,13 +492,7 @@ display: -webkit-box;
 					</div>
 				</div>
 			</div>
-
-
-
-
 			<br>
-
-
 			<?PHP /* ABOUT WHITEFEATHER TRIANGLE CSS START */ ?>
 			<span style="color:#3892C6;">About White Feather's Jewellery</span>
 			<div style="
@@ -539,8 +505,6 @@ border-style: solid;
 border-width: 0 10px 10px 10px;
 border-color: transparent transparent #ffffff transparent;"></div>
 			<?PHP /* ABOUT WHITEFEATHER TRIANGLE CSS END */ ?>
-
-
 		</div>
 
 	</div>
@@ -805,20 +769,3 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 </div>
 <?PHP /* LINKS FOOTER END */ ?>
-
-
-
-<!-- Start of Tawk.to Script for live chat
-<script type="text/javascript">
-
-	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-	(function () {
-		var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-		s1.async = true;
-		s1.src = 'https://embed.tawk.to/63b7e22647425128790bfb0d/1gm34mqia';
-		s1.charset = 'UTF-8';
-		s1.setAttribute('crossorigin', '*');
-		s0.parentNode.insertBefore(s1, s0);
-	})();
-</script> -->
-<!--End of Tawk.to Script-->
