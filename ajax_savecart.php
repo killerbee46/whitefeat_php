@@ -15,14 +15,10 @@ $idi=0;
 	  if($countft>0){
 		  $rowft=mysqli_fetch_array($displayft);
 		  
-		  $sqlft2 = "Select * from `whitefeat_wf_new`.`package` where id_pack='$id_pack' "; 
+		  $sqlft2 = fetchProduct($id_pack); 
       $displayft2=mysqli_query($con,$sqlft2); 
 	  $rowft2=mysqli_fetch_array($displayft2);
-		$dynamicPrice = dynamicPriceCalculator($rowft2['p_name'], 1);
-		$newprice=$dynamicPrice['originalPrice'];
-		if($rowft2['offer']>0){
-		$newprice=($newprice - $dynamicPrice['discount']);
-		}
+		$newprice=$rowft2['final_price'];
 		
 		if($GLOBALS['customer']!=0){
 	  $sqlb2b = "Select b2b from `whitefeat_wf_new`.`customer` where c_id='".$GLOBALS['customer']."'"; 
@@ -30,7 +26,7 @@ $idi=0;
 	  $rowb2b=mysqli_fetch_array($displayb2b);
 	   if($rowb2b['b2b']==1){
 		   $b2b_check=1;
-		  $newprice=$rowft2['price_b2b']; 
+		  $newprice=$rowft2['final_price_b2b']; 
 	   }
 	   
 	   }
@@ -50,14 +46,10 @@ $idi=0;
 		   mysqli_query($con,$sql);
 	       $idi = mysqli_insert_id($con);
 		  
-	  $sqlft2 = "Select * from `whitefeat_wf_new`.`package` where id_pack='$id_pack' "; 
+	  $sqlft2 = fetchProduct($id_pack); 
       $displayft2=mysqli_query($con,$sqlft2); 
 	  $rowft2=mysqli_fetch_array($displayft2); 
-			$dynamicPrice = dynamicPriceCalculator($rowft2['p_name'], 1);
-		$newprice=$dynamicPrice['originalPrice'];
-		    if($rowft2['offer']>0){
-	        $newprice=($newprice - $dynamicPrice['discount']);
-			}
+		$newprice=$rowft2['final_price'];
 			
 			if($GLOBALS['customer']!=0){
 	  $sqlb2b = "Select b2b from `whitefeat_wf_new`.`customer` where c_id='".$GLOBALS['customer']."'"; 
@@ -65,7 +57,7 @@ $idi=0;
 	  $rowb2b=mysqli_fetch_array($displayb2b);
 	   if($rowb2b['b2b']==1){
 		   $b2b_check=1;
-		  $newprice=$rowft2['price_b2b']; 
+		  $newprice=$rowft2['final_sprice_b2b']; 
 	   }
 	   
 	   }

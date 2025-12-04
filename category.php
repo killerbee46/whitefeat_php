@@ -382,13 +382,7 @@ background: rgba(116,228,250,1);">
 						$cnot = $rowcrc2['cur_name'];
 						$crate = ($rowcrc2['cur_rate']);
 
-						$dynamic_price = dynamicPriceCalculator($rowslt2['p_name'], $crate);
-
-						$original_price = $dynamic_price['originalPrice'];
-						$newprice = $original_price;
-						if ($rowslt2['offer'] > 0) {
-							$newprice = $original_price - $dynamic_price['discount'];
-						}
+						$newprice = $cnot == "Rs" ? floor($rowslt2['final_price'] / $crate) : round($rowslt2['final_price'] / $crate, 2);
 
 						//b2b check
 						$b2b_check = 0;
@@ -398,20 +392,20 @@ background: rgba(116,228,250,1);">
 							$rowb2b = mysqli_fetch_array($displayb2b);
 							if ($rowb2b['b2b'] == 1) {
 								$b2b_check = 1;
-								$newprice = $rowslt2['price_b2b'];
+								$newprice = $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
 							}
-
 						}
 
-						echo $cnot . ' ' . floor(($newprice));
+						echo "<small><small>" . $cnot . "</small></small>" . ' ' . ($newprice);
 
 						echo '&nbsp;';
 						if ($b2b_check == 1) {
 							echo '<span class="has-text-weight-normal is-size-6" style="opacity:0.6;"><small><small>B2B rate</small></small></span>';
 						}
 						if ($rowslt2['offer'] > 0 && $b2b_check == 0) {
+							$discount = $cnot == "Rs" ? floor($rowslt2['actual_price'] / $crate) : round($rowslt2['actual_price'] / $crate, 2);
 							echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-							echo $cnot . round(($original_price), 2);
+							echo $cnot ." ". $discount;
 							echo '</small></small></del>';
 						}
 						echo '</h3>
