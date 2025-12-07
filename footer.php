@@ -173,7 +173,7 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 						} else {
 							echo "no-image.png";
 						}
-						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
+						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
 
 
 						/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
@@ -243,7 +243,7 @@ display: -webkit-box;
 					} else {
 						echo "no-image.png";
 					}
-					echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
+					echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
 
 
 					/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */

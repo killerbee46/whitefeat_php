@@ -337,8 +337,7 @@ background: rgba(116,228,250,1);">
 						} else {
 							echo "no-image.png";
 						}
-						echo ' " 
-	  alt="product image" class="card-img-top" style="height:100%;aspect: ratio 1px / 1px;"/></a>
+						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>
   </div>
   <div class="card-content has-background-light" style="height:100%;">
     <div class="media mb-0">

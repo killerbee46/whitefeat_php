@@ -20,10 +20,8 @@
     <meta http-equiv="Cache-control" content="public">
     <meta charset="utf-8">
     <title><?= $rowhead['p_name'] ?> | White Feathers Jewellery</title>
-		<meta name="description"
-			content="<?= $rowhead['description'] ?>">
-		<meta name="keywords"
-			content="<?= $rowhead['keyword'] ?>">
+    <meta name="description" content="<?= $rowhead['description'] ?>">
+    <meta name="keywords" content="<?= $rowhead['keyword'] ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -174,24 +172,28 @@
 
         <div class="column is-5" style="border-right:1px solid #eee; ">
           <div class="preview-wrap">
-              <?php 
-              $sqlpd = fetchProduct($productname);
-              $displaypd = mysqli_query($con, $sqlpd);
-              $rowpd = mysqli_fetch_array($displaypd);
-              $image = "no-image.png";
-              if (isset($rowpd['image'])) {
-                $image = $rowpd['image'];
-              } 
-              ?>
-            <div class="thumb" id="thumb" style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');background-size:cover;">
+            <?php
+            $sqlpd = fetchProduct($productname);
+            $displaypd = mysqli_query($con, $sqlpd);
+            $rowpd = mysqli_fetch_array($displaypd);
+            $image = "no-image.png";
+            if (isset($rowpd['image'])) {
+              $image = $rowpd['image'];
+            }
+            ?>
+            <div class="thumb" id="thumb"
+              style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');background-size:cover;">
               <div class="product-image-info">
                 Hover for Zoom Preview
               </div>
-              <img id="thumbImg" onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';" 
-              src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>" alt="no image">
+              <img id="thumbImg"
+                onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';"
+                src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>"
+                alt="no image">
             </div>
 
-            <div class="zoom-preview" id="zoomPreview" style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');">
+            <div class="zoom-preview" id="zoomPreview"
+              style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');">
             </div>
           </div>
         </div>
@@ -258,7 +260,7 @@
 
                       <?php
 
-                      $sqlpw = fetchProducts(isset($rowpd['cat_id']) ? " cat_id =  ".$rowpd['cat_id'] : " true " ." limit 10");
+                      $sqlpw = fetchProducts(isset($rowpd['cat_id']) ? " cat_id =  " . $rowpd['cat_id'] : " true " . " limit 10");
                       $displaypw = mysqli_query($con, $sqlpw);
                       while ($rowpw = mysqli_fetch_array($displaypw)) {
 
@@ -271,7 +273,7 @@
                         } else {
                           echo "no-image.png";
                         }
-                        echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; height:100%; object-fit:cover;object-position:center; " class="image"/>';
+                        echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
 
 
                         /* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
@@ -306,9 +308,9 @@
                         $rowcrc2 = mysqli_fetch_array($displaycrc2);
                         $cnot = $rowcrc2['cur_name'];
                         $crate = ($rowcrc2['cur_rate']);
-                        $actual_price = $rowpd['actual_price']/$crate;
-                        $final_price = $rowpd['final_price']/$crate;
-                        $discount = $rowpd['discount']/$crate;
+                        $actual_price = $rowpd['actual_price'] / $crate;
+                        $final_price = $rowpd['final_price'] / $crate;
+                        $discount = $rowpd['discount'] / $crate;
                         /* customer & its attribute checking end (new/logged-in,currency) */
 
                         /* Checking for discount on product start */
@@ -316,7 +318,7 @@
                         <span class="p-2"><Strong class="letter-spacing price-off ">';
 
                         echo $cnot . " " . round(($final_price), 2);
-                        
+
                         echo '</strong>';
                         if ($rowpw['offer'] > 0) {
                           echo '<small><small><strike class="price-off">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
@@ -338,23 +340,6 @@ display: -webkit-box;
 
 
                       ?>
-
-
-
-
-
-
-
-                      <div class="owl-nav" style="display:none;">
-                        <div class='nav-button owl-prev'>
-                          <i class='fas fa-chevron-circle-left'
-                            style='position:absolute; font-size:2em; margin-top:-250px; margin-left:0.5%;'></i>
-                        </div>
-                        <div class='nav-button owl-next'>
-                          <i class='fas fa-chevron-circle-right'
-                            style='position:absolute; font-size:2em; margin-left:97%; margin-top:-250px;'></i>
-                        </div>
-                      </div>
                     </div>
                   </section>
 
@@ -390,11 +375,8 @@ display: -webkit-box;
               $sqlpsm = "Select * from `whitefeat_wf_new`.`package_sizes_measure` where ps_id='" . $rowpd['ps_id'] . "'";
               $displaypsm = mysqli_query($con, $sqlpsm);
               while ($rowpsm = mysqli_fetch_array($displaypsm)) {
-
                 echo '<option value="' . $rowpsm['psm_id'] . '">' . $rowpsm['psm_info'] . '</option>';
               }
-
-
               echo '</select>
   </div>
   <span class="icon is-left">
@@ -407,35 +389,17 @@ display: -webkit-box;
 
                 echo 'ring size?</small></small></a> ';
               }
-
-
               if ($rowpd['ps_id'] == '5') {
                 echo '<a href="post/banglesize"><small style="float:left;"><small class="has-text-info style="font-size:0.5em;">';
                 echo "Don't know the ";
 
                 echo 'bangle size?</small></small></a> ';
               }
-
-
-
-
               echo '</div></div>
 			';
-
             }
-
-
-
-
             ?>
-
-
-
-
-
             <?php
-
-
             if ($rowpd['pmt_id'] != '0') {
               $sqlpsm = "Select * from `whitefeat_wf_new`.`package_metal` where pmt_id='" . $rowpd['pmt_id'] . "'";
               $displaypsm = mysqli_query($con, $sqlpsm);
@@ -458,17 +422,7 @@ display: -webkit-box;
 
             }
             ?>
-
-
-
-
-
           </div>
-
-
-
-
-
           <div class="columns pl-3">
 
 
@@ -506,18 +460,8 @@ display: -webkit-box;
 	<small>&nbsp; Silver <small style="font-size:0.7em;">(certified)</small> 
 	</small></h6>
 				 ';
-
               }
-
-
-
-
               ?>
-
-
-
-
-
             </div>
 
           </div>
@@ -595,9 +539,9 @@ display: -webkit-box;
               $rowcrc2 = mysqli_fetch_array($displaycrc2);
               $cnot = $rowcrc2['cur_name'];
               $crate = ($rowcrc2['cur_rate']);
-              $actual_price = $rowpd['actual_price']/$crate;
-              $final_price = $rowpd['final_price']/$crate;
-              $discount = $rowpd['discount']/$crate;
+              $actual_price = $rowpd['actual_price'] / $crate;
+              $final_price = $rowpd['final_price'] / $crate;
+              $discount = $rowpd['discount'] / $crate;
 
               //b2b check
               $b2b_check = 0;
@@ -607,7 +551,7 @@ display: -webkit-box;
                 $rowb2b = mysqli_fetch_array($displayb2b);
                 if ($rowb2b['b2b'] == 1) {
                   $b2b_check = 1;
-                  $newprice =  $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
+                  $newprice = $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
                 }
 
               }
@@ -647,8 +591,8 @@ display: -webkit-box;
             </div>
 
 
-            
-            
+
+
           </div>
           <div class="" style="margin-top:-1.2em; letter-spacing:1.5px;">
             <button style="width:50%;" class="button is-success is-normal add_cart"
@@ -797,10 +741,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                           </div>
 
                         </section>
-                        <!--
-    <footer class="modal-card-foot">
-      <button class="button is-danger is-light modal-close-button">Cancel</button>
-    </footer>-->
                       </div>
                     </div>
 
@@ -810,14 +750,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
               </span>
 
             </div>
-
-
-
-
-
-
-
-
             <div class="">
               <span class="box is-rounded" style="background:rgba(62,142,208,0.2);">
                 <div class="field">
@@ -915,15 +847,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                               <button class="button is-info send_home_appoint_product"
                                 data-ref="<?php echo $rowpd['id_pack']; ?>">Submit Form</button>
                             </div>
-                            <!--
-  <div class="control">
-    <button class="button is-link is-light">Cancel</button>
-  </div>-->
                           </div>
-
-
-
-
                         </section>
                       </div>
                     </div>
@@ -934,39 +858,9 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
               </span>
 
             </div>
-
-
-
-
-
           </div>
-
-
-
         </div>
-
-
-
-
       </div>
-
-
-      <!--
-<div class="columns mt-2" style="background-color:#F9F9FA; height:15em;">
-
-  
-  <div class="column is-6 is-centered has-background-info ">
-  <figure class="image has-text-centered is-centered">
-  <img class="is-rounded is-centered" src="assets/images/product/slider/1.jpg" style="width:200px;">
-</figure>
-  </div>
-
-
-</div>
--->
-
-
-
     </div>
 
 

@@ -1179,11 +1179,11 @@ $menus = [
                 'title' => 'Shop By Style',
                 'data' => [
                     ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-ring.png', 'path' => 'search.php?term=diamond%20ring'],
-                    ['title' => 'Eartop', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=diamond%20eartop'],
+                    ['title' => 'Eartop', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=diamond%20ear%20top'],
                     ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-Juli.png', 'path' => 'search.php?term=diamond%20juli'],
                     ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-Necklace.png', 'path' => 'search.php?term=diamond%20necklace'],
                     ['title' => 'Locket / Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'search.php?term=diamond%20pendant'],
-                    ['title' => 'Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=diamond%20nosepin'],
+                    ['title' => 'Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=diamond%20nose%20pin'],
                     ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bracelet.png', 'path' => 'search.php?term=diamond%20bracelet'],
                     ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bangles.png', 'path' => 'search.php?term=diamond%20bangles'],
                     ['title' => 'Mangalsutra', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-mangalsutra.png', 'path' => 'search.php?term=diamond%20mangalsutra'],
@@ -1230,11 +1230,11 @@ $menus = [
                     ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Juli.png', 'path' => 'search.php?term=gold%20juli'],
                     ['title' => 'Anklet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-anklet.png', 'path' => 'search.php?term=gold%20anklet'],
                     ['title' => 'Chandrama', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-chandrama.png', 'path' => 'search.php?term=gold%20chandrama'],
-                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'products/gold-chain'],
+                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'search.php?term=gold%chain'],
                     ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bracelet.png', 'path' => 'search.php?term=gold%20bracelet'],
                     ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20locket.png', 'path' => 'search.php?term=gold%20locket'],
                     ['title' => 'Mundra', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20mundra.png', 'path' => 'search.php?term=gold%20mundra'],
-                    ['title' => 'Top', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20top.png', 'path' => 'search.php?term=gold%20top'],
+                    ['title' => 'Top', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20top.png', 'path' => 'search.php?term=gold%20ear%20top'],
                     ['title' => 'Brooch', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20brooch.png', 'path' => 'search.php?term=gold%20brooch'],
                 ]
             ],
@@ -1267,7 +1267,7 @@ $menus = [
                 'title' => 'Shop By Style',
                 'data' => [
                     ['title' => 'Ranihaar', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ranihaar.png', 'path' => 'search.php?term=silver%20ranihaar'],
-                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20necklace.png', 'path' => 'search.php?term=silver%20necklace'],
+                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20necklace.png', 'path' => 'search.php?term=silver%necklace'],
                     ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20eartop.png', 'path' => 'search.php?term=silver%20eartop'],
                     ['title' => 'Jhumka / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20jhumka.png', 'path' => 'search.php?term=silver%20earrings'],
                     ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ring.png', 'path' => 'search.php?term=silver%20ring'],
@@ -1382,7 +1382,7 @@ $menus = [
                 'title' => 'Shop By Style',
                 'data' => [
                     ['title' => 'Utensils', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Utensils.png', 'path' => 'products/utensils-'],
-                    ['title' => 'Diamond Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'products/diamond-nosepin-'],
+                    ['title' => 'Diamond Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=diamond%20nose%20pin'],
                     ['title' => 'Diamond Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'products/diamond-pendent'],
                     ['title' => 'Silver Murti', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20murti.png', 'path' => 'products/silver-murti'],
                     ['title' => 'Gold Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'products/gold-chain']
