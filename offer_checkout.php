@@ -38,7 +38,7 @@
     <?php include('header.php'); 
     if ($offerExpired) {
   echo '<script>
-  alert("Offer Has Expired !");
+  alert("Action Not Allowed !");
   window.location.href = "/"
   </script>';
 }

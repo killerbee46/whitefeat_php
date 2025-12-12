@@ -3,7 +3,12 @@ include 'header-assets.php';
 $offSql = "Select count(*) as total,cno from cart_book where checkout = '1' and email = 'offer-nosepin' ";
 		$displayOff = mysqli_query($con, $offSql);
 		$offerGrabbed = mysqli_num_rows($displayOff);
-		$offerExpired = $offerGrabbed >= 12 ? true : false;
+        $origin = new DateTime("now", new DateTimeZone('Asia/Kathmandu')); 
+        $target = new DateTime('2004-02-12T11:11:00',new DateTimeZone('Asia/Kathmandu'));
+        $interval = $origin->diff($target);
+		$offerExpired = $offerGrabbed >= 12 || $interval < 0 ? true : false;
+
+
 while ($rowsOffer = mysqli_fetch_array($displayOff)) {
     if($GLOBALS['customer']!=0){
         $sqlud = "Select phone from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";

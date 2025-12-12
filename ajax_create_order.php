@@ -4,7 +4,10 @@ include 'ajax_cookie.php';
 include 'header.php';
 
 if ($offerExpired) {
-  echo '<script>window.location.href = "/"</script>';
+  echo '<script>
+  alert("Action Not Allowed");
+  window.location.href = "/"
+  </script>';
 }
 $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
 $tdate = date('y-m-d');
