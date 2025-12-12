@@ -55,6 +55,10 @@
             font-optical-sizing: auto;
         }
 
+        body{
+            overflow: hidden;
+        }
+
         #loader {
         position: fixed;
         top: 0;
