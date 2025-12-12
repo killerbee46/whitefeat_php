@@ -4,7 +4,7 @@ $offSql = "Select count(*) as total,cno from cart_book where checkout = '1' and 
 		$displayOff = mysqli_query($con, $offSql);
 		$offerGrabbed = mysqli_num_rows($displayOff);
         $origin = new DateTime("now", new DateTimeZone('Asia/Kathmandu')); 
-        $target = new DateTime('2004-02-12T11:11:00',new DateTimeZone('Asia/Kathmandu'));
+        $target = new DateTime('2025-12-12T11:11:00',new DateTimeZone('Asia/Kathmandu'));
         $interval = $origin->diff($target);
 		$offerExpired = $offerGrabbed >= 12 || $interval < 0 ? true : false;
 
