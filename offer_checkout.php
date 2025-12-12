@@ -326,8 +326,8 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 $displayckp = mysqli_query($con, $sqlckp);
                 $rowckp = mysqli_fetch_array($displayckp);
 
-                $originalPrice = 5000;
-                $discount = 4988;
+                $originalPrice = 999;
+                $discount = 987;
                 echo '
 		<div class="columns has-background-white mt-3 each_item mr-3">
 	    <div class="column each_item is-2">

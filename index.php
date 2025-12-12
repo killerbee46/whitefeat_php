@@ -217,9 +217,9 @@ echo $offerExpired ? 'disabled " title="Action Not Allowed" ' : ' "';
 						echo '<br>';
 
 
-						$actual_price = 5000 / $crate;
+						$actual_price = 999 / $crate;
 						$final_price = 12 / $crate;
-						$discount = 4988 / $crate;
+						$discount = 987 / $crate;
 						/* customer & its attribute checking end (new/logged-in,currency) */
 
 						/* Checking for discount on product start */
