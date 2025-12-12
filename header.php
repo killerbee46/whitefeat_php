@@ -6,7 +6,7 @@ $offSql = "Select count(*) as total,cno from cart_book where checkout = '1' and 
         $origin = new DateTime("now", new DateTimeZone('Asia/Kathmandu')); 
         $target = new DateTime('2025-12-12T11:11:00',new DateTimeZone('Asia/Kathmandu'));
         $interval = $origin->diff($target);
-		$offerExpired = $offerGrabbed >= 12 || $interval < 0 ? true : false;
+		$offerExpired = $offerGrabbed >= 12 || $interval->format("%R%S") < 0 ? true : false;
 
 
 while ($rowsOffer = mysqli_fetch_array($displayOff)) {
