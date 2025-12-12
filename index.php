@@ -184,15 +184,16 @@
 				$crate = ($rowcrc2['cur_rate']);
 				?>
 			</div>
-			<div style="display:flex;justify-content:center;"> 
+			<div style="display:flex;justify-content:center;">
+<?= $interval->format("%R%S") ?>
 				<div style="width:300px;margin:20px auto;cursor:<?= $offerExpired ? "not-allowed":'default' ?>" title="<?= $offerExpired ? "Action Not Allowed":'' ?>">
 					<?php
 					while ($rowfixed = mysqli_fetch_array($displayOffer)) {
 
 						echo '
 		      <div style="position:relative;overflow:hidden;">
-  <a class="';
-echo $offerExpired ? 'disabled " title="Action Not Allowed" ' : ' "';
+  <a class="disabled"';
+// echo $offerExpired ? 'disabled " title="Action Not Allowed" ' : ' "';
   echo ' href="' . "offer-checkout?id=".$rowfixed['id_pack']. '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						if (isset($rowfixed['image'])) {
