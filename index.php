@@ -193,7 +193,8 @@
 		      <div style="position:relative;overflow:hidden;">
   <a class="disabled"';
 // echo $offerExpired ? 'disabled " title="Action Not Allowed" ' : ' "';
-  echo ' href="' . "offer-checkout?id=".$rowfixed['id_pack']. '">
+//   echo ' href="' . "offer-checkout?id=".$rowfixed['id_pack']. '"
+  echo ' href="#" >
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						if (isset($rowfixed['image'])) {
 							echo $rowfixed['image'];
