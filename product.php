@@ -320,7 +320,7 @@
                         echo $cnot . " " . round(($final_price), 2);
 
                         echo '</strong>';
-                        if ($rowpw['offer'] > 0) {
+                        if ($rowpw['diccount'] > 0) {
                           echo '<small><small><strike class="price-off">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
                         }
 
@@ -431,7 +431,12 @@ display: -webkit-box;
 
               <?php
 
-              if ($rowpd['pm_id'] == 1) {
+              if ($rowpd['dc_qty'] > 0) { ?>
+                <div style="background:crimson;color:white;padding:10px 20px;font-size:16px;font-weight:600;display:flex;flex-direction:column;text-align:center;display:<?= $rowpd['dc_qty']>0 ? "block" : "none" ?>">
+	<div style="margin:0;">50% OFF</div>
+	<span style="font-size: 14px;margin:0">On Diamond</span>
+</div>
+                <?php 
                 echo '
 				 <h6 class="mb-1">
 	<small>&nbsp;Diamond  <small style="font-size:0.7em;">(certified)</small> 
@@ -565,7 +570,7 @@ display: -webkit-box;
               if ($b2b_check == 1) {
                 echo '<span class="has-text-weight-normal is-size-6" style="opacity:0.6;"><small><small>B2B rate</small></small></span>';
               }
-              if ($rowpd['offer'] > 0 && $b2b_check == 0) {
+              if ($rowpd['discount'] > 0 && $b2b_check == 0) {
                 echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
                 echo $cnot . " " . round(($actual_price), 2);
                 echo '</small></small></del>';

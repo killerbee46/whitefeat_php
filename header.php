@@ -1,5 +1,20 @@
 <?php 
 include 'header-assets.php';
+$offSql = "Select count(*) as total,cno from cart_book where checkout = '1' and email = 'offer-nosepin' ";
+		$displayOff = mysqli_query($con, $offSql);
+		$offerGrabbed = mysqli_num_rows($displayOff);
+		$offerExpired = $offerGrabbed >= 12 ? true : false;
+while ($rowsOffer = mysqli_fetch_array($displayOff)) {
+    if($GLOBALS['customer']!=0){
+        $sqlud = "Select phone from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
+                  $displayud = mysqli_query($con, $sqlud);
+                  $rowud = mysqli_fetch_array($displayud);
+                  if ($rowud['phone']==$rowsOffer['cno']) {
+                    $offerExpired = true;
+                  }
+    }
+}
+
 
 ?>
     <?PHP /*-- anchor link use for autosearch trigger start --*/?>

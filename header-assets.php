@@ -1165,6 +1165,12 @@
                 width: 100%;
             }
         }
+        a.disabled{
+            pointer-events:none;
+        }
+        button.disabled{
+            pointer-events:none;
+        }
     </style>
 
 </head>

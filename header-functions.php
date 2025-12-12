@@ -23,13 +23,13 @@ function fetchProducts($filters)
                 p.pmt_id = 11,
                 pr.rate,
                 pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                 p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
             )
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        0,
+        p.offer * p.price / 100,
         (
             IF(
                 p.offer > 0,
@@ -39,13 +39,13 @@ function fetchProducts($filters)
                             p.pmt_id = 11,
                             pr.rate,
                             pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                             p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
                         )
                     ) *(p.offer / 100)
-                ),
+                ) ,
                 0
-            )
+            )+(p.dc_rate * p.dc_qty * 0.85)
         )
     ) AS discount,IF(
         isFixedPrice,
@@ -55,13 +55,13 @@ function fetchProducts($filters)
                 p.pmt_id = 11,
                 pr.rate,
                 pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                 p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
             )
         )
     ) - IF(
         isFixedPrice,
-        0,
+        p.offer * p.price / 100,
         (
             IF(
                 p.offer > 0,
@@ -71,13 +71,13 @@ function fetchProducts($filters)
                             p.pmt_id = 11,
                             pr.rate,
                             pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                             p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
                         )
                     ) *(p.offer / 100)
-                ),
+                ) ,
                 0
-            )
+            )+(p.dc_rate * p.dc_qty * 0.85)
         )
     ) AS final_price,(
         IF(
@@ -163,13 +163,13 @@ function fetchProduct($id)
                 p.pmt_id = 11,
                 pr.rate,
                 pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                 p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
             )
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        0,
+        p.offer * p.price / 100,
         (
             IF(
                 p.offer > 0,
@@ -179,13 +179,13 @@ function fetchProduct($id)
                             p.pmt_id = 11,
                             pr.rate,
                             pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                             p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
                         )
                     ) *(p.offer / 100)
-                ),
+                ) ,
                 0
-            )
+            )+(p.dc_rate * p.dc_qty * 0.85)
         )
     ) AS discount,IF(
         isFixedPrice,
@@ -195,13 +195,13 @@ function fetchProduct($id)
                 p.pmt_id = 11,
                 pr.rate,
                 pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty) +(
+            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                 p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
             )
         )
     ) - IF(
         isFixedPrice,
-        0,
+        p.offer * p.price / 100,
         (
             IF(
                 p.offer > 0,
@@ -211,13 +211,13 @@ function fetchProduct($id)
                             p.pmt_id = 11,
                             pr.rate,
                             pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty) +(
+                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
                             p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
                         )
                     ) *(p.offer / 100)
-                ),
+                ) ,
                 0
-            )
+            )+(p.dc_rate * p.dc_qty * 0.85)
         )
     ) AS final_price,(
         IF(

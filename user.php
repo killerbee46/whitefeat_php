@@ -304,13 +304,13 @@ Share your amazing experience&nbsp; <img src="assets/images/extra/happy.png" sty
 	  $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='".$rowup['cur_id']."'"; 
       $displaycrc2=mysqli_query($con,$sqlcrc2);
 	  $rowcrc2=mysqli_fetch_array($displaycrc2);
-      $cnot=$rowcrc2['cur_name']; $crate=(1/$rowcrc2['cur_rate']);
+      $cnot=$rowcrc2['cur_name']??"Npr"; $crate=(1/($rowcrc2['cur_rate']??1));
 	  
-	  $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='".$rowup['cb_id']."'"; 
+	  $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where phone='".$rowup['cb_id']."'"; 
       $displayckp=mysqli_query($con,$sqlckp);
 	  while($rowckp=mysqli_fetch_array($displayckp))
 	  {
-	  $total_net=$total_net+($rowckp['rate']*$rowckp['qty']);  
+	  $total_net=$total_net+(($rowckp['rate']??112)*($rowckp['qty']??1));  
 	  }
 	  
 	  echo `<div><strong>`.$cnot.' '.floor(($crate*$total_net)).`</strong></div>`;

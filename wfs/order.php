@@ -148,37 +148,10 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 						<a href="main.php" class="nav-link open_main"><strong><i class="fas fa-home"></i>
 								DASHBOARD</strong></a>
 					</li>
-					<!--
-	  <li class="nav-item d-none d-sm-inline-block">
-		<a href="#" class="nav-link open_walk">Account</a>
-	  </li>-->
-
 				</ul>
 
 				<!-- Right navbar links -->
 				<ul class="navbar-nav ml-auto">
-
-
-					<!-- Notifications Dropdown Menu -->
-					<!--
-		<li class="nav-item">
-		<a class="nav-link" href="#" role="button">
-		 <button class="btn btn-xs btn-outline-info">KOT <i class="fas fa-print"></i></button> 
-		</a>
-	  </li>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 					<li class="nav-item">
 						<a class="nav-link btn btn-light" href="../" target="_blank" role="button" id="">

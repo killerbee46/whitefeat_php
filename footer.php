@@ -52,7 +52,7 @@ $crate = ($rowcrc2['cur_rate']);
 					while ($rowfixed = mysqli_fetch_array($displayfixed)) {
 
 						echo '
-		      <div style="position:relative;">
+		      <div style="position:relative;overflow:hidden;">
   <a href="' . make_url($rowfixed['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						if (isset($rowfixed['image'])) {
@@ -165,7 +165,13 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 					while ($rowpw = mysqli_fetch_array($displaypw)) {
 
 						echo '
-		      <div style="position:relative;">
+		      <div style="position:relative;overflow:hidden;">'; ?>
+<div style="position: absolute;top: 10px;z-index:100;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowpw['dc_qty']>0 ? "block" : "none" ?>">
+	<div style="margin:0;">50% OFF</div>
+	<span style="font-size: 10px;margin:0">On Diamond</span>
+</div>
+  <?php
+  echo'
   <a href="' . make_url($rowpw['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						if (isset($rowpw['image'])) {
@@ -200,7 +206,7 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 						echo $cnot . " " . round(($final_price), 2);
 
 						echo '</strong>';
-						if ($rowpw['offer'] > 0) {
+						if ($rowpw['discount'] > 0) {
 							echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
 						}
 
@@ -235,7 +241,13 @@ display: -webkit-box;
 				$displaypw = mysqli_query($con, $sqlpw);
 				while ($rowpw = mysqli_fetch_array($displaypw)) {
 					echo '
-		      <div style="position:relative;">
+		      <div style="position:relative;overflow:hidden;">'; ?>
+<div style="position: absolute;top: 10px;z-index:100;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowpw['dc_qty']>0 ? "block" : "none" ?>">
+	<div style="margin:0;">50% OFF</div>
+	<span style="font-size: 10px;margin:0">On Diamond</span>
+</div>
+  <?php
+  echo'
   <a href="' . make_url($rowpw['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 					if (isset($rowpw['image'])) {
@@ -274,7 +286,7 @@ display: -webkit-box;
 					echo $cnot . " " . round(($final_price), 2);
 
 					echo '</strong>';
-					if ($rowpw['offer'] > 0) {
+					if ($rowpw['discount'] > 0) {
 						echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
 					}
 
