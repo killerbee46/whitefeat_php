@@ -185,7 +185,6 @@
 				?>
 			</div>
 			<div style="display:flex;justify-content:center;">
-<?= $interval->format("%R%S") ?>
 				<div style="width:300px;margin:20px auto;cursor:<?= $offerExpired ? "not-allowed":'default' ?>" title="<?= $offerExpired ? "Action Not Allowed":'' ?>">
 					<?php
 					while ($rowfixed = mysqli_fetch_array($displayOffer)) {
