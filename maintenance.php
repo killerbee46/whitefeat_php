@@ -1,3 +1,4 @@
+<?php $image = 'https://static.vecteezy.com/system/resources/thumbnails/016/462/237/small/website-under-construction-illustration-concept-on-white-background-vector.jpg' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +79,7 @@
 
         @media screen and (max-width: 768px) {
             .bg-image {
-                background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('assets/images/underM.jpg');
+                background: linear-gradient(to left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(<?= $image ?>);
                 background-size: cover;
                 object-fit: cover;
                 background-repeat: no-repeat;
@@ -143,7 +144,7 @@
                 </div>
             </div>
             <div class="col image">
-                <img src="assets/images/underM.jpg" width="100%" style="aspect-ratio:7/4" />
+                <img src="<?= $image ?>" width="100%" style="aspect-ratio:7/4" />
             </div>
         </div>
     </div>
