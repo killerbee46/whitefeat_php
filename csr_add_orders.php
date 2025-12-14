@@ -8,6 +8,12 @@ if ($GLOBALS['customer'] == 0) {
     header('location:index.php');
 }
 
+if (isset($_GET['id'])) {
+    $sqlPD = fetchProduct(($_GET['id']));
+    $displayPD = mysqli_query($con, $sqlPD);
+    $rowPD = mysqli_fetch_array($displayPD);
+}
+
 $sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 $displayus = mysqli_query($con, $sqlus);
 $rowus = mysqli_fetch_array($displayus);
@@ -97,15 +103,46 @@ $apporder = false;
         .orders-table {
             width: 100%;
         }
-        .row{
+
+        .row {
             display: flex;
-            gap:30px;
+            gap: 30px;
             flex-wrap: wrap;
         }
-        .col{
+
+        .col {
             width: 40%;
             display: flex;
             flex-direction: column;
+        }
+
+        .tag-box {
+            border: 1px solid #ccc;
+            padding: 8px;
+            min-height: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            background: #e5e7eb;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        select {
+            width: 250px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -118,7 +155,7 @@ $apporder = false;
             <form>
                 <div class="row">
                     <div class="col">
-                        <label>User Name</label>
+                        <label>Name</label>
                         <input name="user" />
                     </div>
                     <div class="col">
@@ -130,8 +167,52 @@ $apporder = false;
                         <input name="address" />
                     </div>
                     <div class="col">
-                        <label>Products</label>
-                        <input name="products" />
+
+                        <label>Select Products:</label>
+                        <div id="tagBox" class="tag-box"></div>
+
+                        <select id="productSelect">
+                            <option value="">-- Choose a product --</option>
+                            <option value="p1">Diamond Ring</option>
+                            <option value="p2">Gold Necklace</option>
+                            <option value="p3">Silver Bracelet</option>
+                            <option value="p4">Platinum Earrings</option>
+                        </select>
+
+                        <input type="hidden" id="selectedProducts" name="products">
+
+                        <script>
+                            const select = document.getElementById('productSelect');
+                            const tagBox = document.getElementById('tagBox');
+                            const hiddenInput = document.getElementById('selectedProducts');
+
+                            let selectedValues = [];
+
+                            select.addEventListener('change', () => {
+                                const value = select.value;
+                                const label = select.options[select.selectedIndex].text;
+
+                                if (!value || selectedValues.includes(value)) return;
+
+                                selectedValues.push(value);
+                                hiddenInput.value = JSON.stringify(selectedValues);
+
+                                const tag = document.createElement('div');
+                                tag.classList.add('tag');
+                                tag.innerHTML = `${label} <button data-value="${value}">✕</button>`;
+                                tagBox.appendChild(tag);
+
+                                tag.querySelector("button").onclick = (e) => {
+                                    const v = e.target.dataset.value;
+                                    selectedValues = selectedValues.filter(item => item !== v);
+                                    hiddenInput.value = JSON.stringify(selectedValues);
+                                    tag.remove();
+                                };
+
+                                select.value = "";
+                            });
+                        </script>
+
                     </div>
                     <div class="col">
                         <label>Price</label>

@@ -17,7 +17,7 @@ function fetchProducts($filters)
     )
     ) AS image, IF(
         isFixedPrice,
-        p.price,
+        p.fixed_price,
         (
             IF(
                 p.pmt_id = 11,
@@ -29,7 +29,7 @@ function fetchProducts($filters)
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        p.offer * p.price / 100,
+        p.offer * p.fixed_price / 100,
         (
             IF(
                 p.offer > 0,
@@ -49,7 +49,7 @@ function fetchProducts($filters)
         )
     ) AS discount,IF(
         isFixedPrice,
-        p.price,
+        p.fixed_price,
         (
             IF(
                 p.pmt_id = 11,
@@ -157,7 +157,7 @@ function fetchProduct($id)
     )
     ) AS image, IF(
         isFixedPrice,
-        p.price,
+        p.fixed_price,
         (
             IF(
                 p.pmt_id = 11,
@@ -169,7 +169,7 @@ function fetchProduct($id)
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        p.offer * p.price / 100,
+        p.offer * p.fixed_price / 100,
         (
             IF(
                 p.offer > 0,
@@ -189,7 +189,7 @@ function fetchProduct($id)
         )
     ) AS discount,IF(
         isFixedPrice,
-        p.price,
+        p.fixed_price,
         (
             IF(
                 p.pmt_id = 11,

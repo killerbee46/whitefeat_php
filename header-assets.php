@@ -109,6 +109,18 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .button.no-hover:hover{
+            
+        }
+
+        .button {
+            padding: 5px 10px;
+            background: white;
+            border: 1px solid black;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
 
         .rounded {
             border-radius: 8px;
