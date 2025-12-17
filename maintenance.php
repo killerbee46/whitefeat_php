@@ -108,7 +108,7 @@
     <div class="card">
         <div class="row" style="margin-bottom:30px;">
             <div class="col">
-                <img src="assets/images/wflogo.png" width="200px" />
+                <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/wflogo.png" width="200px" />
             </div>
         </div>
         <div class="row">
