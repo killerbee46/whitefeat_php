@@ -30,11 +30,11 @@ function fetchProducts($filters)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
@@ -49,29 +49,28 @@ function fetchProducts($filters)
         isFixedPrice,
         p.fixed_price,
         IF(
-            p.pmt_id <> 0,
-            IF(
-                p.pmt_id < 10,
-                (
-                    pr.purity / 100 * gold.price / 11.664 * p.weight
-                ) +(
-                    p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
-                ),
+                p.pmt_id <> 0,
                 IF(
-                    p.pmt_id = 11,
-                    (pr.purity / 100 * silver.price) +(
-                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
-                    ),
+                    p.pmt_id < 10,
                     (
-                        pr.purity / 100 * silver.price / 11.664
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
-                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
+                    IF(
+                        p.pmt_id = 11,
+                        (pr.purity / 100 * silver.price * p.weight) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                )
-            ),
-            0
-        )
-    ) *(p.offer / 100) +(
+                ),
+                0
+            ))  *(p.offer / 100) +(
         dia.discount / 100 *(
             dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
         )
@@ -90,11 +89,11 @@ function fetchProducts($filters)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
@@ -105,11 +104,11 @@ function fetchProducts($filters)
                 dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
             )
         )
-    ) -(
+    ) - (
         IF(
-            isFixedPrice,
-            p.fixed_price,
-            IF(
+        isFixedPrice,
+        p.fixed_price,
+        IF(
                 p.pmt_id <> 0,
                 IF(
                     p.pmt_id < 10,
@@ -120,23 +119,22 @@ function fetchProducts($filters)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
                     )
                 ),
                 0
-            )
-        ) *(p.offer / 100) +(
-            dia.discount / 100 *(
-                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
-            )
+            ))  *(p.offer / 100) +(
+        dia.discount / 100 *(
+            dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
         )
+    )
     ) AS final_price, IF(
         isFixedPrice,
         p.fixed_price,
@@ -284,11 +282,11 @@ function fetchProduct($id)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
@@ -303,29 +301,28 @@ function fetchProduct($id)
         isFixedPrice,
         p.fixed_price,
         IF(
-            p.pmt_id <> 0,
-            IF(
-                p.pmt_id < 10,
-                (
-                    pr.purity / 100 * gold.price / 11.664 * p.weight
-                ) +(
-                    p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
-                ),
+                p.pmt_id <> 0,
                 IF(
-                    p.pmt_id = 11,
-                    (pr.purity / 100 * silver.price) +(
-                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
-                    ),
+                    p.pmt_id < 10,
                     (
-                        pr.purity / 100 * silver.price / 11.664
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
-                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
+                    IF(
+                        p.pmt_id = 11,
+                        (pr.purity / 100 * silver.price * p.weight) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                )
-            ),
-            0
-        )
-    ) *(p.offer / 100) +(
+                ),
+                0
+            ))  *(p.offer / 100) +(
         dia.discount / 100 *(
             dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
         )
@@ -344,11 +341,11 @@ function fetchProduct($id)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
@@ -359,11 +356,11 @@ function fetchProduct($id)
                 dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
             )
         )
-    ) -(
+    ) - (
         IF(
-            isFixedPrice,
-            p.fixed_price,
-            IF(
+        isFixedPrice,
+        p.fixed_price,
+        IF(
                 p.pmt_id <> 0,
                 IF(
                     p.pmt_id < 10,
@@ -374,23 +371,22 @@ function fetchProduct($id)
                     ),
                     IF(
                         p.pmt_id = 11,
-                        (pr.purity / 100 * silver.price) +(
+                        (pr.purity / 100 * silver.price * p.weight) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
                         ),
                         (
-                            pr.purity / 100 * silver.price / 11.664
+                            pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
                     )
                 ),
                 0
-            )
-        ) *(p.offer / 100) +(
-            dia.discount / 100 *(
-                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
-            )
+            ))  *(p.offer / 100) +(
+        dia.discount / 100 *(
+            dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
         )
+    )
     ) AS final_price, IF(
         isFixedPrice,
         p.fixed_price,
