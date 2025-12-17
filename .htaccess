@@ -15,7 +15,6 @@
   </IfModule>
 
 RewriteEngine On
-RewriteRule ^(.*)$ maintenance.php [NC,L]
 RewriteRule ^contact$ contact.php?title=$1 [NC,L]
 RewriteRule ^clogin/([a-zA-Z0-9_-]+)$ ajax_dlogin.php?title=$1 [NC,L]
 RewriteRule ^subscriber$ ajax_subs.php?title=$1 [NC,L]
@@ -89,4 +88,4 @@ RewriteRule ^([a-zA-Z0-9_-]+)$ product.php?pack=$1 [NC,L]
 <IfModule mime_module>
   AddHandler application/x-httpd-alt-php83 .php .php8 .phtml
 </IfModule>
-# php -- END cPanel-generated handler, do not edit
+# php -- END cPanel-generated handler, do not edit  RewriteRule ^(.*)$ maintenance.php [NC,L]

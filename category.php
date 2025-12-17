@@ -30,7 +30,7 @@
 			content="Shop elegant and premium <?= $title ?> crafted in diamond, gold and silver. Discover unique designs perfect for daily wear, gifts, weddings and special occasions.">
 		<meta name="keywords"
 			content="<?= $title ?>, <?= $title ?> Nepal, diamond <?= $title ?>, gold <?= $title ?>, silver <?= $title ?>, White Feathers Jewellery">
-z
+		z
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -329,12 +329,20 @@ background: rgba(116,228,250,1);">
 						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>
   </div>
   <div class="card-content has-background-light" style="height:100%;">'; ?>
-<div style="position: absolute;top: 10px;left:-60px;background:crimson;text-align:center;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty']>0 ? "block" : "none" ?>">
-	<div style="margin:0;">50% OFF</div>
-	<span style="font-size: 10px;margin:0">On Diamond</span>
-</div>
-  <?php
-  echo'
+						<?php
+						if ($rowslt2['dc_qty'] > 0 || $rowslt2['dc_qty_bce2'] > 0) {
+							$dOffSql = "Select discount from package_material where pm_id = 1";
+							$doFFFetch = mysqli_query($con, $dOffSql);
+							$dOff = mysqli_fetch_array($doFFFetch)
+								?>
+							<div
+								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+								<span style="font-size: 10px;margin:0">On Diamond</span>
+							</div>
+							<?php
+						}
+						echo '
     <div class="media mb-0">
       <div class="media-left">
         <!--<figure class="image is-48x48">
@@ -411,7 +419,7 @@ background: rgba(116,228,250,1);">
 						if ($rowslt2['discount'] > 0 && $b2b_check == 0) {
 							$discount = $cnot == "Rs" ? floor($rowslt2['actual_price'] / $crate) : round($rowslt2['actual_price'] / $crate, 2);
 							echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-							echo $cnot ." ". $discount;
+							echo $cnot . " " . $discount;
 							echo '</small></small></del>';
 						}
 						echo '</h3>
@@ -680,18 +688,18 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 		</div>
 
-			<?php include('footer.php'); ?>
-			<script src="assets/js/jquery-3.6.0.min.js"></script>
-			<script src="assets/owl/owl.carousel.min.js"></script>
-			<?php include('js.php'); ?>
-			<script>
-				$('.sort_filter').change(function () {
-					var target = 's' + $(this).val();
-					var result = 'productfilter/<?php echo $rowslt['cat_id']; ?>-' + target;
-					$("#sortfilter_trigger").attr("href", result);
-					$("#sortfilter_trigger")[0].click();
-				});
-			</script>
+		<?php include('footer.php'); ?>
+		<script src="assets/js/jquery-3.6.0.min.js"></script>
+		<script src="assets/owl/owl.carousel.min.js"></script>
+		<?php include('js.php'); ?>
+		<script>
+			$('.sort_filter').change(function () {
+				var target = 's' + $(this).val();
+				var result = 'productfilter/<?php echo $rowslt['cat_id']; ?>-' + target;
+				$("#sortfilter_trigger").attr("href", result);
+				$("#sortfilter_trigger")[0].click();
+			});
+		</script>
 
 	</body>
 

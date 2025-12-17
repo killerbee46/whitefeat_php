@@ -20,112 +20,220 @@ function fetchProducts($filters)
         p.fixed_price,
         (
             IF(
-                p.pmt_id = 11,
-                pr.rate,
-                pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
+                    (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
+                    IF(
+                        p.pmt_id = 11,
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
+                    )
+                ),
+                0
+            ) +(
+                dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
             )
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        p.offer * p.fixed_price / 100,
-        (
+        p.fixed_price,
+        IF(
+            p.pmt_id <> 0,
             IF(
-                p.offer > 0,
+                p.pmt_id < 10,
                 (
+                    pr.purity / 100 * gold.price / 11.664 * p.weight
+                ) +(
+                    p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                ),
+                IF(
+                    p.pmt_id = 11,
+                    (pr.purity / 100 * silver.price) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                    ),
                     (
-                        IF(
-                            p.pmt_id = 11,
-                            pr.rate,
-                            pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-                        )
-                    ) *(p.offer / 100)
-                ) ,
-                0
-            )+(p.dc_rate * p.dc_qty * 0.85)
+                        pr.purity / 100 * silver.price / 11.664
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                    )
+                )
+            ),
+            0
         )
-    ) AS discount,IF(
+    ) *(p.offer / 100) +(
+        dia.discount / 100 *(
+            dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+        )
+    ) AS discount, IF(
         isFixedPrice,
         p.fixed_price,
         (
             IF(
-                p.pmt_id = 11,
-                pr.rate,
-                pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-            )
-        )
-    ) - IF(
-        isFixedPrice,
-        p.offer * p.price / 100,
-        (
-            IF(
-                p.offer > 0,
-                (
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
                     (
-                        IF(
-                            p.pmt_id = 11,
-                            pr.rate,
-                            pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-                        )
-                    ) *(p.offer / 100)
-                ) ,
-                0
-            )+(p.dc_rate * p.dc_qty * 0.85)
-        )
-    ) AS final_price,(
-        IF(
-            p.pmt_id = 11,
-            pr.rate,
-            pr.rate / 11.664
-        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
-        )
-    ) AS dynamic_price_b2b,(
-        IF(
-            p.offer_b2b > 0,
-            (
-                (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
                     IF(
                         p.pmt_id = 11,
-                        pr.rate,
-                        pr.rate / 11.664
-                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                ) *(p.offer_b2b / 100)
-            ),
-            0
-        )
-    ) AS discount_b2b,(
-        IF(
-            p.pmt_id = 11,
-            pr.rate,
-            pr.rate / 11.664
-        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                ),
+                0
+            ) +(
+                dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            )
         )
     ) -(
         IF(
-            p.offer_b2b > 0,
-            (
-                (
+            isFixedPrice,
+            p.fixed_price,
+            IF(
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
+                    (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
                     IF(
                         p.pmt_id = 11,
-                        pr.rate,
-                        pr.rate / 11.664
-                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                ) *(p.offer_b2b / 100)
-            ),
-            0
+                ),
+                0
+            )
+        ) *(p.offer / 100) +(
+            dia.discount / 100 *(
+                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            )
+        )
+    ) AS final_price, IF(
+        isFixedPrice,
+        p.fixed_price,
+        (
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+            ) +(
+                p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        )
+    ) AS actual_price_b2b, IF(
+        isFixedPrice,
+        p.fixed_price,
+        IF(
+            p.pmt_id < 10,
+            pr.purity / 100 * gold.price / 11.664,
+            IF(
+                p.pmt_id = 11,
+                pr.purity / 100 * silver.price,
+                pr.purity / 100 * silver.price / 11.664
+            )
+        ) * p.weight +(
+            dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+        ) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                IF(
+                    p.pmt_id < 10,
+                    gold.price,
+                    silver.price
+                ) * p.weight
+            )
+        )
+    ) *(p.offer_b2b / 100) +(
+        dia.discount / 100 * dia.price * .75 * p.dc_qty
+    ) AS discount_b2b, IF(
+        isFixedPrice,
+        p.fixed_price,
+        (
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            ) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        )
+    ) -(
+        IF(
+            isFixedPrice,
+            p.fixed_price,
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+            ) +(
+                p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        ) *(p.offer_b2b / 100) +(
+            dia.discount / 100 * dia.price * .75 * p.dc_qty
         )
     ) AS final_price_b2b
 FROM
@@ -134,6 +242,12 @@ JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
     p.pm_id = pm.pm_id
+JOIN package_material dia ON
+    dia.pm_id = 1
+JOIN package_material gold ON
+    gold.pm_id = 2
+JOIN package_material silver ON
+    silver.pm_id = 3
 WHERE  " . $filters;
     return $dynamicPriceSql;
 
@@ -160,112 +274,220 @@ function fetchProduct($id)
         p.fixed_price,
         (
             IF(
-                p.pmt_id = 11,
-                pr.rate,
-                pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
+                    (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
+                    IF(
+                        p.pmt_id = 11,
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
+                    )
+                ),
+                0
+            ) +(
+                dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
             )
         )
     ) AS actual_price, IF(
         isFixedPrice,
-        p.offer * p.fixed_price / 100,
-        (
+        p.fixed_price,
+        IF(
+            p.pmt_id <> 0,
             IF(
-                p.offer > 0,
+                p.pmt_id < 10,
                 (
+                    pr.purity / 100 * gold.price / 11.664 * p.weight
+                ) +(
+                    p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                ),
+                IF(
+                    p.pmt_id = 11,
+                    (pr.purity / 100 * silver.price) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                    ),
                     (
-                        IF(
-                            p.pmt_id = 11,
-                            pr.rate,
-                            pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-                        )
-                    ) *(p.offer / 100)
-                ) ,
-                0
-            )+(p.dc_rate * p.dc_qty * 0.85)
+                        pr.purity / 100 * silver.price / 11.664
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                    )
+                )
+            ),
+            0
         )
-    ) AS discount,IF(
+    ) *(p.offer / 100) +(
+        dia.discount / 100 *(
+            dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+        )
+    ) AS discount, IF(
         isFixedPrice,
         p.fixed_price,
         (
             IF(
-                p.pmt_id = 11,
-                pr.rate,
-                pr.rate / 11.664
-            ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-            )
-        )
-    ) - IF(
-        isFixedPrice,
-        p.offer * p.price / 100,
-        (
-            IF(
-                p.offer > 0,
-                (
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
                     (
-                        IF(
-                            p.pmt_id = 11,
-                            pr.rate,
-                            pr.rate / 11.664
-                        ) * p.weight +(p.dc_rate * p.dc_qty * 1.7) +(
-                            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(pm.price * pr.purity / 100) * p.weight
-                        )
-                    ) *(p.offer / 100)
-                ) ,
-                0
-            )+(p.dc_rate * p.dc_qty * 0.85)
-        )
-    ) AS final_price,(
-        IF(
-            p.pmt_id = 11,
-            pr.rate,
-            pr.rate / 11.664
-        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
-        )
-    ) AS dynamic_price_b2b,(
-        IF(
-            p.offer_b2b > 0,
-            (
-                (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
                     IF(
                         p.pmt_id = 11,
-                        pr.rate,
-                        pr.rate / 11.664
-                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                ) *(p.offer_b2b / 100)
-            ),
-            0
-        )
-    ) AS discount_b2b,(
-        IF(
-            p.pmt_id = 11,
-            pr.rate,
-            pr.rate / 11.664
-        ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                ),
+                0
+            ) +(
+                dia.price * dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            )
         )
     ) -(
         IF(
-            p.offer_b2b > 0,
-            (
-                (
+            isFixedPrice,
+            p.fixed_price,
+            IF(
+                p.pmt_id <> 0,
+                IF(
+                    p.pmt_id < 10,
+                    (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                    ),
                     IF(
                         p.pmt_id = 11,
-                        pr.rate,
-                        pr.rate / 11.664
-                    ) * p.weight +(p.dc_rate_b2b * p.dc_qty_b2b) +(
-                        p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(pm.price * pr.purity / 100) * p.weight
+                        (pr.purity / 100 * silver.price) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price * p.weight
+                        ),
+                        (
+                            pr.purity / 100 * silver.price / 11.664
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                     )
-                ) *(p.offer_b2b / 100)
-            ),
-            0
+                ),
+                0
+            )
+        ) *(p.offer / 100) +(
+            dia.discount / 100 *(
+                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            )
+        )
+    ) AS final_price, IF(
+        isFixedPrice,
+        p.fixed_price,
+        (
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+            ) +(
+                p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        )
+    ) AS actual_price_b2b, IF(
+        isFixedPrice,
+        p.fixed_price,
+        IF(
+            p.pmt_id < 10,
+            pr.purity / 100 * gold.price / 11.664,
+            IF(
+                p.pmt_id = 11,
+                pr.purity / 100 * silver.price,
+                pr.purity / 100 * silver.price / 11.664
+            )
+        ) * p.weight +(
+            dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+        ) +(
+            p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                IF(
+                    p.pmt_id < 10,
+                    gold.price,
+                    silver.price
+                ) * p.weight
+            )
+        )
+    ) *(p.offer_b2b / 100) +(
+        dia.discount / 100 * dia.price * .75 * p.dc_qty
+    ) AS discount_b2b, IF(
+        isFixedPrice,
+        p.fixed_price,
+        (
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * p.dc_qty + p.dc_rate_bce2 * p.dc_qty_bce2
+            ) +(
+                p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        )
+    ) -(
+        IF(
+            isFixedPrice,
+            p.fixed_price,
+            IF(
+                p.pmt_id < 10,
+                pr.purity / 100 * gold.price / 11.664,
+                IF(
+                    p.pmt_id = 11,
+                    pr.purity / 100 * silver.price,
+                    pr.purity / 100 * silver.price / 11.664
+                )
+            ) * p.weight +(
+                dia.price * .75 * p.dc_qty + p.dc_rate_b2b_b2e2 * p.dc_qty_b2b_b2e2
+            ) +(
+                p.mk_pp_b2b + p.mk_gm_b2b * p.weight +(p.jarti_b2b / 100) *(
+                    IF(
+                        p.pmt_id < 10,
+                        gold.price,
+                        silver.price
+                    ) * p.weight
+                )
+            )
+        ) *(p.offer_b2b / 100) +(
+            dia.discount / 100 * dia.price * .75 * p.dc_qty
         )
     ) AS final_price_b2b
 FROM
@@ -274,6 +496,12 @@ JOIN package_metal pr ON
     p.pmt_id = pr.pmt_id
 JOIN package_material pm ON
     p.pm_id = pm.pm_id
+JOIN package_material dia ON
+    dia.pm_id = 1
+JOIN package_material gold ON
+    gold.pm_id = 2
+JOIN package_material silver ON
+    silver.pm_id = 3
 WHERE  
 p.id_pack ='" . $id . "';";
     return $dynamicPriceSql;

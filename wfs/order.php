@@ -347,7 +347,9 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 												<?php
 
-												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and dispatch='0' and c_request='0' order by cb_id DESC";
+												$noNosepin = " and email <> 'offer-nosepin' ";
+
+												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and dispatch='0' and c_request='0' " . $noNosepin . " order by cb_id DESC";
 												$displayol = mysqli_query($con, $queryol);
 												$total_net = 0;
 												$sn = 1;
@@ -573,7 +575,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 												<?php
 
-												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and dispatch='1' and deliver='0' and c_request='0' order by cb_id DESC";
+												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and dispatch='1' and deliver='0' and c_request='0' " . $noNosepin . " order by cb_id DESC";
 												$displayol = mysqli_query($con, $queryol);
 												$total_net = 0;
 												$sn = 1;
@@ -788,7 +790,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 												<?php
 
-												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and deliver='1' and c_request='0' order by cb_id DESC";
+												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and deliver='1' and c_request='0' " . $noNosepin . " order by cb_id DESC";
 												$displayol = mysqli_query($con, $queryol);
 												$total_net = 0;
 												$sn = 1;
@@ -988,7 +990,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 												<?php
 
-												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_request='1' order by cb_id DESC";
+												$queryol = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_request='1' " . $noNosepin . " order by cb_id DESC";
 												$displayol = mysqli_query($con, $queryol);
 												$total_net = 0;
 												$sn = 1;
