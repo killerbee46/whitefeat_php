@@ -11,7 +11,7 @@
 	<head>
 
 		<?php
-		$title = 'Jewellries';
+		$title = 'Jewelleries';
 		$himage = 0;
 		$hvideo = 0;
 		$cterm = 0;
@@ -88,28 +88,29 @@
 	
 		function queryFilter()
 		{
+			$prices = fetchPriceQueries();
 			$queries = '';
 			if (array_key_exists('price', $_GET)) {
 				if ($_GET['price'] == 0) {
 					$queries = $queries . '';
 				}
 				if ($_GET['price'] == 1) {
-					$queries = $queries . " and p.price < '10000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." < '10000' ";
 				}
 				if ($_GET['price'] == 2) {
-					$queries = $queries . " and p.price > '10000' and p.price < '20000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '10000' and ". $prices['finalPrice'] ." < '20000' ";
 				}
 				if ($_GET['price'] == 3) {
-					$queries = $queries . " and p.price > '20000' and p.price < '50000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '20000' and ". $prices['finalPrice'] ." < '50000' ";
 				}
 				if ($_GET['price'] == 4) {
-					$queries = $queries . " and p.price > '50000' and p.price < '100000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '50000' and ". $prices['finalPrice'] ." < '100000' ";
 				}
 				if ($_GET['price'] == 5) {
-					$queries = $queries . " and p.price > '100000' and p.price < '200000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '100000' and ". $prices['finalPrice'] ." < '200000' ";
 				}
 				if ($_GET['price'] == 6) {
-					$queries = $queries . " and p.price > '200000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '200000' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -143,16 +144,16 @@
 					$queries = $queries . '';
 				}
 				if ($_GET['metal'] == 1) {
-					$queries = $queries . " and p.pm_id = '1' ";
+					$queries = $queries . " and ( p.dc_qty > 0 or p.dc_qty_bce2 ) ";
 				}
 				if ($_GET['metal'] == 2) {
-					$queries = $queries . " and p.pm_id = '2' ";
+					$queries = $queries . " and p.pmt_id > 0 and p.pmt_id < 10 ";
 				}
 				if ($_GET['metal'] == 3) {
-					$queries = $queries . " and p.pm_id = '4' ";
+					$queries = $queries . " and p.pmt_id > 10 ";
 				}
 				if ($_GET['metal'] == 4) {
-					$queries = $queries . " and p.pm_id = '3' ";
+					$queries = $queries . " and p.pmt_id = 11 ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -196,45 +197,13 @@
 					$queries = $queries . " order by p.id_pack DESC ";
 				}
 				if ($_GET['sort'] == "price-lth") {
-					$queries = $queries . " order by (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
-                    )
-                ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) ASC ";
+					$queries = $queries . " order by ". $prices['finalPrice'] ." ASC ";
 				}
 				if ($_GET['sort'] == "price-htl") {
-					$queries = $queries . "  order by (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
-                    )
-                ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) DESC ";
+					$queries = $queries . "  order by ". $prices['finalPrice'] ." DESC ";
 				}
 				if ($_GET['sort'] == "discounted") {
-					$queries = $queries . " and offer > 0 order by offer DESC ";
+					$queries = $queries . " and ". $prices['discount'] ." > 0 order by ". $prices['discount'] ." DESC ";
 				} else {
 					$queries = $queries . "";
 				}

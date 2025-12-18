@@ -338,7 +338,7 @@
                         echo $cnot . " " . round(($final_price), 2);
 
                         echo '</strong>';
-                        if ($rowpw['diccount'] > 0) {
+                        if ($rowpw['discount'] > 0) {
                           echo '<small><small><strike class="price-off">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
                         }
 

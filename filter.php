@@ -41,13 +41,13 @@
                 </select>
             </div>
             <div class="form-item" style="padding-bottom:30px">
-                <label for="metal">Metal:</label>
+                <label for="metal">Material:</label>
                 <select value="2" name="metal" id="filter-metal-selector" onchange="filterSelectorHandle(this,'metal')">
                     <option value="0" <?php selected("0", 'metal') ?>>None</option>
                     <option value="1" <?php selected("1", 'metal') ?>>Diamond</option>
                     <option value="2" <?php selected("2", 'metal') ?>>Gold</option>
-                    <option value="3" <?php selected("3", 'metal') ?>>Rhodium</option>
-                    <option value="4" <?php selected("4", 'metal') ?>>Silver</option>
+                    <option value="3" <?php selected("3", 'metal') ?>>Silver</option>
+                    <option value="4" <?php selected("4", 'metal') ?>>Rhodium</option>
                 </select>
             </div>
         </div>
