@@ -133,13 +133,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	  </div>
 		 
 		 </div>
-		
-	  
-	  
 	  </div>
-	  
-	  
-	  
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>

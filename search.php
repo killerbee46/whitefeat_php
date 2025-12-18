@@ -47,6 +47,9 @@
 					if ($tag == 'gift4') {
 						$title = $title . 'Pasni Gift';
 					}
+					if ($tag == 'gift5') {
+						$title = $title . 'New Years Gift';
+					}
 				}
 			}
 		}
@@ -185,6 +188,9 @@
 					}
 					if ($tag == 'gift4') {
 						$tagv = 'tag_gift = "4" ';
+					}
+					if ($tag == 'gift5') {
+						$tagv = 'tag_gift = "5" ';
 					}
 					$queries = $queries . " and " . $tagv;
 				}
