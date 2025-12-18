@@ -4,12 +4,11 @@
   include 'db_connect.php';
   include 'ajax_cookie.php';
 
-
   $paym = $_POST['paym'];
   $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
 
 
-  $sql1act = "Select * from `whitefeat_wf_new`.`cart_book` where cookie_id='" . $GLOBALS['cookid'] . "' and c_id='" . $GLOBALS['customer'] . "' and checkout='0' and msg='offer-nosepin' ";
+  $sql1act = "Select * from `whitefeat_wf_new`.`cart_book` where cookie_id='" . $GLOBALS['cookid'] . "' and c_id='" . $GLOBALS['customer'] . "' and checkout='0' ";
   $displayact = mysqli_query($con, $sql1act);
   $rowact = mysqli_fetch_array($displayact);
 
@@ -43,15 +42,18 @@
   $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowact['cb_id'] . "'";
   $displayckp1 = mysqli_query($con, $sqlckp1);
   while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
-    $sqlckp2 = "Select stock, stock_b2b from `whitefeat_wf_new`.`package` where id_pack='" . $rowckp1['id_pack'] . "'";
+    $sqlckp2 = fetchProduct($rowckp1['id_pack']);
     $displayckp2 = mysqli_query($con, $sqlckp2);
     $rowckp2 = mysqli_fetch_array($displayckp2);
-
     if ($rowuc['b2b'] == 0) {
+      $sqlUC = "update cart_detail set rate=" . $rowckp['final_price'] . ", discount=" . $rowckp['discount'] ." where cart_id='" . $rowckp1['id_pack'] . "'";
+      mysqli_query($con, $sqlUC);
       $newstock = $rowckp2['stock'] - $rowckp1['qty'];
       $sql = "update `whitefeat_wf_new`.`package` set stock='" . $newstock . "' where id_pack='" . $rowckp1['id_pack'] . "'";
       mysqli_query($con, $sql);
     } else {
+            $sqlUC = "update cart_detail set rate=" . $rowckp['final_price_b2b'] . ", discount=" . $rowckp['discount_b2b'] ." where cart_id='" . $rowckp1['id_pack'] . "'";
+      mysqli_query($con, $sqlUC);
       $newstock = $rowckp2['stock_b2b'] - $rowckp1['qty'];
       $sql = "update `whitefeat_wf_new`.`package` set stock_b2b='" . $newstock . "' where id_pack='" . $rowckp1['id_pack'] . "'";
       mysqli_query($con, $sql);

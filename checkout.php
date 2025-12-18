@@ -195,48 +195,21 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 
             <div class="column mt-5 thankyou-div">
               <img src="assets/images/extra/namaste.png" style="height:5em;"><br>
-              Thankyou for choosing us! <br>- Whitefeathers Team. <br>
+              Thank you for choosing us! <br>- Whitefeathers Team. <br>
               <small class="letter-spacing"><u>Contact us</u>
                 +977 - 9806091605 , if you have any issue.
               </small>
             </div>
-
           </div>
-
-
-
-
-
-
         </div>
-
-
-
         <div class="columns is-multiline process-div" style="background-color:#F9F9FA;">
-
-
-
-
-
-
-
           <div class="column is-8 scroll-filter-product cart_items_div p-5" style="height:73.5vh;
   overflow-y:scroll;">
-
-
             <span class="cart_area">
-
-
-
-
-
-
-
-
               <?php
 
               while ($rowactx = mysqli_fetch_array($displayacw)) {
-                $sqlckp = fetchProducts("id_pack='" . $rowactx['id_pack'] . "'");
+                $sqlckp = fetchProduct($rowactx['id_pack']);
                 $displayckp = mysqli_query($con, $sqlckp);
                 $rowckp = mysqli_fetch_array($displayckp);
 
@@ -283,9 +256,9 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 $newprice = $originalPrice;
                 $total_bd = $total_bd + ($newprice * $rowactx['qty']);
 
-                if ($rowckp['offer'] > 0) {
+                if ($rowckp['discount'] > 0) {
                   $newprice = $originalPrice - $discount;
-                  $total_dis += $discount;
+                  $total_dis += $discount * $rowactx['qty'];
                 }
 
                 //b2b check
@@ -314,7 +287,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 }
                 if ($rowckp['offer'] > 0 && $b2b_check == 0) {
                   echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-                  echo $cnot . " " . floor(( $newprice * $rowactx['qty'])/$crate);
+                  echo $cnot . " " . floor(( $originalPrice * $rowactx['qty'])/$crate);
                   echo '</small></small></del>';
                 }
 
@@ -576,12 +549,12 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                   <span class="pl-0 is-size-6 has-text-weight-semibold is-fullwidth">2. Delivery Information</span>
 
 
-                  <span id="">
+                  <form id="del_info_form">
 
                     <div class="field mt-5">
                       <label class="label">Name:</label>
                       <p class="control has-icons-left">
-                        <input class="input del-name" type="text" id="" value="" placeholder="Contact Person Name">
+                        <input required class="input del-name" type="text" id="" value="" placeholder="Contact Person Name">
                         <span class="icon is-small is-left">
                           <i class="fas fa-user"></i>
                         </span>
@@ -592,7 +565,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                     <div class="field">
                       <label class="label">Contact Number:</label>
                       <p class="control has-icons-left">
-                        <input class="input del-phone" type="text" id="exampleFormControlInputPass"
+                        <input required class="input del-phone" type="text" id="exampleFormControlInputPass"
                           placeholder="Phone number">
                         <span class="icon is-small is-left">
                           <i class="fas fa-phone"></i>
@@ -604,7 +577,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                     <div class="field ">
                       <label class="label">Delivery Location:</label>
                       <p class="control has-icons-left has-icons-right">
-                        <input class="input del-location" type="email" id="" placeholder="Nearest Landmark">
+                        <input required class="input del-location" type="text" id="" placeholder="Nearest Landmark">
                         <span class="icon is-small is-left">
                           <i class="fas fa-map"></i>
                         </span>
@@ -627,14 +600,14 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                     </div>
                     <div class="field mt-4">
                       <p class="control">
-                        <button class="button is-normal is-fullwidth proceed-payment"
+                        <button type="submit" class="button is-normal is-fullwidth"
                           style="background: rgb(241,243,244);
 background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%);">
                           Proceed To Payment Page &nbsp; <i class="fas fa-arrow-right"></i>
                         </button>
                       </p>
                     </div>
-                  </span>
+            </form>
 
 
                 </div>
@@ -992,7 +965,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
         }
       });
 
-      $(document).on('click', '.proceed-payment', function () {
+      $(document).on('submit', '#del_info_form', function (e) {
+        e.preventDefault()
         var dataString = 'address=' + $('.del-location').val() + '&number=' + $('.del-phone').val() + '&msg=' + $('.del-msg').val() + '&name=' + $('.del-name').val();
 
         $.ajax({
@@ -1018,7 +992,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
           $.ajax({
             url: "confirmcart", data: dataString, type: 'POST', cache: false,
             success: function (result) {
-              alert("Order Placed Successfully !");
               $('.confirm-success').fadeIn(500);
               $('.3step').removeClass('is-active');
               $('.4step').addClass('is-active');

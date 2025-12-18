@@ -172,12 +172,12 @@
 												}
 											}
 
-											$total_bd = $total_bd + ($rowld1['price'] * $rowld['qty']);
-											$newprice = $rowld1['price'];
+											$total_bd = $total_bd + ($rowld['rate'] * $rowld['qty']);
+											$newprice = $rowld['rate'];
 
 											if ($rowld1['offer'] > 0 && $b2b_check == 0) {
-												$newprice = ($rowld1['price'] - (($rowld1['offer'] / 100) * $rowld1['price']));
-												$total_dis = $total_dis + ((($rowld1['offer'] / 100) * $rowld1['price']) * $rowld['qty']);
+												$newprice = ($rowld['rate'] - (($rowld1['offer'] / 100) * $rowld['rate']));
+												$total_dis = $total_dis + ((($rowld1['offer'] / 100) * $rowld['rate']) * $rowld['qty']);
 											}
 
 
@@ -207,7 +207,7 @@
 											$crate = (1 / $rowcrc2['cur_rate']);
 
 											if ($b2b_check == 0) {
-												echo $cnot . ' ' . floor(($crate * $rowld1['price']));
+												echo $cnot . ' ' . floor(($crate * $rowld['rate']));
 											} else {
 												echo $cnot . ' ' . floor(($crate * $newprice));
 											}
@@ -220,7 +220,7 @@
 
 
 											if ($b2b_check == 0) {
-												echo $cnot . ' ' . floor(($crate * $rowld1['price'] * $rowld['qty']));
+												echo $cnot . ' ' . floor(($crate * $rowld['rate'] * $rowld['qty']));
 											} else {
 												echo $cnot . ' ' . floor(($crate * $newprice * $rowld['qty']));
 											}
@@ -272,9 +272,9 @@
 													}
 												} else {
 													if ($b2b_check == 0) {
-														echo $cnot . ' ' . floor($crate * $total_bd);
+														echo $cnot . ' ' . floor($crate * $total_bd +$crate * $total_dis);
 													} else {
-														echo $cnot . ' ' . floor($crate * $total_net);
+														echo $cnot . ' ' . floor($crate * $total_net +$crate * $total_dis);
 													}
 												}
 

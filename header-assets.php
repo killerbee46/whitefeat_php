@@ -185,20 +185,31 @@
         }
 
         .gifting-sub-menu a.item {
+            background: linear-gradient(to left, rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://imgs.search.brave.com/JS7upz0dHUPQBIiVybrtywsVFPBcvX5k7juq4QlIfYk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMDQv/Mjc3LzAzMS9zbWFs/bC9hYnN0cmFjdC1l/bGVnYW50LTNkLWJs/YWNrLWFuZC1nb2xk/LWN1cnZlLXdpdGgt/bGlnaHRpbmctb24t/ZGFyay1iYWNrZ3Jv/dW5kLWx1eHVyeS1z/dHlsZS12ZWN0b3Iu/anBn');
+            background-size: cover;
             text-decoration: none;
-            color: black;
+            font-size: 14px;
+            font-weight: 600;
+            color: goldenrod;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+            border: 2px solid black;
+            padding: 5px;
         }
 
         .gifting-sub-menu a.item:hover {
-            font-weight: 600;
+            background: url("");
+            transform: scale(1.1);
+            border-color: goldenrod;
+            color: black;
         }
 
-        .gifting-sub-menu a.item:hover img {
-            transform: scale(1.1)
+        .gifting-sub-menu a.item:hover {
+            
         }
 
         .gifting-sub-menu .cat-image {
@@ -1430,10 +1441,11 @@ $menus = [
             [
                 'title' => 'Shop By Style',
                 'data' => [
-                    ['title' => 'Birthday Gifts', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/b-g.jpg', 'path' => 'search.php?tags[]=gift2'],
+                    ['title' => 'Birthday Gifts', 'image' => 'https://imgs.search.brave.com/n8QCdRh91msRnSxOAqQ1QA5yzXKYMbhOMwfBKe4adxs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMTcvR29s/ZC1HaWZ0LUJvdy1U/cmFuc3BhcmVudC1Q/TkcucG5n', 'path' => 'search.php?tags[]=gift2'],
                     ['title' => 'Anniversary Gifts', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/a-g.png', 'path' => 'search.php?tags[]=gift1'],
                     ['title' => 'Wedding Gifts', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/w-g.png', 'path' => 'search.php?tags[]=gift3'],
                     ['title' => 'Paasni Gifts', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/p-g.png', 'path' => 'search.php?tags[]=gift4'],
+                    ['title' => 'New Years Gifts', 'image' => 'https://imgs.search.brave.com/5-dBgBmbeFB80BbLrRaZBdrd2-jz3-UW5pi1VwN--vY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTEv/NzE0LzE0NS9zbWFs/bC9mZXN0aXZlLWdp/ZnQtYm94LWFkb3Ju/ZWQtd2l0aC1hLXJl/ZC1yaWJib24tYm93/LWlzb2xhdGVkLXBu/Zy5wbmc', 'path' => 'search.php?tags[]=gift5'],
                 ]
             ],
             [
