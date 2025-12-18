@@ -30,7 +30,7 @@
 			content="Shop elegant and premium <?= $title ?> crafted in diamond, gold and silver. Discover unique designs perfect for daily wear, gifts, weddings and special occasions.">
 		<meta name="keywords"
 			content="<?= $title ?>, <?= $title ?> Nepal, diamond <?= $title ?>, gold <?= $title ?>, silver <?= $title ?>, White Feathers Jewellery">
-z
+		z
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -62,28 +62,29 @@ z
 		}
 		function queryFilter()
 		{
+			$prices = fetchPriceQueries();
 			$queries = '';
 			if (array_key_exists('price', $_GET)) {
 				if ($_GET['price'] == 0) {
 					$queries = $queries . '';
 				}
 				if ($_GET['price'] == 1) {
-					$queries = $queries . " and p.price < '10000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." < '10000' ";
 				}
 				if ($_GET['price'] == 2) {
-					$queries = $queries . " and p.price > '10000' and p.price < '20000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '10000' and ". $prices['finalPrice'] ." < '20000' ";
 				}
 				if ($_GET['price'] == 3) {
-					$queries = $queries . " and p.price > '20000' and p.price < '50000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '20000' and ". $prices['finalPrice'] ." < '50000' ";
 				}
 				if ($_GET['price'] == 4) {
-					$queries = $queries . " and p.price > '50000' and p.price < '100000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '50000' and ". $prices['finalPrice'] ." < '100000' ";
 				}
 				if ($_GET['price'] == 5) {
-					$queries = $queries . " and p.price > '100000' and p.price < '200000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '100000' and ". $prices['finalPrice'] ." < '200000' ";
 				}
 				if ($_GET['price'] == 6) {
-					$queries = $queries . " and p.price > '200000' ";
+					$queries = $queries . " and ". $prices['finalPrice'] ." > '200000' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -94,71 +95,19 @@ z
 					$queries = $queries . '';
 				}
 				if ($_GET['weight'] == 1) {
-					$queries = $queries . " and p.weight < '2' ";
+					$queries = $queries . " and weight < '2' ";
 				}
 				if ($_GET['weight'] == 2) {
-					$queries = $queries . " and p.weight > '2' and p.weight < '5' ";
+					$queries = $queries . " and weight > '2' and weight < '5' ";
 				}
 				if ($_GET['weight'] == 3) {
-					$queries = $queries . " and p.weight > '5' and p.weight < '10' ";
+					$queries = $queries . " and weight > '5' and weight < '10' ";
 				}
 				if ($_GET['weight'] == 4) {
-					$queries = $queries . " and p.weight > '10' and p.weight < '20' ";
+					$queries = $queries . " and weight > '10' and weight < '20' ";
 				}
 				if ($_GET['weight'] == 5) {
-					$queries = $queries . " and p.weight > '20' ";
-				} else {
-					$queries = $queries . "";
-				}
-
-			}
-			if (array_key_exists('sort', $_GET)) {
-				if ($_GET['sort'] == 0) {
-					$queries = $queries . '';
-				}
-				if ($_GET['sort'] == "date") {
-					$queries = $queries . " order by p.id_pack DESC ";
-				}
-				if ($_GET['sort'] == "price-lth") {
-					$queries = $queries . " order by (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
-                    )
-                ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) ASC ";
-				}
-				if ($_GET['sort'] == "price-htl") {
-					$queries = $queries . "  order by (
-        IF(p.pmt_id = 11, pr.rate,pr.rate / 11.664) * p.weight +(p.dc_rate * p.dc_qty) +(
-            p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * ( pm.price * pr.purity / 100 ) * p.weight
-        )
-    ) - (
-        IF(
-            p.offer > 0,
-            (
-                (
-                    pr.rate / 11.664 * p.weight +(p.dc_rate * p.dc_qty) +(
-                        p.mk_pp + p.mk_gm * p.weight +(p.jarti / 100) * pr.rate * p.weight
-                    )
-                ) *(p.offer / 100)
-            ),
-            0
-        )
-    ) DESC ";
-				}
-				if ($_GET['sort'] == "discounted") {
-					$queries = $queries . " and offer > 0 order by offer DESC ";
+					$queries = $queries . " and weight > '20' ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -169,16 +118,16 @@ z
 					$queries = $queries . '';
 				}
 				if ($_GET['metal'] == 1) {
-					$queries = $queries . " and p.dc_qty > 0 ";
+					$queries = $queries . " and ( p.dc_qty > 0 or p.dc_qty_bce2 ) ";
 				}
 				if ($_GET['metal'] == 2) {
-					$queries = $queries . " and p.pm_id = '2' ";
+					$queries = $queries . " and p.pmt_id > 0 and p.pmt_id < 10 ";
 				}
 				if ($_GET['metal'] == 3) {
-					$queries = $queries . " and p.pm_id = '4' ";
+					$queries = $queries . " and p.pmt_id > 10 ";
 				}
 				if ($_GET['metal'] == 4) {
-					$queries = $queries . " and p.pm_id = '3' ";
+					$queries = $queries . " and p.pmt_id = 11 ";
 				} else {
 					$queries = $queries . "";
 				}
@@ -186,19 +135,53 @@ z
 			}
 			if (array_key_exists('tags', $_GET)) {
 				$tagv = '';
-				if ($_GET['tags'] == 'kid') {
-					$tagv = 'tag_kid';
+				foreach ($_GET['tags'] as $key => $tag) {
+					if ($tag == 'kid') {
+						$tagv = 'tag_kid > "0" ';
+					}
+					if ($tag == 'men') {
+						$tagv = 'tag_men > "0" ';
+					}
+					if ($tag == 'women') {
+						$tagv = 'tag_women > "0" ';
+					}
+					if ($tag == 'gift') {
+						$tagv = 'tag_gift > "0" ';
+					}
+					if ($tag == 'gift1') {
+						$tagv = 'tag_gift = "1" ';
+					}
+					if ($tag == 'gift2') {
+						$tagv = 'tag_gift = "2" ';
+					}
+					if ($tag == 'gift3') {
+						$tagv = 'tag_gift = "3" ';
+					}
+					if ($tag == 'gift4') {
+						$tagv = 'tag_gift = "4" ';
+					}
+					$queries = $queries . " and " . $tagv;
 				}
-				if ($_GET['tags'] == 'men') {
-					$tagv = 'tag_men';
+			}
+			if (array_key_exists('sort', $_GET)) {
+				if ($_GET['sort'] == 0) {
+					$queries = $queries . '';
 				}
-				if ($_GET['tags'] == 'women') {
-					$tagv = 'tag_women';
+				if ($_GET['sort'] == "date") {
+					$queries = $queries . " order by p.id_pack DESC ";
 				}
-				if ($_GET['tags'] == 'gift') {
-					$tagv = 'tag_gift';
+				if ($_GET['sort'] == "price-lth") {
+					$queries = $queries . " order by ". $prices['finalPrice'] ." ASC ";
 				}
-				$queries = $queries . " and " . $tagv . ">'1' ";
+				if ($_GET['sort'] == "price-htl") {
+					$queries = $queries . "  order by ". $prices['finalPrice'] ." DESC ";
+				}
+				if ($_GET['sort'] == "discounted") {
+					$queries = $queries . " and ". $prices['discount'] ." > 0 order by ". $prices['discount'] ." DESC ";
+				} else {
+					$queries = $queries . "";
+				}
+
 			}
 			return $queries;
 
@@ -329,12 +312,20 @@ background: rgba(116,228,250,1);">
 						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>
   </div>
   <div class="card-content has-background-light" style="height:100%;">'; ?>
-<div style="position: absolute;top: 10px;left:-60px;background:crimson;text-align:center;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty']>0 ? "block" : "none" ?>">
-	<div style="margin:0;">50% OFF</div>
-	<span style="font-size: 10px;margin:0">On Diamond</span>
-</div>
-  <?php
-  echo'
+						<?php
+						if ($rowslt2['dc_qty'] > 0 || $rowslt2['dc_qty_bce2'] > 0) {
+							$dOffSql = "Select discount from package_material where pm_id = 1";
+							$doFFFetch = mysqli_query($con, $dOffSql);
+							$dOff = mysqli_fetch_array($doFFFetch)
+								?>
+							<div
+								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+								<span style="font-size: 10px;margin:0">On Diamond</span>
+							</div>
+							<?php
+						}
+						echo '
     <div class="media mb-0">
       <div class="media-left">
         <!--<figure class="image is-48x48">
@@ -411,7 +402,7 @@ background: rgba(116,228,250,1);">
 						if ($rowslt2['discount'] > 0 && $b2b_check == 0) {
 							$discount = $cnot == "Rs" ? floor($rowslt2['actual_price'] / $crate) : round($rowslt2['actual_price'] / $crate, 2);
 							echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-							echo $cnot ." ". $discount;
+							echo $cnot . " " . $discount;
 							echo '</small></small></del>';
 						}
 						echo '</h3>
@@ -680,18 +671,18 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 		</div>
 
-			<?php include('footer.php'); ?>
-			<script src="assets/js/jquery-3.6.0.min.js"></script>
-			<script src="assets/owl/owl.carousel.min.js"></script>
-			<?php include('js.php'); ?>
-			<script>
-				$('.sort_filter').change(function () {
-					var target = 's' + $(this).val();
-					var result = 'productfilter/<?php echo $rowslt['cat_id']; ?>-' + target;
-					$("#sortfilter_trigger").attr("href", result);
-					$("#sortfilter_trigger")[0].click();
-				});
-			</script>
+		<?php include('footer.php'); ?>
+		<script src="assets/js/jquery-3.6.0.min.js"></script>
+		<script src="assets/owl/owl.carousel.min.js"></script>
+		<?php include('js.php'); ?>
+		<script>
+			$('.sort_filter').change(function () {
+				var target = 's' + $(this).val();
+				var result = 'productfilter/<?php echo $rowslt['cat_id']; ?>-' + target;
+				$("#sortfilter_trigger").attr("href", result);
+				$("#sortfilter_trigger")[0].click();
+			});
+		</script>
 
 	</body>
 

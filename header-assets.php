@@ -1247,7 +1247,7 @@ $menus = [
                     ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-ring.png', 'path' => 'search.php?term=gold%20ring'],
                     ['title' => 'Sirbandi', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-shirbandi.png', 'path' => 'search.php?term=gold%20sirbandi'],
                     ['title' => 'Tillhari', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Tilhari.png', 'path' => 'search.php?term=gold%20tillhari'],
-                    ['title' => 'Low Weight Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-low-weight-necklace.png', 'path' => 'search.php?term=gold%20low%20weight%20necklace'],
+                    ['title' => 'Low Weight Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-low-weight-necklace.png', 'path' => 'search.php?term=gold%low%weight%necklace'],
                     ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bangle.png', 'path' => 'products/gold-bangles'],
                     ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Juli.png', 'path' => 'search.php?term=gold%20juli'],
                     ['title' => 'Anklet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-anklet.png', 'path' => 'search.php?term=gold%20anklet'],

@@ -181,19 +181,37 @@
               $image = $rowpd['image'];
             }
             ?>
-            <div class="thumb" id="thumb"
-              style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');background-size:cover;">
+            <div class="thumb" id="thumb" style="
+              background:
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>');
+              aspect-ratio:1/1;
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              object-fit: contain ;
+              object-position: center center;">
               <div class="product-image-info">
                 Hover for Zoom Preview
               </div>
-              <img id="thumbImg"
-                onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';"
-                src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>"
-                alt="no image">
+              <!-- <img id="thumbImg"
+              src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>"
+              onerror="this.error = null; this.src = 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>';"
+                alt="no image"> -->
             </div>
 
-            <div class="zoom-preview" id="zoomPreview"
-              style="background-image:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>');">
+            <div class="zoom-preview" id="zoomPreview" style="background:
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>');
+              background-size: 150%;
+              background-position: center;
+              background-repeat: no-repeat;
+              object-fit: contain ;
+              object-position: center center;">
             </div>
           </div>
         </div>
@@ -320,7 +338,7 @@
                         echo $cnot . " " . round(($final_price), 2);
 
                         echo '</strong>';
-                        if ($rowpw['diccount'] > 0) {
+                        if ($rowpw['discount'] > 0) {
                           echo '<small><small><strike class="price-off">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
                         }
 
@@ -430,14 +448,18 @@ display: -webkit-box;
 
 
               <?php
-
-              if ($rowpd['dc_qty'] > 0) { ?>
-                <div style="background:crimson;color:white;padding:10px 20px;font-size:16px;font-weight:600;display:flex;flex-direction:column;text-align:center;display:<?= $rowpd['dc_qty']>0 ? "block" : "none" ?>">
-	<div style="margin:0;">50% OFF</div>
-	<span style="font-size: 14px;margin:0">On Diamond</span>
-</div>
-                <?php 
-                echo '
+						if ($rowpd['dc_qty'] > 0 || $rowpd['dc_qty_bce2'] > 0) {
+$dOffSql = "Select discount from package_material where pm_id = 1";
+$doFFFetch = mysqli_query($con, $dOffSql);
+$dOff = mysqli_fetch_array($doFFFetch)
+							?>
+							<div
+								style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+								<div style="margin:0;"><?= round($dOff['discount'],0) ?>% OFF</div>
+								<span style="font-size: 10px;margin:0">On Diamond</span>
+							</div>
+							<?php
+						echo '
 				 <h6 class="mb-1">
 	<small>&nbsp;Diamond  <small style="font-size:0.7em;">(certified)</small> 
 	</small>

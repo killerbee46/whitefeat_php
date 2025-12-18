@@ -30,11 +30,12 @@ $crate = ($rowcrc2['cur_rate']);
 			style="font-size: 20px; width: max-content;padding-bottom:10px;border-bottom:1px solid #A65FF3;margin-bottom:40px;">
 			Fixed Price 14K Eartops
 		</div>
-<a href="/search.php?cat_id=81">
-	<button style="border:1px solid white;outline:none; background: transparent;cursor:pointer;color:white;font-weight:600;padding:5px 10px;">
-	View All
-</button>
-</a>
+		<a href="/search.php?cat_id=81">
+			<button
+				style="border:1px solid white;outline:none; background: transparent;cursor:pointer;color:white;font-weight:600;padding:5px 10px;">
+				View All
+			</button>
+		</a>
 		<!-- <div
 			style="font-size: 20px; width: max-content;padding-bottom:10px;border-bottom:1px solid #A65FF3;margin-bottom:40px;">
 			Fixed Price 14K Eartops
@@ -166,12 +167,20 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 
 						echo '
 		      <div style="position:relative;overflow:hidden;">'; ?>
-<div style="position: absolute;top: 10px;z-index:100;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowpw['dc_qty']>0 ? "block" : "none" ?>">
-	<div style="margin:0;">50% OFF</div>
-	<span style="font-size: 10px;margin:0">On Diamond</span>
-</div>
-  <?php
-  echo'
+						<?php
+						if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
+							$dOffSql = "Select discount from package_material where pm_id = 1";
+							$doFFFetch = mysqli_query($con, $dOffSql);
+							$dOff = mysqli_fetch_array($doFFFetch)
+								?>
+							<div
+								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);">
+								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+								<span style="font-size: 10px;margin:0">On Diamond</span>
+							</div>
+							<?php
+						}
+						echo '
   <a href="' . make_url($rowpw['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
 						if (isset($rowpw['image'])) {
@@ -231,68 +240,80 @@ display: -webkit-box;
 			include "no-data.php";
 		} ?>
 	</div>
-	<div class="columns is-mobile p-0 for-men-div" style="display:none;">
 
-		<div class="column is-full">
-			<div class="owl-carousel owl-theme owl-one">
-				<?php
-				/* lopping through products in database matching the terms and displaying start */
-				$sqlpw = fetchProducts(" tag_men=1 order by p.id_pack limit 10");
-				$displaypw = mysqli_query($con, $sqlpw);
-				while ($rowpw = mysqli_fetch_array($displaypw)) {
-					echo '
+	<div class="columns is-mobile p-0 for-men-div" style="display:none;">
+		<?php
+		/* lopping through products in database matching the terms and displaying start */
+		$sqlpw = fetchProducts(" tag_men=1 order by p.id_pack DESC limit 10");
+		$displaypw = mysqli_query($con, $sqlpw);
+		$countgen = mysqli_num_rows($displaypw);
+		if ($countgen > 0) { ?>
+			<div class="column is-full">
+				<div class="owl-carousel owl-theme owl-one">
+
+
+					<?php
+
+
+					while ($rowpw = mysqli_fetch_array($displaypw)) {
+
+						echo '
 		      <div style="position:relative;overflow:hidden;">'; ?>
-<div style="position: absolute;top: 10px;z-index:100;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowpw['dc_qty']>0 ? "block" : "none" ?>">
-	<div style="margin:0;">50% OFF</div>
-	<span style="font-size: 10px;margin:0">On Diamond</span>
-</div>
-  <?php
-  echo'
+						<?php
+						if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
+							$dOffSql = "Select discount from package_material where pm_id = 1";
+							$doFFFetch = mysqli_query($con, $dOffSql);
+							$dOff = mysqli_fetch_array($doFFFetch)
+								?>
+							<div
+								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);">
+								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+								<span style="font-size: 10px;margin:0">On Diamond</span>
+							</div>
+							<?php
+						}
+						echo '
   <a href="' . make_url($rowpw['id_pack']) . '">
   <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
-					if (isset($rowpw['image'])) {
-						echo $rowpw['image'];
-					} else {
-						echo "no-image.png";
-					}
-					echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
+						if (isset($rowpw['image'])) {
+							echo $rowpw['image'];
+						} else {
+							echo "no-image.png";
+						}
+						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
 
 
-					/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
-					$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
-					$displaywl = mysqli_query($con, $sqlwl);
-					$countw = mysqli_num_rows($displaywl);
-					if ($countw > 0) {
+						/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
+						$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
+						$displaywl = mysqli_query($con, $sqlwl);
+						$countw = mysqli_num_rows($displaywl);
+						if ($countw > 0) {
 							echo '
   <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
 						} else {
 							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
 						}
 
-					echo '<br>';
+						echo '<br>';
+						$actual_price = $rowpw['actual_price'] / $crate;
+						$final_price = $rowpw['final_price'] / $crate;
+						$discount = $rowpw['discount'] / $crate;
+						/* customer & its attribute checking end (new/logged-in,currency) */
 
-					/* customer & its attribute checking end (new/logged-in,currency) */
-
-					/* Checking for discount on product start */
-					$actual_price = $rowpw['actual_price'] / $crate;
-					$final_price = $rowpw['final_price'] / $crate;
-					$discount = $rowpw['discount'] / $crate;
-					/* customer & its attribute checking end (new/logged-in,currency) */
-
-					/* Checking for discount on product start */
-					echo '
+						/* Checking for discount on product start */
+						echo '
 							<span class="p-2"><Strong class="letter-spacing price-off ">';
 
-					echo $cnot . " " . round(($final_price), 2);
+						echo $cnot . " " . round(($final_price), 2);
 
-					echo '</strong>';
-					if ($rowpw['discount'] > 0) {
-						echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
-					}
+						echo '</strong>';
+						if ($rowpw['discount'] > 0) {
+							echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
+						}
 
-					/* Checking for discount on product end */
+						/* Checking for discount on product end */
 
-					echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+						echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -300,14 +321,16 @@ display: -webkit-box;
   </a>
   </div>	  
 		  ';
-				}
+					}
 
-				/* lopping through products in database matching the terms and displaying end */
+					/* lopping through products in database matching the terms and displaying end */
 
-				?>
-
+					?>
+				</div>
 			</div>
-		</div>
+		<?php } else {
+			include "no-data.php";
+		} ?>
 	</div>
 
 </div>
