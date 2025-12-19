@@ -46,23 +46,15 @@
     $displayckp2 = mysqli_query($con, $sqlckp2);
     $rowckp2 = mysqli_fetch_array($displayckp2);
     if ($rowuc['b2b'] == 0) {
-      $sqlUC = "update cart_detail set rate=" . $rowckp['final_price'] . ", discount=" . $rowckp['discount'] ." where cart_id='" . $rowckp1['id_pack'] . "'";
-      mysqli_query($con, $sqlUC);
       $newstock = $rowckp2['stock'] - $rowckp1['qty'];
       $sql = "update `whitefeat_wf_new`.`package` set stock='" . $newstock . "' where id_pack='" . $rowckp1['id_pack'] . "'";
       mysqli_query($con, $sql);
     } else {
-            $sqlUC = "update cart_detail set rate=" . $rowckp['final_price_b2b'] . ", discount=" . $rowckp['discount_b2b'] ." where cart_id='" . $rowckp1['id_pack'] . "'";
-      mysqli_query($con, $sqlUC);
       $newstock = $rowckp2['stock_b2b'] - $rowckp1['qty'];
       $sql = "update `whitefeat_wf_new`.`package` set stock_b2b='" . $newstock . "' where id_pack='" . $rowckp1['id_pack'] . "'";
       mysqli_query($con, $sql);
 
     }
-
-
   }
-
-
 }
 ?>

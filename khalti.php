@@ -1,4 +1,4 @@
-<?php { $customer='0'; $cookid='0'; include 'db_connect.php'; include 'ajax_cookie.php'; include_once('make_url.php'); ?>
+<?php { $customer='0'; $cookid='0'; include 'db_connect.php'; include 'ajax_cookie.php'; include_once('make_url.php');include 'header-functions.php'; ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,13 +21,12 @@
 	  $sql1acw = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='".$rowact['cb_id']."' "; 
       $displayacw=mysqli_query($con,$sql1acw);
 	  while($rowactx=mysqli_fetch_array($displayacw)){
-		  $sqlckp = "Select * from `whitefeat_wf_new`.`package` where id_pack='".$rowactx['id_pack']."'"; 
+		  $sqlckp = fetchProduct($rowactx['id_pack']); 
           $displayckp=mysqli_query($con,$sqlckp);
 	      $rowckp=mysqli_fetch_array($displayckp);
-		  $newprice=$rowckp['price'];
-		  if($rowckp['offer']>0){
-		  $newprice=($rowckp['price']-(($rowckp['offer']/100)*$rowckp['price']));
-		  $total_dis=$total_dis+((($rowckp['offer']/100)*$rowckp['price'])*$rowactx['qty']);
+		  $newprice=$rowckp['final_price'];
+		  if($rowckp['discount']>0){
+		  $total_dis=$total_dis+($rowckp['discount']*$rowactx['qty']);
 	       }
 	      $total_net=$total_net+($newprice*$rowactx['qty']);
 	  }

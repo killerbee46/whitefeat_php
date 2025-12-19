@@ -1,6 +1,6 @@
 
 
-<div class="container is-fluid footer_check" style="margin-top:1.8%;background-color:#F6EFF6;">
+<div class="container is-fluid footer_check" style="margin-top:1.8%;background-color:#F6EFF6;padding-bottom:20px;">
   <div class="columns" style="padding-left:5%;"> 
      <div class="column is-8 pt-5">
 	 <span style="color:#3892C6; font-size:0.8rem; font-weight:300; "><a href="#" style="color:#666;font-size:1rem; font-weight:500;" class="subtitle">Contact Us: +977-01-5365343 ( Helpline )  +977 9806091605 </a></span>
