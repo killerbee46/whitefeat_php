@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="assets/css/css.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-      /crypto-js.min.js"></script>
+          /crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-      /hmac-sha256.min.js"></script>
+          /hmac-sha256.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-      /enc-base64.min.js"></script>
+          /enc-base64.min.js"></script>
     <script>
       //var hash = CryptoJS.HmacSHA256("Message", "secret");
       //var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
@@ -189,8 +189,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             <code id="tracking_code" class="column is-half
 is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style="">
 
-                   here is code...
-                   </code>
+                           here is code...
+                           </code>
 
 
             <div class="column mt-5 thankyou-div">
@@ -212,6 +212,11 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 $sqlckp = fetchProduct($rowactx['id_pack']);
                 $displayckp = mysqli_query($con, $sqlckp);
                 $rowckp = mysqli_fetch_array($displayckp);
+
+                if ($rowckp['final_price'] !== $rowactx['rate']) {
+                  $sqlUCD = "update cart_detail set rate=" . $rowckp['final_price'] . ", discount=" . $rowckp['discount'] . "  where cart_id='" . $rowactx['cart_id'] . "' ";
+                  mysqli_query($con, $sqlUCD);
+                }
 
                 $originalPrice = $rowckp['actual_price'];
                 $discount = $rowckp['discount'];
@@ -279,7 +284,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
 
                 echo '
    <h3 class="is-size-6 has-text-weight-semibold mt-4" style="color:#333;">';
-                echo $cnot . " " . floor(( $newprice * $rowactx['qty'])/$crate);
+                echo $cnot . " " . floor(($newprice * $rowactx['qty']) / $crate);
 
                 echo '&nbsp;';
                 if ($b2b_check == 1) {
@@ -287,7 +292,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 }
                 if ($rowckp['offer'] > 0 && $b2b_check == 0) {
                   echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
-                  echo $cnot . " " . floor(( $originalPrice * $rowactx['qty'])/$crate);
+                  echo $cnot . " " . floor(($originalPrice * $rowactx['qty']) / $crate);
                   echo '</small></small></del>';
                 }
 
@@ -607,7 +612,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                         </button>
                       </p>
                     </div>
-            </form>
+                  </form>
 
 
                 </div>
@@ -692,7 +697,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                   Subtotal:
                 </div>
                 <div class="column is-6 pb-0 has-text-right checkout_right_div">
-                  <?php echo $cnot . " " . floor(($total_bd/$crate)); ?>
+                  <?php echo $cnot . " " . floor(($total_bd / $crate)); ?>
                 </div>
 
               </div>
@@ -705,7 +710,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 	Offer Discount:
 	</div>
 	<div class="column is-6 pb-0 has-text-right checkout_right_div">';
-                echo $cnot . " " . floor(($total_dis/$crate));
+                echo $cnot . " " . floor(($total_dis / $crate));
                 echo '</div>
 	
 	</div>';
@@ -731,8 +736,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 </div>
                 <div
                   class="column is-6 pb-2 letter-spacing is-size-6 has-text-weight-semibold has-text-right checkout_right_div">
-                  <?php echo $cnot . " " . floor(($total_net/$crate));
-                  echo '<input type="hidden" id="tcost" value="' . floor(($total_net/$crate)) . '" />'; ?>
+                  <?php echo $cnot . " " . floor(($total_net / $crate));
+                  echo '<input type="hidden" id="tcost" value="' . floor(($total_net / $crate)) . '" />'; ?>
                 </div>
               </div>
 
@@ -744,27 +749,26 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             </div>
 
             <div class="columns mt-4 p-3">
-              <?php 
+              <?php
               if ($GLOBALS['customer'] == '0') { ?>
-                <button class="button is-normal is-fullwidth user-modal"
-                data-target="modal-user"
-                style="background: rgb(241,243,244);
-background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%); border:0;"><i
-                  class="fas fa-shopping-cart"></i> &nbsp; Checkout Now</button>
+                <button class="button is-normal is-fullwidth user-modal" data-target="modal-user"
+                  style="background: rgb(241,243,244);
+background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%); border:0;"><i class="fas fa-shopping-cart"></i> &nbsp; Checkout
+                  Now</button>
               <?php } else { ?>
                 <button class="button is-normal is-fullwidth first-checkout" data-ref="<?php echo $GLOBALS['customer']; ?>"
-                data-ref2="<?php
-                if ($GLOBALS['customer'] != '0') {
-                  $sqlud = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
-                  $displayud = mysqli_query($con, $sqlud);
-                  $rowud = mysqli_fetch_array($displayud);
-                  echo $rowud['name'] . '-' . $rowud['phone'] . '-' . $rowud['address'];
-                }
+                  data-ref2="<?php
+                  if ($GLOBALS['customer'] != '0') {
+                    $sqlud = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
+                    $displayud = mysqli_query($con, $sqlud);
+                    $rowud = mysqli_fetch_array($displayud);
+                    echo $rowud['name'] . '-' . $rowud['phone'] . '-' . $rowud['address'];
+                  }
 
-                ?>"
-                style="background: rgb(241,243,244);
+                  ?>"
+                  style="background: rgb(241,243,244);
 background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 34%, rgba(80,225,255,1) 80%, rgba(116,228,250,1) 98%); border:0;"><i
-                  class="fas fa-shopping-cart"></i> &nbsp; Checkout Now</button>
+                    class="fas fa-shopping-cart"></i> &nbsp; Checkout Now</button>
               <?php } ?>
             </div>
 
@@ -1007,7 +1011,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
           window.location.href = 'khalti.php?cb_id=' + '<?php echo $rowact['cb_id']; ?>';
         }
         if (pmode === '3') {
-
           $('#esewa_pay').submit();
         }
 
