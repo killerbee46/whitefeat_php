@@ -22,15 +22,11 @@
     <link rel="stylesheet" href="assets/css/css.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-          /crypto-js.min.js"></script>
+  /crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-          /hmac-sha256.min.js"></script>
+  /hmac-sha256.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-          /enc-base64.min.js"></script>
-    <script>
-      //var hash = CryptoJS.HmacSHA256("Message", "secret");
-      //var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-      //document.write(hashInBase64);
+  /enc-base64.min.js"></script>
     </script>
   </head>
 
@@ -189,8 +185,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             <code id="tracking_code" class="column is-half
 is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style="">
 
-                           here is code...
-                           </code>
+                               here is code...
+                               </code>
 
 
             <div class="column mt-5 thankyou-div">
@@ -833,9 +829,9 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
      <input value="Submit" type="submit">
      </form>';
         */
-
+$s = hash_hmac('sha256', "total_amount=". floor($total_net) .",transaction_uuid=". date("his") . '-' . $rowact['cb_id'] .",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
       echo '
-<form action="https://epay.esewa.com.np/api/epay/main/v2/form" method="POST" onsubmit="generateSignature()" id="esewa_pay">
+<form action="https://epay.esewa.com.np/api/epay/main/v2/form" method="POST" id="esewa_pay">
 
         <br><br><table style="display:none">
             <tbody><tr>
@@ -898,7 +894,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Signature:</td>
-                <td><input type="text" id="signature" name="signature" value="4Ov7pCI1zIOdwtV2BRMUNjz1upIlT/COTxfLhWvVurE=" class="form" required=""> </td>
+                <td><input type="text" id="signature" name="signature" value="'. base64_encode($s) .'" class="form" required=""> </td>
             </tr>
             <tr>
                 <td>Secret Key:</td>
@@ -916,30 +912,30 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
     ?>
     <script>
       // Function to auto-generate signature
-      function generateSignature() {
-        var currentTime = new Date();
-        var formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') + '-' + currentTime.getHours() +
-          currentTime.getMinutes() + currentTime.getSeconds();
-        //document.getElementById("transaction_uuid").value = formattedTime+;
-        var total_amount = document.getElementById("total_amount").value;
-        var transaction_uuid = document.getElementById("transaction_uuid").value;
-        var product_code = document.getElementById("product_code").value;
-        var secret = document.getElementById("secret").value;
+      // function generateSignature() {
+      //   var currentTime = new Date();
+      //   var formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') + '-' + currentTime.getHours() +
+      //     currentTime.getMinutes() + currentTime.getSeconds();
+      //   //document.getElementById("transaction_uuid").value = formattedTime+;
+      //   var total_amount = document.getElementById("total_amount").value;
+      //   var transaction_uuid = document.getElementById("transaction_uuid").value;
+      //   var product_code = document.getElementById("product_code").value;
+      //   var secret = document.getElementById("secret").value;
 
-        //alert(total_amount+'***'+transaction_uuid+'***'+product_code+'***'+secret);
+      //   //alert(total_amount+'***'+transaction_uuid+'***'+product_code+'***'+secret);
+      //   var hash = CryptoJS.HmacSHA256(
+      //     `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`,
+      //     `${secret}`);
 
-        var hash = CryptoJS.HmacSHA256(
-          `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`,
-          `${secret}`);
-        var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-        document.getElementById("signature").value = hashInBase64;
-      }
+      //   var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+      //   document.getElementById("signature").value = hashInBase64;
+      // }
 
-      // Event listeners to call generateSignature() when inputs are changed
-      document.getElementById("total_amount").addEventListener("input", generateSignature);
-      document.getElementById("transaction_uuid").addEventListener("input", generateSignature);
-      document.getElementById("product_code").addEventListener("input", generateSignature);
-      document.getElementById("secret").addEventListener("input", generateSignature);
+      // // Event listeners to call generateSignature() when inputs are changed
+      // document.getElementById("total_amount").addEventListener("input", generateSignature);
+      // document.getElementById("transaction_uuid").addEventListener("input", generateSignature);
+      // document.getElementById("product_code").addEventListener("input", generateSignature);
+      // document.getElementById("secret").addEventListener("input", generateSignature);
     </script>
 
 
