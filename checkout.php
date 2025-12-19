@@ -286,7 +286,7 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 if ($b2b_check == 1) {
                   echo '<span class="has-text-weight-normal is-size-6" style="opacity:0.6;"><small><small><small>B2B rate</small></small></small></span>';
                 }
-                if ($rowckp['offer'] > 0 && $b2b_check == 0) {
+                if ($rowckp['discount'] > 0 && $b2b_check == 0) {
                   echo '<del class="has-text-weight-normal is-size-5" style="opacity:0.5;"><small><small>';
                   echo $cnot . " " . floor(($originalPrice * $rowactx['qty']) / $crate);
                   echo '</small></small></del>';
