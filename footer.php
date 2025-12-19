@@ -152,7 +152,7 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 	<div class="columns is-mobile p-0 for-women-div">
 		<?php
 		/* lopping through products in database matching the terms and displaying start */
-		$sqlpw = fetchProducts(" tag_women=1 order by p.id_pack DESC limit 10");
+		$sqlpw = fetchProducts(" tag_women=1 and p.cat_id <> 81 order by p.id_pack DESC limit 10");
 		$displaypw = mysqli_query($con, $sqlpw);
 		$countgen = mysqli_num_rows($displaypw);
 		if ($countgen > 0) { ?>
