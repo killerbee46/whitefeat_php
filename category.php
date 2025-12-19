@@ -309,7 +309,7 @@ background: rgba(116,228,250,1);">
 						} else {
 							echo "no-image.png";
 						}
-						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>
+						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center;" class="image"/>
   </div>
   <div class="card-content has-background-light" style="height:100%;">'; ?>
 						<?php
@@ -393,7 +393,7 @@ background: rgba(116,228,250,1);">
 							}
 						}
 
-						echo "<small><small>" . $cnot . "</small></small>" . ' ' . ($newprice);
+						echo "<div class='mt-3'><small><small>" . $cnot . "</small></small>" . ' ' . ($newprice)."</div>";
 
 						echo '&nbsp;';
 						if ($b2b_check == 1) {
@@ -412,7 +412,7 @@ background: rgba(116,228,250,1);">
 	  
 	  <div class="">
 	
-	    <div class="" style="display:flex;flex-wrap:wrap;margin:10px auto; gap:10px;">
+	    <div class="" style="display:none;flex-wrap:wrap;margin:10px auto; gap:10px;">
 <button class="button is-info is-outlined is-light appointment-button" data-target="modal-ter2' . $sn . '"><i class="fas fa-home"></i>Try at home</button>
 
 <div class="modal" id="modal-ter2' . $sn . '">
@@ -512,7 +512,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 
 </div>
-		<div class="">
+		<div class="" style="display:none;">
 		<button class="button is-success is-light schedule-button" data-target="modal-ter"><i class="fas fa-video"></i>&nbsp;Live video call</button>
 		
 		<div class="modal" id="modal-ter">

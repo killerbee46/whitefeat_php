@@ -458,7 +458,7 @@ $dOff = mysqli_fetch_array($doFFFetch)
       </div>
 	  
 	  
-	  <div class="" style="display:flex;flex-wrap:wrap;margin:10px auto; gap:10px;">
+	  <div class="" style="display:none;flex-wrap:wrap;margin:10px auto; gap:10px;">
 	
 	    <div class="">
 <button class="button is-info is-outlined is-light appointment-button" data-target="modal-ter2' . $sn . '"><i class="fas fa-home"></i>Try at home</button>
