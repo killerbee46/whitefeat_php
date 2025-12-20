@@ -46,7 +46,7 @@ $timezone = new DateTimeZone('Asia/Kathmandu');
 $now = new DateTime('now', $timezone);
 
 // Target time in Kathmandu
-$target = new DateTime('2025-12-21 08:30:00', $timezone);
+$target = new DateTime('2025-12-21 12:00:00', $timezone);
 
 // Condition check
 if ($now >= $target && $myNosepinOrder > 1) {
