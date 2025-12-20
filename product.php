@@ -6,20 +6,31 @@
   include_once('make_url.php');
   include_once('get_url.php');
   $productname = get_url($_GET['pack']);
-// Set Kathmandu timezone
-date_default_timezone_set('Asia/Kathmandu');
 
-// Current time
-$currentTime = time();
+  $myNosepinOrder = 0;
+  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
+  $displayOrder = mysqli_query($con, $orderSql);
 
-// Target time: 2025-12-21 08:30 AM Kathmandu time
-$targetTime = strtotime('2025-12-21 08:30:00');
+  while ($rowOrder = mysqli_fetch_array($displayOrder)) {
+    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
+    $displayOrder2 = mysqli_query($con, $orderSql2);
+    $countOrder = mysqli_num_rows($displayOrder2);
+    $myNosepinOrder += $countOrder;
+  }
+  // Set Kathmandu timezone
+  date_default_timezone_set('Asia/Kathmandu');
 
-// Condition check
-if ($currentTime < $targetTime && $productname == 1849) {
+  // Current time
+  $currentTime = time();
+
+  // Target time: 2025-12-21 08:30 AM Kathmandu time
+  $targetTime = strtotime('2025-12-21 8:30:00');
+
+  // Condition check
+  if ($currentTime < $targetTime && $productname == 1849 && $myNosepinOrder > 0) {
     // Time has reached or passed
     header('location:index.php');
-}
+  }
   $headsql = "Select * from `whitefeat_wf_new`.`package` WHERE id_pack='" . $productname . "'";
   $displayhead = mysqli_query($con, $headsql);
   $counthead = mysqli_num_rows($displayhead);
@@ -33,7 +44,7 @@ if ($currentTime < $targetTime && $productname == 1849) {
   <head>
     <meta http-equiv="Cache-control" content="public">
     <meta charset="utf-8">
-    <title><?= $rowhead['p_name'] ?> | White Feathers Jewellery</title>
+    <title><?= $rowhead['p_name'] ?>| White Feathers Jewellery</title>
     <meta name="description" content="<?= $rowhead['description'] ?>">
     <meta name="keywords" content="<?= $rowhead['keyword'] ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -177,8 +188,14 @@ if ($currentTime < $targetTime && $productname == 1849) {
   </head>
 
   <body style="letter-spacing:0.02em;">
-    <?php include 'header.php'; ?>
+    <?php include 'header.php'; 
+    if ($productname == 1849 && $myNosepinOrder > 0) {
+      echo '<script>
+      window.location.href = "/";
+      </script>';
+    }
 
+    ?>
 
     <div class="container is-fluid mt-3">
 
@@ -462,18 +479,18 @@ display: -webkit-box;
 
 
               <?php
-						if ($rowpd['dc_qty'] > 0 || $rowpd['dc_qty_bce2'] > 0) {
-$dOffSql = "Select discount from package_material where pm_id = 1";
-$doFFFetch = mysqli_query($con, $dOffSql);
-$dOff = mysqli_fetch_array($doFFFetch)
-							?>
-							<div
-								style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
-								<div style="margin:0;"><?= round($dOff['discount'],0) ?>% OFF</div>
-								<span style="font-size: 10px;margin:0">On Diamond</span>
-							</div>
-							<?php
-						echo '
+              if ($rowpd['dc_qty'] > 0 || $rowpd['dc_qty_bce2'] > 0) {
+                $dOffSql = "Select discount from package_material where pm_id = 1";
+                $doFFFetch = mysqli_query($con, $dOffSql);
+                $dOff = mysqli_fetch_array($doFFFetch)
+                  ?>
+                <div
+                  style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+                  <div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+                  <span style="font-size: 10px;margin:0">On Diamond</span>
+                </div>
+                <?php
+                echo '
 				 <h6 class="mb-1">
 	<small>&nbsp;Diamond  <small style="font-size:0.7em;">(certified)</small> 
 	</small>
