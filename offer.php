@@ -40,17 +40,16 @@ $myNosepinOrder += $countOrder;
 }
 
 
-// Set Kathmandu timezone
-date_default_timezone_set('Asia/Kathmandu');
+$timezone = new DateTimeZone('Asia/Kathmandu');
 
-// Current time
-$currentTime = time();
+// Current time in Kathmandu
+$now = new DateTime('now', $timezone);
 
-// Target time: 2025-12-21 08:30 AM Kathmandu time
-$targetTime = strtotime('2025-12-21 8:30:00');
+// Target time in Kathmandu
+$target = new DateTime('2025-12-21 08:30:00', $timezone);
 
 // Condition check
-if ($currentTime >= $targetTime && $myNosepinOrder > 1) {
+if ($now >= $target && $myNosepinOrder > 1) {
     // Time has reached or passed
     $offerDisabled = 0;
 }
