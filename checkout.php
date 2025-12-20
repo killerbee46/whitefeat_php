@@ -238,8 +238,11 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 if ($rowactx['size'] != '0') {
                   echo 'Size: ' . $rowactx['size'] . ', &nbsp;';
                 }
-                echo 'Qty &nbsp;
-		  <select class="qty_sel_checkout" data-ref="' . $rowactx['cart_id'] . '">';
+                echo 'Qty &nbsp;';
+		  if($rowckp['id_pack'] == "1849") echo "<button>1</button>"; 
+                else {
+                  echo '
+		  <select'. '' .' class="qty_sel_checkout" data-ref="' . $rowactx['cart_id'] . '">';
 
                 for ($i = 1; $i < 11; $i++) {
                   echo '<option ';
@@ -248,7 +251,10 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                   }
                   echo ' value="' . $i . '">' . $i . '</option>';
                 }
-                echo '</select></b>
+                echo '</select>';
+                } 
+                
+                echo '</b>
 		  </h5>';
 
 
