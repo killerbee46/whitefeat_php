@@ -59,7 +59,7 @@ if ($currentTime >= $targetTime && $myNosepinOrder > 1) {
 					style="color:gold;font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid crimson;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
 					<?php 
                     if ($offerDisabled) { ?>
-                        <div> Christmas Sale<?= $myNosepinOrder ?> ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
+                        <div> Christmas Sale ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
                     <?php } else { ?>
                         <div> Christmas Sale</div>
                     <?php } ?>
@@ -110,7 +110,7 @@ if ($currentTime >= $targetTime && $myNosepinOrder > 1) {
 						}
                         ?>
   <div style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= isset($rowfixed['image'] )? $rowfixed['image'] : 'no-image.php' ?>');
-  background-size:200%;aspect-ratio:1/1;background-position:center;
+  background-size:200%;aspect-ratio:1/1;background-position:center;border-radius:8px;
   " ></div>
   <br />
 
