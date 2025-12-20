@@ -13,6 +13,13 @@
     header('location:index.php');
   }
   $rowhead = mysqli_fetch_array($displayhead);
+
+  if($rowhead['stock'] <= 0){
+    echo '<script>
+    alert("Cannot View Or Order Product");
+    window.location.href = "/";
+    </script>';
+  }
   ?><!DOCTYPE html>
   <html lang="en">
 
