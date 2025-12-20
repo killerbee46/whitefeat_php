@@ -189,7 +189,7 @@
 
   <body style="letter-spacing:0.02em;">
     <?php include 'header.php'; 
-    if ($productname == 1849 && $myNosepinOrder > 0) {
+    if ($currentTime < $targetTime && $productname == 1849 && $myNosepinOrder > 0) {
       echo '<script>
       window.location.href = "/";
       </script>';
