@@ -6,6 +6,20 @@
   include_once('make_url.php');
   include_once('get_url.php');
   $productname = get_url($_GET['pack']);
+// Set Kathmandu timezone
+date_default_timezone_set('Asia/Kathmandu');
+
+// Current time
+$currentTime = time();
+
+// Target time: 2025-12-21 08:30 AM Kathmandu time
+$targetTime = strtotime('2025-12-21 08:30:00');
+
+// Condition check
+if ($currentTime < $targetTime && $productname == 1849) {
+    // Time has reached or passed
+    header('location:index.php');
+}
   $headsql = "Select * from `whitefeat_wf_new`.`package` WHERE id_pack='" . $productname . "'";
   $displayhead = mysqli_query($con, $headsql);
   $counthead = mysqli_num_rows($displayhead);
