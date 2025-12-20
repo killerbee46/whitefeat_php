@@ -17,17 +17,16 @@
     $countOrder = mysqli_num_rows($displayOrder2);
     $myNosepinOrder += $countOrder;
   }
-  // Set Kathmandu timezone
-  date_default_timezone_set('Asia/Kathmandu');
+$timezone = new DateTimeZone('Asia/Kathmandu');
 
-  // Current time
-  $currentTime = time();
+// Current time in Kathmandu
+$now = new DateTime('now', $timezone);
 
-  // Target time: 2025-12-21 08:30 AM Kathmandu time
-  $targetTime = strtotime('2025-12-21 8:30:00');
+// Target time in Kathmandu
+$target = new DateTime('2025-12-21 08:30:00', $timezone);
 
   // Condition check
-  if ($currentTime < $targetTime && $productname == 1849 && $myNosepinOrder > 0) {
+  if ($now < $target && $productname == 1849 && $myNosepinOrder > 0) {
     // Time has reached or passed
     header('location:index.php');
   }
@@ -189,7 +188,7 @@
 
   <body style="letter-spacing:0.02em;">
     <?php include 'header.php'; 
-    if ($currentTime < $targetTime && $productname == 1849 && $myNosepinOrder > 0) {
+    if ($now < $target && $productname == 1849 && $myNosepinOrder > 0) {
       echo '<script>
       window.location.href = "/";
       </script>';
