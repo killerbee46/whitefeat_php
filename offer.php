@@ -90,16 +90,12 @@ if ($currentTime >= $targetTime && $myNosepinOrder = 1) {
 			</div>
 			<div style="display:flex;justify-content:center;">
                     
-                <div style="width:300px;margin:20px auto;">
+				<div style="width:300px;margin:20px auto;cursor:pointer">
 					<?php
 					while ($rowfixed = mysqli_fetch_array($displayOffer)) { ?>
-<?php 
-                    if ($myNosepinOrder > 0 && $rowfixed['stock'] <= 0) { ?>
-                        <a href="#"></a>
-                    <?php } else { ?>
-                        <a href="<?= make_url(1849) ?>"></a>
-                    <?php } ?>
-		      <div style="position:relative;overflow:hidden;cursor:<?= $myNosepinOrder > 0 && $rowfixed['stock'] ? "not-allowed" : "pointer" ?>;">
+						<a href="<?= make_url('1849') ?>">
+
+		      <div style="position:relative;overflow:hidden;">
                 <?php
 						if ($rowfixed['stock'] <= 0) {?>
 							<div
@@ -145,6 +141,6 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 					}
 					?>
 				</div>
-                </a>
+			</a>
 			</div>
 		</div>

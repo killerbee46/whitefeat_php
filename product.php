@@ -13,9 +13,6 @@
     header('location:index.php');
   }
   $rowhead = mysqli_fetch_array($displayhead);
-  if ($rowhead['stock'] <= 0) {
-    header('location:index.php');
-  }
   ?><!DOCTYPE html>
   <html lang="en">
 
