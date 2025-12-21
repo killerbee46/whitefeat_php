@@ -14,9 +14,26 @@
   }
   $rowhead = mysqli_fetch_array($displayhead);
 
-  if($rowhead['stock'] <= 0 && $productname == 1849){
+  $myNosepinOrder = 0;
+  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
+  $displayOrder = mysqli_query($con, $orderSql);
+
+  while ($rowOrder = mysqli_fetch_array($displayOrder)) {
+    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
+    $displayOrder2 = mysqli_query($con, $orderSql2);
+    $countOrder = mysqli_num_rows($displayOrder2);
+    $myNosepinOrder += $countOrder;
+  }
+
+  if ($rowhead['stock'] <= 0 && $productname == 1849) {
     echo '<script>
     alert("Cannot View Or Order Product");
+    window.location.href = "/";
+    </script>';
+  }
+  if ($myNosepinOrder > 0) {
+    echo '<script>
+    alert("Cannot Place Any More Orders");
     window.location.href = "/";
     </script>';
   }
@@ -455,18 +472,18 @@ display: -webkit-box;
 
 
               <?php
-						if ($rowpd['dc_qty'] > 0 || $rowpd['dc_qty_bce2'] > 0) {
-$dOffSql = "Select discount from package_material where pm_id = 1";
-$doFFFetch = mysqli_query($con, $dOffSql);
-$dOff = mysqli_fetch_array($doFFFetch)
-							?>
-							<div
-								style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
-								<div style="margin:0;"><?= round($dOff['discount'],0) ?>% OFF</div>
-								<span style="font-size: 10px;margin:0">On Diamond</span>
-							</div>
-							<?php
-						echo '
+              if ($rowpd['dc_qty'] > 0 || $rowpd['dc_qty_bce2'] > 0) {
+                $dOffSql = "Select discount from package_material where pm_id = 1";
+                $doFFFetch = mysqli_query($con, $dOffSql);
+                $dOff = mysqli_fetch_array($doFFFetch)
+                  ?>
+                <div
+                  style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+                  <div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+                  <span style="font-size: 10px;margin:0">On Diamond</span>
+                </div>
+                <?php
+                echo '
 				 <h6 class="mb-1">
 	<small>&nbsp;Diamond  <small style="font-size:0.7em;">(certified)</small> 
 	</small>
