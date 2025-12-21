@@ -31,7 +31,7 @@
     window.location.href = "/";
     </script>';
   }
-  if ($myNosepinOrder > 0) {
+  if ($myNosepinOrder > 0 && $productname == 1849) {
     echo '<script>
     alert("Cannot Place Any More Orders");
     window.location.href = "/";
@@ -186,7 +186,7 @@
     </style>
   </head>
 
-  <body style="letter-spacing:0.02em;">
+  <body style="letter-spacing:0.02em;overflow:auto;">
     <?php include 'header.php'; ?>
 
 
