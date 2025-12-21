@@ -186,7 +186,7 @@
     </style>
   </head>
 
-  <body style="letter-spacing:0.02em;overflow:auto;">
+  <body style="letter-spacing:0.02em;">
     <?php include 'header.php'; ?>
 
 
@@ -210,12 +210,13 @@
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>');
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               aspect-ratio:1/1;
               background-size: cover;
               background-position: center;
               background-repeat: no-repeat;
-              object-fit: contain ;
+              object-fit: cover ;
               object-position: center center;">
               <div class="product-image-info">
                 Hover for Zoom Preview
@@ -230,7 +231,8 @@
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>');
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               background-size: 150%;
               background-position: center;
               background-repeat: no-repeat;
