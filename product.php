@@ -14,7 +14,7 @@
   }
   $rowhead = mysqli_fetch_array($displayhead);
 
-  if($rowhead['stock'] <= 0){
+  if($rowhead['stock'] <= 0 && $productname == 1849){
     echo '<script>
     alert("Cannot View Or Order Product");
     window.location.href = "/";
