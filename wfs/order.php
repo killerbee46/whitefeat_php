@@ -474,7 +474,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['title']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													} else {
 														$sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowol['cb_id'] . "'";
@@ -487,7 +487,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['p_name']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													}
 
@@ -702,20 +702,20 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['title']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													} else {
 														$sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowol['cb_id'] . "'";
 														$displayckp1 = mysqli_query($con, $sqlckp1);
 														while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
 															echo '<h6 style="" class="p-2"><small><small>';
-															$sqlckp2 = "Select s_path from `whitefeat_wf_new`.`package_slider` where id_pack='" . $rowckp1['id_pack'] . "' limit 1";
+															$sqlckp2 = fetchProduct($rowckp1['id_pack']) ;
 															$displayckp2 = mysqli_query($con, $sqlckp2);
 															$rowckp2 = mysqli_fetch_array($displayckp2);
 
-															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['s_path'] . '" style="height:3em;"/>';
+															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['p_name']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													}
 
@@ -909,7 +909,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['title']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													} else {
 														$sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowol['cb_id'] . "'";
@@ -922,7 +922,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['p_name']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													}
 
@@ -1108,7 +1108,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['title']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													} else {
 														$sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowol['cb_id'] . "'";
@@ -1121,7 +1121,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 															echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['s_path'] . '" style="height:3em;"/>';
 
-															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['p_name']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
+															echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="../' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></small></small></h6>';
 														}
 													}
 
