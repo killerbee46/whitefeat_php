@@ -30,6 +30,9 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 		<link rel="stylesheet" href="dist/css/sweet-alert.css">
 		<link href="plugins/addon/SunEditor-master/dist/css/suneditor.min.css" rel="stylesheet" type="text/css" />
 		<style>
+			body{
+				overflow: auto;
+			}
 			.Hunter-pop-up {
 				position: absolute;
 				top: 0;
