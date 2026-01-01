@@ -3,12 +3,6 @@ include 'db_connect.php';
 include 'ajax_cookie.php';
 include 'header.php';
 
-if ($offerExpired) {
-  echo '<script>
-  alert("Action Not Allowed");
-  window.location.href = "/"
-  </script>';
-}
 $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
 $tdate = date('y-m-d');
 $query = "INSERT INTO cart_book (
@@ -22,8 +16,8 @@ $query = "INSERT INTO cart_book (
     checkout,
     mode,
     tracking_code,
-      p_date,
-      p_amount
+    p_date,
+    p_amount
     )
     values (
     '" . $_POST['name'] . "',
@@ -36,14 +30,13 @@ $query = "INSERT INTO cart_book (
     '1',
     '1',
     '" . $tracking . "',
-    '" . $tdate . "',
-    '112'
+    '" . $tdate . "'
     )
     ";
 if (mysqli_query($con, $query)) {
   echo "<script>
-                        alert('Product Ordered Successfully!')
-                        window.location.href = '/customer'
+          alert('Product Ordered Successfully!')
+          window.location.href = '/orders'
         </script>";
 } else {
   echo "<script>alert('Error While Ordering Product!')</script>";

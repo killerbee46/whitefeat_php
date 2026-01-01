@@ -144,19 +144,162 @@ $apporder = false;
             width: 250px;
             margin-top: 10px;
         }
+
+        .search-select {
+            position: relative;
+            width: 300px;
+        }
+
+        #productResults {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            max-height: 220px;
+            overflow-y: auto;
+            display: none;
+            z-index: 999;
+        }
+
+        #productResults li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #productResults li:hover {
+            background: #f5f5f5;
+        }
+
+        .multi-select {
+            position: relative;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .selected-items {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .chip {
+            width: 100%;
+            background: white;
+            padding: 6px 10px;
+            border: .5px solid black;
+            border-radius: 8px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .chip span {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        ul#results {
+            position: absolute;
+            left: 1px;
+            right: 0;
+            top: 70%;
+            background: #fff;
+            border: 1px solid #ddd;
+            max-height: 240px;
+            overflow-y: auto;
+            display: none;
+            z-index: 999;
+            padding-inline-start: 0;
+        }
+
+        #results li {
+            padding: 10px;
+            cursor: pointer;
+            list-style-type: none;
+        }
+
+        #results li:hover {
+            background: #f4f4f4;
+        }
     </style>
 </head>
 
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;">
     <?php include('header.php'); ?>
     <div class="container mt-5">
+
+        <?php
+        if (!empty($_POST)) {
+            $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
+            $tdate = date('y-m-d');
+            $query = "INSERT INTO cart_book (
+    name,
+    cno,
+    address,
+    cookie_id,
+    email,
+    checkout,
+    mode,
+    tracking_code,
+    p_date
+    )
+    values (
+    '" . $_POST['name'] . "',
+    '" . $_POST['phone'] . "',
+    '" . $_POST['address'] . "',
+    '" . $_POST['products'] . "',
+    'Order By:" . $_POST['email'] . "',
+    '1',
+    '1',
+    '" . $tracking . "',
+    '" . $tdate . "'
+    )
+    ";
+
+            if (mysqli_query($con, $query)) {
+                echo "<script>
+          alert('Product Ordered Successfully!')
+          window.location.href = '/orders'
+        </script>";
+            } else {
+                echo "<script>alert('Error While Ordering Product!')</script>";
+            }
+        }
+        ?>
         <div class="order-form-container card p-5">
             <div style="font-size:18px;font-weight:500;margin-bottom:30px;">Order Details</div>
-            <form>
+            <form id="order-form" method="post" action="">
                 <div class="row">
                     <div class="col">
                         <label>Name</label>
-                        <input name="user" />
+                        <input name="name" />
                     </div>
                     <div class="col">
                         <label>Phone</label>
@@ -167,56 +310,33 @@ $apporder = false;
                         <input name="address" />
                     </div>
                     <div class="col">
+                        <label>Products</label>
+                        <div class="multi-select">
 
-                        <label>Select Products:</label>
-                        <div id="tagBox" class="tag-box"></div>
+                            <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off" />
 
-                        <select id="productSelect">
-                            <option value="">-- Choose a product --</option>
-                            <option value="p1">Diamond Ring</option>
-                            <option value="p2">Gold Necklace</option>
-                            <option value="p3">Silver Bracelet</option>
-                            <option value="p4">Platinum Earrings</option>
-                        </select>
+                            <ul id="results"></ul>
 
-                        <input type="hidden" id="selectedProducts" name="products">
+                            <div class="selected-items" id="selectedItems"></div>
 
-                        <script>
-                            const select = document.getElementById('productSelect');
-                            const tagBox = document.getElementById('tagBox');
-                            const hiddenInput = document.getElementById('selectedProducts');
-
-                            let selectedValues = [];
-
-                            select.addEventListener('change', () => {
-                                const value = select.value;
-                                const label = select.options[select.selectedIndex].text;
-
-                                if (!value || selectedValues.includes(value)) return;
-
-                                selectedValues.push(value);
-                                hiddenInput.value = JSON.stringify(selectedValues);
-
-                                const tag = document.createElement('div');
-                                tag.classList.add('tag');
-                                tag.innerHTML = `${label} <button data-value="${value}">✕</button>`;
-                                tagBox.appendChild(tag);
-
-                                tag.querySelector("button").onclick = (e) => {
-                                    const v = e.target.dataset.value;
-                                    selectedValues = selectedValues.filter(item => item !== v);
-                                    hiddenInput.value = JSON.stringify(selectedValues);
-                                    tag.remove();
-                                };
-
-                                select.value = "";
-                            });
-                        </script>
+                            <!-- hidden field for backend -->
+                            <input type="hidden" name="products" id="productsPayload">
+                        </div>
 
                     </div>
+
                     <div class="col">
-                        <label>Price</label>
-                        <input name="price" />
+                        <label>Order Taken By</label>
+                        <select name="email" required>
+                            <option value="" selected disabled>Select Order Taker</option>
+                            <option value="Reshma Thakuri">Reshma Thakuri</option>
+                            <option value="Ruby Madai">Ruby Madai</option>
+                            <option value="Pooja Sapkota">Pooja Sapkota</option>
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                    <div style="width:100%">
+                        <button type="submit" class="button primary">Add Order</button>
                     </div>
                 </div>
             </form>
@@ -224,30 +344,127 @@ $apporder = false;
     </div>
 
     <script>
-        let tempUrl = ''
-        var defaultFilters = {}
 
-        const url = new URL(document.location.href)
-        function queryHandler(e, filter_name) {
-            const value = e.value
-            const searchParams = url.searchParams
-            if (value === "0" || value === "") {
-                searchParams.delete(filter_name)
-            }
-            else {
-                searchParams.set(filter_name, value)
-                window.location.href = url
-            }
-            window.location.href = url
+        let products = [];
+
+        fetch("http://whitefeathersjewellery.com:60000/api/sql/products").then(response => response.json())
+            .then(data => {
+                products = data.data
+            })
+
+    </script>
+    <script>
+
+        const input = document.getElementById("searchInput");
+        const results = document.getElementById("results");
+        const selectedItems = document.getElementById("selectedItems");
+        const payloadInput = document.getElementById("productsPayload");
+
+        let selectedProducts = [];
+        let debounceTimer;
+
+        // debounce
+        function debounce(fn, delay) {
+            return (...args) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => fn(...args), delay);
+            };
         }
 
-        const orderSearch = document.getElementById('orderSearch')
-        orderSearch.addEventListener('keydown', function (e) {
-            if (e.key === "Enter") {
-                queryHandler({ value: e.target.value }, 'search')
+        const handleSearch = debounce((value) => {
+            results.innerHTML = "";
+
+            if (value.length < 2) {
+                results.style.display = "none";
+                return;
             }
-        })
+
+            const filtered = products.filter(p =>
+                p.title.toLowerCase().includes(value.toLowerCase()) &&
+                !selectedProducts.some(sp => sp.id === p.id)
+            );
+
+            if (!filtered.length) {
+                results.innerHTML = "<li>No results</li>";
+            } else {
+                filtered.forEach(p => {
+                    const li = document.createElement("li");
+                    li.textContent = p.title;
+                    li.onclick = () => selectProduct(p);
+                    results.appendChild(li);
+                });
+            }
+
+            results.style.display = "block";
+        }, 300);
+
+        input.addEventListener("input", e => {
+            handleSearch(e.target.value.trim());
+        });
+
+        function selectProduct(product) {
+            const tempProd = {id:product.id,s_path:product.image,dynamic_price:product.final_price,discount:product.discount,title:product.title}
+            selectedProducts.push({ ...tempProd, quantity: 1 });
+            renderSelected();
+            updatePayload();
+            input.value = "";
+            results.style.display = "none";
+        }
+
+        function removeProduct(id) {
+            selectedProducts = selectedProducts.filter(p => p.id !== id);
+            renderSelected();
+            updatePayload();
+        }
+
+        function updateQuantity(id, quantity) {
+            selectedProducts = selectedProducts.map(p => {
+                if (p.id == id) {
+                    return { ...p, quantity: p.quantity + quantity }
+                } else {
+                    return p
+                }
+            });
+            renderSelected();
+            updatePayload();
+        }
+
+        function renderSelected() {
+            selectedItems.innerHTML = "";
+
+            selectedProducts.forEach(p => {
+                const chip = document.createElement("div");
+                chip.className = "chip";
+                chip.innerHTML = `
+    <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/${p.s_path}" width="20px" height="20px" alt="pI" />
+      ${p.title}  - 
+      <span>
+        Qty: 
+        <button ${p.quantity === 1 ? "disabled" : ""} onclick="updateQuantity(${p.id},-1)" style="height: unset;padding:2px 8px;cursor: pointer;">-</button> 
+        ${p.quantity} 
+        <button ${p.quantity === 5 ? "disabled" : ""} onclick="updateQuantity(${p.id},1)" style="height: unset;padding:2px 8px;cursor: pointer;">+</button>
+        
+        </span>
+      <span title="Remove" onclick="removeProduct(${p.id})" style="font-size:18px;">&times;</span>
+    `;
+                selectedItems.appendChild(chip);
+            });
+        }
+
+        function updatePayload() {
+            payloadInput.value = JSON.stringify({
+                products: selectedProducts
+            });
+        }
+
+        // close dropdown
+        document.addEventListener("click", e => {
+            if (!e.target.closest(".multi-select")) {
+                results.style.display = "none";
+            }
+        });
     </script>
+
 
 </body>
 
