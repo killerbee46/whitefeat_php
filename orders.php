@@ -52,7 +52,8 @@ $apporder = false;
             align-items: center;
             gap: 10px;
             padding: 10px 20px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow: auto;
         }
 
         .tabs-head {
@@ -91,37 +92,63 @@ $apporder = false;
         .orders-table {
             width: 100%;
         }
+
+        .ppanel {
+            padding: 10px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .order-list-phone {
+            display: none;
+        }
+
+        .order-list {
+            display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            .order-list-phone {
+                display: block;
+            }
+
+            .order-list {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
-    <?php include('header.php'); 
-    
-        function updateOrderStatus($id, $status){
-            include 'db_connect.php';
-            $updateQuery = "update cart_book set ".$status." = ".$GLOBALS['customer']." where cb_id = ".$id." ;";
-            if (mysqli_query($con, $updateQuery)) {
-                echo "<script>
+    <?php include('header.php');
+
+    function updateOrderStatus($id, $status)
+    {
+        include 'db_connect.php';
+        $updateQuery = "update cart_book set " . $status . " = " . $GLOBALS['customer'] . " where cb_id = " . $id . " ;";
+        if (mysqli_query($con, $updateQuery)) {
+            echo "<script>
                 alert('Order Status Updated!');
                 window.location.href = '/white-feathers/orders';
                 </script>";
-            } else {
-                echo "<script>
+        } else {
+            echo "<script>
                 alert('Error Updating Order!');
                 window.location.href = '/white-feathers/orders';
                 </script>";
-            }
-            
         }
 
-        if (isset($_GET['status']) && isset($_GET['id'])) {
-            $status = $_GET['status'];
-            $id = $_GET['id'];
-            updateOrderStatus($id, $status);
-        }
+    }
+
+    if (isset($_GET['status']) && isset($_GET['id'])) {
+        $status = $_GET['status'];
+        $id = $_GET['id'];
+        updateOrderStatus($id, $status);
+    }
 
     ?>
-    
+
 
     <div class="container is-fluid mt-5 pb-5">
         <div class="orders-header" style="display:flex;justify-content: space-between;align-items:center;">
@@ -160,6 +187,125 @@ $apporder = false;
                     </div>
                     <hr style="margin-top:-12px;" />
                 </div>
+
+                <div class="order-list-phone">
+                    <?php
+                    if ($countOrder > 0) {
+                        while ($rowOrder = mysqli_fetch_array($displayOrder)) {
+                            $apporder = $rowOrder['c_id'] == 0;
+                            $tempProd = json_decode($rowOrder['cookie_id'], true);
+                            $products = $apporder ? $tempProd['products'] : [];
+                            $orderStatus = "new";
+                            $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
+                                $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
+                                    $rowOrder['dispatch'] > 0 ? ["on delivery", "goldenrod", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
+                                )
+                            )
+                                ?>
+
+                            <div class="order-card box" style="padding:10px;margin:0 -15px;border-top:1px solid #3892C6">
+                                <div class="flex justify-between align-center">
+                                    <div><?= $rowOrder['cb_id'] ?></div>
+                                    <div>
+                                        <div>
+                                            <?= $rowOrder['name'] ?>
+                                        </div>
+                                        <div>
+                                            <?= $rowOrder['cno'] ?>
+                                        </div>
+                                    </div>
+                                    <div style="font-weight:600;">
+                                        <?php $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $rowOrder['cur_id'] . "'";
+                                        $displaycrc2 = mysqli_query($con, $sqlcrc2);
+                                        $rowcrc2 = mysqli_fetch_array($displaycrc2);
+                                        $cnot = $rowcrc2['cur_name'] ?? "Npr";
+                                        $crate = (1 / ($rowcrc2['cur_rate'] ?? 1));
+                                        $total_net = 0;
+                                        $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                        $displayckp = mysqli_query($con, $sqlckp);
+                                        if ($apporder) {
+                                            if ($rowOrder['p_amount'] == 0) {
+                                                foreach ($products as $prod) {
+                                                    $total_net += ($prod['quantity'] * $prod['dynamic_price']);
+                                                }
+                                            } else {
+                                                $total_net = $rowOrder['p_amount'];
+                                            }
+                                        } else {
+                                            while ($rowckp = mysqli_fetch_array($displayckp)) {
+                                                $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
+                                            }
+                                        }
+                                        echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
+                                    </div>
+                                </div>
+                                <div class="flex justify-center align-center" style="margin:10px auto;">
+                                    To: <?= $rowOrder['address'] ?>
+                                </div>
+                                <hr class="mt-0" />
+                                <div>
+                                    <button class="button paccordion" style="width:100%">Products</button>
+                                    <div class="ppanel">
+                                        <div style="font-size:12px;">
+                                            <hr class="m-0 mt-2" />
+                                            <?php
+                                            if ($apporder) {
+                                                foreach ($products as $prod) {
+                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+
+                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
+
+                                                    echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                }
+                                            } else {
+                                                $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                                $displayckp1 = mysqli_query($con, $sqlckp1);
+                                                while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
+                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+                                                    $sqlckp2 = fetchProduct($rowckp1['id_pack']);
+                                                    $displayckp2 = mysqli_query($con, $sqlckp2);
+                                                    $rowckp2 = mysqli_fetch_array($displayckp2);
+
+                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+
+                                                    echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                }
+                                            }
+                                            ?>
+                                            <hr class="m-0 mb-5" style="background:#3892C666" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mt-0" />
+                                <div class="flex justify-center align-center" style="gap:20px;margin:10px 0">
+                                    <div style="width:50%">
+                                        <button class="button"
+                                            style="width:100%;display:flex;gap:10px;background:<?= $orderStatus[1] ?>;color:white;">
+                                            <?= $orderStatus[2] ?>
+                                            <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
+                                        </button>
+                                    </div>
+                                    <?php if (count($orderStatus) > 3) { ?>
+                                        <div style="width:50%">
+                                            <button class="button primary"
+                                                style="width:100%;cursor:pointer;text-transform:capitalize; display:flex;gap:10px;"
+                                                title="<?= $orderStatus[3] ?>"
+                                                onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
+                                                <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
+
+                                            </button>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php }
+                    } else { ?>
+                        <div>
+                            <?php include 'no-data.php'; ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
                 <div class="order-list">
                     <table class="orders-table">
                         <tr>
@@ -219,9 +365,9 @@ $apporder = false;
                                     <td><?= $rowOrder['address'] ?></td>
                                     <td>
                                         <?php
-                                        $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson",'<i class="fas fa-times"></i>'] : (
-                                            $rowOrder['deliver'] > 0 ? ["delivered", "green",'<i class="fas fa-check"></i>'] : (
-                                                $rowOrder['dispatch'] > 0 ? ["on delivery", "brown",'<i class="fas fa-truck"></i>', "deliver",'<i class="fas fa-check"></i>'] : ["new", "gray",'<i class="fas fa-file"></i>', "dispatch",'<i class="fas fa-truck"></i>']
+                                        $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
+                                            $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
+                                                $rowOrder['dispatch'] > 0 ? ["on delivery", "brown", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
                                             )
                                         )
                                             ?>
@@ -232,7 +378,8 @@ $apporder = false;
                                                 <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
                                             </div>
                                             <?php if (count($orderStatus) > 3) { ?>
-                                                <div title="<?= $orderStatus[3] ?>" onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
+                                                <div title="<?= $orderStatus[3] ?>"
+                                                    onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
                                                     style="cursor:pointer;">
                                                     <?= $orderStatus[4] ?>
                                                 </div>
@@ -243,8 +390,8 @@ $apporder = false;
                                         <div style="display:flex;gap:20px">
                                             <a href="/add-order?id=<?= $rowOrder['cb_id'] ?>"><i title="Edit" class="fas fa-pen"
                                                     style="color:#2b93fb;cursor:pointer;"></i></a>
-                                            <i title="Delete" onclick="confirmDelete(<?= $rowOrder['cb_id'] ?>)" style="color:crimson;cursor:pointer;"
-                                                class="fas fa-trash"></i>
+                                            <i title="Delete" onclick="confirmDelete(<?= $rowOrder['cb_id'] ?>)"
+                                                style="color:crimson;cursor:pointer;" class="fas fa-trash"></i>
                                         </div>
                                     </td>
                                 </tr>
@@ -272,7 +419,7 @@ $apporder = false;
 
                                                     echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
 
-                                                    echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="'. make_url($rowckp1['id_pack']) .'" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                    echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
                                                 }
                                             }
                                             ?>
@@ -314,9 +461,9 @@ $apporder = false;
 
         const confirmDelete = (id) => {
             const result = confirm("Are you sure you want to delete this order?")
-            
+
             if (result) {
-                window.location.href = window.location.href = '/white-feathers/orders?status=c_request&id='+id;
+                window.location.href = window.location.href = '/white-feathers/orders?status=c_request&id=' + id;
             }
         }
 
@@ -326,6 +473,23 @@ $apporder = false;
                 queryHandler({ value: e.target.value }, 'search')
             }
         })
+    </script>
+
+    <script>
+        var acc = document.getElementsByClassName("paccordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
     </script>
 
 </body>
