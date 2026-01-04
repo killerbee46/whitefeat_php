@@ -104,8 +104,8 @@ $apporder = false;
             display: none;
         }
 
-        .order-list {
-            display: block;
+        .orders-table {
+            display: table;
         }
 
         @media screen and (max-width: 768px) {
@@ -113,7 +113,7 @@ $apporder = false;
                 display: block;
             }
 
-            .order-list {
+            .orders-table {
                 display: none;
             }
 
@@ -198,6 +198,7 @@ $apporder = false;
 
                 <div class="">
                     <table class="orders-table">
+                            <div class="order-list">
                         <tr>
                             <th>ID</th>
                             <th>User</th>
@@ -212,6 +213,7 @@ $apporder = false;
                                 <hr class="mt-2 mb-5" style="background:#14141488" />
                             </td>
                         </tr>
+                    </div>
                     <?php
                     if ($countOrder > 0) {
                         while ($rowOrder = mysqli_fetch_array($displayOrder)) {
