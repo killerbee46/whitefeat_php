@@ -7,7 +7,7 @@ include_once('make_url.php');
 $sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 $displayus = mysqli_query($con, $sqlus);
 $rowus = mysqli_fetch_array($displayus);
-if ($GLOBALS['customer'] == 0 && $rowus < 2) {
+if ($GLOBALS['customer'] == 0 && $rowus['role'] < 2) {
     header('location:index.php');
 }
 
@@ -116,6 +116,11 @@ $apporder = false;
             .order-list {
                 display: none;
             }
+
+            .tabs-head {
+                padding: 5px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -130,12 +135,12 @@ $apporder = false;
         if (mysqli_query($con, $updateQuery)) {
             echo "<script>
                 alert('Order Status Updated!');
-                window.location.href = '/white-feathers/orders';
+                window.location.href = '/orders';
                 </script>";
         } else {
             echo "<script>
                 alert('Error Updating Order!');
-                window.location.href = '/white-feathers/orders';
+                window.location.href = '/orders';
                 </script>";
         }
 
@@ -156,13 +161,16 @@ $apporder = false;
             <div style="display:flex;gap:10px;">
                 <input value="<?= $_GET['search'] ?? "" ?>" id="orderSearch" style="padding: 5px 10px;" type="search"
                     placeholder="Search Order...">
-                <div>
-                    <a href="/add-order">
-                        <button
-                            style="font-weight:600; background:#3892C6;border:2px solid #3892C6;padding:5px 10px;color:white;cursor:pointer;"><i
-                                class="fas fa-plus"></i> Add Order</button>
-                    </a>
-                </div>
+                <?php
+                if ($rowus['role'] >= 3) { ?>
+                    <div>
+                        <a href="/add-order">
+                            <button
+                                style="font-weight:600; background:#3892C6;border:2px solid #3892C6;padding:5px 10px;color:white;cursor:pointer;"><i
+                                    class="fas fa-plus"></i> Add Order</button>
+                        </a>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <hr class="my-2" />
@@ -188,7 +196,22 @@ $apporder = false;
                     <hr style="margin-top:-12px;" />
                 </div>
 
-                <div class="order-list-phone">
+                <div class="">
+                    <table class="orders-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Delivery Address</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <hr class="mt-2 mb-5" style="background:#14141488" />
+                            </td>
+                        </tr>
                     <?php
                     if ($countOrder > 0) {
                         while ($rowOrder = mysqli_fetch_array($displayOrder)) {
@@ -203,7 +226,7 @@ $apporder = false;
                             )
                                 ?>
 
-                            <div class="order-card box" style="padding:10px;margin:0 -15px;border-top:1px solid #3892C6">
+                            <div class="order-card box order-list-phone" style="padding:10px;margin:15px -10px;border-top:1px solid #3892C6">
                                 <div class="flex justify-between align-center">
                                     <div><?= $rowOrder['cb_id'] ?></div>
                                     <div>
@@ -242,7 +265,7 @@ $apporder = false;
                                 <div class="flex justify-center align-center" style="margin:10px auto;">
                                     To: <?= $rowOrder['address'] ?>
                                 </div>
-                                <hr class="mt-0" />
+                                <hr class="mt-0 mb-3" />
                                 <div>
                                     <button class="button paccordion" style="width:100%">Products</button>
                                     <div class="ppanel">
@@ -272,7 +295,6 @@ $apporder = false;
                                                 }
                                             }
                                             ?>
-                                            <hr class="m-0 mb-5" style="background:#3892C666" />
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +302,7 @@ $apporder = false;
                                 <div class="flex justify-center align-center" style="gap:20px;margin:10px 0">
                                     <div style="width:50%">
                                         <button class="button"
-                                            style="width:100%;display:flex;gap:10px;background:<?= $orderStatus[1] ?>;color:white;">
+                                            style="width:100%;display:flex;gap:10px;background:<?= $orderStatus[1] ?>;color:white;border-color:<?= $orderStatus[1] ?>">
                                             <?= $orderStatus[2] ?>
                                             <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
                                         </button>
@@ -292,44 +314,13 @@ $apporder = false;
                                                 title="<?= $orderStatus[3] ?>"
                                                 onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
                                                 <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
-
                                             </button>
                                         </div>
                                     <?php } ?>
                                 </div>
                             </div>
-                        <?php }
-                    } else { ?>
-                        <div>
-                            <?php include 'no-data.php'; ?>
-                        </div>
-                    <?php } ?>
-                </div>
 
-                <div class="order-list">
-                    <table class="orders-table">
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Price</th>
-                            <th>Delivery Address</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr>
-                            <td colspan="7">
-                                <hr class="mt-2 mb-5" style="background:#14141488" />
-                            </td>
-                        </tr>
-                        <?php
-                        if ($countOrder > 0) {
-                            while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-                                $apporder = $rowOrder['c_id'] == 0;
-                                $tempProd = json_decode($rowOrder['cookie_id'], true);
-                                $products = $apporder ? $tempProd['products'] : [];
-                                $orderStatus = "new"
-                                    ?>
+                            <div class="order-list">
                                 <tr style="padding-bottom:10px;">
                                     <td><?= $rowOrder['cb_id'] ?></td>
                                     <td>
@@ -373,7 +364,7 @@ $apporder = false;
                                             ?>
                                         <div class="flex align-center" style="gap: 10px;">
                                             <div class="flex align-center"
-                                                style="gap:8px;border-radius:8px;width:fit-content;padding:3px 5px; border: 1px solid gray;background:<?= $orderStatus[1] ?>;color:white;cursor:pointer;font-size:12px">
+                                                style="gap:8px;border-radius:8px;width:fit-content;padding:3px 5px; border: 1px solid gray;background:<?= $orderStatus[1] ?>;color:white;cursor:pointer;font-size:12px;border-color:<?= $orderStatus[1] ?>;">
                                                 <?= $orderStatus[2] ?>
                                                 <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
                                             </div>
@@ -387,12 +378,15 @@ $apporder = false;
                                         </div>
                                     </td>
                                     <td>
+                                        <?php
+                if ($rowus['role'] >= 3 && str_starts_with($rowOrder['email'],"Order By:")) { ?>
                                         <div style="display:flex;gap:20px">
                                             <a href="/add-order?id=<?= $rowOrder['cb_id'] ?>"><i title="Edit" class="fas fa-pen"
                                                     style="color:#2b93fb;cursor:pointer;"></i></a>
                                             <i title="Delete" onclick="confirmDelete(<?= $rowOrder['cb_id'] ?>)"
                                                 style="color:crimson;cursor:pointer;" class="fas fa-trash"></i>
                                         </div>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -427,15 +421,13 @@ $apporder = false;
                                         </div>
                                     </td>
                                 </tr>
-                            <?php }
-                        } else { ?>
-                            <tr>
-                                <td colspan='6'>
-                                    <?php include 'no-data.php'; ?>
-                                </td>
-                            </tr>
+                            </div>
                         <?php }
-                        ?>
+                    } else { ?>
+                        <div>
+                            <?php include 'no-data.php'; ?>
+                        </div>
+                    <?php } ?>
                     </table>
                 </div>
             </div>
@@ -463,7 +455,7 @@ $apporder = false;
             const result = confirm("Are you sure you want to delete this order?")
 
             if (result) {
-                window.location.href = window.location.href = '/white-feathers/orders?status=c_request&id=' + id;
+                window.location.href = '/white-feathers/orders?status=c_request&id=' + id;
             }
         }
 

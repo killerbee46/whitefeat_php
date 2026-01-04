@@ -8,12 +8,6 @@ if ($GLOBALS['customer'] == 0) {
     header('location:index.php');
 }
 
-if (isset($_GET['id'])) {
-    $sqlPD = fetchProduct(($_GET['id']));
-    $displayPD = mysqli_query($con, $sqlPD);
-    $rowPD = mysqli_fetch_array($displayPD);
-}
-
 $sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 $displayus = mysqli_query($con, $sqlus);
 $rowus = mysqli_fetch_array($displayus);
@@ -256,10 +250,27 @@ $apporder = false;
     <div class="container mt-5">
 
         <?php
+        if (isset($_GET['id'])) {
+            $sqlOD = "Select * from cart_book where cb_id =" . ($_GET['id']);
+            $displayOD = mysqli_query($con, $sqlOD);
+            $rowOD = mysqli_fetch_array($displayOD);
+        }
         if (!empty($_POST)) {
-            $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
-            $tdate = date('y-m-d');
-            $query = "INSERT INTO cart_book (
+            if (isset($_GET['id'])) {
+                $query = "update cart_book set name='" . $_POST['name'] . "', address='" . $_POST['address'] . "',cookie_id='" . $_POST['products'] . "',email='Order By:" . $_POST['email'] . "' where cb_id = " . $_GET['id'];
+                if (mysqli_query($con, $query)) {
+                    echo "<script>
+                            alert('Order Updated Successfully!')
+                            window.location.href = '/orders'
+                        </script>";
+                } else {
+                    echo "<script>alert('Error While Updating Order!')</script>";
+                }
+
+            } else {
+                $tracking = time() . round(microtime(true)) . $GLOBALS['customer'];
+                $tdate = date('y-m-d');
+                $query = "INSERT INTO cart_book (
     name,
     cno,
     address,
@@ -283,13 +294,14 @@ $apporder = false;
     )
     ";
 
-            if (mysqli_query($con, $query)) {
-                echo "<script>
-          alert('Product Ordered Successfully!')
-          window.location.href = '/orders'
-        </script>";
-            } else {
-                echo "<script>alert('Error While Ordering Product!')</script>";
+                if (mysqli_query($con, $query)) {
+                    echo "<script>
+                            alert('Order Added Successfully!')
+                            window.location.href = '/orders'
+                        </script>";
+                } else {
+                    echo "<script>alert('Error While Adding Order!')</script>";
+                }
             }
         }
         ?>
@@ -299,15 +311,15 @@ $apporder = false;
                 <div class="row">
                     <div class="col">
                         <label>Name</label>
-                        <input name="name" />
+                        <input value="<?= isset($rowOD) ? $rowOD['name'] : '' ?>" name="name" />
                     </div>
                     <div class="col">
                         <label>Phone</label>
-                        <input name="phone" />
+                        <input value="<?= isset($rowOD) ? $rowOD['cno'] : '' ?>" name="phone" />
                     </div>
                     <div class="col">
                         <label>Delivery Address</label>
-                        <input name="address" />
+                        <input value="<?= isset($rowOD) ? $rowOD['address'] : '' ?>" name="address" />
                     </div>
                     <div class="col">
                         <label>Products</label>
@@ -327,16 +339,18 @@ $apporder = false;
 
                     <div class="col">
                         <label>Order Taken By</label>
-                        <select name="email" required>
-                            <option value="" selected disabled>Select Order Taker</option>
-                            <option value="Reshma Thakuri">Reshma Thakuri</option>
-                            <option value="Ruby Madai">Ruby Madai</option>
-                            <option value="Pooja Sapkota">Pooja Sapkota</option>
+                        <select value="" name="email" required>
+                            <option value="" <?= !(isset($_GET['id']) && str_starts_with($rowOD['email'], "Order By:")) ? "selected" : "" ?> disabled>Select Order Taker</option>
+                            <option value="Reshma Thakuri" <?= (isset($_GET['id']) && explode(':', $rowOD['email'])[1] == "Reshma Thakuri") ? "selected" : "" ?>>Reshma Thakuri
+                            </option>
+                            <option value="Ruby Madai" <?= (isset($_GET['id']) && explode(':', $rowOD['email'])[1] == "Ruby Madai") ? "selected" : "" ?>>Ruby Madai</option>
+                            <option value="Pooja Sapkota" <?= (isset($_GET['id']) && explode(':', $rowOD['email'])[1] == "Pooja Sapkota") ? "selected" : "" ?>>Pooja Sapkota
+                            </option>
                         </select>
                     </div>
                     <div class="col"></div>
                     <div style="width:100%">
-                        <button type="submit" class="button primary">Add Order</button>
+                        <button type="submit" class="button primary"><?= isset($_GET['id']) ? "Update" : "Add Order" ?></button>
                     </div>
                 </div>
             </form>
@@ -362,6 +376,13 @@ $apporder = false;
 
         let selectedProducts = [];
         let debounceTimer;
+
+        <?php if (isset($_GET['id'])) { ?>
+            const tempOrders = <?= $rowOD['cookie_id'] ?>;
+            selectedProducts = tempOrders?.products;
+            renderSelected();
+            updatePayload();
+        <?php } ?>
 
         // debounce
         function debounce(fn, delay) {
@@ -403,7 +424,7 @@ $apporder = false;
         });
 
         function selectProduct(product) {
-            const tempProd = {id:product.id,s_path:product.image,dynamic_price:product.final_price,discount:product.discount,title:product.title}
+            const tempProd = { id: product.id, s_path: product.image, dynamic_price: product.final_price, discount: product.discount, title: product.title }
             selectedProducts.push({ ...tempProd, quantity: 1 });
             renderSelected();
             updatePayload();
