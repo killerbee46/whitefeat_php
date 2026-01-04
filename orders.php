@@ -197,7 +197,7 @@ $apporder = false;
                 </div>
 
                 <div class="">
-                    <table class="orders-table">
+                    <table class="orders-table" style="display:<?= $countOrder > 0 ? "table":"none" ?>">
                             <div class="order-list">
                         <tr>
                             <th>ID</th>
@@ -314,7 +314,7 @@ $apporder = false;
                                             <button class="button primary"
                                                 style="width:100%;cursor:pointer;text-transform:capitalize; display:flex;gap:10px;"
                                                 title="<?= $orderStatus[3] ?>"
-                                                onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
+                                                onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
                                                 <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
                                             </button>
                                         </div>
@@ -372,7 +372,7 @@ $apporder = false;
                                             </div>
                                             <?php if (count($orderStatus) > 3) { ?>
                                                 <div title="<?= $orderStatus[3] ?>"
-                                                    onclick="window.location.href = '/white-feathers/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
+                                                    onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
                                                     style="cursor:pointer;">
                                                     <?= $orderStatus[4] ?>
                                                 </div>
@@ -457,7 +457,7 @@ $apporder = false;
             const result = confirm("Are you sure you want to delete this order?")
 
             if (result) {
-                window.location.href = '/white-feathers/orders?status=c_request&id=' + id;
+                window.location.href = '/orders?status=c_request&id=' + id;
             }
         }
 
