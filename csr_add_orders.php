@@ -39,7 +39,6 @@ $apporder = false;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Order | White Feather's Jewellery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
@@ -351,7 +350,8 @@ $apporder = false;
                     </div>
                     <div class="col"></div>
                     <div style="width:100%">
-                        <button type="submit" class="button primary"><?= isset($_GET['id']) ? "Update" : "Add Order" ?></button>
+                        <button type="submit"
+                            class="button primary"><?= isset($_GET['id']) ? "Update" : "Add Order" ?></button>
                     </div>
                 </div>
             </form>
@@ -362,7 +362,7 @@ $apporder = false;
 
         let products = [];
 
-        fetch("http://whitefeathersjewellery.com:60000/api/sql/products").then(response => response.json())
+        fetch("http://localhost:60000/api/sql/products").then(response => response.json())
             .then(data => {
                 products = data?.data
             })
@@ -486,12 +486,7 @@ $apporder = false;
             }
         });
     </script>
-
-
 </body>
-
-
-
 
 </html>
 <?php ?>
