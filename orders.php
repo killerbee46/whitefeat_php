@@ -114,7 +114,7 @@ $apporder = false;
             }
 
             .orders-table {
-                display: none;
+                display: none !important;
             }
 
             .tabs-head {
@@ -197,239 +197,240 @@ $apporder = false;
                 </div>
 
                 <div class="">
-                    <table class="orders-table" style="display:<?= $countOrder > 0 ? "table":"none" ?>">
-                            <div class="order-list">
-                        <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Price</th>
-                            <th>Delivery Address</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr>
-                            <td colspan="7">
-                                <hr class="mt-2 mb-5" style="background:#14141488" />
-                            </td>
-                        </tr>
-                    </div>
-                    <?php
-                    if ($countOrder > 0) {
-                        while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-                            $apporder = $rowOrder['c_id'] == 0;
-                            $tempProd = json_decode($rowOrder['cookie_id'], true);
-                            $products = $apporder ? $tempProd['products'] : [];
-                            $orderStatus = "new";
-                            $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
-                                $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
-                                    $rowOrder['dispatch'] > 0 ? ["on delivery", "goldenrod", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
+                    <table class="orders-table" style="display:<?= $countOrder > 0 ? "table" : "none" ?>">
+                        <div class="order-list">
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Price</th>
+                                <th>Delivery Address</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
+                                    <hr class="mt-2 mb-5" style="background:#14141488" />
+                                </td>
+                            </tr>
+                        </div>
+                        <?php
+                        if ($countOrder > 0) {
+                            while ($rowOrder = mysqli_fetch_array($displayOrder)) {
+                                $apporder = $rowOrder['c_id'] == 0;
+                                $tempProd = json_decode($rowOrder['cookie_id'], true);
+                                $products = $apporder ? $tempProd['products'] : [];
+                                $orderStatus = "new";
+                                $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
+                                    $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
+                                        $rowOrder['dispatch'] > 0 ? ["on delivery", "goldenrod", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
+                                    )
                                 )
-                            )
-                                ?>
+                                    ?>
 
-                            <div class="order-card box order-list-phone" style="padding:10px;margin:15px -10px;border-top:1px solid #3892C6">
-                                <div class="flex justify-between align-center">
-                                    <div><?= $rowOrder['cb_id'] ?></div>
-                                    <div>
+                                <div class="order-card box order-list-phone"
+                                    style="padding:10px;margin:15px -10px;border-top:1px solid #3892C6">
+                                    <div class="flex justify-between align-center">
+                                        <div><?= $rowOrder['cb_id'] ?></div>
                                         <div>
-                                            <?= $rowOrder['name'] ?>
+                                            <div>
+                                                <?= $rowOrder['name'] ?>
+                                            </div>
+                                            <div>
+                                                <?= $rowOrder['cno'] ?>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <?= $rowOrder['cno'] ?>
-                                        </div>
-                                    </div>
-                                    <div style="font-weight:600;">
-                                        <?php $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $rowOrder['cur_id'] . "'";
-                                        $displaycrc2 = mysqli_query($con, $sqlcrc2);
-                                        $rowcrc2 = mysqli_fetch_array($displaycrc2);
-                                        $cnot = $rowcrc2['cur_name'] ?? "Npr";
-                                        $crate = (1 / ($rowcrc2['cur_rate'] ?? 1));
-                                        $total_net = 0;
-                                        $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
-                                        $displayckp = mysqli_query($con, $sqlckp);
-                                        if ($apporder) {
-                                            if ($rowOrder['p_amount'] == 0) {
-                                                foreach ($products as $prod) {
-                                                    $total_net += ($prod['quantity'] * $prod['dynamic_price']);
-                                                }
-                                            } else {
-                                                $total_net = $rowOrder['p_amount'];
-                                            }
-                                        } else {
-                                            while ($rowckp = mysqli_fetch_array($displayckp)) {
-                                                $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
-                                            }
-                                        }
-                                        echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center align-center" style="margin:10px auto;">
-                                    To: <?= $rowOrder['address'] ?>
-                                </div>
-                                <hr class="mt-0 mb-3" />
-                                <div>
-                                    <button class="button paccordion" style="width:100%">Products</button>
-                                    <div class="ppanel">
-                                        <div style="font-size:12px;">
-                                            <hr class="m-0 mt-2" />
-                                            <?php
+                                        <div style="font-weight:600;">
+                                            <?php $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $rowOrder['cur_id'] . "'";
+                                            $displaycrc2 = mysqli_query($con, $sqlcrc2);
+                                            $rowcrc2 = mysqli_fetch_array($displaycrc2);
+                                            $cnot = $rowcrc2['cur_name'] ?? "Npr";
+                                            $crate = (1 / ($rowcrc2['cur_rate'] ?? 1));
+                                            $total_net = 0;
+                                            $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                            $displayckp = mysqli_query($con, $sqlckp);
                                             if ($apporder) {
-                                                foreach ($products as $prod) {
-                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
-
-                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
-
-                                                    echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                if ($rowOrder['p_amount'] == 0) {
+                                                    foreach ($products as $prod) {
+                                                        $total_net += ($prod['quantity'] * $prod['dynamic_price']);
+                                                    }
+                                                } else {
+                                                    $total_net = $rowOrder['p_amount'];
                                                 }
                                             } else {
-                                                $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
-                                                $displayckp1 = mysqli_query($con, $sqlckp1);
-                                                while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
-                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
-                                                    $sqlckp2 = fetchProduct($rowckp1['id_pack']);
-                                                    $displayckp2 = mysqli_query($con, $sqlckp2);
-                                                    $rowckp2 = mysqli_fetch_array($displayckp2);
-
-                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
-
-                                                    echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                while ($rowckp = mysqli_fetch_array($displayckp)) {
+                                                    $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
                                                 }
                                             }
-                                            ?>
+                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
                                         </div>
                                     </div>
-                                </div>
-                                <hr class="mt-0" />
-                                <div class="flex justify-center align-center" style="gap:20px;margin:10px 0">
-                                    <div style="width:50%">
-                                        <button class="button"
-                                            style="width:100%;display:flex;gap:10px;background:<?= $orderStatus[1] ?>;color:white;border-color:<?= $orderStatus[1] ?>">
-                                            <?= $orderStatus[2] ?>
-                                            <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
-                                        </button>
+                                    <div class="flex justify-center align-center" style="margin:10px auto;">
+                                        To: <?= $rowOrder['address'] ?>
                                     </div>
-                                    <?php if (count($orderStatus) > 3) { ?>
+                                    <hr class="mt-0 mb-3" />
+                                    <div>
+                                        <button class="button paccordion" style="width:100%">Products</button>
+                                        <div class="ppanel">
+                                            <div style="font-size:12px;">
+                                                <hr class="m-0 mt-2" />
+                                                <?php
+                                                if ($apporder) {
+                                                    foreach ($products as $prod) {
+                                                        echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+
+                                                        echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
+
+                                                        echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                    }
+                                                } else {
+                                                    $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                                    $displayckp1 = mysqli_query($con, $sqlckp1);
+                                                    while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
+                                                        echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+                                                        $sqlckp2 = fetchProduct($rowckp1['id_pack']);
+                                                        $displayckp2 = mysqli_query($con, $sqlckp2);
+                                                        $rowckp2 = mysqli_fetch_array($displayckp2);
+
+                                                        echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+
+                                                        echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-0" />
+                                    <div class="flex justify-center align-center" style="gap:20px;margin:10px 0">
                                         <div style="width:50%">
-                                            <button class="button primary"
-                                                style="width:100%;cursor:pointer;text-transform:capitalize; display:flex;gap:10px;"
-                                                title="<?= $orderStatus[3] ?>"
-                                                onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
-                                                <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
-                                            </button>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-
-                            <div class="order-list">
-                                <tr style="padding-bottom:10px;">
-                                    <td><?= $rowOrder['cb_id'] ?></td>
-                                    <td>
-                                        <div><?= $rowOrder['name'] ?></div>
-                                        <div><?= $rowOrder['cno'] ?></div>
-                                    </td>
-                                    <td><?= $apporder == 1 ? date_format(date_create($rowOrder['book_date']), "Y-m-d") : $rowOrder['p_date'] ?>
-                                    </td>
-                                    <td style="font-weight:600">
-                                        <?php $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $rowOrder['cur_id'] . "'";
-                                        $displaycrc2 = mysqli_query($con, $sqlcrc2);
-                                        $rowcrc2 = mysqli_fetch_array($displaycrc2);
-                                        $cnot = $rowcrc2['cur_name'] ?? "Npr";
-                                        $crate = (1 / ($rowcrc2['cur_rate'] ?? 1));
-                                        $total_net = 0;
-                                        $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
-                                        $displayckp = mysqli_query($con, $sqlckp);
-                                        if ($apporder) {
-                                            if ($rowOrder['p_amount'] == 0) {
-                                                foreach ($products as $prod) {
-                                                    $total_net += ($prod['quantity'] * $prod['dynamic_price']);
-                                                }
-                                            } else {
-                                                $total_net = $rowOrder['p_amount'];
-                                            }
-                                        } else {
-                                            while ($rowckp = mysqli_fetch_array($displayckp)) {
-                                                $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
-                                            }
-                                        }
-                                        echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
-                                    </td>
-                                    <td><?= $rowOrder['address'] ?></td>
-                                    <td>
-                                        <?php
-                                        $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
-                                            $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
-                                                $rowOrder['dispatch'] > 0 ? ["on delivery", "brown", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
-                                            )
-                                        )
-                                            ?>
-                                        <div class="flex align-center" style="gap: 10px;">
-                                            <div class="flex align-center"
-                                                style="gap:8px;border-radius:8px;width:fit-content;padding:3px 5px; border: 1px solid gray;background:<?= $orderStatus[1] ?>;color:white;cursor:pointer;font-size:12px;border-color:<?= $orderStatus[1] ?>;">
+                                            <button class="button"
+                                                style="width:100%;display:flex;gap:10px;background:<?= $orderStatus[1] ?>;color:white;border-color:<?= $orderStatus[1] ?>">
                                                 <?= $orderStatus[2] ?>
                                                 <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
+                                            </button>
+                                        </div>
+                                        <?php if (count($orderStatus) > 3) { ?>
+                                            <div style="width:50%">
+                                                <button class="button primary"
+                                                    style="width:100%;cursor:pointer;text-transform:capitalize; display:flex;gap:10px;"
+                                                    title="<?= $orderStatus[3] ?>"
+                                                    onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'">
+                                                    <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
+                                                </button>
                                             </div>
-                                            <?php if (count($orderStatus) > 3) { ?>
-                                                <div title="<?= $orderStatus[3] ?>"
-                                                    onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
-                                                    style="cursor:pointer;">
-                                                    <?= $orderStatus[4] ?>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <?php
-                if ($rowus['role'] >= 3 && str_starts_with($rowOrder['email'],"Order By:")) { ?>
-                                        <div style="display:flex;gap:20px">
-                                            <a href="/add-order?id=<?= $rowOrder['cb_id'] ?>"><i title="Edit" class="fas fa-pen"
-                                                    style="color:#2b93fb;cursor:pointer;"></i></a>
-                                            <i title="Delete" onclick="confirmDelete(<?= $rowOrder['cb_id'] ?>)"
-                                                style="color:crimson;cursor:pointer;" class="fas fa-trash"></i>
-                                        </div>
                                         <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="7">
-                                        <div style="font-size:12px;">
-                                            <hr class="m-0 mt-2" />
-                                            <?php
+                                    </div>
+                                </div>
+
+                                <div class="order-list">
+                                    <tr style="padding-bottom:10px;">
+                                        <td><?= $rowOrder['cb_id'] ?></td>
+                                        <td>
+                                            <div><?= $rowOrder['name'] ?></div>
+                                            <div><?= $rowOrder['cno'] ?></div>
+                                        </td>
+                                        <td><?= $apporder == 1 ? date_format(date_create($rowOrder['book_date']), "Y-m-d") : $rowOrder['p_date'] ?>
+                                        </td>
+                                        <td style="font-weight:600">
+                                            <?php $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $rowOrder['cur_id'] . "'";
+                                            $displaycrc2 = mysqli_query($con, $sqlcrc2);
+                                            $rowcrc2 = mysqli_fetch_array($displaycrc2);
+                                            $cnot = $rowcrc2['cur_name'] ?? "Npr";
+                                            $crate = (1 / ($rowcrc2['cur_rate'] ?? 1));
+                                            $total_net = 0;
+                                            $sqlckp = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                            $displayckp = mysqli_query($con, $sqlckp);
                                             if ($apporder) {
-                                                foreach ($products as $prod) {
-                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
-
-                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
-
-                                                    echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                if ($rowOrder['p_amount'] == 0) {
+                                                    foreach ($products as $prod) {
+                                                        $total_net += ($prod['quantity'] * $prod['dynamic_price']);
+                                                    }
+                                                } else {
+                                                    $total_net = $rowOrder['p_amount'];
                                                 }
                                             } else {
-                                                $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
-                                                $displayckp1 = mysqli_query($con, $sqlckp1);
-                                                while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
-                                                    echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
-                                                    $sqlckp2 = fetchProduct($rowckp1['id_pack']);
-                                                    $displayckp2 = mysqli_query($con, $sqlckp2);
-                                                    $rowckp2 = mysqli_fetch_array($displayckp2);
-
-                                                    echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
-
-                                                    echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                while ($rowckp = mysqli_fetch_array($displayckp)) {
+                                                    $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
                                                 }
                                             }
-                                            ?>
-                                            <hr class="m-0 mb-5" style="background:#3892C666" />
-                                        </div>
-                                    </td>
-                                </tr>
+                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
+                                        </td>
+                                        <td><?= $rowOrder['address'] ?></td>
+                                        <td>
+                                            <?php
+                                            $orderStatus = $rowOrder['c_request'] > 0 ? ["cancelled", "crimson", '<i class="fas fa-times"></i>'] : (
+                                                $rowOrder['deliver'] > 0 ? ["delivered", "green", '<i class="fas fa-check"></i>'] : (
+                                                    $rowOrder['dispatch'] > 0 ? ["on delivery", "brown", '<i class="fas fa-truck"></i>', "deliver", '<i class="fas fa-check"></i>'] : ["new", "gray", '<i class="fas fa-file"></i>', "dispatch", '<i class="fas fa-truck"></i>']
+                                                )
+                                            )
+                                                ?>
+                                            <div class="flex align-center" style="gap: 10px;">
+                                                <div class="flex align-center"
+                                                    style="gap:8px;border-radius:8px;width:fit-content;padding:3px 5px; border: 1px solid gray;background:<?= $orderStatus[1] ?>;color:white;cursor:pointer;font-size:12px;border-color:<?= $orderStatus[1] ?>;">
+                                                    <?= $orderStatus[2] ?>
+                                                    <span style="text-transform:uppercase"><?= $orderStatus[0] ?></span>
+                                                </div>
+                                                <?php if (count($orderStatus) > 3) { ?>
+                                                    <div title="<?= $orderStatus[3] ?>"
+                                                        onclick="window.location.href = '/orders?status=<?= $orderStatus[3] ?>&id=<?= $rowOrder['cb_id'] ?>'"
+                                                        style="cursor:pointer;">
+                                                        <?= $orderStatus[4] ?>
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($rowus['role'] >= 3 && str_starts_with($rowOrder['email'], "Order By:")) { ?>
+                                                <div style="display:flex;gap:20px">
+                                                    <a href="/add-order?id=<?= $rowOrder['cb_id'] ?>"><i title="Edit"
+                                                            class="fas fa-pen" style="color:#2b93fb;cursor:pointer;"></i></a>
+                                                    <i title="Delete" onclick="confirmDelete(<?= $rowOrder['cb_id'] ?>)"
+                                                        style="color:crimson;cursor:pointer;" class="fas fa-trash"></i>
+                                                </div>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7">
+                                            <div style="font-size:12px;">
+                                                <hr class="m-0 mt-2" />
+                                                <?php
+                                                if ($apporder) {
+                                                    foreach ($products as $prod) {
+                                                        echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+
+                                                        echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $prod['s_path'] . '" style="height:3em;"/>';
+
+                                                        echo ' &diams; ' . ucfirst($prod['title']) . ' - <b>Qty: ' . $prod['quantity'] . '  &nbsp; </b><span><a href="../' . make_url($prod['id']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                    }
+                                                } else {
+                                                    $sqlckp1 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id='" . $rowOrder['cb_id'] . "'";
+                                                    $displayckp1 = mysqli_query($con, $sqlckp1);
+                                                    while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
+                                                        echo '<h6 style="display:flex;align-items:center;gap:5px;" class="p-2">';
+                                                        $sqlckp2 = fetchProduct($rowckp1['id_pack']);
+                                                        $displayckp2 = mysqli_query($con, $sqlckp2);
+                                                        $rowckp2 = mysqli_fetch_array($displayckp2);
+
+                                                        echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+
+                                                        echo ' &diams; ' . ucfirst($rowckp1['p_name']) . ' - <b>Qty: ' . $rowckp1['qty'] . '  &nbsp; </b><span><a href="' . make_url($rowckp1['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                    }
+                                                }
+                                                ?>
+                                                <hr class="m-0 mb-5" style="background:#3892C666" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </div>
+                            <?php }
+                        } else { ?>
+                            <div>
+                                <?php include 'no-data.php'; ?>
                             </div>
-                        <?php }
-                    } else { ?>
-                        <div>
-                            <?php include 'no-data.php'; ?>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
                     </table>
                 </div>
             </div>
