@@ -361,12 +361,12 @@ $apporder = false;
     <script>
 
         let products = [];
-
-        fetch("http://localhost:60000/api/sql/products").then(response => response.json())
-            .then(data => {
-                products = data?.data
-            })
-
+const dat = <?= file_get_contents("http://whitefeathersjewellery.com:60000/api/sql/products") ?>;
+        // fetch("http://whitefeathersjewellery.com:60000/api/sql/products").then(response => response.json())
+        //     .then(data => {
+        //         products = data?.data
+        //     })
+products = dat?.data
     </script>
     <script>
 
