@@ -361,9 +361,9 @@ $apporder = false;
 
         let products = [];
 
-        fetch("http://whitefeathersjewellery.com:60000/api/sql/products").then(response => response.json())
+        fetch("localhost:60000/api/sql/products").then(response => response.json())
             .then(data => {
-                products = data.data
+                products = data?.data
             })
 
     </script>
