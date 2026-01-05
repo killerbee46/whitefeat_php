@@ -4,7 +4,10 @@ $cookid = '0';
 include 'db_connect.php';
 include 'ajax_cookie.php';
 include_once('make_url.php');
-if ($GLOBALS['customer'] == 0) {
+$sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
+$displayus = mysqli_query($con, $sqlus);
+$rowus = mysqli_fetch_array($displayus);
+if ($GLOBALS['customer'] == 0 || $rowus['role'] < 2) {
     header('location:index.php');
 }
 
