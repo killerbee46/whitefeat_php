@@ -23,7 +23,7 @@ $rowApp = mysqli_fetch_array($displayApp);
 <body>
     <div class="m-4 border-1 border-[rgba(0,0,0,0.3)] p-5 rounded-lg">
         <div class="text-lg font-medium">
-        <a href="/white-feathers/wfs/appointment.php" class="me-2"><i class="fas fa-arrow-left"></i></a> Selling Request Details
+        <a href="/wfs/appointment.php" class="me-2"><i class="fas fa-arrow-left"></i></a> Selling Request Details
         </div>
         <hr class="text-slate-200 mt-1" />
         <div class="flex gap-4 mt-2">
