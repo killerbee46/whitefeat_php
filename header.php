@@ -148,46 +148,39 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
     <div class="modal" id="jwell-sell-modal">
         <div class="modal-background" onclick="closeModal('jwell-sell-modal')"></div>
         <div class="modal-content jwell-sell-modal-content">
-            <div class="box">
+            <div class="box" style="height: fit-content; background:white;">
                 <h2>Sell your jwellery / gold </h2>
                 <hr />
                 <div class="jwell-sell-modal-content">
-<div class="modal-cover" style="background-image:url(https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/jwell-sell.jpg);"></div>
-                    <!-- <img class="modal-cover" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/jwell-sell.jpg" /> -->
-                    <div class="modal-info">
-                        <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/whatsapp-qr-wf.png" class="whatsapp-qr" alt="Whatsapp qr" />
-                        <div class="modal-info-info">
-                            <a href="tel:+977-9806091605" class="phone-link">+977-9806091605</a>
-                        <div class="phone-info">(CALL / WHATSAPP / VIBER)</div>
-                        <div class="modal-info-list-container">
-                            <div class="modal-info-list">
-                                <div class="modal-info-list-item">
-                                    <span><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/green-tick.png" width="15px" height="15px" /></span> <span>Get on a
-                                        live
-                                        video call with our design consultants.</span>
-                                </div>
-                                <div class="modal-info-list-item">
-                                    <span><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/green-tick.png" width="15px" height="15px" /></span> <span>Live
-                                        Available On
-                                        <b>Whatsapp, Viber & Messenger!</b></span>
-                                </div>
-                                <div class="modal-info-list-item">
-                                    <span><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/green-tick.png" width="15px" height="15px" /></span> <span>SUN - SAT
-                                        ( 9am
-                                        to 6pm )</span>
-                                </div>
-                                <div class="modal-info-list-item">
-                                    <span><img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/green-tick.png" width="15px" height="15px" /></span> <span>OPENS 365
-                                        DAYS!
-                                        <a target="_blank"
-                                            href="https://www.google.com/maps/place/White+Feathers+Jewellery/@27.7027815,85.3085035,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb190051eb7d6d:0x345d8d98fffd34e7!8m2!3d27.7027768!4d85.3110784!16s%2Fg%2F11fklpz4dp?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D">
-                                            Location Map
-                                        </a></span>
-                                </div>
+                    <form method="post" action="./ajax_create_sell_inquiry.php" enctype="multipart/form-data" style="margin-bottom: 20px;">
+                        <div class="row">
+                            <div style="width: 100%;">
+                                <label for="jwell-bill-image">Jwellery Bill Image *</label>
+                                <div id="imagePreview" class="preview-container" style="margin-bottom: 10px;"></div>
+								<input required type="file" id="imageInput" accept="image/*" name="image">
+								<label for="imageInput" class="upload-label">+ Add Image</label>
+                            </div>
+                            <div class="col">
+                                <label for="name" required>Name *</label>
+                                <input name="name" />
+                            </div>
+                            <div class="col">
+                                <label for="phone" required>Phone *</label>
+                                <input name="phone" />
+                            </div>
+                            <div class="col">
+                                <label for="message">Message</label>
+                                <textarea name="message"></textarea>
+                            </div>
+                            <div class="col">
+                                <label for="address" required>Address *</label>
+                                <input name="address" />
+                            </div>
+                            <div class="col">
+                                <button class="button primary">Submit</button>
                             </div>
                         </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <button class="modal-close is-large" onclick="closeModal('jwell-sell-modal')" aria-label="close"></button>
@@ -639,10 +632,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                                         <image class="icons" src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/flags/eur.png" alt="user detail" /> EUR
                                     </div>';
 		}
-	
-	
-	
-	
 	?>
 	</span>
 	       <?php /* customer currecny wise flag check end */ ?>
@@ -843,3 +832,23 @@ var panel = document.getElementsByClassName('panel');
             });
         }
     </script>
+
+    <script>
+			const imageInput = document.getElementById("imageInput");
+			const imagePreview = document.getElementById("imagePreview");
+
+			if (imageInput) {
+				imageInput.addEventListener("change", () => {
+					imagePreview.innerHTML = ""; // Clear old previews
+					Array.from(imageInput.files).forEach(file => {
+						const reader = new FileReader();
+						reader.onload = e => {
+							const img = document.createElement("img");
+							img.src = e.target.result;
+							imagePreview.appendChild(img);
+						};
+						reader.readAsDataURL(file);
+					});
+				});
+			}
+		</script>

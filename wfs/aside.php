@@ -20,7 +20,7 @@ include('db_connect.php');
             <a href="appointment.php" class="nav-link open_order">
               <i class="nav-icon fas fa-home"></i>
               <p>
-                 Appoinments <span class="badge badge-warning">';
+                 Inquiries <span class="badge badge-warning">';
                     $queryuc = "Select * from `whitefeat_wf_new`.`inquiry` where visit='0'"; 
                     $displayuc = mysqli_query($con,$queryuc);
 		            $rowuc=mysqli_num_rows($displayuc);

@@ -484,6 +484,71 @@
             cursor: pointer;
         }
 
+        .row {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            height: 100px;
+            padding:8px;
+        }
+
+        .image-upload {
+				margin-top: 10px;
+			}
+
+			input[type="file"] {
+				display: none;
+			}
+
+			.upload-label {
+				display: inline-block;
+				padding: 10px 15px;
+				background: #4cafef;
+				color: white;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 14px;
+				transition: background 0.3s;
+			}
+
+			.upload-label:hover {
+				background: #3a9ed9;
+			}
+
+			.preview-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-top: 15px;
+			}
+
+			.preview-container img {
+				width: 120px;
+				height: 120px;
+				object-fit: cover;
+				border: 1px solid #ddd;
+				border-radius: 6px;
+			}
+
         /* currency selector  */
 
         #curr-temp {

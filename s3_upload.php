@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require './vendor/autoload.php';
 
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
@@ -11,10 +11,10 @@ use Aws\Exception\AwsException;
  * @param array $file The $_FILES['image'] array
  * @return string|false The S3 file URL on success, or false on failure
  */
-function uploadImageToS3($file,$folder="/thumb")
+function uploadImageToS3($file)
 {
     // --- AWS Configuration ---
-    include "../../envVars/s3.php";
+    include "../envVars/s3.php";
 
     // --- Validate File ---
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
@@ -43,7 +43,7 @@ function uploadImageToS3($file,$folder="/thumb")
         // --- Upload File ---
         $result = $s3->putObject([
             'Bucket' => $bucketName,
-            'Key' => 'product_images/thumb/' . $uniqueName,
+            'Key' => 'product_images/jwell-bills/' . $uniqueName,
             'SourceFile' => $filePath,
             // 'ACL' => 'public-read', // optional: remove if private
             'ContentType' => $mimeType
