@@ -486,7 +486,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 							   &nbsp;Acknowledge
 							   </button>
 
-							   <a href="/wfs/appointment_detail.php?id='.$rowol['inquiry_id'].'"><span>
+							   <a href="/wfs/appointment_detail.php?id=' . $rowol['inquiry_id'] . '"><span>
 							   <i class="fas fa-eye"></i> View
 							   </span></a>
 							 </div>
@@ -635,7 +635,9 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 						  
 						  <div class="col-1 p-0">
 						  <span class="badge badge-light">Acknowledged</span>
-
+<a href="/wfs/appointment_detail.php?id=' . $rowol['inquiry_id'] . '"><span>
+							   <i class="fas fa-eye"></i> View
+							   </span></a>
 						  <a> View</a>
 							 </div>
 							   
@@ -668,8 +670,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 											</div>
 
 
-											<div class="tab-pane fade" id="custom-tabs-four-home-stock"
-												role="tabpanel" aria-labelledby="custom-tabs-four-home-tab-stock">
+											<div class="tab-pane fade" id="custom-tabs-four-home-stock" role="tabpanel"
+												aria-labelledby="custom-tabs-four-home-tab-stock">
 
 
 
