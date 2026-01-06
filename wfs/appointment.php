@@ -638,7 +638,6 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 <a href="/wfs/appointment_detail.php?id=' . $rowol['inquiry_id'] . '"><span>
 							   <i class="fas fa-eye"></i> View
 							   </span></a>
-						  <a> View</a>
 							 </div>
 							   
 							   
