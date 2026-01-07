@@ -369,11 +369,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 													</div>
 
 													<div class="col-10 row">
-														<div class="col-2">
+														<div class="col-3">
 															<small> Customer Name </small>
-														</div>
-														<div class="col-2">
-															<small> Product <small>(opt.)</small> </small>
 														</div>
 														<div class="col-2 text-center">
 															<small>Contact no.</small>
@@ -381,10 +378,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<div class="col-2 text-center">
 															<small>Address</small>
 														</div>
-														<div class="col-2 text-center">
+														<div class="col-3 text-center">
 															<small>Message</small>
 														</div>
-														<div class="col-1 text-left pl-2">
+														<div class="col-2 text-left pl-2">
 															<small>Actions</small>
 														</div>
 													</div>
@@ -422,23 +419,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 													if ($rowol['c_id'] == 0) {
 														echo '
-					  <div class="col-2">
+					  <div class="col-3">
 						' . $rowol['p_name'] . '
 				      </div>';
-
-														echo '<div class="col-2">
-						<small>';
-														if ($rowol['id_pack'] != 0) {
-															$queryolx = "Select p_name from `whitefeat_wf_new`.`package` where id_pack='" . $rowol['id_pack'] . "'";
-															$displayolx = mysqli_query($con, $queryolx);
-															$rowolx = mysqli_fetch_array($displayolx);
-															echo $rowolx['p_name'];
-														}
-														echo '</small>
-				      </div>';
-
-
-														echo '<div class="col-2 text-center">
+					echo '<div class="col-2 text-center">
 						' . $rowol['cno'] . '
 				      </div>
 					  <div class="col-2 text-center">
@@ -451,23 +435,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														$rowolx = mysqli_fetch_array($displayolx);
 
 														echo '
-					  <div class="col-2">
+					  <div class="col-3">
 						' . $rowolx['name'] . '
 				      </div>';
-
-														echo '<div class="col-2">
-						<small>';
-														if ($rowol['id_pack'] != 0) {
-															$queryolx2 = "Select p_name from `whitefeat_wf_new`.`package` where id_pack='" . $rowol['id_pack'] . "'";
-															$displayolx2 = mysqli_query($con, $queryolx2);
-															$rowolx2 = mysqli_fetch_array($displayolx2);
-															echo $rowolx2['p_name'];
-														}
-														echo '</small>
-				      </div>';
-
-
-														echo '
+					  echo '
 					  <div class="col-2 text-center">
 						' . $rowolx['phone'] . '
 				      </div>
@@ -476,10 +447,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 				      </div>';
 													}
 													echo '
-					  <div class="col-2 text-center">
+					  <div class="col-3 text-center">
 						' . $rowol['p_qn'] . '
 				      </div>
-						  <div class="col-1 p-0">
+						  <div class="col-2 p-0" style="gap:10px;min-width:100px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
 						  <button type="button" class="btn btn-small btn-outline-info no-border home_visit"
 							   data-ref="' . $rowol['inquiry_id'] . '">
 							   <i class="fas fa-check-circle" data-toggle="tooltip" title="Acknowledged"></i>
@@ -519,11 +490,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 													</div>
 
 													<div class="col-10 row">
-														<div class="col-2">
+														<div class="col-3">
 															<small> Customer Name </small>
-														</div>
-														<div class="col-2">
-															<small> Product <small>(opt.)</small> </small>
 														</div>
 														<div class="col-2 text-center">
 															<small>Contact no.</small>
@@ -531,10 +499,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<div class="col-2 text-center">
 															<small>Address</small>
 														</div>
-														<div class="col-2 text-center">
+														<div class="col-3 text-center">
 															<small>Message</small>
 														</div>
-														<div class="col-1 text-left pl-2">
+														<div class="col-2 text-left pl-2">
 															<small></small>
 														</div>
 													</div>
@@ -570,23 +538,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 
 													if ($rowol['c_id'] == 0) {
 														echo '
-					  <div class="col-2">
+					  <div class="col-3">
 						' . $rowol['p_name'] . '
 				      </div>';
-
-														echo '<div class="col-2">
-						<small>';
-														if ($rowol['id_pack'] != 0) {
-															$queryolx = "Select p_name from `whitefeat_wf_new`.`package` where id_pack='" . $rowol['id_pack'] . "'";
-															$displayolx = mysqli_query($con, $queryolx);
-															$rowolx = mysqli_fetch_array($displayolx);
-															echo $rowolx['p_name'] ?? "";
-														}
-														echo '</small>
-				      </div>';
-
-
-														echo '<div class="col-2 text-center">
+					echo '<div class="col-2 text-center">
 						' . $rowol['cno'] . '
 				      </div>
 					  <div class="col-2 text-center">
@@ -599,23 +554,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														$rowolx = mysqli_fetch_array($displayolx);
 
 														echo '
-					  <div class="col-2">
+					  <div class="col-3">
 						' . $rowolx['name'] . '
-				      </div>';
-
-														echo '<div class="col-2">
-						<small>';
-														if ($rowol['id_pack'] != 0) {
-															$queryolx2 = "Select p_name from `whitefeat_wf_new`.`package` where id_pack='" . $rowol['id_pack'] . "'";
-															$displayolx2 = mysqli_query($con, $queryolx2);
-															$rowolx2 = mysqli_fetch_array($displayolx2);
-															echo $rowolx2['p_name'];
-														}
-														echo '</small>
-				      </div>';
-
-
-														echo '
+				      </div>';								
+					  echo '
 					  <div class="col-2 text-center">
 						' . $rowolx['phone'] . '
 				      </div>
@@ -627,13 +569,13 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 													echo '
 						  
 						  
-					  <div class="col-2 text-center">
+					  <div class="col-3 text-center">
 						' . $rowol['p_qn'] . '
 				      </div>
 					   	 
 						 
 						  
-						  <div class="col-1 p-0">
+						  <div class="col-2 p-0" style="gap:10px;min-width:100px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;">
 						  <span class="badge badge-light">Acknowledged</span>
 <a href="/wfs/appointment_detail.php?id=' . $rowol['inquiry_id'] . '"><span>
 							   <i class="fas fa-eye"></i> View

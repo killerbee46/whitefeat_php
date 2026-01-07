@@ -127,213 +127,216 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
 				White Feather's</h2>
 		</div>
 
-		<div class="column is-2-desktop is-12-mobile has-text-right"
-			style="float:right!important; text-align:right; padding-right:0;">
-			<div class="tags has-addons p-0">
 
-				<span href="#" class=" button tag is-info p-4 for-women " href="#colors">Women</span>
+		<div class="toggle-switch">
+			<input type="radio" class="tab-toggle" name="tab-toggle" id="tab1" checked>
+			<input type="radio" class="tab-toggle" name="tab-toggle" id="tab2">
 
-				<span href="#" class=" button tag is-light p-4 for-men">Men</span>
+			<ul class="tab-list">
+				<li class="tab-item">
+					<label class="tab-trigger" for="tab1">Women</label>
+				</li>
+				<li class="tab-item">
+					<label class="tab-trigger" for="tab2">Men</label>
+				</li>
+			</ul>
 
+			<div class="tab-container">
+				<div class="tab-content">
+					<div class="columns is-mobile p-0 for-women-div">
+						<?php
+						/* lopping through products in database matching the terms and displaying start */
+						$sqlpw = fetchProducts(" tag_women=1 and p.cat_id <> 81 order by p.id_pack DESC limit 10");
+						$displaypw = mysqli_query($con, $sqlpw);
+						$countgen = mysqli_num_rows($displaypw);
+						if ($countgen > 0) { ?>
+							<div class="column is-full">
+								<div class="owl-carousel owl-theme owl-one">
+
+
+									<?php
+
+
+									while ($rowpw = mysqli_fetch_array($displaypw)) {
+
+										echo '
+		      <div style="position:relative;overflow:hidden;">'; ?>
+										<?php
+										if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
+											$dOffSql = "Select discount from package_material where pm_id = 1";
+											$doFFFetch = mysqli_query($con, $dOffSql);
+											$dOff = mysqli_fetch_array($doFFFetch)
+												?>
+											<div
+												style="position: absolute;top: 10px;left:-60px;z-index:5;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);z-index:5;">
+												<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+												<span style="font-size: 10px;margin:0">On Diamond</span>
+											</div>
+											<?php
+										}
+										echo '
+  <a href="' . make_url($rowpw['id_pack']) . '">
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
+										if (isset($rowpw['image'])) {
+											echo $rowpw['image'];
+										} else {
+											echo "no-image.png";
+										}
+										echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
+
+
+										/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
+										$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
+										$displaywl = mysqli_query($con, $sqlwl);
+										$countw = mysqli_num_rows($displaywl);
+										if ($countw > 0) {
+											echo '
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
+										} else {
+											echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+										}
+
+										echo '<br>';
+										$actual_price = $rowpw['actual_price'] / $crate;
+										$final_price = $rowpw['final_price'] / $crate;
+										$discount = $rowpw['discount'] / $crate;
+										/* customer & its attribute checking end (new/logged-in,currency) */
+
+										/* Checking for discount on product start */
+										echo '
+							<span class="p-2"><Strong class="letter-spacing price-off ">';
+
+										echo $cnot . " " . round(($final_price), 2);
+
+										echo '</strong>';
+										if ($rowpw['discount'] > 0) {
+											echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
+										}
+
+										/* Checking for discount on product end */
+
+										echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
+  </a>
+  </div>	  
+		  ';
+									}
+
+									/* lopping through products in database matching the terms and displaying end */
+
+									?>
+								</div>
+							</div>
+						<?php } else {
+							include "no-data.php";
+						} ?>
+					</div>
+				</div>
+				<div class="tab-content">
+					<div class="columns is-mobile p-0 for-men-div">
+						<?php
+						/* lopping through products in database matching the terms and displaying start */
+						$sqlpw = fetchProducts(" tag_men=1 order by p.id_pack DESC limit 10");
+						$displaypw = mysqli_query($con, $sqlpw);
+						$countgen = mysqli_num_rows($displaypw);
+						if ($countgen > 0) { ?>
+							<div class="column is-full">
+								<div class="owl-carousel owl-theme owl-one">
+
+
+									<?php
+
+
+									while ($rowpw = mysqli_fetch_array($displaypw)) {
+
+										echo '
+		      <div style="position:relative;overflow:hidden;">'; ?>
+										<?php
+										if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
+											$dOffSql = "Select discount from package_material where pm_id = 1";
+											$doFFFetch = mysqli_query($con, $dOffSql);
+											$dOff = mysqli_fetch_array($doFFFetch)
+												?>
+											<div
+												style="position: absolute;top: 10px;left:-60px;z-index:5;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);">
+												<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
+												<span style="font-size: 10px;margin:0">On Diamond</span>
+											</div>
+											<?php
+										}
+										echo '
+  <a href="' . make_url($rowpw['id_pack']) . '">
+  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
+										if (isset($rowpw['image'])) {
+											echo $rowpw['image'];
+										} else {
+											echo "no-image.png";
+										}
+										echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
+
+
+										/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
+										$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
+										$displaywl = mysqli_query($con, $sqlwl);
+										$countw = mysqli_num_rows($displaywl);
+										if ($countw > 0) {
+											echo '
+  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
+										} else {
+											echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
+										}
+
+										echo '<br>';
+										$actual_price = $rowpw['actual_price'] / $crate;
+										$final_price = $rowpw['final_price'] / $crate;
+										$discount = $rowpw['discount'] / $crate;
+										/* customer & its attribute checking end (new/logged-in,currency) */
+
+										/* Checking for discount on product start */
+										echo '
+							<span class="p-2"><Strong class="letter-spacing price-off ">';
+
+										echo $cnot . " " . round(($final_price), 2);
+
+										echo '</strong>';
+										if ($rowpw['discount'] > 0) {
+											echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
+										}
+
+										/* Checking for discount on product end */
+
+										echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
+  </a>
+  </div>	  
+		  ';
+									}
+
+									/* lopping through products in database matching the terms and displaying end */
+
+									?>
+								</div>
+							</div>
+						<?php } else {
+							include "no-data.php";
+						} ?>
+					</div>
+				</div>
 			</div>
-
 		</div>
+
 	</div>
 
 
 
 </div>
 
-
-
-
-<div class="container is-fluid" style="margin-top:1.5em;">
-
-	<div class="columns is-mobile p-0 for-women-div">
-		<?php
-		/* lopping through products in database matching the terms and displaying start */
-		$sqlpw = fetchProducts(" tag_women=1 and p.cat_id <> 81 order by p.id_pack DESC limit 10");
-		$displaypw = mysqli_query($con, $sqlpw);
-		$countgen = mysqli_num_rows($displaypw);
-		if ($countgen > 0) { ?>
-			<div class="column is-full">
-				<div class="owl-carousel owl-theme owl-one">
-
-
-					<?php
-
-
-					while ($rowpw = mysqli_fetch_array($displaypw)) {
-
-						echo '
-		      <div style="position:relative;overflow:hidden;">'; ?>
-						<?php
-						if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
-							$dOffSql = "Select discount from package_material where pm_id = 1";
-							$doFFFetch = mysqli_query($con, $dOffSql);
-							$dOff = mysqli_fetch_array($doFFFetch)
-								?>
-							<div
-								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);">
-								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
-								<span style="font-size: 10px;margin:0">On Diamond</span>
-							</div>
-							<?php
-						}
-						echo '
-  <a href="' . make_url($rowpw['id_pack']) . '">
-  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
-						if (isset($rowpw['image'])) {
-							echo $rowpw['image'];
-						} else {
-							echo "no-image.png";
-						}
-						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
-
-
-						/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
-						$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
-						$displaywl = mysqli_query($con, $sqlwl);
-						$countw = mysqli_num_rows($displaywl);
-						if ($countw > 0) {
-							echo '
-  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
-						} else {
-							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
-						}
-
-						echo '<br>';
-						$actual_price = $rowpw['actual_price'] / $crate;
-						$final_price = $rowpw['final_price'] / $crate;
-						$discount = $rowpw['discount'] / $crate;
-						/* customer & its attribute checking end (new/logged-in,currency) */
-
-						/* Checking for discount on product start */
-						echo '
-							<span class="p-2"><Strong class="letter-spacing price-off ">';
-
-						echo $cnot . " " . round(($final_price), 2);
-
-						echo '</strong>';
-						if ($rowpw['discount'] > 0) {
-							echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
-						}
-
-						/* Checking for discount on product end */
-
-						echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
-  </a>
-  </div>	  
-		  ';
-					}
-
-					/* lopping through products in database matching the terms and displaying end */
-
-					?>
-				</div>
-			</div>
-		<?php } else {
-			include "no-data.php";
-		} ?>
-	</div>
-
-	<div class="columns is-mobile p-0 for-men-div" style="display:none;">
-		<?php
-		/* lopping through products in database matching the terms and displaying start */
-		$sqlpw = fetchProducts(" tag_men=1 order by p.id_pack DESC limit 10");
-		$displaypw = mysqli_query($con, $sqlpw);
-		$countgen = mysqli_num_rows($displaypw);
-		if ($countgen > 0) { ?>
-			<div class="column is-full">
-				<div class="owl-carousel owl-theme owl-one">
-
-
-					<?php
-
-
-					while ($rowpw = mysqli_fetch_array($displaypw)) {
-
-						echo '
-		      <div style="position:relative;overflow:hidden;">'; ?>
-						<?php
-						if ($rowpw['dc_qty'] > 0 || $rowpw['dc_qty_bce2'] > 0) {
-							$dOffSql = "Select discount from package_material where pm_id = 1";
-							$doFFFetch = mysqli_query($con, $dOffSql);
-							$dOff = mysqli_fetch_array($doFFFetch)
-								?>
-							<div
-								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);">
-								<div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
-								<span style="font-size: 10px;margin:0">On Diamond</span>
-							</div>
-							<?php
-						}
-						echo '
-  <a href="' . make_url($rowpw['id_pack']) . '">
-  <img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/';
-						if (isset($rowpw['image'])) {
-							echo $rowpw['image'];
-						} else {
-							echo "no-image.png";
-						}
-						echo '" style="border:1px solid #eee; border-radius:2.5%; width:100%; aspect-ratio:1/1; object-fit:cover;object-position:center; " class="image"/>';
-
-
-						/* checking if product is alreay in wishlish or not start and displaying heart icon accordingly */
-						$sqlwl = "Select * from `whitefeat_wf_new`.`wishlist` where cookie_id='" . $GLOBALS['cookid'] . "' and id_pack='" . $rowpw['id_pack'] . "' ";
-						$displaywl = mysqli_query($con, $sqlwl);
-						$countw = mysqli_num_rows($displaywl);
-						if ($countw > 0) {
-							echo '
-  <a href="wishlist" class="added_wishlist" style="color:crimson;position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;font-size:18px;background:white;padding: 3px 5px;padding-bottom:0px;border-radius:50%;"><i class="fas fa-heart"></i></a>';
-						} else {
-							echo '<a href="#" style="position:absolute; top:3%; right: 5%; margin-top:0px; margin-left:0px;background:white;padding: 2px 5px;padding-bottom:0px;border-radius:50%;" title="Add to wishlist" class="add_wish_owl" data-id="' . $rowpw['id_pack'] . '"><i class="far fa-heart " style=""></i></a>';
-						}
-
-						echo '<br>';
-						$actual_price = $rowpw['actual_price'] / $crate;
-						$final_price = $rowpw['final_price'] / $crate;
-						$discount = $rowpw['discount'] / $crate;
-						/* customer & its attribute checking end (new/logged-in,currency) */
-
-						/* Checking for discount on product start */
-						echo '
-							<span class="p-2"><Strong class="letter-spacing price-off ">';
-
-						echo $cnot . " " . round(($final_price), 2);
-
-						echo '</strong>';
-						if ($rowpw['discount'] > 0) {
-							echo '<small><small><strike class="price-off" style="margin-left:10px;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
-						}
-
-						/* Checking for discount on product end */
-
-						echo '<br> <span title="' . $rowpw['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;" class="p-2">' . strtoupper($rowpw['p_name']) . '</span> </span>
-  </a>
-  </div>	  
-		  ';
-					}
-
-					/* lopping through products in database matching the terms and displaying end */
-
-					?>
-				</div>
-			</div>
-		<?php } else {
-			include "no-data.php";
-		} ?>
-	</div>
-
-</div>
 
 <?php /* Footer Products OWL carousel section end */ ?>
 
