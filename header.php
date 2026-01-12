@@ -157,7 +157,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
                             <div style="width: 100%;">
                                 <label for="jwell-bill-image">Jwellery Bill Image *</label>
                                 <div id="imagePreview" class="preview-container" style="margin-bottom: 10px;"></div>
-								<input required type="file" id="imageInput" accept="image/*" name="image">
+								<input required type="file" id="imageInput" accept="image/png, image/gif, image/jpeg, image/jpg, image/webp" name="image">
 								<label for="imageInput" class="upload-label">+ Add Image</label>
                             </div>
                             <div class="col">
