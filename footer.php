@@ -10,7 +10,7 @@ if ($GLOBALS['customer'] != 0) {
 	$sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 	$displaycrc = mysqli_query($con, $sqlcrc);
 	$rowcrc = mysqli_fetch_array($displaycrc);
-	$sel_cur = $rowcrc['cur_id'];
+	$sel_cur = $rowcrc['cur_id'] ?? 1;
 } else {
 	$sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
 	$displaycrc = mysqli_query($con, $sqlcrc);

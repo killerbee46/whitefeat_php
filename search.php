@@ -414,7 +414,7 @@ $dOff = mysqli_fetch_array($doFFFetch)
 							$sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 							$displaycrc = mysqli_query($con, $sqlcrc);
 							$rowcrc = mysqli_fetch_array($displaycrc);
-							$sel_cur = $rowcrc['cur_id'];
+							$sel_cur = $rowcrc['cur_id'] ?? 1;
 						} else {
 							$sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
 							$displaycrc = mysqli_query($con, $sqlcrc);
@@ -435,7 +435,7 @@ $dOff = mysqli_fetch_array($doFFFetch)
 							$sqlb2b = "Select b2b from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 							$displayb2b = mysqli_query($con, $sqlb2b);
 							$rowb2b = mysqli_fetch_array($displayb2b);
-							if ($rowb2b['b2b'] == 1) {
+							if (isset($rowb2b['b2b']) && $rowb2b['b2b'] == 1) {
 								$b2b_check = 1;
 								$newprice = $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
 							}
