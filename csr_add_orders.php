@@ -364,12 +364,12 @@ $apporder = false;
     <script>
 
         let products = [];
-const dat = <?= file_get_contents("http://whitefeathersjewellery.com:60000/api/sql/products") ?>;
-        // fetch("http://whitefeathersjewellery.com:60000/api/sql/products").then(response => response.json())
-        //     .then(data => {
-        //         products = data?.data
-        //     })
-products = dat?.data
+// const dat = php file_get_contents("http://whitefeathersjewellery.com:60000/api/sql/products") ?>;
+// products = dat?.data
+        fetch("https://api.whitefeathersjewellery.com/api/sql/products").then(response => response.json())
+            .then(data => {
+                products = data?.data
+            })
     </script>
     <script>
 
