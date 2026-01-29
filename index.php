@@ -150,9 +150,9 @@
 
 		/* HOMEPAGE SLIDER END */ ?>
 
-		<div style="margin-top: 10px;">
+		<!-- <div style="margin-top: 10px;">
 			<?php include './silver-investment.php' ?>
-		</div>
+		</div> -->
 		<div class="container is-fluid" style="margin-top: 30px;">
 			<a href="/gold-rate.php">
 				<div class="card p-4" style="background: #01243a; color:white; overflow:hidden;">
