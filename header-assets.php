@@ -540,8 +540,8 @@
         .tab-toggle:nth-child(2):checked~.tab-list .tab-item:nth-child(2) {
             opacity: 1;
             background: #3892C6;
-            color:white;
-            font-weight:600;
+            color: white;
+            font-weight: 600;
         }
 
         .tab-toggle:nth-child(1):checked~.tab-container .tab-content:nth-child(1),
@@ -550,7 +550,7 @@
         }
 
         .tab-trigger {
-            cursor:pointer;
+            cursor: pointer;
             display: block;
             padding: 10px 0;
         }
@@ -1424,7 +1424,7 @@ $menus = [
                     ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ring.png', 'path' => 'search.php?term=silver%20ring'],
                     ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20kada.png', 'path' => 'search.php?term=silver%20bangles'],
                     ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20juli.png', 'path' => 'search.php?term=silver%20juli'],
-                    ['title' => 'Anklet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20anklet.png', 'path' => 'search.php?term=silver%20anklet'],
+                    ['title' => 'Pauju', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20anklet.png', 'path' => 'search.php?term=silver%20pauju'],
                     ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20chain.png', 'path' => 'search.php?term=silver%20chain'],
                     ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20bracelet.png', 'path' => 'search.php?term=silver%20bracelet'],
                     ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20locket.png', 'path' => 'search.php?term=silver%20pendent'],
