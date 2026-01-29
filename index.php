@@ -151,7 +151,7 @@
 		/* HOMEPAGE SLIDER END */ ?>
 
 		<!-- <div style="margin-top: 10px;">
-			<?php include './silver-investment.php' ?>
+			silver investment
 		</div> -->
 		<div class="container is-fluid" style="margin-top: 30px;">
 			<a href="/gold-rate.php">
