@@ -311,6 +311,13 @@ $apporder = false;
                         } else { ?>
                             <div>
                                 <?php include 'no-data.php'; ?>
+                                <div style="text-align:center; margin-top:-100px;padding-bottom:80px;">
+                                <a href="/silver">
+                                    <button class="button primary small">
+                                    Invest In Silver
+                                </button>
+                                </a>
+                                </div>
                             </div>
                         <?php } ?>
                     </table>

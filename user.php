@@ -278,7 +278,9 @@ Share your amazing experience&nbsp; <img src="assets/images/extra/happy.png" sty
         $displayus2 = mysqli_query($con,$sqlus2);
 		$countus2=mysqli_num_rows($displayus2);
 		echo $countus2;
-		?>  </span> )</small></h3>
+		?>  </span> )</small> 
+	<a href="/silver-requests"><button class="button primary small ml-2">My Silver Investments</button></a>	
+	</h3>
 	
 	<?php 
 	
