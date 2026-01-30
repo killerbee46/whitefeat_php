@@ -29,7 +29,7 @@
     if ($silverSold > $rowpd['stock']) {
         echo "<script>
                             alert('Silver Buniya Out Of Stock!');
-    window.location.href = '/white-feathers/silver'
+    window.location.href = '/silver'
                         </script>";
     } else {
         $query = "INSERT INTO silver_stock (
@@ -52,7 +52,7 @@
         if (mysqli_query($con, $query)) {
             echo "<script>
                             alert('Request added for silver investment. Please wait for confirmation...');
-    window.location.href = '/white-feathers/silver-requests'
+    window.location.href = '/silver-requests'
                         </script>";
         } else {
             echo "<script>

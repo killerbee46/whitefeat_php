@@ -234,7 +234,7 @@ $apporder = false;
                                                 <button class="button primary"
                                                     style="width:100%;cursor:pointer;text-transform:capitalize; display:flex;gap:10px;"
                                                     title="<?= $orderStatus[3] ?>"
-                                                    onclick="window.location.href = '/white-feathers/silver-requests?id=<?= $rowOrder['id'] ?>'">
+                                                    onclick="window.location.href = '/silver-requests?id=<?= $rowOrder['id'] ?>'">
                                                     <?= $orderStatus[4] ?>             <?= $orderStatus[3] ?>
                                                 </button>
                                             </div>
