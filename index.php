@@ -4,6 +4,7 @@
 	$cookid = '0';
 	$newuser = '1';
 	/* CONNECTING DATABASE */
+	include 'db_connect.php';
 	/* CHECKING COOKIE & SET NEW IF NOT FOUND IN BROWSER */
 	include 'ajax_cookie.php';
 	/* FOR CREATING SEO FRIENDLY URLS */
@@ -149,7 +150,7 @@
 
 		/* HOMEPAGE SLIDER END */ ?>
 
-		<!-- <div style="margin-top: 10px;">
+<!-- <div style="margin-top: 10px;">
 			silver investment
 		</div> -->
 		<div class="container is-fluid" style="margin-top: 30px;">
