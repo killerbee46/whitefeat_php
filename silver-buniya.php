@@ -187,13 +187,11 @@
 
                         $silverSold = 0;
 
-                        $sqlus = "Select weight, verified from silver_stock where verified = 1";
+                        $sqlus = "Select weight, verified from silver_stock where verified = 1 and booking_date like '%" . date_format(date_create(), "Y-m-d") . "%' ";
                         $displayus = mysqli_query($con, $sqlus);
-
                         while ($rowus = mysqli_fetch_array($displayus)) {
                             $silverSold += $rowus['weight'];
                         }
-
                         $image = "no-image.png";
                         if (isset($rowpd['image'])) {
                             $image = $rowpd['image'];
@@ -615,8 +613,9 @@ display: -webkit-box;
                             </span>
                         <?php } else { ?>
                             <span onclick="openModal('silver-modal')" class=" contains-number big-screen">
-                                <button <?= $rowpd['visible'] && ($silverSold < $rowpd['stock']) ? "" : "disabled" ?> style="width:50%;"
-                                    class="button is-success is-normal" data-ref="<?php echo $rowpd['id_pack']; ?>">
+                                <button <?= $rowpd['visible'] && ($silverSold < $rowpd['stock']) ? "" : "disabled" ?>
+                                    style="width:50%;" class="button is-success is-normal"
+                                    data-ref="<?php echo $rowpd['id_pack']; ?>">
                                     <span>BUY NOW</span>
                                     <span class="icon is-small">
                                         <i class="fas fa-shopping-cart"></i>

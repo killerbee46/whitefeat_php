@@ -5,7 +5,7 @@
 
     $silverSold = 0;
 
-    $sqlus = "Select weight, verified from silver_stock where verified = 1";
+    $sqlus = "Select weight, verified from silver_stock where verified = 1 and booking_date like '%" . date_format(date_create(), "Y-m-d") . "%' ";
     $displayus = mysqli_query($con, $sqlus);
 
     while ($rowus = mysqli_fetch_array($displayus)) {

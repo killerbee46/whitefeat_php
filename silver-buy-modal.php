@@ -49,6 +49,15 @@ include 'db_connect.php';
             $displaypd = mysqli_query($con, $sqlpd);
             $rowpd = mysqli_fetch_array($displaypd);
 
+            $silverSold = 0;
+
+            $sqlus = "Select weight, verified from silver_stock where verified = 1 and booking_date like '%" . date_format(date_create(), "Y-m-d") . "%' ";
+            $displayus = mysqli_query($con, $sqlus);
+
+            while ($rowus = mysqli_fetch_array($displayus)) {
+                $silverSold += $rowus['weight'];
+            }
+echo $silverSold;
             $sqluser = 'Select c_id,name, phone, address, cur_id from customer where c_id = ' . $GLOBALS["customer"];
             $displayuser = mysqli_query($con, $sqluser);
             $rowuser = mysqli_fetch_array($displayuser);
@@ -94,22 +103,16 @@ include 'db_connect.php';
                         <input name="address" value="<?= $rowuser["address"] ?? '' ?>" required />
                     </div>
                     <div class="col">
-                        <label>Weight</label>
-                        <select name="weight" onchange="updatePrice(this)" required>
-                            <option selected disabled value="">Select Weight</option>
-                            <?php
-                            for ($i = 5; $i <= 20; $i++) { ?>
-                                <option value=<?= $i ?>><?= $i ?> Tola</option>
-                            <?php }
-                            ?>
-                        </select>
+                        <label>Weight (Tola)</label>
+                        <input min="5" max="<?= $rowpd['stock'] - $silverSold ?>" type="number" name="weight" onchange="updatePrice(this)" required>
                     </div>
 
                     <div style="flex-direction:row;align-items:center;width:100%">
                         <label>Total Price:</label>
                         Rs. <input
-                            style="font-weight:600;border:none;outline:none;background:transparent;width:fit-content;font-size:18px;padding:0;"
-                            name="price" id="totalPrice" readonly="readonly" />
+                            style="font-weight:600;border:none;outline:none;background:transparent;width: 150px;;font-size:18px;padding:0;"
+                            name="price" id="totalPrice" readonly="readonly" /><i class='fas fa-sync-alt'
+                            style="cursor:pointer;"></i>
                     </div>
                     <div class="col"></div>
                     <div class="col">

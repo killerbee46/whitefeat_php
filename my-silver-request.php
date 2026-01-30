@@ -197,8 +197,11 @@ $apporder = false;
                         <?php
                         if ($countOrder > 0) {
                             while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-                                $orderStatus = $rowOrder['verified'] != 0 ? ["verified", "green", '<i class="fas fa-check"></i>'] : ["pending", "goldenrod", '<i class="fas fa-file"></i>', "verify", '<i class="fas fa-check"></i>']
-                                    ?>
+                                $orderStatus = $rowOrder['verified'] != 0 ? ["verified", "green", '<i class="fas fa-check"></i>'] : ["pending", "goldenrod", '<i class="fas fa-file"></i>', "verify", '<i class="fas fa-check"></i>'];
+                                $sqlckp2 = fetchProduct(2292);
+                                $displayckp2 = mysqli_query($con, $sqlckp2);
+                                $rowckp2 = mysqli_fetch_array($displayckp2);
+                                ?>
 
                                 <div class="order-card box order-list-phone"
                                     style="padding:10px;margin:15px -10px;border-top:1px solid #3892C6">
@@ -220,6 +223,20 @@ $apporder = false;
                                         To: <?= $rowOrder['address'] ?>
                                     </div>
                                     <hr class="mt-0 mb-3" />
+                                    <div>
+                                        <button class="button paccordion" style="width:100%">Products</button>
+                                        <div class="ppanel">
+                                            <div style="font-size:12px;">
+                                                <hr class="m-0 mt-2" />
+                                                <?php
+
+                                                echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+
+                                                echo ' &diams; ' . ucfirst($rowckp2['p_name']) . ' - <span><a href="' . make_url($rowckp2['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr class="mt-0" />
                                     <div class="flex justify-center align-center" style="gap:20px;margin:10px 0">
                                         <div style="width:50%">
@@ -251,9 +268,9 @@ $apporder = false;
                                         </td>
                                         <td><?= date_format(date_create($rowOrder['booking_date']), "Y-m-d") ?>
                                         </td>
-                                       <td><?= $rowOrder['address'] ?></td>
-                                       <td>Rs. <?= $rowOrder['price'] ?></td>
                                         <td><?= $rowOrder['address'] ?></td>
+                                        <td><span style="font-weight:600;"><?= $rowOrder['weight'] ?></span><small><small>Tola</small></small></td>
+                                        <td><div style="font-weight:600">Rs. <?= $rowOrder['price'] ?></div></td>
                                         <td>
                                             <div class="flex align-center" style="gap: 10px;">
                                                 <div class="flex align-center"
@@ -276,14 +293,14 @@ $apporder = false;
                                             <div style="font-size:12px;">
                                                 <hr class="m-0 mt-2" />
                                                 <?php
-                                                
-                                                        $sqlckp2 = fetchProduct(2292);
-                                                        $displayckp2 = mysqli_query($con, $sqlckp2);
-                                                        $rowckp2 = mysqli_fetch_array($displayckp2);
 
-                                                        echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+                                                $sqlckp2 = fetchProduct(2292);
+                                                $displayckp2 = mysqli_query($con, $sqlckp2);
+                                                $rowckp2 = mysqli_fetch_array($displayckp2);
 
-                                                        echo ' &diams; ' . ucfirst($rowckp2['p_name']) . ' - <span><a href="' . make_url($rowckp2['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
+                                                echo '<img src="https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/' . $rowckp2['image'] . '" style="height:3em;"/>';
+
+                                                echo ' &diams; ' . ucfirst($rowckp2['p_name']) . ' - <span><a href="' . make_url($rowckp2['id_pack']) . '" target="_blank"><i>View Product </i><i class="fas fa-eye"></i></a></span></h6>';
                                                 ?>
                                                 <hr class="m-0 mb-5" style="background:#3892C666" />
                                             </div>
