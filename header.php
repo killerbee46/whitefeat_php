@@ -13,10 +13,11 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
     if($GLOBALS['customer']!=0){
         $sqlud = "Select phone from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
                   $displayud = mysqli_query($con, $sqlud);
-                  $rowud = mysqli_fetch_array($displayud);
-                  if ($rowud['phone']==$rowsOffer['cno']) {
+                  while ($rowud = mysqli_fetch_array($displayud)) {
+                    if ($rowud['phone']==$rowsOffer['cno']) {
                     $offerExpired = true;
                   }
+                  }      
     }
 }
 
