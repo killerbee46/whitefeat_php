@@ -6,16 +6,6 @@
     include_once('make_url.php');
     include_once('get_url.php');
 
-    $myNosepinOrder = 0;
-    $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
-    $displayOrder = mysqli_query($con, $orderSql);
-
-    //   while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-//     $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
-//     $displayOrder2 = mysqli_query($con, $orderSql2);
-//     $countOrder = mysqli_num_rows($displayOrder2);
-//     $myNosepinOrder += $countOrder;
-//   }
     ?><!DOCTYPE html>
     <html lang="en">
 
@@ -169,7 +159,6 @@
 
         <?php
         include 'header.php';
-        include './silver-buy-modal.php';
         ?>
 
 
@@ -611,7 +600,8 @@ display: -webkit-box;
                                     </span>
                                 </button>
                             </span>
-                        <?php } else { ?>
+                        <?php } else { 
+                            include './silver-buy-modal.php'; ?>
                             <span onclick="openModal('silver-modal')" class=" contains-number big-screen">
                                 <button <?= $rowpd['visible'] && ($silverSold < $rowpd['stock']) ? "" : "disabled" ?>
                                     style="width:50%;" class="button is-success is-normal"
