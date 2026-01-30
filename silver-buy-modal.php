@@ -36,9 +36,6 @@
         }
     </style>
 </head>
-<?php
-include 'db_connect.php';
-?>
 <div class="modal" id="silver-modal">
     <div class="modal-background" onclick="closeModal('silver-modal')"></div>
     <div class="modal-content">
