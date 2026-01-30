@@ -38,7 +38,6 @@
     '" . $_POST['price'] . "',
     '" . $GLOBALS['customer'] . "')
     ";
-        echo $query;
         if (mysqli_query($con, $query)) {
             echo "<script>
                             alert('Request added for silver investment. Please wait for confirmation...');
