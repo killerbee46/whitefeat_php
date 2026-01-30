@@ -4,7 +4,6 @@
 	$cookid = '0';
 	$newuser = '1';
 	/* CONNECTING DATABASE */
-	include 'db_connect.php';
 	/* CHECKING COOKIE & SET NEW IF NOT FOUND IN BROWSER */
 	include 'ajax_cookie.php';
 	/* FOR CREATING SEO FRIENDLY URLS */
