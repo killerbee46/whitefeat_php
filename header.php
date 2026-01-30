@@ -216,7 +216,6 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
         <button class="modal-close is-large" onclick="closeModal('login-modal')" aria-label="close"></button>
     </div>
     <?php
-    include './silver-buy-modal.php';
     echo '
     <div class="modal" id="modal-user">
   <div class="modal-background"></div>

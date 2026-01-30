@@ -167,9 +167,9 @@
 
     <body style="letter-spacing:0.02em;">
 
-        <?php 
-        include 'header.php'; 
-        // include './silver-buy-modal.php';
+        <?php
+        include 'header.php';
+        include './silver-buy-modal.php';
         ?>
 
 
@@ -183,6 +183,17 @@
                         $sqlpd = fetchProduct(2292);
                         $displaypd = mysqli_query($con, $sqlpd);
                         $rowpd = mysqli_fetch_array($displaypd);
+
+
+                        $silverSold = 0;
+
+                        $sqlus = "Select weight, verified from silver_stock where verified = 1";
+                        $displayus = mysqli_query($con, $sqlus);
+
+                        while ($rowus = mysqli_fetch_array($displayus)) {
+                            $silverSold += $rowus['weight'];
+                        }
+
                         $image = "no-image.png";
                         if (isset($rowpd['image'])) {
                             $image = $rowpd['image'];
@@ -604,17 +615,18 @@ display: -webkit-box;
                             </span>
                         <?php } else { ?>
                             <span onclick="openModal('silver-modal')" class=" contains-number big-screen">
-                                <button style="width:50%;" class="button is-success is-normal"
-                                    data-ref="<?php echo $rowpd['id_pack']; ?>">
+                                <button <?= $rowpd['visible'] && ($silverSold < $rowpd['stock']) ? "" : "disabled" ?> style="width:50%;"
+                                    class="button is-success is-normal" data-ref="<?php echo $rowpd['id_pack']; ?>">
                                     <span>BUY NOW</span>
                                     <span class="icon is-small">
                                         <i class="fas fa-shopping-cart"></i>
                                     </span>
                                 </button>
                             </span>
+                            <?= $rowpd['visible'] ? "" : " <div style='color:crimson;font-weight:600;'>Can Only PLace Orders Between 11:30 AM to 6:00 PM</div>" ?>
+                            <?= ($silverSold < $rowpd['stock']) ? "" : " <div style='color:crimson;font-weight:600;'>Out Of Stock!!!</div>" ?>
                         </div>
                     <?php } ?>
-
 
                     <hr style="color:#eee;border:0;height:1px;">
                 </div>
@@ -624,7 +636,9 @@ display: -webkit-box;
 
 
         <?php include('footer.php'); ?>
-
+        <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="assets/owl/owl.carousel.min.js"></script>
+        <?php /* CONTAINS DEPENDENT JS FILES LINKS + SCRIPTS */ include('js.php'); ?>
 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
         <script type="text/javascript"
@@ -703,7 +717,6 @@ display: -webkit-box;
                 zoom.style.display = 'none';
             });
         </script>
-        <?php /* CONTAINS DEPENDENT JS FILES LINKS + SCRIPTS */ include('js.php'); ?>
         <a href="#" id="autocomplete_trigger"></a>
     </body>
 
