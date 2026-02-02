@@ -25,12 +25,6 @@
     $myNosepinOrder += $countOrder;
   }
 
-   if ($productname == 2292) {
-    echo '<script>
-    window.location.href = "/silver";
-    </script>';
-  }
-
   if ($rowhead['stock'] <= 0 && $productname == 1849) {
     echo '<script>
     alert("Cannot View Or Order Product");
@@ -215,10 +209,8 @@
               background:
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               aspect-ratio:1/1;
               background-size: cover;
@@ -238,10 +230,8 @@
             <div class="zoom-preview" id="zoomPreview" style="background:
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
-              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               background-size: 150%;
               background-position: center;
