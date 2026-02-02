@@ -6,6 +6,13 @@
     include_once('make_url.php');
     include_once('get_url.php');
 
+    $headsql = "Select * from `whitefeat_wf_new`.`package` WHERE id_pack='2292'";
+    $displayhead = mysqli_query($con, $headsql);
+    $counthead = mysqli_num_rows($displayhead);
+    if ($counthead <= 0) {
+        header('location:index.php');
+    }
+
     ?><!DOCTYPE html>
     <html lang="en">
 
@@ -600,7 +607,7 @@ display: -webkit-box;
                                     </span>
                                 </button>
                             </span>
-                        <?php } else { 
+                        <?php } else {
                             include './silver-buy-modal.php'; ?>
                             <span onclick="openModal('silver-modal')" class=" contains-number big-screen">
                                 <button <?= $rowpd['visible'] && ($silverSold < $rowpd['stock']) ? "" : "disabled" ?>
