@@ -15,14 +15,20 @@
   $rowhead = mysqli_fetch_array($displayhead);
 
   $myNosepinOrder = 0;
-  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
-  $displayOrder = mysqli_query($con, $orderSql);
+  // $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
+  // $displayOrder = mysqli_query($con, $orderSql);
 
-  while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
-    $displayOrder2 = mysqli_query($con, $orderSql2);
-    $countOrder = mysqli_num_rows($displayOrder2);
-    $myNosepinOrder += $countOrder;
+  // while ($rowOrder = mysqli_fetch_array($displayOrder)) {
+  //   $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
+  //   $displayOrder2 = mysqli_query($con, $orderSql2);
+  //   $countOrder = mysqli_num_rows($displayOrder2);
+  //   $myNosepinOrder += $countOrder;
+  // }
+
+   if ($productname == 2292) {
+    echo '<script>
+    window.location.href = "/silver";
+    </script>';
   }
 
   if ($rowhead['stock'] <= 0 && $productname == 1849) {
@@ -209,8 +215,10 @@
               background:
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               aspect-ratio:1/1;
               background-size: cover;
@@ -230,8 +238,10 @@
             <div class="zoom-preview" id="zoomPreview" style="background:
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/hq/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= $image ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".jpeg" ?>'),
+              url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= explode('.', $image)[0] . ".JPG" ?>'),
               url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/no-image.png');
               background-size: 150%;
               background-position: center;
@@ -480,7 +490,7 @@ display: -webkit-box;
                 $dOff = mysqli_fetch_array($doFFFetch)
                   ?>
                 <div
-                  style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+                  style="width:fit-content;text-align:center;background:crimson;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;display:<?= $rowpd['dc_qty'] > 0 ? "block" : "none" ?>">
                   <div style="margin:0;"><?= round($dOff['discount'], 0) ?>% OFF</div>
                   <span style="font-size: 10px;margin:0">On Diamond</span>
                 </div>
@@ -604,7 +614,7 @@ display: -webkit-box;
                 $rowb2b = mysqli_fetch_array($displayb2b);
                 if ($rowb2b['b2b'] == 1) {
                   $b2b_check = 1;
-                  $newprice = $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
+                  $newprice = $cnot == "Rs" ? floor($rowpd['final_price_b2b'] / $crate) : round($rowpd['final_price_b2b'] / $crate, 2);
                 }
 
               }

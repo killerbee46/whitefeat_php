@@ -548,7 +548,7 @@ display: -webkit-box;
                                 $rowb2b = mysqli_fetch_array($displayb2b);
                                 if ($rowb2b['b2b'] == 1) {
                                     $b2b_check = 1;
-                                    $newprice = $cnot == "Rs" ? floor($rowslt2['final_price_b2b'] / $crate) : round($rowslt2['final_price_b2b'] / $crate, 2);
+                                    $newprice = $cnot == "Rs" ? floor($rowpd['final_price_b2b'] / $crate) : round($rowpd['final_price_b2b'] / $crate, 2);
                                 }
 
                             }
