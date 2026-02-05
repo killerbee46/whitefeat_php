@@ -157,6 +157,20 @@ $apporder = false;
     <div class="container is-fluid mt-5 pb-5">
         <div class="orders-header" style="display:flex;justify-content: space-between;align-items:center;">
             <div style="font-size:20px;font-weight:600;">Silver Investments</div>
+
+            <!-- <form method="post">
+                <div>
+                    Silver Rate:
+                    <input name="silver" />
+                </div>
+                <div>
+                    Silver Rate:
+                    <input name="" />
+                </div>
+                <div>
+                    <button type="submit" class="button primary">Update</button>
+                </div>
+            </form> -->
         </div>
         <hr class="my-2" />
         <div class="orders-body">
@@ -269,8 +283,12 @@ $apporder = false;
                                         <td><?= date_format(date_create($rowOrder['booking_date']), "Y-m-d") ?>
                                         </td>
                                         <td><?= $rowOrder['address'] ?></td>
-                                        <td><span style="font-weight:600;"><?= $rowOrder['weight'] ?></span><small><small>Tola</small></small></td>
-                                        <td><div style="font-weight:600">Rs. <?= $rowOrder['price'] ?></div></td>
+                                        <td><span
+                                                style="font-weight:600;"><?= $rowOrder['weight'] ?></span><small><small>Tola</small></small>
+                                        </td>
+                                        <td>
+                                            <div style="font-weight:600">Rs. <?= $rowOrder['price'] ?></div>
+                                        </td>
                                         <td>
                                             <div class="flex align-center" style="gap: 10px;">
                                                 <div class="flex align-center"
@@ -312,11 +330,11 @@ $apporder = false;
                             <div>
                                 <?php include 'no-data.php'; ?>
                                 <div style="text-align:center; margin-top:-100px;padding-bottom:80px;">
-                                <a href="/silver">
-                                    <button class="button primary small">
-                                    Invest In Silver
-                                </button>
-                                </a>
+                                    <a href="/silver">
+                                        <button class="button primary small">
+                                            Invest In Silver
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         <?php } ?>
