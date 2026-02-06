@@ -619,7 +619,7 @@ display: -webkit-box;
                                     </span>
                                 </button>
                             </span>
-                            <?= $rowpd['visible'] ? "" : " <div style='color:crimson;font-weight:600;'>Can Only PLace Orders Between 11:30 AM to 6:00 PM</div>" ?>
+                            <?= $rowpd['visible'] ? "" : " <div style='color:crimson;font-weight:600;'>Can Only Place Orders Between 11:30 AM to 6:00 PM Sunday to Friday</div>" ?>
                             <?= ($silverSold < $rowpd['stock']) ? "" : " <div style='color:crimson;font-weight:600;'>Out Of Stock!!!</div>" ?>
                         </div>
                     <?php } ?>
