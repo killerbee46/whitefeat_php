@@ -32,7 +32,7 @@ $crate = ($rowcrc2['cur_rate']);
         $myNosepinOrder = 0;
         // $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
         // $displayOrder = mysqli_query($con, $orderSql);
-
+        
         // Set Kathmandu timezone
         date_default_timezone_set('Asia/Kathmandu');
 
@@ -48,78 +48,83 @@ $crate = ($rowcrc2['cur_rate']);
             $offerDisabled = 0;
         }
         ?>
-        <div
-            style="font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid goldenrod;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
-                <div> Silver Investment ( 11:15 AM - 6:00 PM : Sun to Fri )</div>
-        </div>
+        <h3
+            style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap; width:100%;margin-bottom:40px;">
+
+            <div
+                style="font-size: 20px;font-weight:700;padding-bottom:10px;border-bottom:3px solid goldenrod;display:flex;align-items:baseline;gap:5px;color:white;">
+                <div> Silver Investment ( 11:15 AM - 6:00 PM : Sun to Fri ) </div>
+            </div>
+            <a href="/silver-requests"><button class="button primary small ml-2">My Silver Investments</button></a>
+        </h3>
         <?php
-				$sqlOffer = fetchProduct(2292);
-				$displayOffer = mysqli_query($con, $sqlOffer);
-				$sel_cur = 1;
-				$cnot = '';
-				$crate = 1;
-				if ($GLOBALS['customer'] != 0) {
-					$sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
-					$displaycrc = mysqli_query($con, $sqlcrc);
-					$rowcrc = mysqli_fetch_array($displaycrc);
-					$sel_cur = $rowcrc['cur_id'];
-				} else {
-					$sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
-					$displaycrc = mysqli_query($con, $sqlcrc);
-					$rowcrc = mysqli_fetch_array($displaycrc);
-					$sel_cur = $rowcrc['cookie_currency'];
-				}
-				$sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
-				$displaycrc2 = mysqli_query($con, $sqlcrc2);
-				$rowcrc2 = mysqli_fetch_array($displaycrc2);
-				$cnot = $rowcrc2['cur_name'];
-				$crate = ($rowcrc2['cur_rate']);
-				?>
-			</div>
-			<div style="display:flex;justify-content:center;">
-                    
-				<div style="width:300px;margin:20px auto;cursor:pointer">
-					<?php
-                    $rowfixed = mysqli_fetch_array($displayOffer);
-                        ?>
-                    
-						<a href="<?= make_url('silver') ?>">
+        $sqlOffer = fetchProduct(2292);
+        $displayOffer = mysqli_query($con, $sqlOffer);
+        $sel_cur = 1;
+        $cnot = '';
+        $crate = 1;
+        if ($GLOBALS['customer'] != 0) {
+            $sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
+            $displaycrc = mysqli_query($con, $sqlcrc);
+            $rowcrc = mysqli_fetch_array($displaycrc);
+            $sel_cur = $rowcrc['cur_id'];
+        } else {
+            $sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
+            $displaycrc = mysqli_query($con, $sqlcrc);
+            $rowcrc = mysqli_fetch_array($displaycrc);
+            $sel_cur = $rowcrc['cookie_currency'];
+        }
+        $sqlcrc2 = "Select * from `whitefeat_wf_new`.`currency` where cur_id='" . $sel_cur . "'";
+        $displaycrc2 = mysqli_query($con, $sqlcrc2);
+        $rowcrc2 = mysqli_fetch_array($displaycrc2);
+        $cnot = $rowcrc2['cur_name'];
+        $crate = ($rowcrc2['cur_rate']);
+        ?>
+    </div>
+    <div style="display:flex;justify-content:center;">
 
-		      <div style="position:relative;overflow:hidden;">
-                <?php
-						if ($rowfixed['stock'] <= 0) {?>
-							<div
-								style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
-								<div style="margin-left:-10px;">Out Of Stock</div>
-							</div>
-							<?php
-						}
-                        ?>
-  <div style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= isset($rowfixed['image'] )? $rowfixed['image'] : 'no-image.php' ?>');
+        <div style="width:300px;margin:20px auto;cursor:pointer">
+            <?php
+            $rowfixed = mysqli_fetch_array($displayOffer);
+            ?>
+
+            <a href="<?= make_url('silver') ?>">
+
+                <div style="position:relative;overflow:hidden;">
+                    <?php
+                    if ($rowfixed['stock'] <= 0) { ?>
+                        <div
+                            style="position: absolute;top: 10px;left:-60px;text-align:center;background:crimson;color:white;padding:10px 70px;font-size:12px;display:flex;flex-direction:column;transform:rotate(-45deg);display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+                            <div style="margin-left:-10px;">Out Of Stock</div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <div style="background:url('https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/thumb/<?= isset($rowfixed['image']) ? $rowfixed['image'] : 'no-image.php' ?>');
   background-size:200%;aspect-ratio:1/1;background-position:center;border-radius:8px;
-  " ></div>
-  <br />
+  "></div>
+                    <br />
 
-<?php
-						$actual_price = $rowfixed['actual_price'] / $crate;
-						$final_price = $rowfixed['final_price'] / $crate;
-						$discount = $rowfixed['discount'] / $crate;
-						/* customer & its attribute checking end (new/logged-in,currency) */
+                    <?php
+                    $actual_price = $rowfixed['actual_price'] / $crate;
+                    $final_price = $rowfixed['final_price'] / $crate;
+                    $discount = $rowfixed['discount'] / $crate;
+                    /* customer & its attribute checking end (new/logged-in,currency) */
 
-						/* Checking for discount on product start */
-						echo '
+                    /* Checking for discount on product start */
+                    echo '
 							<span class="p-2"><Strong class="letter-spacing price-off " style="color:white !important;">';
 
-						echo $cnot . " " . round(($final_price), 2) . " per tola";
+                    echo $cnot . " " . round(($final_price), 2) . " per tola";
 
-						echo '</strong>';
-						if ($discount > 0) {
-							echo '<small><small><strike class="price-off" style="margin-left:10px;color:white;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
-						}
+                    echo '</strong>';
+                    if ($discount > 0) {
+                        echo '<small><small><strike class="price-off" style="margin-left:10px;color:white;">' . $cnot . round(($actual_price), 2) . '</strike></small></small>';
+                    }
 
-						/* Checking for discount on product end */
+                    /* Checking for discount on product end */
 
-						echo '<br> <span title="' . $rowfixed['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
+                    echo '<br> <span title="' . $rowfixed['p_name'] . '" style="font-size:0.9rem; color:#555;overflow: hidden;height:50px;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 2;
@@ -128,7 +133,7 @@ color:white;" class="p-2">' . strtoupper($rowfixed['p_name']) . '</span> </span>
   </a>
   </div>	  
 		  ';
-					?>
+                    ?>
                 </div>
             </a>
         </div>
