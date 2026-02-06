@@ -108,6 +108,28 @@ $apporder = false;
             display: table;
         }
 
+        .priceInput {
+            position: relative;
+        }
+
+        .prefix {
+            position: absolute;
+            top: 11px;
+            left: 10px;
+        }
+
+        input.prices {
+            padding-left: 35px;
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        input.readonly {
+            border: 0.5px solid gray;
+            cursor: default;
+        }
+
         @media screen and (max-width: 768px) {
             .order-list-phone {
                 display: block;
@@ -146,9 +168,37 @@ $apporder = false;
 
     }
 
+    function silverBuniyaPrice($silverrate, $premium)
+    {
+        include 'db_connect.php';
+        $updateSilverPrice = "update package_material set price = " . $silverrate . " where pm_id = 3 ;";
+        mysqli_query($con, $updateSilverPrice);
+        $buniyaPrice = $silverrate + $premium;
+        $updateQuery = "update package set fixed_price = " . $buniyaPrice . " where id_pack = 2292 ;";
+        if (mysqli_query($con, $updateQuery)) {
+            echo "<script>
+            window.history.back();
+            alert('Price Updated!');
+                window.location.reload();
+                </script>";
+        } else {
+            echo "<script>
+                alert('Error Updating Price!');
+                window.location.reload();
+                </script>";
+        }
+
+    }
+
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         updateOrderStatus($id);
+    }
+
+    if (isset($_POST['silverrate']) && isset($_POST['premium'])) {
+        $silverrate = $_POST['silverrate'];
+        $premium = $_POST['premium'];
+        silverBuniyaPrice($silverrate, $premium);
     }
 
     ?>
@@ -158,19 +208,42 @@ $apporder = false;
         <div class="orders-header" style="display:flex;justify-content: space-between;align-items:center;">
             <div style="font-size:20px;font-weight:600;">Silver Investments</div>
 
-            <!-- <form method="post">
-                <div>
-                    Silver Rate:
-                    <input name="silver" />
+            <form method="post">
+                <div class="flex" style="gap:20px; align-items: center;">
+                    <div>Buniya (per tola):</div>
+                    <?php
+                    $bunSQL = "Select fixed_price from package where id_pack = 2292 ;";
+                    $displayBun = mysqli_query($con, $bunSQL);
+                    $rowBun = mysqli_fetch_array($displayBun);
+                    ?>
+                    <div class="priceInput">
+                        <div class="prefix">Rs</div>
+                        <input name="silverrate" class="prices readonly" style="width:90px;" readonly
+                            value="<?= round($rowBun['fixed_price'], 0) ?>" />
+                    </div>
+                    <div>Silver Rate:</div>
+                    <div class="priceInput">
+                        <?php
+                        $dspSQL = "Select price from package_material where pm_id = 3 ;";
+                        $displayDSP = mysqli_query($con, $dspSQL);
+                        $rowDSP = mysqli_fetch_array($displayDSP);
+                        ?>
+                        <div class="prefix">Rs</div>
+                        <input name="silverrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
+                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSP['price'], 0) ?>" />
+                    </div>
+                    <div>Premium:</div>
+                    <div class="priceInput">
+                        <div class="prefix">Rs</div>
+                        <input style="width:90px;" name="premium" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
+                            <?= $rowus['role'] > 2 ? "" : "readonly" ?>
+                            value="<?= round($rowBun['fixed_price'], 0) - round($rowDSP['price'], 0) ?>" />
+                    </div>
+                    <div <?= $rowus['role'] > 2 ? "" : "hidden" ?>>
+                        <button type="submit" class="button primary">Update</button>
+                    </div>
                 </div>
-                <div>
-                    Silver Rate:
-                    <input name="" />
-                </div>
-                <div>
-                    <button type="submit" class="button primary">Update</button>
-                </div>
-            </form> -->
+            </form>
         </div>
         <hr class="my-2" />
         <div class="orders-body">
