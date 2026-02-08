@@ -23,7 +23,16 @@ $adminRequestFilter = !isset($_GET['tab']) ? " and verified = '0' " : (
         $_GET['tab'] == "owned" ? "  and verified = '1' " : " "
     )
 );
-$requestFilter = $rowus['role'] > 2 ? $adminRequestFilter : $userRequestFilter;
+$adminUserRequestFilter = !isset($_GET['tab']) ? " and verified = '0' and c_id != ". $GLOBALS['customer'] ." " : (
+    $_GET['tab'] == "all" ? "  and c_id != ". $GLOBALS['customer'] ." " : (
+        $_GET['tab'] == "owned" ? "  and verified = '1'  and c_id != ". $GLOBALS['customer'] ." " : "  and c_id != ". $GLOBALS['customer'] ." "
+    )
+);
+$requestFilter = $rowus['role'] > 2 ? (
+    !isset($_GET['request']) ? $adminUserRequestFilter :(
+      $_GET['request'] == "all" ? $adminRequestFilter : $userRequestFilter
+    )
+) : $userRequestFilter;
 //  and dispatch='0' and c_request='0' 
 $orderSql = "Select * from silver_stock where 1 " . $requestFilter;
 $displayOrder = mysqli_query($con, $orderSql);
@@ -55,6 +64,11 @@ $apporder = false;
             flex-wrap: nowrap;
             overflow: auto;
         }
+        .tabs-control.admin {
+            gap: 0px;
+            padding: 10px;
+            font-size: 16px;
+        }
 
         .tabs-head {
             font-weight: 600;
@@ -62,13 +76,31 @@ $apporder = false;
             padding: 20px;
         }
 
+        .tabs-head.admin {
+            font-weight: 600;
+            cursor: pointer;
+            padding:8px 15px;
+            color: gray;
+            border: 2px solid gray;
+        }
+
         .tabs-head:hover {
             color: gray;
+        }
+
+        .tabs-head.admin:hover {
+            color: #138296;
         }
 
         .tabs-head.active {
             color: #138296;
             border-bottom: 3px solid;
+        }
+
+        .tabs-head.admin.active {
+            color: white;
+            border: 2px solid #138296;
+            background: #138296;
         }
 
         .tabs-contents {
@@ -150,9 +182,8 @@ $apporder = false;
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
     <?php include('header.php');
 
-    function updateOrderStatus($id)
+    function updateOrderStatus($id,$con)
     {
-        include 'db_connect.php';
         $updateQuery = "update silver_stock set verified = 1 where id = " . $id . " ;";
         if (mysqli_query($con, $updateQuery)) {
             echo "<script>
@@ -192,7 +223,7 @@ $apporder = false;
 
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        updateOrderStatus($id);
+        updateOrderStatus($id,$con);
     }
 
     if (isset($_POST['silverrate']) && isset($_POST['premium'])) {
@@ -205,11 +236,11 @@ $apporder = false;
 
 
     <div class="container is-fluid mt-5 pb-5">
-        <div class="orders-header" style="display:flex;justify-content: space-between;align-items:center;">
+        <div class="orders-header" style="display:flex;justify-content: space-between;align-items:center;flex-wrap:wrap;gap:20px;">
             <div style="font-size:20px;font-weight:600;">Silver Investments</div>
 
             <form method="post">
-                <div class="flex" style="gap:20px; align-items: center;">
+                <div class="flex" style="gap:20px; align-items: center;flex-wrap:wrap;">
                     <div>Buniya (per tola):</div>
                     <?php
                     $bunSQL = "Select fixed_price from package where id_pack = 2292 ;";
@@ -248,6 +279,16 @@ $apporder = false;
         <hr class="my-2" />
         <div class="orders-body">
             <div class="card p-5 mb-3">
+                <div class="p-0 border-bottom-0 flex justify-center">
+                    <div class="tabs-control admin">
+                        <div class="tabs-head admin <?= isset($_GET['request']) && $_GET['request'] == "all" ? "active" : "" ?>"
+                            onclick="queryHandler({value:'all'},'request')"> All </div>
+                        <div class="tabs-head admin <?= !isset($_GET['request']) || isset($_GET['request']) && $_GET['request'] == "" ? "active" : "" ?>"
+                            onclick="queryHandler({value:'0'},'request')"> Customers </div>
+                        <div class="tabs-head admin <?= isset($_GET['request']) && $_GET['request'] == "myorders" ? "active" : "" ?>"
+                            onclick="queryHandler({value:'myorders'},'request')"> My Orders </div>
+                    </div>
+                </div>
                 <div class="p-0 border-bottom-0">
                     <div class="tabs-control">
                         <div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "all" ? "active" : "" ?>"

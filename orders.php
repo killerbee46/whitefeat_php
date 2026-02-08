@@ -128,9 +128,8 @@ $apporder = false;
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
     <?php include('header.php');
 
-    function updateOrderStatus($id, $status)
+    function updateOrderStatus($id, $status,$con)
     {
-        include 'db_connect.php';
         $updateQuery = "update cart_book set " . $status . " = " . $GLOBALS['customer'] . " where cb_id = " . $id . " ;";
         if (mysqli_query($con, $updateQuery)) {
             echo "<script>
@@ -149,7 +148,7 @@ $apporder = false;
     if (isset($_GET['status']) && isset($_GET['id'])) {
         $status = $_GET['status'];
         $id = $_GET['id'];
-        updateOrderStatus($id, $status);
+        updateOrderStatus($id, $status,$con);
     }
 
     ?>
