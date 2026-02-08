@@ -279,7 +279,9 @@ $apporder = false;
         <hr class="my-2" />
         <div class="orders-body">
             <div class="card p-5 mb-3">
-                <div class="p-0 border-bottom-0 flex justify-center">
+                <?php
+                if ($rowus['role'] > 2) { ?>
+                    <div class="p-0 border-bottom-0 flex justify-center">
                     <div class="tabs-control admin">
                         <div class="tabs-head admin <?= isset($_GET['request']) && $_GET['request'] == "all" ? "active" : "" ?>"
                             onclick="queryHandler({value:'all'},'request')"> All </div>
@@ -289,6 +291,8 @@ $apporder = false;
                             onclick="queryHandler({value:'myorders'},'request')"> My Orders </div>
                     </div>
                 </div>
+                <?php } 
+                ?>
                 <div class="p-0 border-bottom-0">
                     <div class="tabs-control">
                         <div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "all" ? "active" : "" ?>"
