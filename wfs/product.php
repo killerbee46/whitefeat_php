@@ -30,9 +30,10 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 		<link rel="stylesheet" href="dist/css/sweet-alert.css">
 		<link href="plugins/addon/SunEditor-master/dist/css/suneditor.min.css" rel="stylesheet" type="text/css" />
 		<style>
-			body{
+			body {
 				overflow: auto;
 			}
+
 			.Hunter-pop-up {
 				position: absolute;
 				top: 0;
@@ -346,7 +347,8 @@ $rowud = mysqli_fetch_array($displayud); { ?>
 			.tabs-item.active {
 				display: block;
 			}
-			.tab-divider{
+
+			.tab-divider {
 				width: 1px;
 				background: gray;
 				height: 20px;
@@ -481,16 +483,16 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 										<div class="tabs-control">
 											<div class="tabs-head <?= !isset($_GET['tab']) || $_GET['tab'] == "" || $_GET['tab'] == "products" ? "active" : "" ?>"
 												onclick="filterSelectorHandle({value:'0'},'tab')"> Products</div>
-												<div class="tab-divider"></div>
+											<div class="tab-divider"></div>
 											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "add" ? "active" : "" ?>"
 												onclick="filterSelectorHandle({value:'add'},'tab')">Add Product</div>
-												<div class="tab-divider"></div>
+											<div class="tab-divider"></div>
 											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "regular" ? "active" : "" ?>"
 												onclick="filterSelectorHandle({value:'regular'},'tab')">Regular Tags</div>
-												<div class="tab-divider"></div>
+											<div class="tab-divider"></div>
 											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "gift" ? "active" : "" ?>"
 												onclick="filterSelectorHandle({value:'gift'},'tab')">Gift Tags</div>
-												<div class="tab-divider"></div>
+											<div class="tab-divider"></div>
 											<div class="tabs-head <?= isset($_GET['tab']) && $_GET['tab'] == "collection" ? "active" : "" ?>"
 												onclick="filterSelectorHandle({value:'collection'},'tab')">Collection Tags
 											</div>
@@ -793,10 +795,10 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 														<label style="width: 100%;">Description (separated by comma)
 															<textarea style="width:100%; height:250px;" class="form-control"
 																name="meta_head"><meta name="description" content="">
-														<meta name="keywords" content="">
-														<meta name="robots" content="index, follow">
-														<meta name="author" content="White Feathers Jewellery">
-																	</textarea>
+															<meta name="keywords" content="">
+															<meta name="robots" content="index, follow">
+															<meta name="author" content="White Feathers Jewellery">
+																		</textarea>
 														</label>
 													</section>
 
