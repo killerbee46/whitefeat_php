@@ -365,7 +365,7 @@ margin-top:-0.6em; margin-left:-1.5%; width:105.5%;">
 						$total_net = $total_net + (($rowckp['rate'] ?? 112) * ($rowckp['qty'] ?? 1));
 					}
 
-					echo `<div><strong>` . $cnot . ' ' . floor(($crate * $total_net)) . `</strong></div>`;
+					echo `<div><strong>` . $cnot . ' ' . floor(($crate * ($total_net+200))) . `</strong></div>`;
 
 					echo '<button class="button is-success is-light is-small tracking-order" data-target="modal-track' . $sn . '">Track Order &nbsp; <i class="fas fa-external-link-alt"></i></button>
         

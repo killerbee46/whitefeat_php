@@ -61,7 +61,7 @@
 
     $total_bd = 0;
     $total_dis = 0;
-    $total_net = 0;
+    $total_net = 200;
 
     $sql1act = "Select * from `whitefeat_wf_new`.`cart_book` where cookie_id='" . $GLOBALS['cookid'] . "' and checkout='0' ";
     $displayact = mysqli_query($con, $sql1act);
@@ -725,7 +725,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                   Delivery Charge:
                 </div>
                 <div class="column is-6 pb-0 letter-spacing has-text-right checkout_right_div">
-                  FREE
+                  Rs. 200
                 </div>
 
               </div>
@@ -738,8 +738,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 </div>
                 <div
                   class="column is-6 pb-2 letter-spacing is-size-6 has-text-weight-semibold has-text-right checkout_right_div">
-                  <?php echo $cnot . " " . floor(($total_net / $crate));
-                  echo '<input type="hidden" id="tcost" value="' . floor(($total_net / $crate)) . '" />'; ?>
+                  <?php echo $cnot . " " . floor(($total_net) / $crate);
+                  echo '<input type="hidden" id="tcost" value="' . floor(($total_net) / $crate) . '" />'; ?>
                 </div>
               </div>
 

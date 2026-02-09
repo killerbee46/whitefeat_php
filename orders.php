@@ -261,7 +261,7 @@ $apporder = false;
                                                     $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
                                                 }
                                             }
-                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
+                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * ($total_net + 200))); ?>
                                         </div>
                                     </div>
                                     <div class="flex justify-center align-center" style="margin:10px auto;">
@@ -353,7 +353,7 @@ $apporder = false;
                                                     $total_net = $total_net + ($rowckp['rate'] * $rowckp['qty']);
                                                 }
                                             }
-                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * $total_net)); ?>
+                                            echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * ($total_net + 200))); ?>
                                         </td>
                                         <td><?= $rowOrder['address'] ?></td>
                                         <td>
