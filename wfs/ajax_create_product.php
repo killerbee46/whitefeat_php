@@ -29,7 +29,7 @@ if (isset($_POST['collection'])) {
 
 if (isset($_POST['isFixedPrice'])) {
     $isFixedPrice = 1;
-    $fixedPrice = $_POST['price'];
+    $fixedPrice = $_POST['fixed_price'];
     $fixedPriceB2B = $_POST['price_b2b'];
 }
 
@@ -52,7 +52,7 @@ $query = "INSERT INTO package (
     offer,
     offer_b2b,
     isFixedPrice,
-    price,
+    fixed_price,
     price_b2b,
     tag_women,
     tag_men,

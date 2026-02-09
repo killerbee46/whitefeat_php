@@ -546,7 +546,7 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															</label>
 															<label id="priceSection" style="display: none;">
 																Price
-																<input id="price" type="number" name="price">
+																<input id="price" type="number" name="fixed_price">
 															</label>
 															<label id="priceSectionB2B" style="display: none;">
 																Price (B2B)
