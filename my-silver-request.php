@@ -180,7 +180,7 @@ $apporder = false;
 </head>
 
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
-    <?php
+    <?php include('header.php');
 
     function updateOrderStatus($id,$con)
     {
