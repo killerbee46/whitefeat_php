@@ -180,7 +180,7 @@ $apporder = false;
 </head>
 
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
-    <?php include('header.php');
+    <?php
 
     function updateOrderStatus($id,$con)
     {
@@ -199,9 +199,8 @@ $apporder = false;
 
     }
 
-    function silverBuniyaPrice($silverrate, $premium)
+    function silverBuniyaPrice($silverrate, $premium,$con)
     {
-        include 'db_connect.php';
         $updateSilverPrice = "update package_material set price = " . $silverrate . " where pm_id = 3 ;";
         mysqli_query($con, $updateSilverPrice);
         $buniyaPrice = $silverrate + $premium;
@@ -229,7 +228,7 @@ $apporder = false;
     if (isset($_POST['silverrate']) && isset($_POST['premium'])) {
         $silverrate = $_POST['silverrate'];
         $premium = $_POST['premium'];
-        silverBuniyaPrice($silverrate, $premium);
+        silverBuniyaPrice($silverrate, $premium,$con);
     }
 
     ?>

@@ -1,6 +1,5 @@
  <?php
   /* This page checks & sets value for php global variables used inside website ($customer, $cookid & $newuser )*/
-   include('db_connect.php');
    /* checking in browser if cookie set or not */
 if(!isset($_COOKIE['wfjewel']))
 {
