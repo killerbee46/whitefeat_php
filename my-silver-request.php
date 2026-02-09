@@ -15,17 +15,17 @@ $merchant = $rowus['b2b'];
 
 $userRequestFilter = !isset($_GET['tab']) ? " and verified = '0' and c_id = " . $GLOBALS['customer'] : (
     $_GET['tab'] == "all" ? " and c_id = " . $GLOBALS['customer'] : (
-        $_GET['tab'] == "owned" ? "  and verified = '1' and c_id = " . $GLOBALS['customer'] : " "
+        $_GET['tab'] == "owned" ? "  and verified = '1' and c_id = " . $GLOBALS['customer'] : " order by id DESC"
     )
 );
 $adminRequestFilter = !isset($_GET['tab']) ? " and verified = '0' " : (
     $_GET['tab'] == "all" ? " " : (
-        $_GET['tab'] == "owned" ? "  and verified = '1' " : " "
+        $_GET['tab'] == "owned" ? "  and verified = '1' " : " order by id DESC"
     )
 );
 $adminUserRequestFilter = !isset($_GET['tab']) ? " and verified = '0' and c_id != ". $GLOBALS['customer'] ." " : (
     $_GET['tab'] == "all" ? "  and c_id != ". $GLOBALS['customer'] ." " : (
-        $_GET['tab'] == "owned" ? "  and verified = '1'  and c_id != ". $GLOBALS['customer'] ." " : "  and c_id != ". $GLOBALS['customer'] ." "
+        $_GET['tab'] == "owned" ? "  and verified = '1'  and c_id != ". $GLOBALS['customer'] ." " : "  and c_id != ". $GLOBALS['customer'] ." order by id DESC"
     )
 );
 $requestFilter = $rowus['role'] > 2 ? (
@@ -182,9 +182,9 @@ $apporder = false;
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
     <?php include('header.php');
 
-    function updateOrderStatus($id,$con)
+    function updateOrderStatus($id,$buniyaPrice,$con)
     {
-        $updateQuery = "update silver_stock set verified = 1 where id = " . $id . " ;";
+        $updateQuery = "update silver_stock set verified = 1, price = ( weight * ". $buniyaPrice .") where id = " . $id . " ;";
         if (mysqli_query($con, $updateQuery)) {
             echo "<script>
                 alert('Request Approved!');
@@ -220,9 +220,13 @@ $apporder = false;
 
     }
 
+    $sqlckp2 = fetchProduct(2292);
+    $displayckp2 = mysqli_query($con, $sqlckp2);
+    $rowckp2 = mysqli_fetch_array($displayckp2);
+
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        updateOrderStatus($id,$con);
+        updateOrderStatus($id,$rowckp2['fixed_price'],$con);
     }
 
     if (isset($_POST['silverrate']) && isset($_POST['premium'])) {
@@ -329,9 +333,6 @@ $apporder = false;
                         if ($countOrder > 0) {
                             while ($rowOrder = mysqli_fetch_array($displayOrder)) {
                                 $orderStatus = $rowOrder['verified'] != 0 ? ["verified", "green", '<i class="fas fa-check"></i>'] : ["pending", "goldenrod", '<i class="fas fa-file"></i>', "verify", '<i class="fas fa-check"></i>'];
-                                $sqlckp2 = fetchProduct(2292);
-                                $displayckp2 = mysqli_query($con, $sqlckp2);
-                                $rowckp2 = mysqli_fetch_array($displayckp2);
                                 ?>
 
                                 <div class="order-card box order-list-phone"
