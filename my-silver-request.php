@@ -7,9 +7,9 @@ include_once('make_url.php');
 $sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 $displayus = mysqli_query($con, $sqlus);
 $rowus = mysqli_fetch_array($displayus);
-if ($GLOBALS['customer'] == 0) {
-    header('location:index.php');
-}
+// if ($GLOBALS['customer'] == 0) {
+//     header('location:index.php');
+// }
 
 $merchant = $rowus['b2b'];
 
@@ -220,9 +220,9 @@ $apporder = false;
 
     }
 
-    function silverPerGramPrice($silverrate, $premium,$con)
+    function silverPerGramPrice($silverrate,$con)
     {
-        $updateSilverPerGramPrice = "update package_material set price = " . $silverrate . " where pm_id = 3 ;";
+        $updateSilverPerGramPrice = "update package_metal set rate = " . $silverrate . " where pm_id = 3 ;";
         if (mysqli_query($con, $updateSilverPerGramPrice)) {
             echo "<script>
             window.history.back();
@@ -255,7 +255,7 @@ $apporder = false;
 
     if (isset($_POST['silverpgrate'])) {
         $silverpgrate = $_POST['silverpgrate'];
-        silverBuniyaPrice($silverrate, $premium,$con);
+        silverPerGramPrice($silverpgrate,$con);
     }
     ?>
 
@@ -275,7 +275,18 @@ $apporder = false;
                     <div class="priceInput">
                         <div class="prefix">Rs</div>
                         <input name="silverrate" class="prices readonly" style="width:90px;" readonly
-                            value="<?= round($rowBun['fixed_price'], 0) ?>" />
+                        value="<?= round($rowBun['fixed_price'], 0) ?>" />
+                    </div>
+                    <div>Silver Per Gram Rate:</div>
+                    <div class="priceInput">
+                        <?php
+                        $dspgSQL = "Select rate from package_metal where pmt_id = 13 ;";
+                        $displayDSPG = mysqli_query($con, $dspgSQL);
+                        $rowDSPG = mysqli_fetch_array($displayDSPG);
+                        ?>
+                        <div class="prefix">Rs</div>
+                        <input name="silverpgrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
+                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSPG['rate'], 0) ?>" />
                     </div>
                     <div>Silver Rate:</div>
                     <div class="priceInput">
@@ -287,17 +298,6 @@ $apporder = false;
                         <div class="prefix">Rs</div>
                         <input name="silverrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
                             <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSP['price'], 0) ?>" />
-                    </div>
-                    <div>Silver Per Gram Rate:</div>
-                    <div class="priceInput">
-                        <?php
-                        $dspgSQL = "Select price from package_metal where pmt_id = 13 ;";
-                        $displayDSPG = mysqli_query($con, $dspgSQL);
-                        $rowDSPG = mysqli_fetch_array($displayDSPG);
-                        ?>
-                        <div class="prefix">Rs</div>
-                        <input name="silverpgrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
-                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSPG['price'], 0) ?>" />
                     </div>
                     <div>Premium:</div>
                     <div class="priceInput">

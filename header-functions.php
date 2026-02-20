@@ -19,10 +19,16 @@ function fetchPriceQueries() {
                         (
                             4 * silver.price * p.weight / 11.664
                         ),
+                        IF(
+                        p.pmt_id = 13,
+                        (
+                        pr.rate * p.weight
+                        ),
                         (
                             pr.purity / 100 * silver.price / 11.664 * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        )
                         )
                     )
                 ),
@@ -48,15 +54,21 @@ function fetchPriceQueries() {
                     (
                         pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
-                        p.mk_pp + p.mk_gm +(p.jarti / 100) * gold.price / 11.664 * p.weight
+                        p.mk_pp +(
+                            p.mk_gm +(p.jarti / 100) * gold.price / 11.664
+                        ) * p.weight
                     ),
                     IF(
                         p.pmt_id = 11,
                         0,
-                        (
-                            pr.purity / 100 * silver.price / 11.664 * p.weight
-                        ) +(
-                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        IF(
+                            p.pmt_id = 13,
+                            (pr.rate * p.weight),
+                            (
+                                pr.purity / 100 * silver.price / 11.664 * p.weight
+                            ) +(
+                                p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                            )
                         )
                     )
                 ),
