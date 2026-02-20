@@ -220,6 +220,24 @@ $apporder = false;
 
     }
 
+    function silverPerGramPrice($silverrate, $premium,$con)
+    {
+        $updateSilverPerGramPrice = "update package_material set price = " . $silverrate . " where pm_id = 3 ;";
+        if (mysqli_query($con, $updateSilverPerGramPrice)) {
+            echo "<script>
+            window.history.back();
+            alert('Silver Per Gram Price Updated!');
+                window.location.reload();
+                </script>";
+        } else {
+            echo "<script>
+                alert('Error Updating Silver Per Gram Price!');
+                window.location.reload();
+                </script>";
+        }
+
+    }
+
     $sqlckp2 = fetchProduct(2292);
     $displayckp2 = mysqli_query($con, $sqlckp2);
     $rowckp2 = mysqli_fetch_array($displayckp2);
@@ -235,6 +253,10 @@ $apporder = false;
         silverBuniyaPrice($silverrate, $premium,$con);
     }
 
+    if (isset($_POST['silverpgrate'])) {
+        $silverpgrate = $_POST['silverpgrate'];
+        silverBuniyaPrice($silverrate, $premium,$con);
+    }
     ?>
 
 
@@ -265,6 +287,17 @@ $apporder = false;
                         <div class="prefix">Rs</div>
                         <input name="silverrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
                             <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSP['price'], 0) ?>" />
+                    </div>
+                    <div>Silver Per Gram Rate:</div>
+                    <div class="priceInput">
+                        <?php
+                        $dspgSQL = "Select price from package_metal where pmt_id = 13 ;";
+                        $displayDSPG = mysqli_query($con, $dspgSQL);
+                        $rowDSPG = mysqli_fetch_array($displayDSPG);
+                        ?>
+                        <div class="prefix">Rs</div>
+                        <input name="silverpgrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
+                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSPG['price'], 0) ?>" />
                     </div>
                     <div>Premium:</div>
                     <div class="priceInput">

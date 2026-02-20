@@ -90,11 +90,6 @@
 		<?PHP /*-- BODY SECTION START --*/ ?>
 
 		<?php
-
-		$sqlslt = "Select * from `whitefeat_wf_new`.`video` where visible='1' ORDER BY RAND() LIMIT 1";
-		$displayslt = mysqli_query($con, $sqlslt);
-		$countslt = mysqli_num_rows($displayslt);
-		$rowslt = mysqli_fetch_array($displayslt);
 		echo '<div class="slider slider-spacing">
   <div class="slide_viewer">
     <div class="slide_group">';
