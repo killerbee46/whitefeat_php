@@ -147,7 +147,7 @@
                $displaycrc = mysqli_query($con, $sqlcrc);
                $rowcrc = mysqli_fetch_array($displaycrc);
                $sel_cur = $rowcrc['cur_id'];
-               if ($rowuser['role'] < 3) {
+               if ($rowcrc['role'] < 3) {
                  echo '<script>
     alert("Cannot View Or Order Product");
     window.location.href = "/";
