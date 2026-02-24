@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="assets/css/css.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-  /crypto-js.min.js"></script>
+    /crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-  /hmac-sha256.min.js"></script>
+    /hmac-sha256.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1
-  /enc-base64.min.js"></script>
+    /enc-base64.min.js"></script>
     </script>
   </head>
 
@@ -147,6 +147,12 @@
                $displaycrc = mysqli_query($con, $sqlcrc);
                $rowcrc = mysqli_fetch_array($displaycrc);
                $sel_cur = $rowcrc['cur_id'];
+               if ($rowuser['role'] < 3) {
+                 echo '<script>
+    alert("Cannot View Or Order Product");
+    window.location.href = "/";
+    </script>';
+               }
              } else {
                $sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
                $displaycrc = mysqli_query($con, $sqlcrc);
@@ -185,8 +191,8 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             <code id="tracking_code" class="column is-half
 is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style="">
 
-                               here is code...
-                               </code>
+                                   here is code...
+                                   </code>
 
 
             <div class="column mt-5 thankyou-div">
@@ -239,21 +245,22 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                   echo 'Size: ' . $rowactx['size'] . ', &nbsp;';
                 }
                 echo 'Qty &nbsp;';
-		  if($rowckp['id_pack'] == "1849") echo "<button>1</button>"; 
+                if ($rowckp['id_pack'] == "1849")
+                  echo "<button>1</button>";
                 else {
                   echo '
-		  <select'. '' .' class="qty_sel_checkout" data-ref="' . $rowactx['cart_id'] . '">';
+		  <select' . '' . ' class="qty_sel_checkout" data-ref="' . $rowactx['cart_id'] . '">';
 
-                for ($i = 1; $i < 11; $i++) {
-                  echo '<option ';
-                  if ($i == $rowactx['qty']) {
-                    echo 'selected';
+                  for ($i = 1; $i < 11; $i++) {
+                    echo '<option ';
+                    if ($i == $rowactx['qty']) {
+                      echo 'selected';
+                    }
+                    echo ' value="' . $i . '">' . $i . '</option>';
                   }
-                  echo ' value="' . $i . '">' . $i . '</option>';
+                  echo '</select>';
                 }
-                echo '</select>';
-                } 
-                
+
                 echo '</b>
 		  </h5>';
 
@@ -835,7 +842,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
      <input value="Submit" type="submit">
      </form>';
         */
-$s = hash_hmac('sha256', "total_amount=". floor($total_net) .",transaction_uuid=". date("his") . '-' . $rowact['cb_id'] .",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
+      $s = hash_hmac('sha256', "total_amount=" . floor($total_net) . ",transaction_uuid=" . date("his") . '-' . $rowact['cb_id'] . ",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
       echo '
 <form action="https://epay.esewa.com.np/api/epay/main/v2/form" method="POST" id="esewa_pay">
 
@@ -900,7 +907,7 @@ $s = hash_hmac('sha256', "total_amount=". floor($total_net) .",transaction_uuid=
 
             <tr>
                 <td>Signature:</td>
-                <td><input type="text" id="signature" name="signature" value="'. base64_encode($s) .'" class="form" required=""> </td>
+                <td><input type="text" id="signature" name="signature" value="' . base64_encode($s) . '" class="form" required=""> </td>
             </tr>
             <tr>
                 <td>Secret Key:</td>
