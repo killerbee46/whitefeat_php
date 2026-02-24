@@ -3,7 +3,7 @@
 date_default_timezone_set('Asia/Kathmandu');
 
 // Target date & time
-$targetDate = '2025-12-21 08:30:00';
+$targetDate = '2026-2-24 08:30:00';
 
 // Convert to Unix timestamp (seconds)
 $targetTimestamp = strtotime($targetDate) * 1000; // JS uses milliseconds

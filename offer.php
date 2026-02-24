@@ -59,9 +59,9 @@ if ($currentTime >= $targetTime && $myNosepinOrder = 1) {
 					style="color:gold;font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid crimson;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
 					<?php 
                     if ($offerDisabled) { ?>
-                        <div> Christmas Sale ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
+                        <div> Holi Splash Sale ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
                     <?php } else { ?>
-                        <div> Christmas Sale</div>
+                        <div> Holi Splash Sale</div>
                     <?php } ?>
 				</div>
 				<?php

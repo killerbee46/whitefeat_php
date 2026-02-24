@@ -25,12 +25,22 @@
     $myNosepinOrder += $countOrder;
   }
 
-   if ($productname == 2292) {
+  if ($productname == 2292) {
     echo '<script>
     window.location.href = "/silver";
     </script>';
   }
-
+  $sqluser = 'Select c_id,name, phone, address, cur_id from customer where c_id = ' . $GLOBALS["customer"];
+  $displayuser = mysqli_query($con, $sqluser);
+  $rowuser = mysqli_fetch_array($displayuser);
+  if ($GLOBALS['customer'] != 0) {
+    if ($rowuser['role'] < 3 && $productname == 1849) {
+      echo '<script>
+    alert("Cannot View Or Order Product");
+    window.location.href = "/";
+    </script>';
+    }
+  }
   if ($rowhead['stock'] <= 0 && $productname == 1849) {
     echo '<script>
     alert("Cannot View Or Order Product");
@@ -666,7 +676,7 @@ display: -webkit-box;
               </span>
             </button>
 
-          </div>      
+          </div>
         </div>
       </div>
     </div>
