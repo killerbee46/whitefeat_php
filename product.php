@@ -34,12 +34,12 @@
   $displayuser = mysqli_query($con, $sqluser);
   $rowuser = mysqli_fetch_array($displayuser);
   if ($GLOBALS['customer'] != 0) {
-    if ($rowuser['role'] < 3 && $productname == 1849) {
-      echo '<script>
-    alert("Cannot View Or Order Product");
-    window.location.href = "/";
-    </script>';
-    }
+    // if ($rowuser['role'] < 3 && $productname == 1849) {
+    //   echo '<script>
+    // alert("Cannot View Or Order Product");
+    // window.location.href = "/";
+    // </script>';
+    // }
   }
   if ($rowhead['stock'] <= 0 && $productname == 1849) {
     echo '<script>
