@@ -29,7 +29,7 @@ $crate = ($rowcrc2['cur_rate']);
                 <?php
                 $offerDisabled = 1;
                 $myNosepinOrder = 0;
-$orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='".$GLOBALS['customer']."'  order by cb_id DESC";
+$orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='".$GLOBALS['customer']."' and book_date = '20260224'  order by cb_id DESC";
 $displayOrder = mysqli_query($con, $orderSql);
 
 while ($rowOrder = mysqli_fetch_array($displayOrder)) {
@@ -58,7 +58,7 @@ if ($currentTime >= $targetTime && $myNosepinOrder = 1) {
 				<div
 					style="color:white;font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid white;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
 					<?php 
-                    if ($offerDisabled) { ?>
+                    if (1) { ?>
                         <div> Holi Splash Sale ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
                     <?php } else { ?>
                         <div> Holi Splash Sale</div>
