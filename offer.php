@@ -24,7 +24,7 @@ $crate = ($rowcrc2['cur_rate']);
   to left,
   rgba(0,0,0,.4),
   rgba(0,0,0,.4)
-),url('https://imgs.search.brave.com/qv0edIlcxocorLPlwkYDYv33JGIz77C1GOWcv-sn_OU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvYnJpZ2h0LWNo/cmlzdG1hcy1saWdo/dHMtYmFja2dyb3Vu/ZC1mZXN0aXZlLWhv/bGlkYXktZGVjb3Jh/dGlvbnNfMTMyMjU1/My0xMDUzODYuanBn/P3NlbXQ9YWlzX2h5/YnJpZCZ3PTc0MCZx/PTgw'),#231535;color:white;background-size:cover;background-repeat:no-repeat; margin-top:3em">
+),url('https://imgs.search.brave.com/_Wp5GK-qvheavOLwxDGIlV7iB-onNJBK5NSmOyVzNFI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMzcv/MjQ2LzMxNy9zbWFs/bC9haS1nZW5lcmF0/ZWQtaG9saS1wYXJ0/eS1hZHZlcnRpc21l/bnQtYmFja2dyb3Vu/ZC13aXRoLWNvcHkt/c3BhY2UtZnJlZS1w/aG90by5qcGc'),#231535;color:white;background-size:cover;background-repeat:no-repeat; margin-top:3em">
 			<div style="display:flex;justify-content:space-between;align-items:baseline;">
                 <?php
                 $offerDisabled = 1;
@@ -56,7 +56,7 @@ if ($currentTime >= $targetTime && $myNosepinOrder = 1) {
 }
 ?>
 				<div
-					style="color:gold;font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid crimson;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
+					style="color:white;font-size: 20px;font-weight:700;;padding-bottom:10px;border-bottom:3px solid white;margin-bottom:40px;display:flex;align-items:baseline;gap:5px;">
 					<?php 
                     if ($offerDisabled) { ?>
                         <div> Holi Splash Sale ( Starts in: </div><div><?php include 'timer.php'; ?></div><div>)</div>
