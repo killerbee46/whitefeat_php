@@ -30,14 +30,10 @@
     window.location.href = "/silver";
     </script>';
   }
-  $sqluser = 'Select c_id,name, phone, address, cur_id,role from customer where c_id = ' . $GLOBALS["customer"];
+  if ($GLOBALS['customer'] != 0) {
+  $sqluser = 'Select * from customer where c_id = ' . $GLOBALS["customer"];
   $displayuser = mysqli_query($con, $sqluser);
   $rowuser = mysqli_fetch_array($displayuser);
-  if ($GLOBALS['customer'] != 0) {
-    echo '<script>
-    alert("'.$rowuser['role'].'");
-    window.location.href = "/";
-    </script>';
     if ($rowuser['role'] < 3 && $productname == 1849) {
       echo '<script>
     alert("Cannot View Or Order Product");
