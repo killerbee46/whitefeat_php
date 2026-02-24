@@ -15,11 +15,11 @@
   $rowhead = mysqli_fetch_array($displayhead);
 
   $myNosepinOrder = 0;
-  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
+  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "' and book_date = '20260224'  order by cb_id DESC";
   $displayOrder = mysqli_query($con, $orderSql);
 
   while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
+    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849 and  order by cb_id DESC";
     $displayOrder2 = mysqli_query($con, $orderSql2);
     $countOrder = mysqli_num_rows($displayOrder2);
     $myNosepinOrder += $countOrder;

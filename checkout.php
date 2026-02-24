@@ -147,12 +147,7 @@
                $displaycrc = mysqli_query($con, $sqlcrc);
                $rowcrc = mysqli_fetch_array($displaycrc);
                $sel_cur = $rowcrc['cur_id'];
-               if ($rowcrc['role'] < 3) {
-                 echo '<script>
-    alert("Cannot View Or Order Product");
-    window.location.href = "/";
-    </script>';
-               }
+               
              } else {
                $sqlcrc = "Select cookie_currency from `whitefeat_wf_new`.`cookie_status` where cookie_id='" . $GLOBALS['cookid'] . "'";
                $displaycrc = mysqli_query($con, $sqlcrc);
@@ -214,6 +209,13 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
                 $sqlckp = fetchProduct($rowactx['id_pack']);
                 $displayckp = mysqli_query($con, $sqlckp);
                 $rowckp = mysqli_fetch_array($displayckp);
+
+                if ($rowcrc['role'] < 3 && $rowckp["id_pack"] == 1849) {
+                 echo '<script>
+    alert("Cannot View Or Order Product");
+    window.location.href = "/";
+    </script>';
+               }
 
                 if ($rowckp['final_price'] !== $rowactx['rate']) {
                   $sqlUCD = "update cart_detail set rate=" . $rowckp['final_price'] . ", discount=" . $rowckp['discount'] . "  where cart_id='" . $rowactx['cart_id'] . "' ";
