@@ -30,7 +30,7 @@
     window.location.href = "/silver";
     </script>';
   }
-  $sqluser = 'Select c_id,name, phone, address, cur_id from customer where c_id = ' . $GLOBALS["customer"];
+  $sqluser = 'Select c_id,name, phone, address, cur_id,role from customer where c_id = ' . $GLOBALS["customer"];
   $displayuser = mysqli_query($con, $sqluser);
   $rowuser = mysqli_fetch_array($displayuser);
   if ($GLOBALS['customer'] != 0) {
