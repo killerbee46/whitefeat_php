@@ -71,7 +71,7 @@ if ($currentTime >= $targetTime && $myNosepinOrder = 1) {
 				$cnot = '';
 				$crate = 1;
 				if ($GLOBALS['customer'] != 0) {
-					$sqlcrc = "Select cur_id,role from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
+					$sqlcrc = "Select cur_id from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 					$displaycrc = mysqli_query($con, $sqlcrc);
 					$rowcrc = mysqli_fetch_array($displaycrc);
 					$sel_cur = $rowcrc['cur_id'];

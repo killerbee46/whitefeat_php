@@ -15,7 +15,7 @@
   $rowhead = mysqli_fetch_array($displayhead);
 
   $myNosepinOrder = 0;
-  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "' and book_date = '20260224'  order by cb_id DESC";
+  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "' and book_date = '20260225'  order by cb_id DESC";
   $displayOrder = mysqli_query($con, $orderSql);
 
   while ($rowOrder = mysqli_fetch_array($displayOrder)) {
@@ -30,17 +30,9 @@
     window.location.href = "/silver";
     </script>';
   }
-  if ($GLOBALS['customer'] != 0) {
-  $sqluser = 'Select * from customer where c_id = ' . $GLOBALS["customer"];
+  $sqluser = 'Select c_id,name, phone, address, cur_id from customer where c_id = ' . $GLOBALS["customer"];
   $displayuser = mysqli_query($con, $sqluser);
   $rowuser = mysqli_fetch_array($displayuser);
-    if ($rowuser['role'] < 3 && $productname == 1849) {
-      echo '<script>
-    alert("Cannot View Or Order Product");
-    window.location.href = "/";
-    </script>';
-    }
-  }
   if ($rowhead['stock'] <= 0 && $productname == 1849) {
     echo '<script>
     alert("Cannot View Or Order Product");
