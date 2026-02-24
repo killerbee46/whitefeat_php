@@ -21,7 +21,7 @@
     array_push($pids, $rowckprods['id_pack']);
   }
 
-  if ($rowckp2['stock'] < 0 && array_key_exists(1849, $pids)) {
+  if ($rowckp2['stock'] <= 0 && array_key_exists(1849, $pids)) {
     echo '<script>
 alert("Offer Nosepin Out Of Stock!!!");
 window.location.reload();
@@ -39,14 +39,6 @@ window.location.reload();
 
   $sql = "update `whitefeat_wf_new`.`cart_book` set tracking_code='" . $tracking . "', checkout='1', mode='$paym', p_date='$tdate', cur_id='" . $rowft2['cookie_currency'] . "' where  cb_id='" . $rowact['cb_id'] . "'";
   if (mysqli_query($con, $sql)) {
-    echo $tracking . '-' . $rowact['cb_id'];
-
-    // for stock update
-    $sql1uc = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
-    $displayuc = mysqli_query($con, $sql1uc);
-    $rowuc = mysqli_fetch_array($displayuc);
-
-
     while ($rowckp1 = mysqli_fetch_array($displayckp1)) {
       $sqlckp2 = "Select id_pack, stock from package where id_pack='" . $rowckp1['id_pack'] . "'";
       $displayckp2 = mysqli_query($con, $sqlckp2);
@@ -62,6 +54,12 @@ window.location.reload();
 
       }
     }
+    echo $tracking . '-' . $rowact['cb_id'];
+
+    // for stock update
+    $sql1uc = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "' ";
+    $displayuc = mysqli_query($con, $sql1uc);
+    $rowuc = mysqli_fetch_array($displayuc);
 
     //for QR
     include 'phpqrcode/qrlib.php';
