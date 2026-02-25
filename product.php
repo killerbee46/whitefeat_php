@@ -482,7 +482,7 @@ display: -webkit-box;
           <div class="columns pl-3">
 <div class="column is-4">
   <?php
-              if ($rowpd['pmt_id'] > 0 || $rowpd['pmt_id'] < 10) {
+              if ($rowpd['pmt_id'] > 0 && $rowpd['pmt_id'] < 10) {
                 $ltSql = "Select lux_tax from package_material where pm_id = 2";
                 $ltFetch = mysqli_query($con, $ltSql);
                 $luxTax = mysqli_fetch_array($ltFetch)
