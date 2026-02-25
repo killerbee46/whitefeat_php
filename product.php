@@ -526,14 +526,14 @@ display: -webkit-box;
 	</small></h6>
 				 ';
               }
-              if ($rowpd['pm_id'] == 3) {
+              if ($rowpd['pmt_id'] == 11 || $rowpd['pm_id'] == 4) {
                 echo '
 				 <h6 class="mb-1">
 	<small> &nbsp;Rhodium 
 	</small></h6>
 				 ';
               }
-              if ($rowpd['pm_id'] == 4) {
+              if ($rowpd['pm_id'] == 3) {
                 echo '
 				 <h6 class="mb-1">
 	<small>&nbsp; Silver <small style="font-size:0.7em;">(certified)</small> 
