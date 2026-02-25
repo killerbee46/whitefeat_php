@@ -12,8 +12,18 @@ function fetchPriceQueries() {
                     (
                         pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
-                        p.mk_pp + p.mk_gm +((p.jarti + gold.lux_tax) / 100) * gold.price / 11.664 * p.weight
-                    ),
+                        p.mk_pp +(
+                            p.mk_gm +(p.jarti / 100) * gold.price / 11.664
+                        ) * p.weight + ( p.jarti_gm * gold.price / 11.664 )
+                    ) + (( gold.lux_tax / 100  ) *(
+                    (
+                        pr.purity / 100 * gold.price / 11.664 * p.weight
+                    ) +(
+                        p.mk_pp +(
+                            p.mk_gm +(p.jarti / 100) * gold.price / 11.664
+                        ) * p.weight + ( p.jarti_gm * gold.price / 11.664 )
+                    ) 
+                    )),
                     IF(
                         p.pmt_id = 11,
                         (
@@ -56,16 +66,8 @@ function fetchPriceQueries() {
                     ) +(
                         p.mk_pp +(
                             p.mk_gm +(p.jarti / 100) * gold.price / 11.664
-                        ) * p.weight
-                    ) + (( gold.lux_tax / 100  ) *(
-                    (
-                        pr.purity / 100 * gold.price / 11.664 * p.weight
-                    ) +(
-                        p.mk_pp +(
-                            p.mk_gm +(p.jarti / 100) * gold.price / 11.664
-                        ) * p.weight
-                    ) 
-                    )) ,
+                        ) * p.weight + ( p.jarti_gm * gold.price / 11.664 )
+                    ),
                     IF(
                         p.pmt_id = 11,
                         0,
