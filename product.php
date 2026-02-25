@@ -494,7 +494,8 @@ display: -webkit-box;
                 </div>
                 <?php } ?>
 </div>
-
+</div>
+<div class="columns pl-3">
             <div class="column is-4">
 
 
