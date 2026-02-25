@@ -480,7 +480,20 @@ display: -webkit-box;
             ?>
           </div>
           <div class="columns pl-3">
-
+<div class="column is-4">
+  <?php
+              if ($rowpd['pmt_id'] > 0 || $rowpd['pmt_id'] < 10) {
+                $ltSql = "Select lux_tax from package_material where pm_id = 2";
+                $ltFetch = mysqli_query($con, $ltSql);
+                $luxTax = mysqli_fetch_array($ltFetch)
+                  ?>
+                <div
+                title="Luxury Tax on Gold"
+                  style="width:fit-content;text-align:center;background:gray;color:white;padding:10px 30px;margin-bottom:10px;font-size:12px;display:flex;flex-direction:column;cursor:pointer;display:<?= $rowslt2['dc_qty'] > 0 ? "block" : "none" ?>">
+                  <div style="margin:0;"><?= round($luxTax['lux_tax'], 0) ?>% Lux Tax <span style="font-size: 10px;margin:0">On Gold</span></div>
+                </div>
+                <?php } ?>
+</div>
 
             <div class="column is-4">
 
