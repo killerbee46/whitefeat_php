@@ -15,11 +15,11 @@
   $rowhead = mysqli_fetch_array($displayhead);
 
   $myNosepinOrder = 0;
-  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "' and book_date = '20260225'  order by cb_id DESC";
+  $orderSql = "Select * from `whitefeat_wf_new`.`cart_book` where checkout='1' and c_id ='" . $GLOBALS['customer'] . "'  order by cb_id DESC";
   $displayOrder = mysqli_query($con, $orderSql);
 
   while ($rowOrder = mysqli_fetch_array($displayOrder)) {
-    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849 and  order by cb_id DESC";
+    $orderSql2 = "Select * from `whitefeat_wf_new`.`cart_detail` where cb_id ='" . $rowOrder['cb_id'] . "' and id_pack = 1849  order by cb_id DESC";
     $displayOrder2 = mysqli_query($con, $orderSql2);
     $countOrder = mysqli_num_rows($displayOrder2);
     $myNosepinOrder += $countOrder;
@@ -33,18 +33,6 @@
   $sqluser = 'Select c_id,name, phone, address, cur_id from customer where c_id = ' . $GLOBALS["customer"];
   $displayuser = mysqli_query($con, $sqluser);
   $rowuser = mysqli_fetch_array($displayuser);
-  if ($rowhead['stock'] <= 0 && $productname == 1849) {
-    echo '<script>
-    alert("Cannot View Or Order Product");
-    window.location.href = "/";
-    </script>';
-  }
-  if ($myNosepinOrder > 0 && $productname == 1849) {
-    echo '<script>
-    alert("Cannot Place Any More Orders");
-    window.location.href = "/";
-    </script>';
-  }
   ?><!DOCTYPE html>
   <html lang="en">
 
@@ -674,7 +662,7 @@ display: -webkit-box;
 
           </div>
           <div class="" style="margin-top:-1.2em; letter-spacing:1.5px;">
-            <button style="width:50%;" class="button is-success is-normal add_cart"
+            <button <?= ($rowhead['stock'] <= 0 || $myNosepinOrder > 0) ? "disabled title='Can Only Order Once'" :  ($productname == 1849 ? "disabled title='Cannot Place Order'" : "") ?> style="width:50%;" class="button is-success is-normal add_cart"
               data-ref="<?php echo $rowpd['id_pack']; ?>">
               <span>ADD TO CART</span>
               <span class="icon is-small">
