@@ -662,7 +662,7 @@ display: -webkit-box;
 
           </div>
           <div class="" style="margin-top:-1.2em; letter-spacing:1.5px;">
-            <button <?= ($rowhead['stock'] <= 0 || $myNosepinOrder > 0) ? "disabled title='Can Only Order Once'" :  ($productname == 1849 ? "disabled title='Cannot Place Order'" : "") ?> style="width:50%;" class="button is-success is-normal add_cart"
+            <button <?= ( $rowhead['stock'] <= 0 && $productname == 1849 )  ?  "disabled title='Out Of Stock!'" : ( $myNosepinOrder > 0 && $productname == 1849 ? "disabled title='Cannot Place Order!'" : "" ) ?> style="width:50%;" class="button is-success is-normal add_cart"
               data-ref="<?php echo $rowpd['id_pack']; ?>">
               <span>ADD TO CART</span>
               <span class="icon is-small">
