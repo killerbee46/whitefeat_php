@@ -20,7 +20,7 @@
 
 		if (isset($_GET['term'])) {
 			$title = $_GET['term'];
-			$exclude = $_GET["termNot"];
+			$exclude = $_GET["termNot"] ?? "";
 		} else {
 			if (isset($_GET['tags'])) {
 				foreach ($_GET['tags'] as $key => $tag) {
