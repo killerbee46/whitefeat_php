@@ -53,7 +53,7 @@ $crate = ($rowcrc2['cur_rate']);
 
             <div
                 style="font-size: 20px;font-weight:700;padding-bottom:10px;border-bottom:3px solid goldenrod;display:flex;align-items:baseline;gap:5px;color:white;">
-                <div> Silver Investment ( 11:15 AM - 6:00 PM : Sun to Fri ) </div>
+                <div> Silver Investment ( 11:30 AM - 5:30 PM : Sun to Fri ) </div>
             </div>
             <a href="/silver-requests"><button class="button primary small ml-2">My Silver Investments</button></a>
         </h3>
