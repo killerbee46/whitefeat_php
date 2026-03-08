@@ -146,9 +146,6 @@
 		/* HOMEPAGE SLIDER END */ ?>
 
 <div style="margin-top: 10px;">
-			<?php include 'offer.php' ?>
-		</div>
-<div style="margin-top: 10px;">
 			<?php include 'silver-investment.php' ?>
 		</div>
 		<div class="container is-fluid" style="margin-top: 30px;">
