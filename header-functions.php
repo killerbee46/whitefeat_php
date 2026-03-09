@@ -8,7 +8,7 @@ function fetchPriceQueries() {
             IF(
                 p.pmt_id > 0,
                 IF(
-                    p.pmt_id < 10,
+                    p.pmt_id < 11,
                     (
                         pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
@@ -60,7 +60,7 @@ function fetchPriceQueries() {
             IF(
                 p.pmt_id > 0,
                 IF(
-                    p.pmt_id < 10,
+                    p.pmt_id < 11,
                     (
                         pr.purity / 100 * gold.price / 11.664 * p.weight
                     ) +(
