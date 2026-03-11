@@ -109,10 +109,12 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
             style="border:1px solid bisque;width:33%;max-width:300px;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;">
             <div class="actions" style="display:flex;gap:10px; position:absolute;right:10px; top:10px;">
                 <div title="Edit"><a style="padding: 10px;background:white;border-radius:50%;"
-                        href="/wfs/product_edit.php?id=<?= $rowslt2['id_pack'] ?>" target="_blank"><i class="fas fa-pen"></i></a>
+                        href="/wfs/product_edit.php?id=<?= $rowslt2['id_pack'] ?>" target="_blank"><i
+                            class="fas fa-pen"></i></a>
                 </div>
                 <div title="Delete">
-                    <a href="#" data-id="<?= $rowslt2['id_pack'] ?>" class="del_product" style="padding: 10px;background:white;border-radius:50%;">
+                    <a href="#" data-id="<?= $rowslt2['id_pack'] ?>" class="del_product"
+                        style="padding: 10px;background:white;border-radius:50%;">
                         <i class="fas fa-trash-alt" style="color:crimson"></i>
                     </a>
                 </div>
@@ -163,7 +165,7 @@ display: -webkit-box;
     <?php
     // Example values (set dynamically from DB queries)
     $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-    $totalPages = 50;
+    $totalPages = round($total_count / 12) - 1 ;
     $adjacent = 2; // pages shown on each side of current page
     
     echo '<div class="pagination">';
@@ -211,6 +213,10 @@ display: -webkit-box;
     function filterSelectorHandle(e, filter_name) {
         const value = e.value
         const searchParams = url.searchParams
+        if(filter_name == "cat_id"){
+            window.location.href = `/wfs/product.php?cat_id=${value}`
+            return
+        }
         if (filter_name === "page") {
             searchParams.set(filter_name, e)
         }
