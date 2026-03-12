@@ -556,8 +556,8 @@ background: linear-gradient(0deg, rgba(28,68,74,1) 0%, rgba(17,111,130,1) 26%, r
 															<label id="priceSection"
 																style="display: <?php echo $rowpd["isFixedPrice"] == 1 ? "flex" : "none" ?>;">
 																Price
-																<input id="price" type="number" name="price"
-																	value="<?php echo $rowpd["price"] ?? null ?>">
+																<input id="price" type="number" name="fixed_price"
+																	value="<?php echo $rowpd["fixed_price"] ?? null ?>">
 															</label>
 															<label id="priceSectionB2B"
 																style="display: <?php echo $rowpd["isFixedPrice"] == 1 ? "flex" : "none" ?>;">

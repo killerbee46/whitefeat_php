@@ -33,6 +33,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
         }
 
         .pagination a,
+        .pagination .page-btn,
         .pagination span.page-btn {
             padding: 7px 12px;
             border: 1px solid #ddd;
@@ -41,6 +42,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
             text-decoration: none;
             font-size: 14px;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .pagination a:hover {
@@ -61,7 +63,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
             background: #eee;
             color: #aaa;
             border: 1px solid #ddd;
-            cursor: not-allowed;
+            cursor: not-allowed !important;
         }
 
         .pagination .dots {
@@ -161,7 +163,7 @@ display: -webkit-box;
 <div>
 
 </div>
-<div style="display:flex; justify-content: center;margin: 20px auto;">
+<div style="display:<?= $total_count <= 12 ? " none " : " flex " ?>; justify-content: center;margin: 20px auto;">
     <?php
     // Example values (set dynamically from DB queries)
     $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -172,14 +174,14 @@ display: -webkit-box;
 
     // Previous Button
     if ($currentPage > 1) {
-        echo '<a href="?page=' . ($currentPage - 1) . '" class="page-btn">Prev</a>';
+        echo '<div onclick=filterSelectorHandle('. ($currentPage - 1) .',"page") class="page-btn">Prev</div>';
     } else {
         echo '<span class="disabled page-btn">Prev</span>';
     }
 
     // Page numbers with ellipsis
     if ($currentPage > ($adjacent + 1)) {
-        echo '<a href="?page=1">1</a>';
+        echo '<div onclick=filterSelectorHandle(1,"page") class="page-btn">1</div>';
         if ($currentPage > ($adjacent + 2))
             echo '<span class="dots">…</span>';
     }
@@ -195,12 +197,12 @@ display: -webkit-box;
     if ($currentPage < ($totalPages - $adjacent)) {
         if ($currentPage < ($totalPages - $adjacent - 1))
             echo '<span class="dots">…</span>';
-        echo '<a href="?page=' . $totalPages . '">' . $totalPages . '</a>';
+        echo '<div onclick="filterSelectorHandle('.$totalPages.',`page`)" class="page-btn">'.$totalPages.'</div>';
     }
 
     // Next Button
     if ($currentPage < $totalPages) {
-        echo '<a href="?page=' . ($currentPage + 1) . '" class="page-btn">Next</a>';
+        echo '<div onclick="filterSelectorHandle('.($currentPage + 1).',`page`)" class="page-btn">Next</div>';
     } else {
         echo '<span class="disabled page-btn">Next</span>';
     }
@@ -214,7 +216,7 @@ display: -webkit-box;
         const value = e.value
         const searchParams = url.searchParams
         if(filter_name == "cat_id"){
-            window.location.href = `/wfs/product.php?cat_id=${value}`
+            window.location.href = `/white-feathers/wfs/product.php?cat_id=${value}`
             return
         }
         if (filter_name === "page") {
