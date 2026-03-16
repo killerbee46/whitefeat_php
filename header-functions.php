@@ -38,9 +38,7 @@ function fetchPriceQueries() {
                         ),
                         (
                         pr.rate * p.weight
-                        ) +(
-                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
-                        )
+                        ) 
                         )
                     )
                 ),
