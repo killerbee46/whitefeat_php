@@ -71,7 +71,7 @@
 			integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
 			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<?PHP /* END => LOADING REQUIRED CSS */ ?>
-		<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 		<style id="antiClickjack">
 			body {
 				display: none !important;

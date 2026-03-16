@@ -665,7 +665,7 @@ border-color: transparent transparent #ffffff transparent;"></div>
 
 		<div class="column is-2">
 			<label class="has-text-weight-semibold"> About Us </label><br>
-			<a href="post/story" style="color:#666;font-size:0.7rem; font-weight:400;">OUR STORY</a><br>
+			<a href="about.php" style="color:#666;font-size:0.7rem; font-weight:400;">OUR STORY</a><br>
 			<!-- <a href="post/notices" style="color:#666;font-size:0.7rem; font-weight:400;">PRESS & NOTICES</a><br> -->
 
 		</div>

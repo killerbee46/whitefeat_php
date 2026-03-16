@@ -30,12 +30,14 @@ function fetchPriceQueries() {
                             4 * silver.price * p.weight / 11.664
                         ),
                         IF(
-                        p.pmt_id = 13,
-                        (
-                        pr.rate * p.weight
-                        ),
+                        p.pmt_id = 12,
                         (
                             pr.purity / 100 * silver.price / 11.664 * p.weight
+                        ) +(
+                            p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
+                        ),
+                        (
+                        pr.rate * p.weight
                         ) +(
                             p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
                         )
@@ -72,13 +74,13 @@ function fetchPriceQueries() {
                         p.pmt_id = 11,
                         0,
                         IF(
-                            p.pmt_id = 13,
-                            (pr.rate * p.weight),
+                            p.pmt_id = 12,
                             (
                                 pr.purity / 100 * silver.price / 11.664 * p.weight
                             ) +(
                                 p.mk_pp + p.mk_gm +(p.jarti / 100) * silver.price / 11.664 * p.weight
-                            )
+                            ),
+                            (pr.rate * p.weight)
                         )
                     )
                 ),

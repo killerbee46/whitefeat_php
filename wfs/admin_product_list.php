@@ -73,6 +73,7 @@ $countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($
     </style>
 </head>
 
+<?php echo $countslt2; ?>
 <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;">
     <div style="font-size:18px;font-weight:600;">Product List</div>
     <div style="display:flex; gap:20px;align-items:center;">
@@ -167,7 +168,7 @@ display: -webkit-box;
     <?php
     // Example values (set dynamically from DB queries)
     $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-    $totalPages = round($total_count / 12) - 1 ;
+    $totalPages = round($total_count / 12) + 1 ;
     $adjacent = 2; // pages shown on each side of current page
     
     echo '<div class="pagination">';
@@ -216,7 +217,12 @@ display: -webkit-box;
         const value = e.value
         const searchParams = url.searchParams
         if(filter_name == "cat_id"){
-            window.location.href = `/white-feathers/wfs/product.php?cat_id=${value}`
+            if (value === "0") {
+                window.location.href = window.location.pathname
+            }
+            else{
+                window.location.href = `?cat_id=${value}`
+            }
             return
         }
         if (filter_name === "page") {
