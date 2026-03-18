@@ -1329,33 +1329,33 @@ $menus = [
             [
                 'title' => 'Shop By Style',
                 'data' => [
-                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-ring.png', 'path' => 'search.php?term=diamond%20ring'],
-                    ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=diamond%20ear'],
-                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-Necklace.png', 'path' => 'search.php?term=diamond%20necklace'],
-                    ['title' => 'Locket / Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'search.php?term=diamond%20pendant'],
-                    ['title' => 'Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=diamond%20nose%20pin'],
-                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bracelet.png', 'path' => 'search.php?term=diamond%20bracelet'],
-                    ['title' => 'Bangle', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bangles.png', 'path' => 'search.php?term=diamond%20bangle'],
-                    ['title' => 'Mangalsutra', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-mangalsutra.png', 'path' => 'search.php?term=diamond%20mangalsutra&termNot=bracelet'],
+                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-ring.png', 'path' => 'search.php?term=%20ring%20&metal=1'],
+                    ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=%20ear%ring%20&metal=1'],
+                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-Necklace.png', 'path' => 'search.php?term=%20necklace&metal=1'],
+                    ['title' => 'Locket / Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'search.php?term=%20pendant&metal=1'],
+                    ['title' => 'Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=%20nose%pin&metal=1'],
+                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bracelet.png', 'path' => 'search.php?term=%20bracelet&metal=1'],
+                    ['title' => 'Bangle', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-bangles.png', 'path' => 'search.php?term=%20bangle&metal=1'],
+                    ['title' => 'Mangalsutra', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-mangalsutra.png', 'path' => 'search.php?term=%20mangalsutra&termNot=bracelet&metal=1'],
                 ]
             ],
             [
                 'title' => 'Shop By preference',
                 'data' => [
-                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?term=%20diamond%20&tags[]=men'],
-                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?term=%20diamond%20&tags[]=women'],
-                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?term=%20diamond%20&tags[]=kid'],
+                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?&metal=1&tags[]=men'],
+                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?&metal=1&tags[]=women'],
+                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?&metal=1&tags[]=kid'],
                 ]
             ],
             [
                 'title' => 'Shop By price',
                 'data' => [
-                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=1'],
-                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=2'],
-                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=3'],
-                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=4'],
-                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=5'],
-                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20diamond%20&price=6'],
+                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=1'],
+                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=2'],
+                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=3'],
+                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=4'],
+                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=5'],
+                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=&metal=1&price=6'],
                 ]
             ],
         ]
@@ -1367,39 +1367,40 @@ $menus = [
             [
                 'title' => 'Shop By Style',
                 'data' => [
-                    ['title' => 'Ranihaar', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold_ranihaar.png', 'path' => 'search.php?term=gold%20ranihaar'],
-                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Necklace.png', 'path' => 'search.php?term=gold%20necklace'],
-                    ['title' => 'Jhumka / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold_Jhumka.png', 'path' => 'search.php?term=gold%20jhumka'],
-                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-ring.png', 'path' => 'search.php?term=gold%20ring'],
-                    ['title' => 'Sirbandi', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-shirbandi.png', 'path' => 'search.php?term=gold%20sirbandi'],
-                    ['title' => 'Tillhari', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Tilhari.png', 'path' => 'search.php?term=gold%20tillhari'],
-                    ['title' => 'Low Weight Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-low-weight-necklace.png', 'path' => 'search.php?term=gold%low%weight%necklace'],
-                    ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bangle.png', 'path' => 'products/gold-bangles'],
-                    ['title' => 'Chandrama', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-chandrama.png', 'path' => 'search.php?term=gold%20chandrama'],
-                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'search.php?term=gold%chain'],
-                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bracelet.png', 'path' => 'search.php?term=gold%20bracelet'],
-                    ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20locket.png', 'path' => 'search.php?term=gold%20locket'],
-                    ['title' => '14k Eartop', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20top.png', 'path' => 'search.php?cat_id=81'],
-                    ['title' => 'Brooch', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20brooch.png', 'path' => 'search.php?term=gold%20brooch'],
+                    ['title' => 'Ranihaar', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold_ranihaar.png', 'path' => 'search.php?term=%20ranihaar%20&metal=2'],
+                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Necklace.png', 'path' => 'search.php?term=%20necklace%20&metal=2'],
+                    ['title' => 'Jhumka', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold_Jhumka.png', 'path' => 'search.php?term=%20jhumka%20&metal=2'],
+                    ['title' => 'Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold_Jhumka.png', 'path' => 'search.php?term=%20ear%ring%20&metal=2'],
+                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-ring.png', 'path' => 'search.php?term=%20ring%20&metal=2'],
+                    // ['title' => 'Sirbandi', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-shirbandi.png', 'path' => 'search.php?term=%20sirbandi%20&metal=2'],
+                    // ['title' => 'Tillhari', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Tilhari.png', 'path' => 'search.php?term=%20tillhari%20&metal=2'],
+                    ['title' => 'Low Weight Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-low-weight-necklace.png', 'path' => 'search.php?term=%low%weight%necklace%20&metal=2'],
+                    ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bangle.png', 'path' => 'search.php?term=%20bangle%20&metal=2'],
+                    ['title' => 'Chandrama', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-chandrama.png', 'path' => 'search.php?term=%20chandrama%20&metal=2'],
+                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'search.php?term=%20chain%20&metal=2'],
+                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold-Bracelet.png', 'path' => 'search.php?term=%20bracelet%20&metal=2'],
+                    // ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20locket.png', 'path' => 'search.php?term=%20locket%20&metal=2'],
+                    ['title' => '14k Eartop', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20top.png', 'path' => 'search.php?cat_id=81%20'],
+                    // ['title' => 'Brooch', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/gold%20brooch.png', 'path' => 'search.php?term=%20brooch%20&metal=2'],
                 ]
             ],
             [
                 'title' => 'Shop By preference',
                 'data' => [
-                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?term=%20gold%20&tags[]=men'],
-                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?term=%20gold%20&tags[]=women'],
-                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?term=%20gold%20&tags[]=kid'],
+                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?&metal=2&tags[]=men'],
+                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?&metal=2&tags[]=women'],
+                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?&metal=2&tags[]=kid'],
                 ]
             ],
             [
                 'title' => 'Shop By price',
                 'data' => [
-                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=1'],
-                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=2'],
-                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=3'],
-                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=4'],
-                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=5'],
-                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20gold%20&price=6'],
+                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?&metal=2&price=1'],
+                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?&metal=2&price=2'],
+                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?&metal=2&price=3'],
+                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?&metal=2&price=4'],
+                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?&metal=2&price=5'],
+                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?&metal=2&price=6'],
                 ]
             ],
         ]
@@ -1411,39 +1412,39 @@ $menus = [
             [
                 'title' => 'Shop By Style',
                 'data' => [
-                    ['title' => 'Ranihaar', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ranihaar.png', 'path' => 'search.php?term=silver%20ranihaar'],
-                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20necklace.png', 'path' => 'search.php?term=silver%necklace'],
-                    ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20eartop.png', 'path' => 'search.php?term=silver%20eartop'],
-                    ['title' => 'Jhumka / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20jhumka.png', 'path' => 'search.php?term=silver%20earrings'],
-                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ring.png', 'path' => 'search.php?term=silver%20ring'],
-                    ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20kada.png', 'path' => 'search.php?term=silver%20bangles'],
-                    ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20juli.png', 'path' => 'search.php?term=silver%20juli'],
-                    ['title' => 'Pauju', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20anklet.png', 'path' => 'search.php?term=silver%20pauju'],
-                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20chain.png', 'path' => 'search.php?term=silver%20chain'],
-                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20bracelet.png', 'path' => 'search.php?term=silver%20bracelet'],
-                    ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20locket.png', 'path' => 'search.php?term=silver%20pendent'],
-                    ['title' => 'Brooch / Saripin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20brooch.png', 'path' => 'search.php?term=silver%saree%20pin'],
-                    ['title' => 'Silver Kada', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20kada.png', 'path' => 'search.php?term=silver%20kada'],
-                    ['title' => 'Bicchi', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20bichhi.png', 'path' => 'search.php?term=silver%20bicchi'],
+                    ['title' => 'Ranihaar', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ranihaar.png', 'path' => 'search.php?term=%20ranihaar%20&metal=3'],
+                    ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20necklace.png', 'path' => 'search.php?term=%necklace%20&metal=3'],
+                    // ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20eartop.png', 'path' => 'search.php?term=%20ear%top%20&metal=3'],
+                    ['title' => 'Jhumka / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20jhumka.png', 'path' => 'search.php?term=%20ear%ring%20&metal=3'],
+                    ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20ring.png', 'path' => 'search.php?term=%20ring%20&metal=3'],
+                    // ['title' => 'Bangles', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20kada.png', 'path' => 'search.php?term=%20bangle%20&metal=3'],
+                    // ['title' => 'Juli', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20juli.png', 'path' => 'search.php?term=%20juli%20&metal=3'],
+                    ['title' => 'Pauju', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20anklet.png', 'path' => 'search.php?term=%20pauju%20&metal=3'],
+                    ['title' => 'Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20chain.png', 'path' => 'search.php?term=%20chain%20&metal=3'],
+                    ['title' => 'Bracelet', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20bracelet.png', 'path' => 'search.php?term=%20bracelet%20&metal=3'],
+                    ['title' => 'Locket', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20locket.png', 'path' => 'search.php?term=%20pendent%20&metal=3'],
+                    ['title' => 'Brooch / Saripin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20brooch.png', 'path' => 'search.php?term=%20brooch%20&metal=3'],
+                    // ['title' => 'Silver Kada', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20kada.png', 'path' => 'search.php?term=%20kada%20&metal=3'],
+                    // ['title' => 'Bicchi', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20bichhi.png', 'path' => 'search.php?term=%20bicchi%20&metal=3'],
                 ]
             ],
             [
                 'title' => 'Shop By preference',
                 'data' => [
-                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?term=%20silver%20&tags[]=men'],
-                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?term=%20silver%20&tags[]=women'],
-                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?term=%20silver%20&tags[]=kid'],
+                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?&metal=3&tags[]=men'],
+                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?&metal=3&tags[]=women'],
+                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?&metal=3&tags[]=kid'],
                 ]
             ],
             [
                 'title' => 'Shop By price',
                 'data' => [
-                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=1'],
-                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=2'],
-                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=3'],
-                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=4'],
-                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=5'],
-                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20silver%20&price=6'],
+                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?&metal=3&price=1'],
+                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?&metal=3&price=2'],
+                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?&metal=3&price=3'],
+                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?&metal=3&price=4'],
+                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?&metal=3&price=5'],
+                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?&metal=3&price=6'],
                 ]
             ],
 
@@ -1469,20 +1470,20 @@ $menus = [
             [
                 'title' => 'Shop By preference',
                 'data' => [
-                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?term=%20ring&tags[]=men'],
-                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?term=%20ring&tags[]=women'],
-                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?term=%20ring&tags[]=kid'],
+                    ['title' => 'For Men', 'image' => '', 'path' => 'search.php?term=%20ring%20&tags[]=men'],
+                    ['title' => 'For Women', 'image' => '', 'path' => 'search.php?term=%20ring%20&tags[]=women'],
+                    ['title' => 'For Kids', 'image' => '', 'path' => 'search.php?term=%20ring%20&tags[]=kid'],
                 ]
             ],
             [
                 'title' => 'Shop By price',
                 'data' => [
-                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=1'],
-                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=2'],
-                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=3'],
-                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=4'],
-                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=5'],
-                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ring&price=6'],
+                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=1'],
+                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=2'],
+                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=3'],
+                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=4'],
+                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=5'],
+                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ring%20&price=6'],
                 ]
             ],
         ]
@@ -1509,12 +1510,12 @@ $menus = [
             [
                 'title' => 'Shop By price',
                 'data' => [
-                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=1'],
-                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=2'],
-                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=3'],
-                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=4'],
-                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=5'],
-                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20earrings&price=6'],
+                    ['title' => 'Below Rs. 10,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=1'],
+                    ['title' => 'Rs. 10,000 to Rs. 20,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=2'],
+                    ['title' => 'Rs. 20,000 to Rs. 50,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=3'],
+                    ['title' => 'Rs. 50,000 to Rs. 1,00,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=4'],
+                    ['title' => 'Rs. 1,00,000 to Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=5'],
+                    ['title' => 'Above Rs. 2,00,000', 'image' => '', 'path' => 'search.php?term=%20ear%ring%20&price=6'],
                 ]
             ],
         ]
@@ -1527,7 +1528,7 @@ $menus = [
                 'title' => 'Shop By Style',
                 'data' => [
                     ['title' => 'Utensils', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Utensils.png', 'path' => 'products/utensils-'],
-                    ['title' => 'Diamond Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=diamond%20nose%20pin'],
+                    ['title' => 'Diamond Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=%20nose%pin&metal=1'],
                     ['title' => 'Diamond Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'products/diamond-pendent'],
                     ['title' => 'Silver Murti', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/silver%20murti.png', 'path' => 'products/silver-murti'],
                     ['title' => 'Gold Chain', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Gold%20chain.png', 'path' => 'products/gold-chain']

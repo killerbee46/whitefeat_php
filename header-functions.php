@@ -510,6 +510,7 @@ function getTags()
             echo '<span class="tag is-info">PRICE : Rs 10,000 - Rs 20,000</span>';
         }
         if ($_GET['price'] == 3) {
+            echo '<span class="tag is-info">PRICE : Rs 20,000 - Rs 50,000</span>';
         }
         if ($_GET['price'] == 4) {
             echo '<span class="tag is-info">PRICE : Rs 50,000 - Rs 100,000</span>';
