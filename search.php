@@ -85,6 +85,7 @@
 	<body style="letter-spacing:0.02em;">
 		<?php
 		include('header.php');
+		include('view_product_list_section.php');
 		include('filter-assets.php');
 		?>
 		<?php
@@ -231,7 +232,7 @@
 		}
 		?>
 
-
+</div>
 		<div class="container is-fluid" style="width:100vw !important; background: rgb(241,243,244); margin-top:20px;
 background: rgba(116,228,250,1);">
 
@@ -292,7 +293,12 @@ background: rgba(116,228,250,1);">
 
 		<div class="container is-fluid">
 			<div class="columns p-2 product-list-wrapper">
-				<?php include 'filter.php'; ?>
+				<div class="column is-3">
+  <div class="sticky-filter">
+    <!-- your filter content -->
+	<?php include 'filter.php'; ?>
+  </div>
+</div>
 
 
 				<div class="letter-spacing has-text-weight-normal product-container">
