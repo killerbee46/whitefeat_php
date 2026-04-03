@@ -128,7 +128,7 @@ $apporder = false;
 <body style="letter-spacing:0.02em; background-color:#F9F9FA;paddin-bottom:20px;">
     <?php include('header.php');
 
-    function updateOrderStatus($id, $status,$con)
+    function updateOrderStatus($id, $status, $con)
     {
         $updateQuery = "update cart_book set " . $status . " = " . $GLOBALS['customer'] . " where cb_id = " . $id . " ;";
         if (mysqli_query($con, $updateQuery)) {
@@ -148,7 +148,7 @@ $apporder = false;
     if (isset($_GET['status']) && isset($_GET['id'])) {
         $status = $_GET['status'];
         $id = $_GET['id'];
-        updateOrderStatus($id, $status,$con);
+        updateOrderStatus($id, $status, $con);
     }
 
     ?>
@@ -203,12 +203,13 @@ $apporder = false;
                                 <th>User</th>
                                 <th>Date</th>
                                 <th>Price</th>
+                                <th>Payment</th>
                                 <th>Delivery Address</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="8">
                                     <hr class="mt-2 mb-5" style="background:#14141488" />
                                 </td>
                             </tr>
@@ -263,6 +264,10 @@ $apporder = false;
                                             }
                                             echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * ($total_net + 200))); ?>
                                         </div>
+                                    </div>
+                                    <div class="flex justify-center align-center" style="margin:10px auto;gap:10px;">
+                                        <div>Payment:</div>
+                                        <?= $rowOrder['mode'] == 3 ? "<div class='button' style='background:#DC0019;color:white;border:1px solid #DC0019'>Khalti</div>" : ($rowOrder['mode'] == 2 ? "<div class='button' style='background:#56a93e;color:white;border:1px solid #56a93e;'>eSewa</div>" : "<div class='button secondary'>COD</div>") ?>
                                     </div>
                                     <div class="flex justify-center align-center" style="margin:10px auto;">
                                         To: <?= $rowOrder['address'] ?>
@@ -355,6 +360,9 @@ $apporder = false;
                                             }
                                             echo "<small><small>" . $cnot . "</small></small>" . ' ' . floor(($crate * ($total_net + 200))); ?>
                                         </td>
+                                        <td>
+                                            <?= $rowOrder['mode'] == 3 ? "<div class='button' style='background:#DC0019;color:white;border:1px solid #DC0019'>Khalti</div>" : ($rowOrder['mode'] == 2 ? "<div class='button' style='background:#56a93e;color:white;border:1px solid #56a93e;'>eSewa</div>" : "<div class='button secondary'>COD</div>") ?>
+                                        </td>
                                         <td><?= $rowOrder['address'] ?></td>
                                         <td>
                                             <?php
@@ -392,7 +400,7 @@ $apporder = false;
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="8">
                                             <div style="font-size:12px;">
                                                 <hr class="m-0 mt-2" />
                                                 <?php

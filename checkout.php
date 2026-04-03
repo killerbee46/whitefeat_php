@@ -873,7 +873,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Product Code:</td>
-                <td><input type="text" id="product_code" name="product_code" value="NP-ES-WHITEFEATHERS" class="form" required=""> </td>
+                <td><input type="text" id="product_code" name="product_code" value="EPAYTEST" class="form" required=""> </td>
             </tr>
 
             <tr>
@@ -907,7 +907,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             </tr>
             <tr>
                 <td>Secret Key:</td>
-                <td><input type="text" id="secret" name="secret" value="MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==" class="form" required="">
+                <td><input type="text" id="secret" name="secret" value="8gBm/:&EnhH.1/q" class="form" required="">
                 </td>
             </tr>
             
