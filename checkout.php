@@ -61,7 +61,7 @@
 
     $total_bd = 0;
     $total_dis = 0;
-    $total_net = 200;
+    $total_net = 0;
 
     $sql1act = "Select * from `whitefeat_wf_new`.`cart_book` where cookie_id='" . $GLOBALS['cookid'] . "' and checkout='0' ";
     $displayact = mysqli_query($con, $sql1act);
@@ -324,13 +324,6 @@ is-offset-one-quarter mt-2 mb-2 card has-background-white has-text-dark " style=
             <span class="cart_confirm" style="display:none;">
 
               <div class="columns has-background-white mt-0 each_item mr-3 is-multiline logsign">
-
-
-
-
-
-
-
 
                 <div class="column p-5 has-background-white login-main-div">
 
@@ -732,9 +725,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 </div>
 
               </div>
-
-
-
               <div class="columns pl-4 pr-4">
                 <div class="column is-6 pb-0 letter-spacing is-size-6 has-text-weight-semibold">
                   TOTAL COST:
@@ -804,8 +794,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
   
     if ($countcwm > 0) {
       /*
-   echo'<form id="esewa_pay" action="https://epay.esewa.com.np/api/epay/transaction/status/?product_code=EPAYTEST&total_amount=100&transaction_uuid=123" method="POST">
-    <input value="'.floor($total_net).'" name="tAmt" type="hidden">
+   echo'<form id="esewa_pay" action="https://epay.esewa.com.np/.
     <input value="'.floor($total_net).'" name="amt" type="hidden">
     <input value="0" name="txAmt" type="hidden">
     <input value="0" name="psc" type="hidden">
@@ -838,7 +827,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
      <input value="Submit" type="submit">
      </form>';
         */
-      $s = hash_hmac('sha256', "total_amount=" . floor($total_net) . ",transaction_uuid=" . date("his") . '-' . $rowact['cb_id'] . ",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
+      $s = hash_hmac('sha256', "total_amount=". floor($total_net/$crate) .",transaction_uuid=" . date("his") . '-' . $rowact['cb_id'] . ",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
       echo '
 <form action="https://epay.esewa.com.np/api/epay/main/v2/form" method="POST" id="esewa_pay">
 
@@ -850,7 +839,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Amount:</td>
-                <td> <input type="text" id="amount" name="amount" value="' . floor($total_net) . '" class="form" required=""> <br>
+                <td> <input type="text" id="amount" name="amount" value='. floor($total_net/$crate) .' class="form" required=""> <br>
                 </td>
             </tr>
 
@@ -862,7 +851,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Total Amount:</td>
-                <td><input type="text" id="total_amount" name="total_amount" value="' . floor($total_net) . '" class="form" required="">
+                <td><input type="text" id="total_amount" name="total_amount" value='. floor($total_net/$crate) .' class="form" required="">
                 </td>
             </tr>
 
@@ -873,7 +862,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Product Code:</td>
-                <td><input type="text" id="product_code" name="product_code" value="EPAYTEST" class="form" required=""> </td>
+                <td><input type="text" id="product_code" name="product_code" value="NP-ES-WHITEFEATHERS" class="form" required=""> </td>
             </tr>
 
             <tr>
@@ -907,7 +896,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
             </tr>
             <tr>
                 <td>Secret Key:</td>
-                <td><input type="text" id="secret" name="secret" value="8gBm/:&EnhH.1/q" class="form" required="">
+                <td><input type="text" id="secret" name="secret" value="MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==" class="form" required="">
                 </td>
             </tr>
             
@@ -919,37 +908,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 
     ?>
-    <script>
-      // Function to auto-generate signature
-      // function generateSignature() {
-      //   var currentTime = new Date();
-      //   var formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') + '-' + currentTime.getHours() +
-      //     currentTime.getMinutes() + currentTime.getSeconds();
-      //   //document.getElementById("transaction_uuid").value = formattedTime+;
-      //   var total_amount = document.getElementById("total_amount").value;
-      //   var transaction_uuid = document.getElementById("transaction_uuid").value;
-      //   var product_code = document.getElementById("product_code").value;
-      //   var secret = document.getElementById("secret").value;
-
-      //   //alert(total_amount+'***'+transaction_uuid+'***'+product_code+'***'+secret);
-      //   var hash = CryptoJS.HmacSHA256(
-      //     `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`,
-      //     `${secret}`);
-
-      //   var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-      //   document.getElementById("signature").value = hashInBase64;
-      // }
-
-      // // Event listeners to call generateSignature() when inputs are changed
-      // document.getElementById("total_amount").addEventListener("input", generateSignature);
-      // document.getElementById("transaction_uuid").addEventListener("input", generateSignature);
-      // document.getElementById("product_code").addEventListener("input", generateSignature);
-      // document.getElementById("secret").addEventListener("input", generateSignature);
-    </script>
-
-
-
-
     <?php include('footer_checkout.php'); ?>
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/owl/owl.carousel.min.js"></script>
@@ -1033,13 +991,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
         });
       $('.total_cost').html($('#tcost').val());
     </script>
-
-
-
   </body>
-
-
-
-
   </html>
 <?php } ?>
