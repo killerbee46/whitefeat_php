@@ -8,7 +8,7 @@ include './s3_upload.php';
 $fileUrl = null;
 
 if (!empty($_FILES['image']['name'])) {
-    $fileUrl = uploadImageToS3($_FILES['image'],"/jwell-bills");
+    $fileUrl = uploadImageToS3($_FILES['image'], "/jwell-bills");
 }
 
 $query = $con->prepare("INSERT INTO inquiry (
@@ -18,7 +18,6 @@ p_address,
 p_qn,
 type,
     image
-
     )
     values (
     ?,
@@ -29,12 +28,11 @@ type,
     ?
     )
     ");
-$query->bind_param($_POST['name'],$_POST['phone'],$_POST['address'],$_POST['message'],$fileUrl);
-$query->execute();
+    $executed = $query->execute([$_POST['name'], $_POST['phone'], $_POST['address'], $_POST['message'], $fileUrl]);
 $requiredFields = [];
 if (!empty($_FILES['image']['name'])) {
     if ($fileUrl) {
-        if (mysqli_query($con, $query)) {
+        if ($executed) {
             echo "<script>
                         alert('Request Created Successfully!')
                         window.history.go(-1);
