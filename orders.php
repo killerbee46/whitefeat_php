@@ -267,7 +267,7 @@ $apporder = false;
                                     </div>
                                     <div class="flex justify-center align-center" style="margin:10px auto;gap:10px;">
                                         <div>Payment:</div>
-                                        <?= $rowOrder['mode'] == 2 ? "<div class='button' style='background:#DC0019;color:white;border:1px solid #DC0019'>Khalti</div>" : ($rowOrder['mode'] == 3 ? "<div class='button' style='background:#56a93e;color:white;border:1px solid #56a93e;'>eSewa</div>" : "<div class='button secondary'>COD</div>") ?>
+                                        <?= $rowOrder['mode'] == 2 ? "<div class='button' title='". $rowOrder['khalti_code'] ."' style='background:#DC0019;color:white;border:1px solid #DC0019'>Khalti</div>" : ($rowOrder['mode'] == 3 ? "<div class='button' title='". $rowOrder['esewa_code'] ."' style='background:#56a93e;color:white;border:1px solid #56a93e;'>eSewa</div>" : "<div class='button secondary'>COD</div>") ?>
                                     </div>
                                     <div class="flex justify-center align-center" style="margin:10px auto;">
                                         To: <?= $rowOrder['address'] ?>

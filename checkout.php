@@ -61,7 +61,7 @@
 
     $total_bd = 0;
     $total_dis = 0;
-    $total_net = 0;
+    $total_net = 200;
 
     $sql1act = "Select * from `whitefeat_wf_new`.`cart_book` where cookie_id='" . $GLOBALS['cookid'] . "' and checkout='0' ";
     $displayact = mysqli_query($con, $sql1act);
@@ -827,7 +827,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
      <input value="Submit" type="submit">
      </form>';
         */
-      $s = hash_hmac('sha256', "total_amount=". floor($total_net/$crate) .",transaction_uuid=" . date("his") . '-' . $rowact['cb_id'] . ",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
+      $s = hash_hmac('sha256', "total_amount=". floor($total_net / $crate) .",transaction_uuid=" . date("his") . '-' . $rowact['cb_id'] . ",product_code=NP-ES-WHITEFEATHERS", 'MhsMAwRTLQAYERsABRJTIgsaCgEVGBMSHwwWC1M1ARVdSykNAV1fOTFeLjZUMjssIyQ1LiQtLTY3JA==', true);
       echo '
 <form action="https://epay.esewa.com.np/api/epay/main/v2/form" method="POST" id="esewa_pay">
 
@@ -839,7 +839,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Amount:</td>
-                <td> <input type="text" id="amount" name="amount" value='. floor($total_net/$crate) .' class="form" required=""> <br>
+                <td> <input type="text" id="amount" name="amount" value="'. floor($total_net / $crate) .'" class="form" required=""> <br>
                 </td>
             </tr>
 
@@ -851,7 +851,7 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
             <tr>
                 <td>Total Amount:</td>
-                <td><input type="text" id="total_amount" name="total_amount" value='. floor($total_net/$crate) .' class="form" required="">
+                <td><input type="text" id="total_amount" name="total_amount" value="'. floor($total_net / $crate) .'" class="form" required="">
                 </td>
             </tr>
 
