@@ -466,9 +466,18 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
                 <div class="topbar-item" onclick="openModal('custom-design-modal')">
                     <i class="fas fa-tools"></i> Custom Design
                 </div>
+                <?php 
+                if ($GLOBALS['customer'] !== '0') { ?> 
                 <div class="topbar-item" onclick="openModal('jwell-sell-modal')">
                     <button>Sell Jwellery / Gold</button>
-                </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="topbar-item" data-target="modal-user">
+                        <span data-target="modal-user" class="user-modal">
+                            <button>Sell Jwellery / Gold</button>
+	  </span> 
+                    </div>
+                <?php } ?>
             </div>
 	  
 	  

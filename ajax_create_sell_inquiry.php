@@ -11,7 +11,7 @@ if (!empty($_FILES['image']['name'])) {
     $fileUrl = uploadImageToS3($_FILES['image'],"/jwell-bills");
 }
 
-$query = "INSERT INTO inquiry (
+$query = $con->prepare("INSERT INTO inquiry (
 p_name,
 cno,
 p_address,
@@ -21,14 +21,16 @@ type,
 
     )
     values (
-    '" . $_POST['name'] . "',
-    '" . $_POST['phone'] . "',
-    '" . $_POST['address'] . "',
-    '" . $_POST['message'] . "',
+    ?,
+    ?,
+    ?,
+    ?,
     'sell',
-    '" . $fileUrl . "'
+    ?
     )
-    ";
+    ");
+$query->bind_param($_POST['name'],$_POST['phone'],$_POST['address'],$_POST['message'],$fileUrl);
+$query->execute();
 $requiredFields = [];
 if (!empty($_FILES['image']['name'])) {
     if ($fileUrl) {
