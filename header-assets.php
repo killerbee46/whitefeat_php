@@ -964,7 +964,7 @@
 
         .product-container {
             width: 70%;
-            margin-left:35% ;
+            margin-left:35%;
             padding-bottom:50px;
         }
 
@@ -1165,8 +1165,7 @@
 
             .product-container {
                 width: 100%;
-                margin-left:0;
-                /* margin-bottom:50px; */
+                margin-left:0 !important;
             }
 
             .steps:not(.is-horizontal):not(.is-short) {
