@@ -964,7 +964,7 @@
 
         .product-container {
             width: 70%;
-            margin-left:35%;
+            margin-left:35% !important;
             padding-bottom:50px;
         }
 

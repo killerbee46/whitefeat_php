@@ -242,21 +242,10 @@
 		$sqlslt2 = fetchProducts($nameFilter . $notNameFilter . $catFilter . queryFilter() . $sortFilter);
 		$filter_check = 1;
 		?>
-		<div class="container is-fluid">
-			<div class="columns p-2 ">
-				<div class="column is-10 letter-spacing has-text-weight-normal is-size-7">
-					<p style="display:flex;gap:5px;flex-wrap:wrap;">
-						<?= getTags() ?>
-					</p>
-
-				</div>
-			</div>
-		</div>
 
 		<div class="container is-fluid">
 			<div class="columns p-2 product-list-wrapper">
 				<?php include 'filter.php'; ?>
-
 
 				<div class="letter-spacing has-text-weight-normal product-container">
 					<div style="width:100% !important;gap:10px; padding-top:20px;" class="flex align-center">
