@@ -256,9 +256,9 @@ background: rgba(116,228,250,1);">
 		$sqlslt2 = "";
 		$actual_link = "$_SERVER[REQUEST_URI]";
 		$filter_check = 0;
-		$nameFilter = isset($_GET['term']) ? " lower(p_name) LIKE '%" . $_GET['term'] . "%' " : ' 1 ';
-		$notNameFilter = isset($_GET['termNot']) ? " and lower(p_name) not LIKE '%" . $_GET['termNot'] . "%' " : ' ';
-		$catFilter = isset($_GET['cat_id']) ? " and cat_id = " . $_GET['cat_id'] . " " : '';
+		$nameFilter = isset($_GET['term']) ? " lower(p_name) LIKE '%" . mysqli_real_escape_string($con, $_GET['term']) . "%' " : ' 1 ';
+		$notNameFilter = isset($_GET['termNot']) ? " and lower(p_name) not LIKE '%" . mysqli_real_escape_string($con, $_GET['termNot']) . "%' " : ' ';
+		$catFilter = isset($_GET['cat_id']) ? " and cat_id = " . mysqli_real_escape_string($con, $_GET['cat_id']) . " " : '';
 		$sortFilter = !isset($_GET['sort']) ? " order by p.id_pack DESC" : '';
 		$sqlslt2 = fetchProducts($nameFilter . $notNameFilter . $catFilter . queryFilter() . $sortFilter);
 		$filter_check = 1;

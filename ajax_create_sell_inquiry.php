@@ -1,10 +1,6 @@
 <?php
 include 'db_connect.php';
-include './s3_upload.php';
-
-// $gkey_final = mysqli_real_escape_string($con, $gkey);
-// $gsdes_final = mysqli_real_escape_string($con, $gsdes);
-// $gmeta_final = mysqli_real_escape_string($con, $gmeta);
+include './s3_upload.php'
 $fileUrl = null;
 
 if (!empty($_FILES['image']['name'])) {

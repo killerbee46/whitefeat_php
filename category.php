@@ -13,14 +13,12 @@
 		<base href="../" />
 		<?php
 		include 'filter-assets.php';
-		$catname = get_url($_GET['stitle']);
+		$catname = mysqli_real_escape_string($con, get_url($_GET['stitle']));
 		$sqlslt = "Select * from `whitefeat_wf_new`.`package_category` where cat_name='" . $catname . "'";
 		$displayslt = mysqli_query($con, $sqlslt);
 		$countslt = mysqli_num_rows($displayslt);
-		if ($countslt > 0) {
-		}
 		$rowslt = mysqli_fetch_array($displayslt);
-		$title = $_GET['stitle'];
+		$title = mysqli_real_escape_string($con, $_GET['stitle']);
 
 		?>
 		<meta http-equiv="Cache-control" content="public">

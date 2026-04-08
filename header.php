@@ -34,6 +34,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
                 <h2>Free Try at Home</h2>
                 <hr />
                 <section class="modal-card-body">
+                    <form method="post" action="./ajax_savehome.php" enctype="multipart/form-data" style="margin-bottom: 20px;">
 <?php 
 
 	    if($GLOBALS['customer']==0){
@@ -42,7 +43,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
 </label>
   <div class="control">
   <div class="control has-icons-left has-icons-right">
-    <input class="input home_name" type="text" placeholder="Your Full Name">
+    <input class="input home_name" type="text" name="name" placeholder="Your Full Name">
 	<span class="icon is-small is-left">
       <i class="fas fa-user"></i>
     </span>
@@ -53,7 +54,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
 <div class="field">
   <label class="label">Full Address <span class="has-text-danger">*</span></label>
   <div class="control has-icons-left has-icons-right">
-    <input class="input home_add" type="text" placeholder="Your Full Address" value="">
+    <input name="add" class="input home_add" type="text" placeholder="Your Full Address" value="">
     <span class="icon is-small is-left">
       <i class="fas fa-map-marker"></i>
     </span>
@@ -64,7 +65,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
 <div class="field">
   <label class="label">Contact number <span class="has-text-danger">*</span></label>
   <div class="control has-icons-left has-icons-right">
-    <input class="input home_phone" type="number" placeholder="+97798XXXXXXXX" value="" required>
+    <input name="phone" class="input home_phone" type="number" placeholder="+97798XXXXXXXX" value="" required>
     <span class="icon is-small is-left">
       <i class="fas fa-mobile"></i>
     </span>
@@ -81,7 +82,7 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
 <div class="field">
   <label class="label">Message <small class="is-size-7"></small></label>
   <div class="control">
-    <textarea class="textarea home_msg" placeholder="Please Write Jewelleries you want to try..."></textarea>
+    <textarea required name="msg" class="textarea home_msg" placeholder="Please Write Jewelleries you want to try..."></textarea>
   </div>
 </div>
 
@@ -97,13 +98,13 @@ while ($rowsOffer = mysqli_fetch_array($displayOff)) {
 
 <div class="field is-grouped mt-2">
   <div class="control">
-    <button class="button is-info send_home_appoint">Submit</button>
+    <button type="submit" class="button is-info">Submit</button>
   </div>
   <div class="control">
     <button class="button is-link is-light">Cancel</button>
   </div>
 </div>
-	  
+</form>
     </section>
     </div>
         </div>
