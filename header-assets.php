@@ -956,11 +956,16 @@
         }
 
         .filter-wrapper {
+            position: fixed;
+            top:130px;
             width: 30%;
+            z-index:10;
         }
 
         .product-container {
             width: 70%;
+            margin-left:35% ;
+            padding-bottom:50px;
         }
 
         .video-background {
@@ -1153,11 +1158,15 @@
             }
 
             .filter-wrapper {
+                position: relative;
+                top:0;
                 width: 100%;
             }
 
             .product-container {
                 width: 100%;
+                margin-left:0;
+                /* margin-bottom:50px; */
             }
 
             .steps:not(.is-horizontal):not(.is-short) {

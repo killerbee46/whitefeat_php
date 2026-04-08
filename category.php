@@ -197,59 +197,35 @@
 		?>
 
 
-
-		<div class="container is-fluid" style="background: rgb(241,243,244); margin-top:20px;
-background: rgba(116,228,250,1);">
-
-			<div class=""
-				style="display:flex;justify-content:space-between; padding-top:30px; padding-bottom:10px;align-items:center;flex-wrap:wrap; gap:10px;">
-				<div class="">
-					<p>Jewellery <small><i class="fas fa-angle-right has-text-grey-light"></i></small>
-						<span style="text-transform:capitalize;"><?php echo $rowslt['cat_name']; ?>
-					</p></span>
-				</div>
-
-			</div>
-
-
-		</div>
-
-
 		<?php
 		$sortFilter = !isset($_GET['sort']) ? " order by p.id_pack DESC" : '';
 		$sqlslt2 = fetchProducts(queryFilter() . $sortFilter);
-		$sqlslt2 = fetchProducts("cat_id='" . $rowslt['cat_id'] . "'" . queryFilter()) ?>
-		<div class="container is-fluid">
-			<div class="columns p-2 ">
-				<div class="column is-10 letter-spacing has-text-weight-normal is-size-7">
-					<p style="display:flex;gap:5px;flex-wrap:wrap;">
-						<?= getTags() ?>
-						<?php
-
-						$displayslt2 = mysqli_query($con, $sqlslt2);
-						$countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($displayslt2) : 0;
-
-						echo ' <i class="fas fa-tags"></i> <span id="count_design">(' . $countslt2 . '</span> Design';
-						if ($countslt2 > 1) {
-							echo 's';
-						}
-						echo ')  </small>';
-
-
-
-						?>
-
-					</p>
-				</div>
-			</div>
-		</div>
-
+		$sqlslt2 = fetchProducts("cat_id='" . $rowslt['cat_id'] . "'" . queryFilter()) 
+		?>
 
 		<div class="container is-fluid">
 			<div class="columns p-2 product-list-wrapper">
 				<?php include 'filter.php'; ?>
 
 				<div class="letter-spacing has-text-weight-normal product-container">
+					<div style="width:100% !important;gap:10px; padding-top:20px;" class="flex align-center">
+						<div style="font-size:20px;" class="title m-0">
+							<?= $rowslt['cat_name'] ?? "Jewelleries" ?>
+						</div>
+						<?php
+						$displayslt2 = mysqli_query($con, $sqlslt2);
+						$countslt2 = (!empty($displayslt2) && $displayslt2 !== true) ? mysqli_num_rows($displayslt2) : 0;
+
+						echo ' <span id="count_design">(' . $countslt2 . '</span> Design';
+						if ($countslt2 > 1) {
+							echo 's';
+						}
+						echo ')  </small>';
+						?>
+					</div>
+					<!-- <div style="width:100% !important;"> -->
+						<hr style="width: 100%; margin:10px 0;" />
+					<!-- </div> -->
 
 					<?php
 					if ($countslt2 === 0) {
@@ -668,8 +644,6 @@ background: linear-gradient(90deg, rgba(241,243,244,1) 0%, rgba(226,225,219,1) 3
 
 
 		</div>
-
-		<?php include('footer.php'); ?>
 		<script src="assets/js/jquery-3.6.0.min.js"></script>
 		<script src="assets/owl/owl.carousel.min.js"></script>
 		<?php include('js.php'); ?>
