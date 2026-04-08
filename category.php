@@ -208,7 +208,7 @@
 				<?php include 'filter.php'; ?>
 
 				<div class="letter-spacing has-text-weight-normal product-container">
-					<div style="width:100% !important;gap:10px; padding-top:20px;" class="flex align-center">
+					<div style="width:100% !important;gap:10px; padding-top:20px !important;" class="flex align-center">
 						<div style="font-size:20px;" class="title m-0">
 							<?= $rowslt['cat_name'] ?? "Jewelleries" ?>
 						</div>
