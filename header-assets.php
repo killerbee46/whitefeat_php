@@ -1338,7 +1338,8 @@ $menus = [
                 'title' => 'Shop By Style',
                 'data' => [
                     ['title' => 'Ring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-ring.png', 'path' => 'search.php?term=%20ring&metal=1'],
-                    ['title' => 'Eartop / Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=%20ear%ring&metal=1'],
+                    ['title' => 'Earring', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond-eartop.png', 'path' => 'search.php?term=%20ear%ring&metal=1'],
+                    ['title' => 'Eartop', 'image' => 'https://imgs.search.brave.com/wXL2wVdamTImJURh1UNaBeA9vchblM4bKLWfl4s-3PQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzIv/ODk2LzkwNS9zbWFs/bC9mbG9yYWwtZGlh/bW9uZC1zdHVkLWVh/cnJpbmdzLWlzb2xh/dGVkLW9uLXRyYW5z/cGFyZW50LWJhY2tn/cm91bmQtZm9yLWEt/d29tYW4tZnJlZS1w/bmcucG5n', 'path' => 'search.php?term=%20ear%top&metal=1'],
                     ['title' => 'Necklace', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-Necklace.png', 'path' => 'search.php?term=%20necklace&metal=1'],
                     ['title' => 'Locket / Pendant', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/diamond%20pendant.png', 'path' => 'search.php?term=%20pendant&metal=1'],
                     ['title' => 'Nosepin', 'image' => 'https://whitefeatherbucket.s3.ap-south-1.amazonaws.com/product_images/home/nav/Diamond-nosepin.png', 'path' => 'search.php?term=%20nose%pin&metal=1'],
