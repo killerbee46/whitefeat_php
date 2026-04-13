@@ -7,9 +7,9 @@ include_once('make_url.php');
 $sqlus = "Select * from `whitefeat_wf_new`.`customer` where c_id='" . $GLOBALS['customer'] . "'";
 $displayus = mysqli_query($con, $sqlus);
 $rowus = mysqli_fetch_array($displayus);
-// if ($GLOBALS['customer'] == 0) {
-//     header('location:index.php');
-// }
+if ($GLOBALS['customer'] == 0) {
+      header('location:index.php');
+ }
 
 $merchant = $rowus['b2b'];
 
