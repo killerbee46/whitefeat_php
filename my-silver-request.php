@@ -257,6 +257,10 @@ $apporder = false;
         $silverpgrate = $_POST['silverpgrate'];
         silverPerGramPrice($silverpgrate,$con);
     }
+
+    $isAdmin = $GLOBALS['customer'] !== 0 ? (
+        $rowus['role'] > 2 ? true : false
+    ) : false
     ?>
 
 
@@ -285,8 +289,8 @@ $apporder = false;
                         $rowDSPG = mysqli_fetch_array($displayDSPG);
                         ?>
                         <div class="prefix">Rs</div>
-                        <input name="silverpgrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
-                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSPG['rate'], 0) ?>" />
+                        <input name="silverpgrate" style="width:90px;" class="prices <?= $isAdmin ? "" : "readonly" ?>"
+                            <?= $isAdmin ? "" : "readonly" ?> value="<?= round($rowDSPG['rate'], 0) ?>" />
                     </div>
                     <div>Silver Rate:</div>
                     <div class="priceInput">
@@ -296,17 +300,17 @@ $apporder = false;
                         $rowDSP = mysqli_fetch_array($displayDSP);
                         ?>
                         <div class="prefix">Rs</div>
-                        <input name="silverrate" style="width:90px;" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
-                            <?= $rowus['role'] > 2 ? "" : "readonly" ?> value="<?= round($rowDSP['price'], 0) ?>" />
+                        <input name="silverrate" style="width:90px;" class="prices <?= $isAdmin ? "" : "readonly" ?>"
+                            <?= $isAdmin ? "" : "readonly" ?> value="<?= round($rowDSP['price'], 0) ?>" />
                     </div>
                     <div>Premium:</div>
                     <div class="priceInput">
                         <div class="prefix">Rs</div>
-                        <input style="width:90px;" name="premium" class="prices <?= $rowus['role'] > 2 ? "" : "readonly" ?>"
-                            <?= $rowus['role'] > 2 ? "" : "readonly" ?>
+                        <input style="width:90px;" name="premium" class="prices <?= $isAdmin ? "" : "readonly" ?>"
+                            <?= $isAdmin ? "" : "readonly" ?>
                             value="<?= round($rowBun['fixed_price'], 0) - round($rowDSP['price'], 0) ?>" />
                     </div>
-                    <div <?= $rowus['role'] > 2 ? "" : "hidden" ?>>
+                    <div <?= $isAdmin ? "" : "hidden" ?>>
                         <button type="submit" class="button primary">Update</button>
                     </div>
                 </div>
@@ -316,7 +320,7 @@ $apporder = false;
         <div class="orders-body">
             <div class="card p-5 mb-3">
                 <?php
-                if ($rowus['role'] > 2) { ?>
+                if ($isAdmin) { ?>
                     <div class="p-0 border-bottom-0 flex justify-center">
                     <div class="tabs-control admin">
                         <div class="tabs-head admin <?= isset($_GET['request']) && $_GET['request'] == "all" ? "active" : "" ?>"
